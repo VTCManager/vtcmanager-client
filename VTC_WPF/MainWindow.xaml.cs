@@ -55,12 +55,8 @@ namespace VTC_WPF
                 }
                 else
                 {
-
                     UpdateLabelContent(this.RPM_lbl, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.RPM).ToString());
                     UpdateLabelContent(this.speed_lbl, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString() + " KM/H");
-
-
-
                 }
 
             } catch
