@@ -20,7 +20,6 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using SCSSdkClient;
 using SCSSdkClient.Object;
-using WpfGauge;
 
 namespace VTC_WPF
 {
