@@ -11,6 +11,6 @@
         public static string DiscordSmallImageKey = "vtcm-logo";
 
         //FILES
-        public static string JobsCache = @"c:\temp\test.txt";
+        public static string JobsCache = "JobsCache.json";
     }
 }
