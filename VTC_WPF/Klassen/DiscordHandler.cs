@@ -2,7 +2,7 @@
 
 namespace VTC_WPF.Klassen
 {
-    internal class DiscordHandler
+    public class DiscordHandler
     {
         private DiscordRpcClient client;
 

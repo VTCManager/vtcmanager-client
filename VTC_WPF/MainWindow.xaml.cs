@@ -20,11 +20,11 @@ namespace VTC_WPF
         public int Y1 { get; private set; }
 
         private delegate void UpdateProgressDelegate(DependencyProperty dp, object value);
+        public DiscordHandler Discord;
 
 
         public MainWindow()
         {
-            InitializeComponent();
             Telemetry = new SCSSdkTelemetry();
             Telemetry.Data += Telemetry_Data;
             Telemetry.JobStarted += TelemetryHandler.JobStarted;
@@ -37,8 +37,8 @@ namespace VTC_WPF
             Telemetry.RefuelStart += TelemetryHandler.RefuelStart;
             Telemetry.RefuelEnd += TelemetryHandler.RefuelEnd;
             Telemetry.RefuelPayed += TelemetryHandler.RefuelPayed;
-
-
+            Discord = new DiscordHandler();
+            InitializeComponent();
         }
 
         private void Telemetry_Data(SCSTelemetry data, bool updated)
