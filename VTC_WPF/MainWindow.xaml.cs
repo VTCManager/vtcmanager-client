@@ -20,13 +20,13 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using SCSSdkClient;
 using SCSSdkClient.Object;
+using VTC_WPF.Klassen;
 
 namespace VTC_WPF
 {
     public partial class MainWindow : Window
     {
         public SCSSdkTelemetry Telemetry;
-        private object rect1;
         private readonly bool InvokeRequired;
 
         public int Degrees { get; private set; }
@@ -43,16 +43,16 @@ namespace VTC_WPF
             InitializeComponent();
             Telemetry = new SCSSdkTelemetry();
             this.Telemetry.Data += Telemetry_Data;
-            this.Telemetry.JobStarted += this.TelemetryOnJobStarted;
-            this.Telemetry.JobCancelled += TelemetryJobCancelled;
-            this.Telemetry.JobDelivered += TelemetryJobDelivered;
-            this.Telemetry.Fined += TelemetryFined;
-            this.Telemetry.Tollgate += TelemetryTollgate;
-            this.Telemetry.Ferry += TelemetryFerry;
-            this.Telemetry.Train += TelemetryTrain;
-            this.Telemetry.RefuelStart += TelemetryRefuelStart;
-            this.Telemetry.RefuelEnd += TelemetryRefuelEnd;
-            this.Telemetry.RefuelPayed += TelemetryRefuelPayed;
+            this.Telemetry.JobStarted += TelemetryHandler.JobStarted;
+            this.Telemetry.JobCancelled += TelemetryHandler.JobCancelled;
+            this.Telemetry.JobDelivered += TelemetryHandler.JobDelivered;
+            this.Telemetry.Fined += TelemetryHandler.Fined;
+            this.Telemetry.Tollgate += TelemetryHandler.Tollgate;
+            this.Telemetry.Ferry += TelemetryHandler.FerryUsed;
+            this.Telemetry.Train += TelemetryHandler.TrainUsed;
+            this.Telemetry.RefuelStart += TelemetryHandler.RefuelStart;
+            this.Telemetry.RefuelEnd += TelemetryHandler.RefuelEnd;
+            this.Telemetry.RefuelPayed += TelemetryHandler.RefuelPayed;
 
 
         }
@@ -84,57 +84,6 @@ namespace VTC_WPF
             {
 
             }
-        }
-
-
-        private void TelemetryRefuelStart(object sender, EventArgs e)
-        {
-         
-        }
-
-        private void TelemetryRefuelPayed(object sender, EventArgs e)
-        {
-          
-        }
-
-        private void TelemetryRefuelEnd(object sender, EventArgs e)
-        {
-        
-        }
-
-        private void TelemetryTrain(object sender, EventArgs e)
-        {
-    
-        }
-
-        private void TelemetryFerry(object sender, EventArgs e)
-        {
-         
-        }
-
-        private void TelemetryFined(object sender, EventArgs e)
-        {
-          
-        }
-
-        private void TelemetryTollgate(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TelemetryJobDelivered(object sender, EventArgs e)
-        {
-         
-        }
-
-        private void TelemetryJobCancelled(object sender, EventArgs e)
-        {
-          
-        }
-
-        private void TelemetryOnJobStarted(object sender, EventArgs e)
-        {
-       
         }
 
         public void UpdateLabelContent(Label label, string newContent)
