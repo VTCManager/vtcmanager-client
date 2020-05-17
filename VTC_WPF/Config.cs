@@ -9,7 +9,7 @@ namespace VTC_WPF
     public static class Config
     {
         //Versions
-        public static string ClientVersion = "2.3.0";
+        public static string ClientVersion = "3.0.0 DevAlpha";
 
         //DISCORD
         public static string DiscordAppID = "659036297561767948";
