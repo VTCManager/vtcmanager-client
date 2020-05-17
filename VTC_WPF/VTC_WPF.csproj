@@ -77,6 +77,7 @@
     <Compile Include="Config.cs" />
     <Compile Include="Klassen\CirularGaugeControl.cs" />
     <Compile Include="Klassen\DiscordHandler.cs" />
+    <Compile Include="Klassen\JobHandler.cs" />
     <Compile Include="Klassen\TelemetryHandler.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -84,6 +85,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Objects\Job.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -110,9 +112,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Objects\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\icons8-druck-96.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

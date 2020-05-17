@@ -21,6 +21,7 @@ namespace VTC_WPF
 
         private delegate void UpdateProgressDelegate(DependencyProperty dp, object value);
         public DiscordHandler Discord;
+        public JobHandler jobHandler;
 
 
         public MainWindow()
@@ -37,6 +38,7 @@ namespace VTC_WPF
             Telemetry.RefuelStart += TelemetryHandler.RefuelStart;
             Telemetry.RefuelEnd += TelemetryHandler.RefuelEnd;
             Telemetry.RefuelPayed += TelemetryHandler.RefuelPayed;
+            jobHandler = new JobHandler();
             Discord = new DiscordHandler();
             InitializeComponent();
         }

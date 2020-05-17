@@ -9,5 +9,8 @@
         public static string DiscordAppID = "659036297561767948";
         public static string DiscordLargeImageKey = "truck-icon";
         public static string DiscordSmallImageKey = "vtcm-logo";
+
+        //FILES
+        public static string JobsCache = @"c:\temp\test.txt";
     }
 }
