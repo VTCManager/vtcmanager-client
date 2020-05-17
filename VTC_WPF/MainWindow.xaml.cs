@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -12,20 +13,31 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using SCSSdkClient;
 using SCSSdkClient.Object;
+using WpfGauge;
 
 namespace VTC_WPF
 {
     public partial class MainWindow : Window
     {
         public SCSSdkTelemetry Telemetry;
+        private object rect1;
         private readonly bool InvokeRequired;
+
+        public int Degrees { get; private set; }
+        public double Y2 { get; private set; }
+        public double X2 { get; private set; }
+        public int X1 { get; private set; }
+        public int Y1 { get; private set; }
+
         private delegate void UpdateProgressDelegate(DependencyProperty dp, object value);
+        
 
         public MainWindow()
         {
@@ -42,6 +54,8 @@ namespace VTC_WPF
             this.Telemetry.RefuelStart += TelemetryRefuelStart;
             this.Telemetry.RefuelEnd += TelemetryRefuelEnd;
             this.Telemetry.RefuelPayed += TelemetryRefuelPayed;
+
+
         }
 
         private void Telemetry_Data(SCSTelemetry data, bool updated)
@@ -55,8 +69,16 @@ namespace VTC_WPF
                 }
                 else
                 {
-                    UpdateLabelContent(this.RPM_lbl, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.RPM).ToString());
-                    UpdateLabelContent(this.speed_lbl, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString() + " KM/H");
+                    UpdateLabelContent(this.RPM_lbl, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.RPM).ToString() + " R/PM");
+                    UpdateLabelContent(this.speed_label_tacho, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString());
+                    UpdateLabelContent(this.Speed_Limit_Label, Convert.ToInt32(data.NavigationValues.SpeedLimit.Kph).ToString());
+                    UpdateLabelContent(this.Speed_Limiter_Setting, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.CruiseControlSpeed.Kph).ToString());
+                    
+                    if(data.TruckValues.CurrentValues.MotorValues.GearValues.Selected == -1)
+                        UpdateLabelContent(this.Gang_Label, "R");
+
+                    UpdateLabelContent(this.Gang_Label, Convert.ToInt32(data.TruckValues.CurrentValues.MotorValues.GearValues.Selected).ToString());
+
                 }
 
             } catch
@@ -121,6 +143,20 @@ namespace VTC_WPF
             Dispatcher.Invoke(new UpdateProgressDelegate(label.SetValue), DispatcherPriority.Background, ContentProperty, newContent);
         }
 
+        private void Rotate(float grad)
+        {
+            X1 = 0;
+            Y1 = 0;
+            var rad = Degrees * Math.PI / grad;
+            const int radius = 180;
+            var sin = Math.Sin(rad);
+            var cos = Math.Cos(rad);
+            var tan = Math.Tan(rad);
+
+            Y2 = sin * radius;
+            X2 = cos * radius;
+
+        }
 
     }
 }
