@@ -74,6 +74,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Config.cs" />
     <Compile Include="Klassen\CirularGaugeControl.cs" />
     <Compile Include="Klassen\DiscordHandler.cs" />
     <Compile Include="Klassen\TelemetryHandler.cs" />

@@ -18,10 +18,10 @@ namespace VTC_WPF.Klassen
                     Details = "Starte...",
                     Assets = new Assets()
                     {
-                        LargeImageKey = Information.DiscordLargeImageKey,
+                        LargeImageKey = Config.DiscordLargeImageKey,
                         LargeImageText = "Beyond the limits",
-                        SmallImageKey = Information.DiscordSmallImageKey,
-                        SmallImageText = "VTCManager Version " + Information.ClientVersion
+                        SmallImageKey = Config.DiscordSmallImageKey,
+                        SmallImageText = "VTCManager Version " + Config.ClientVersion
                     }
 
                 });
