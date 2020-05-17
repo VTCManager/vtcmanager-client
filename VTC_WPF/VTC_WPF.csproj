@@ -37,7 +37,7 @@
   <ItemGroup>
     <Reference Include="SCSSdkClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\scs-sdk-plugin2\scs-client\C#\SCSSdkClient\bin\Debug\SCSSdkClient.dll</HintPath>
+      <HintPath>..\DLLs\SCSSdkClient.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
