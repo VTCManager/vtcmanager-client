@@ -16,8 +16,8 @@
             <ColumnDefinition Width="475*"/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="90" Margin="69,226,0,0" VerticalAlignment="Top" Width="200" Grid.Column="1"/>
-        <Label x:Name="RPM_lbl" HorizontalContentAlignment="Center" Margin="395,287,67,221" Content="RPM_Label" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="90" Margin="67,70,0,0" VerticalAlignment="Top" Width="200" Grid.Column="1"/>
+        <Label x:Name="RPM_lbl" HorizontalContentAlignment="Center" Margin="393,136,69,372" Content="RPM_Label" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -27,44 +27,11 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Image x:Name="Truck_Image" HorizontalAlignment="Left" Source="Resources\truck-scania-png-5.png" Height="149" Margin="214,23,0,0" VerticalAlignment="Top" Width="150" Grid.Column="1"/>
-        <Rectangle HorizontalAlignment="Left" Height="205" Margin="386,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="6" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-15"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-            <Rectangle.Fill>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
-                    <GradientStop Color="DarkGoldenrod" Offset="0" />
-                    <GradientStop Color="LightGray" Offset="1.0" />
-                </LinearGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>
-        <Rectangle HorizontalAlignment="Left" Height="205" Margin="186,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="6" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="15"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-            <Rectangle.Fill>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
-                    <GradientStop Color="DarkGoldenrod" Offset="0" />
-                    <GradientStop Color="LightGray" Offset="1.0" />
-                </LinearGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="37" Margin="195,177,0,0" VerticalAlignment="Top" Width="40" Source="Resources/bremse_schwarz.png" Grid.Column="1"/>
-        <Image x:Name="image_Copy" HorizontalAlignment="Left" Height="37" Margin="240,177,0,0" VerticalAlignment="Top" Width="40" Source="Resources/icons8-autobatterie-80.png" Grid.Column="1"/>
-        <Image x:Name="image_Copy1" HorizontalAlignment="Left" Height="37" Margin="287,177,0,0" VerticalAlignment="Top" Width="40" Source="Resources/icons8-motor-128.png" Grid.Column="1"/>
-        <Image x:Name="image_Copy2" HorizontalAlignment="Left" Height="37" Margin="337,177,0,0" VerticalAlignment="Top" Width="40" Source="Resources/icons8-druck-96.png" Grid.Column="1"/>
-        <Label x:Name="speed_label_tacho" Content="000" Margin="80,228,308,0" HorizontalContentAlignment="Center" VerticalAlignment="Top" FontSize="34" Height="61" FontFamily="Segoe UI Black" FontStyle="Italic" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
+        <Image x:Name="image" HorizontalAlignment="Left" Height="37" Margin="193,21,0,0" VerticalAlignment="Top" Width="40" Source="Resources/bremse_schwarz.png" Grid.Column="1"/>
+        <Image x:Name="image_Copy" HorizontalAlignment="Left" Height="37" Margin="238,21,0,0" VerticalAlignment="Top" Width="40" Source="Resources/icons8-autobatterie-80.png" Grid.Column="1"/>
+        <Image x:Name="image_Copy1" HorizontalAlignment="Left" Height="37" Margin="285,21,0,0" VerticalAlignment="Top" Width="40" Source="Resources/icons8-motor-128.png" Grid.Column="1"/>
+        <Image x:Name="image_Copy2" HorizontalAlignment="Left" Height="37" Margin="335,21,0,0" VerticalAlignment="Top" Width="40" Source="Resources/icons8-druck-96.png" Grid.Column="1"/>
+        <Label x:Name="speed_label_tacho" Content="000" Margin="78,72,310,0" HorizontalContentAlignment="Center" VerticalAlignment="Top" FontSize="34" Height="61" FontFamily="Segoe UI Black" FontStyle="Italic" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -74,15 +41,15 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Label x:Name="label1" Content="KM/H" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="129,269,0,0" VerticalAlignment="Top" FontSize="24" Height="42" Width="83" Grid.Column="1"/>
-        <Ellipse HorizontalAlignment="Left" Height="80" StrokeThickness="10" Margin="314,230,0,0" Stroke="Red" VerticalAlignment="Top" Width="78" Grid.Column="1"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="90" Margin="311,226,0,0" VerticalAlignment="Top" Width="200" Grid.Column="1">
+        <Label x:Name="label1" Content="KM/H" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="127,113,0,0" VerticalAlignment="Top" FontSize="24" Height="42" Width="83" Grid.Column="1"/>
+        <Ellipse HorizontalAlignment="Left" Height="80" StrokeThickness="10" Margin="312,74,0,0" Stroke="Red" VerticalAlignment="Top" Width="78" Grid.Column="1"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="90" Margin="309,70,0,0" VerticalAlignment="Top" Width="200" Grid.Column="1">
 
         </Border>
-        <Label x:Name="Speed_Limit_Label" Content="000" Margin="313,236,187,240" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Segoe UI Black" FontSize="30" Grid.Column="1"/>
-        <Image x:Name="Speed_Limiter_Image" HorizontalAlignment="Left" Height="26" Margin="417,227,0,0" VerticalAlignment="Top" Width="29" Source="Resources/icons8-tacho-96.png" Grid.Column="1"/>
-        <Label x:Name="Speed_Limiter_Setting" Content="Speed_Limit" HorizontalAlignment="Left" Margin="446,227,0,0" VerticalAlignment="Top" Height="26" Width="69" Grid.Column="1"/>
-        <Label x:Name="Gang_Label" Content="1" HorizontalAlignment="Left" Margin="448,228,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Segoe UI Black" RenderTransformOrigin="0.5,0.5" Height="74" Width="33" Grid.Column="1">
+        <Label x:Name="Speed_Limit_Label" Content="000" Margin="315,86,185,398" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" FontFamily="Segoe UI Black" FontSize="30" Grid.Column="1"/>
+        <Image x:Name="Speed_Limiter_Image" HorizontalAlignment="Left" Height="26" Margin="415,71,0,0" VerticalAlignment="Top" Width="29" Source="Resources/icons8-tacho-96.png" Grid.Column="1"/>
+        <Label x:Name="Speed_Limiter_Setting" Content="Speed_Limit" HorizontalAlignment="Left" Margin="444,71,0,0" VerticalAlignment="Top" Height="26" Width="69" Grid.Column="1"/>
+        <Label x:Name="Gang_Label" Content="1" HorizontalAlignment="Left" Margin="402,75,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Segoe UI Black" RenderTransformOrigin="0.5,0.5" Height="74" Width="111" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
