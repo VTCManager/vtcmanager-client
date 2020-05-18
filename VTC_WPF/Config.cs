@@ -14,7 +14,7 @@
         public static string JobsCache = "JobsCache.json";
 
         //REGISTRY ENTRIES
-        public static string ETS2InstallFolderRegistryEntry = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
-        public static string ETS2InstallFolderRegistryEntryValue = "InstallLocation";
+        public static string ETS2InstallFolderRegistryEntry = @"HKEY_CURRENT_USER\System\GameConfigStore\Children\03f2c1c8-e376-4256-93ff-d7dfded8044e";
+        public static string ETS2InstallFolderRegistryEntryValue = "MatchedExeFullPath";
     }
 }

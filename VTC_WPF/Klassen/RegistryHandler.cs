@@ -10,27 +10,29 @@ namespace VTC_WPF.Klassen
 {
     class RegistryHandler
     {
-        public static object read(string registryPath, string valueName)
+        public static object Globalread(string registryPath, string valueName)
         {
             try
             {
-                if (registryPath.Contains("HKEY_LOCAL_MACHINE"))
+                if (registryPath.Contains("HKEY_CURRENT_USER"))
                 {
-                    registryPath = registryPath.Replace(@"HKEY_LOCAL_MACHINE\", "");
+                    registryPath = registryPath.Replace(@"HKEY_CURRENT_USER\", "");
                     Console.WriteLine(registryPath);
-                    RegistryKey key = Registry.LocalMachine.OpenSubKey(registryPath);
-                    foreach(String key2 in key.GetSubKeyNames())
-                    {
-                        Console.WriteLine(key2);
-                    }
-                    Console.WriteLine(key.GetValue(valueName));
+                    RegistryKey key = Registry.CurrentUser.OpenSubKey(registryPath);
                     return key.GetValue(valueName);
                 }
-                return null;
+                else
+                {
+                    return null;
+                }
             }
             catch (System.Security.SecurityException ex)
             {
                 MessageBox.Show("Failed to load RegValue: " + registryPath + valueName + "\n SecurityException:" + ex.Message);
+                return null;
+            }
+            catch (NullReferenceException ex)
+            {
                 return null;
             }
         }
