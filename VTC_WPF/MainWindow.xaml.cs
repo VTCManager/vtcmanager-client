@@ -19,6 +19,7 @@ namespace VTC_WPF
 
         public MainWindow()
         {
+            TelemetryInstaller.install();
             Telemetry = new SCSSdkTelemetry();
             Telemetry.Data += Telemetry_Data;
             Telemetry.JobStarted += TelemetryHandler.JobStarted;

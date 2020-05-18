@@ -14,6 +14,7 @@
         public static string JobsCache = "JobsCache.json";
 
         //REGISTRY ENTRIES
-        public static string ETS2InstallFolderRegistryEntry = "Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 227300";
+        public static string ETS2InstallFolderRegistryEntry = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
+        public static string ETS2InstallFolderRegistryEntryValue = "InstallLocation";
     }
 }
