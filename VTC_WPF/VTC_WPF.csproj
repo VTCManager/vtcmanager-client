@@ -80,6 +80,7 @@
     <Compile Include="Klassen\FileHandler.cs" />
     <Compile Include="Klassen\JobHandler.cs" />
     <Compile Include="Klassen\TelemetryHandler.cs" />
+    <Compile Include="Klassen\TelemetryInstaller.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
