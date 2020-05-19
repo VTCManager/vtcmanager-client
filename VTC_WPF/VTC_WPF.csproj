@@ -120,6 +120,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Resources\scs-telemetry.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Resources\icons8-druck-96.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

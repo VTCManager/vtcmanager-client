@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,8 @@ namespace VTC_WPF.Klassen
                 //remove the folder containing the exe from the path (both options can be used so I use 64 AND 86)
                 TelemetryPath = TelemetryPath.Replace(ETS2Folder64, "");
                 TelemetryPath = TelemetryPath.Replace(ETS2Folder86, "");
-                Console.WriteLine(TelemetryPath);
+                File.Copy(@"Resources/scs-telemetry.dll", TelemetryPath + ETS2Folder64 + @"plugins\scs-telemetry.dll");
+                File.Copy(@"Resources/scs-telemetry.dll", TelemetryPath + ETS2Folder86 + @"plugins\scs-telemetry.dll");
             }
         }
     }
