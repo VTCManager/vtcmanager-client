@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Windows;
 
 namespace VTC_WPF.Klassen
 {
@@ -11,6 +9,10 @@ namespace VTC_WPF.Klassen
         private static string ETS2Folder64 = @"win_x64\";
         private static string ETS2Folder86 = @"win_x86\";
         private static string ETS2_EXE = "eurotrucks2.exe";
+        public static string ProgramPath;
+        public static string ETSPath = @"\Steam\steamapps\common\Euro Truck Simulator 2";
+        public static string ATSPath = @"\Steam\steamapps\common\American Truck Simulator";
+
         public static void install()
         {
             String TelemetryPath = RegistryHandler.Globalread(Config.ETS2InstallFolderRegistryEntry, Config.ETS2InstallFolderRegistryEntryValue).ToString();
@@ -21,6 +23,25 @@ namespace VTC_WPF.Klassen
                 TelemetryPath = TelemetryPath.Replace(ETS2Folder64, "");
                 TelemetryPath = TelemetryPath.Replace(ETS2Folder86, "");
                 Console.WriteLine(TelemetryPath);
+            }
+        }
+
+        public static void install2()
+        {
+            try
+            {
+                ProgramPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+                if (Directory.Exists(ProgramPath + ETSPath) )
+                {
+                    MessageBox.Show("ETS2 wurde gefunden in: " + Environment.NewLine + ProgramPath + ETSPath, "Pfad von ETS erfolgreich gefunden !", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                    // Kopiere dll in das Plugin Verzeichnis \bin\win_x64\plugins #### vorher muss geprüft werden ob plugins vorhanden ist ####
+                    Logging.WriteClientLog("ETS2 wurde gefunden in: " + ProgramPath + ETSPath);
+                } 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ETS2 wurde nicht gefunden in " + ProgramPath + ETSPath + Environment.NewLine + ex.Message + Environment.NewLine + ex.StackTrace, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                Logging.WriteClientLog("ETS wurde nicht gefunden !" + ex.Message + ex.StackTrace);
             }
         }
     }

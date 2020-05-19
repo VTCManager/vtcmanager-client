@@ -36,5 +36,20 @@ namespace VTC_WPF.Klassen
                 return null;
             }
         }
+
+
+        public string Reg_lesen(string ordner, string value)
+        {
+            try
+            {
+                RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\VTCManager\" + ordner);
+                return key.GetValue(value).ToString();
+            } catch (Exception ex)
+            {
+            
+                return null;
+            }
+
+        }
     }
 }
