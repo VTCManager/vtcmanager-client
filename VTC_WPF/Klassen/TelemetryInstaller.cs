@@ -54,6 +54,8 @@ namespace VTC_WPF.Klassen
                                 if (!Directory.Exists(Steampath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + "plugins"))
                                     Directory.CreateDirectory(Steampath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + "plugins");
                                 File.Copy(@"Resources/scs-telemetry.dll", Steampath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + @"plugins\scs-telemetry.dll");
+                                RegistryHandler.write("ETS2Path", Steampath + @"\steamapps\common\Euro Truck Simulator 2\", "Telemetry");
+                                RegistryHandler.write("Version", Config.TelemetryVersion, "Telemetry");
                             }
                         }
                     }

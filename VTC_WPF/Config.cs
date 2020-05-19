@@ -6,6 +6,7 @@ namespace VTC_WPF
     {
         //Versions
         public static string ClientVersion = "3.0.0 DevAlpha";
+        public static string TelemetryVersion = "1.10";
 
         //DISCORD
         public static string DiscordAppID = "659036297561767948";
