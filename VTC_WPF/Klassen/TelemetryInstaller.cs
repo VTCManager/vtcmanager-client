@@ -17,16 +17,20 @@ namespace VTC_WPF.Klassen
 
         public static void install()
         {
+            Console.WriteLine("install");
             //detect SteamInstallPath
             String SteamInstallPath = RegistryHandler.Globalread(RegistryHandler.Steam64bitRegistry, RegistryHandler.SteamInstallPathValueName).ToString();
             if (!string.IsNullOrEmpty(SteamInstallPath))
             {
+                Console.WriteLine("install2");
                 if (!File.Exists(SteamInstallPath+ @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + "eurotrucks2.exe") && !File.Exists(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + "eurotrucks2.exe"))
                 {
+                    Console.WriteLine("install3");
                     //if ETS2 is not found in normal Steam lib folder
                     String SteamLibraryConfigPath = SteamInstallPath + SteamLibraryConfigFile;
                     if (File.Exists(SteamLibraryConfigPath))
                     {
+                        Console.WriteLine("install4");
                         string testFile = File.ReadAllText(SteamLibraryConfigPath);
                         VdfDeserializer deserializer = new VdfDeserializer();
                         dynamic result = deserializer.Deserialize(testFile);
@@ -44,6 +48,7 @@ namespace VTC_WPF.Klassen
                             
                             if (File.Exists(Steampath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + "eurotrucks2.exe") && File.Exists(Steampath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + "eurotrucks2.exe"))
                             {
+                                Console.WriteLine("install5");
                                 //create plugins folder if necessary and copy dll
                                 if (!Directory.Exists(Steampath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + "plugins"))
                                     Directory.CreateDirectory(Steampath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + "plugins");
@@ -63,6 +68,7 @@ namespace VTC_WPF.Klassen
                     }
                     else
                     {
+                        Console.WriteLine("install6");
                         //ETS2 found in normal Steam folder
                         //create plugins folder if necessary and copy dll
                         if (!Directory.Exists(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + "plugins"))
