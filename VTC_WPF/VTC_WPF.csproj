@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject />
+    <StartupObject>VTC_WPF.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DiscordRPC, Version=1.0.150.0, Culture=neutral, processorArchitecture=MSIL">
@@ -72,6 +72,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ETS2PathDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -81,6 +85,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Config.cs" />
+    <Compile Include="ETS2PathDialog.xaml.cs">
+      <DependentUpon>ETS2PathDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Klassen\CirularGaugeControl.cs" />
     <Compile Include="Klassen\DiscordHandler.cs" />
     <Compile Include="Klassen\FileHandler.cs" />

@@ -66,6 +66,11 @@ namespace VTC_WPF.Klassen
                             }
                         }
                     }
+                    else
+                    {
+                        ETS2PathDialog pathwindow = new ETS2PathDialog();
+                        pathwindow.Show();
+                    }
                 }
                 else
                 {
@@ -85,6 +90,11 @@ namespace VTC_WPF.Klassen
                     RegistryHandler.write("ETS2Path", SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\", "Telemetry");
                     RegistryHandler.write("Version", Config.TelemetryVersion, "Telemetry");
                 }
+            }
+            else
+            {
+                ETS2PathDialog pathwindow = new ETS2PathDialog();
+                pathwindow.Show();
             }
         }
 

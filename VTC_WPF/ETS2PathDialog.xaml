@@ -1,0 +1,14 @@
+﻿<Window x:Class="VTC_WPF.ETS2PathDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VTC_WPF"
+        mc:Ignorable="d"
+        Title="ETS2PathDialog" Height="450" Width="800">
+    <Grid>
+        <WrapPanel HorizontalAlignment="Center" DockPanel.Dock="Top" Margin="0,0,0,10">
+            <Button Name="btnOpenFile" Click="btnOpenFile_Click">Bitte wähle den eurotrucks2.exe aus (Klick mich)</Button>
+        </WrapPanel>
+    </Grid>
+</Window>
