@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace VTC_WPF.Objects
 {
-    class Job
+    public class Job
     {
+        public int ID;
+        public string origin;
+        public string destination;
+        public string cargo;
+        public int weigh;
     }
 }
