@@ -10,15 +10,18 @@ namespace VTC_WPF.Klassen
 {
     class RegistryHandler
     {
+        //STEAM
+        public static string Steam64bitRegistry = @"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Valve\Steam";
+        public static string SteamInstallPathValueName = "InstallPath";
         public static object Globalread(string registryPath, string valueName)
         {
             try
             {
-                if (registryPath.Contains("HKEY_CURRENT_USER"))
+                if (registryPath.Contains("HKEY_LOCAL_MACHINE"))
                 {
-                    registryPath = registryPath.Replace(@"HKEY_CURRENT_USER\", "");
+                    registryPath = registryPath.Replace(@"HKEY_LOCAL_MACHINE\", "");
                     Console.WriteLine(registryPath);
-                    RegistryKey key = Registry.CurrentUser.OpenSubKey(registryPath);
+                    RegistryKey key = Registry.LocalMachine.OpenSubKey(registryPath);
                     return key.GetValue(valueName);
                 }
                 else
