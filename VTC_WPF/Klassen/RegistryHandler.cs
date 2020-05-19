@@ -41,12 +41,12 @@ namespace VTC_WPF.Klassen
         }
 
 
-        public static object read(string ordner, string value)
+        public static string read(string ordner, string value)
         {
             try
             {
                 RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\VTCManager\" + ordner);
-                return key.GetValue(value);
+                return key.GetValue(value).ToString();
             } catch (Exception ex)
             {
             
@@ -54,7 +54,7 @@ namespace VTC_WPF.Klassen
             }
 
         }
-        public static void write(string name, object wert, string ordner)
+        public static void write(string name, string wert, string ordner)
         {
             RegistryKey key = Registry.CurrentUser.OpenSubKey("Software", true);
             key.CreateSubKey("VTCManager");

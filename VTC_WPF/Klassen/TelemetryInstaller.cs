@@ -14,9 +14,6 @@ namespace VTC_WPF.Klassen
         private static string ETS2_EXE = "eurotrucks2.exe";
         //STEAM
         private static string SteamLibraryConfigFile = @"\steamapps\libraryfolders.vdf";
-        /*public static string ProgramPath;
-        public static string ETSPath = @"\Steam\steamapps\common\Euro Truck Simulator 2";
-        public static string ATSPath = @"\Steam\steamapps\common\American Truck Simulator";*/
 
         public static void install()
         {
@@ -24,14 +21,13 @@ namespace VTC_WPF.Klassen
             String SteamInstallPath = RegistryHandler.Globalread(RegistryHandler.Steam64bitRegistry, RegistryHandler.SteamInstallPathValueName).ToString();
             if (!string.IsNullOrEmpty(SteamInstallPath))
             {
-                if (!File.Exists(SteamInstallPath+ @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + "eurotrucks2.exe") && File.Exists(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + "eurotrucks2.exe"))
+                if (!File.Exists(SteamInstallPath+ @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + "eurotrucks2.exe") && !File.Exists(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + "eurotrucks2.exe"))
                 {
                     //if ETS2 is not found in normal Steam lib folder
                     String SteamLibraryConfigPath = SteamInstallPath + SteamLibraryConfigFile;
                     if (File.Exists(SteamLibraryConfigPath))
                     {
                         string testFile = File.ReadAllText(SteamLibraryConfigPath);
-                        Console.WriteLine(testFile);
                         VdfDeserializer deserializer = new VdfDeserializer();
                         dynamic result = deserializer.Deserialize(testFile);
                         IDictionary<string, object> result_dictionary = result.LibraryFolders;
@@ -45,17 +41,23 @@ namespace VTC_WPF.Klassen
                         }
                         foreach (String Steampath in SteamLibraries)
                         {
+                            
                             if (File.Exists(Steampath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + "eurotrucks2.exe") && File.Exists(Steampath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + "eurotrucks2.exe"))
                             {
                                 //create plugins folder if necessary and copy dll
                                 if (!Directory.Exists(Steampath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + "plugins"))
                                     Directory.CreateDirectory(Steampath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + "plugins");
+                                if (File.Exists(Steampath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + @"plugins\scs-telemetry.dll"))
+                                    File.Delete(Steampath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + @"plugins\scs-telemetry.dll");
                                 File.Copy(@"Resources/scs-telemetry.dll", Steampath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + @"plugins\scs-telemetry.dll");
                                 if (!Directory.Exists(Steampath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + "plugins"))
                                     Directory.CreateDirectory(Steampath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + "plugins");
+                                if (File.Exists(Steampath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + @"plugins\scs-telemetry.dll"))
+                                    File.Delete(Steampath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + @"plugins\scs-telemetry.dll");
                                 File.Copy(@"Resources/scs-telemetry.dll", Steampath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + @"plugins\scs-telemetry.dll");
                                 RegistryHandler.write("ETS2Path", Steampath + @"\steamapps\common\Euro Truck Simulator 2\", "Telemetry");
                                 RegistryHandler.write("Version", Config.TelemetryVersion, "Telemetry");
+                                Console.WriteLine("reg geschrieben");
                             }
                         }
                     }
@@ -65,43 +67,53 @@ namespace VTC_WPF.Klassen
                         //create plugins folder if necessary and copy dll
                         if (!Directory.Exists(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + "plugins"))
                             Directory.CreateDirectory(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + "plugins");
+                        if (File.Exists(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + @"plugins\scs-telemetry.dll"))
+                            File.Delete(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + @"plugins\scs-telemetry.dll");
                         File.Copy(@"Resources/scs-telemetry.dll", SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + @"plugins\scs-telemetry.dll");
                         if (!Directory.Exists(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + "plugins"))
                             Directory.CreateDirectory(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + "plugins");
+                        if (File.Exists(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + @"plugins\scs-telemetry.dll"))
+                            File.Delete(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + @"plugins\scs-telemetry.dll");
                         File.Copy(@"Resources/scs-telemetry.dll", SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + @"plugins\scs-telemetry.dll");
+                        RegistryHandler.write("ETS2Path", SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\", "Telemetry");
+                        RegistryHandler.write("Version", Config.TelemetryVersion, "Telemetry");
                     }
                 }
             }
-            /*
-            String TelemetryPath = RegistryHandler.Globalread(Config.ETS2InstallFolderRegistryEntry, Config.ETS2InstallFolderRegistryEntryValue).ToString();
-            if (!string.IsNullOrWhiteSpace(TelemetryPath))
-            {
-                TelemetryPath = TelemetryPath.Replace(ETS2_EXE, "");
-                //remove the folder containing the exe from the path (both options can be used so I use 64 AND 86)
-                TelemetryPath = TelemetryPath.Replace(ETS2Folder64, "");
-                TelemetryPath = TelemetryPath.Replace(ETS2Folder86, "");
-                File.Copy(@"Resources/scs-telemetry.dll", TelemetryPath + ETS2Folder64 + @"plugins\scs-telemetry.dll");
-                File.Copy(@"Resources/scs-telemetry.dll", TelemetryPath + ETS2Folder86 + @"plugins\scs-telemetry.dll");
-            }*/
         }
 
-        /*public static void install2()
+        public static void check()
         {
+            String telemetryVersion = "";
+            String telemetryETS2Path = "";
             try
             {
-                ProgramPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-                if (Directory.Exists(ProgramPath + ETSPath) )
-                {
-                    MessageBox.Show("ETS2 wurde gefunden in: " + Environment.NewLine + ProgramPath + ETSPath, "Pfad von ETS erfolgreich gefunden !", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-                    // Kopiere dll in das Plugin Verzeichnis \bin\win_x64\plugins #### vorher muss geprüft werden ob plugins vorhanden ist ####
-                    Logging.WriteClientLog("ETS2 wurde gefunden in: " + ProgramPath + ETSPath);
-                } 
+                telemetryETS2Path = RegistryHandler.read("Telemetry", "ETS2Path").ToString();
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show("ETS2 wurde nicht gefunden in " + ProgramPath + ETSPath + Environment.NewLine + ex.Message + Environment.NewLine + ex.StackTrace, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
-                Logging.WriteClientLog("ETS wurde nicht gefunden !" + ex.Message + ex.StackTrace);
             }
-        }*/
+            try
+            {
+                telemetryVersion = RegistryHandler.read("Telemetry", "Version").ToString();
+            }
+            catch
+            {
+            }
+            if (String.IsNullOrWhiteSpace(telemetryETS2Path) || String.IsNullOrWhiteSpace(telemetryVersion))
+            {
+                Console.WriteLine("running installation of Telemetry");
+                install();
+            }
+            else if(RegistryHandler.read("Telemetry", "Version").ToString() != Config.TelemetryVersion || !File.Exists(RegistryHandler.read("Telemetry", "ETS2Path").ToString() + @"bin\" + ETS2Folder86 + "eurotrucks2.exe") || !File.Exists(RegistryHandler.read("Telemetry", "ETS2Path").ToString() + @"bin\" + ETS2Folder64 + "eurotrucks2.exe")){
+                Console.WriteLine("running installation of Telemetry2");
+                install();
+            }
+            else if (!File.Exists(RegistryHandler.read("Telemetry", "ETS2Path").ToString() + @"bin\" + ETS2Folder86 + @"plugins\scs-telemetry.dll") || !File.Exists(RegistryHandler.read("Telemetry", "ETS2Path").ToString() + @"bin\" + ETS2Folder64 + @"plugins\scs-telemetry.dll"))
+            {
+                Console.WriteLine("running installation of Telemetry3");
+                install();
+            }
+        }
     }
 }
