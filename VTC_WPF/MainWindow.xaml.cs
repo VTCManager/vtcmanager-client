@@ -18,7 +18,7 @@ namespace VTC_WPF
         public MainWindow()
         {
             Logging.Make_Log_File(); // Muss als erstes stehen, damit vor allem anderen die Logs geleert werden !
-            TelemetryInstaller.install2();
+            TelemetryInstaller.install();
             Telemetry = new SCSSdkTelemetry();
             Telemetry.Data += Telemetry_Data;
             Telemetry.JobStarted += TelemetryHandler.JobStarted;
