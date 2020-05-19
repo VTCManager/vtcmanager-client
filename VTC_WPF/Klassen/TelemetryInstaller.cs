@@ -66,24 +66,24 @@ namespace VTC_WPF.Klassen
                             }
                         }
                     }
-                    else
-                    {
-                        Console.WriteLine("install6");
-                        //ETS2 found in normal Steam folder
-                        //create plugins folder if necessary and copy dll
-                        if (!Directory.Exists(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + "plugins"))
-                            Directory.CreateDirectory(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + "plugins");
-                        if (File.Exists(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + @"plugins\scs-telemetry.dll"))
-                            File.Delete(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + @"plugins\scs-telemetry.dll");
-                        File.Copy(@"Resources/scs-telemetry.dll", SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + @"plugins\scs-telemetry.dll");
-                        if (!Directory.Exists(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + "plugins"))
-                            Directory.CreateDirectory(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + "plugins");
-                        if (File.Exists(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + @"plugins\scs-telemetry.dll"))
-                            File.Delete(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + @"plugins\scs-telemetry.dll");
-                        File.Copy(@"Resources/scs-telemetry.dll", SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + @"plugins\scs-telemetry.dll");
-                        RegistryHandler.write("ETS2Path", SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\", "Telemetry");
-                        RegistryHandler.write("Version", Config.TelemetryVersion, "Telemetry");
-                    }
+                }
+                else
+                {
+                    Console.WriteLine("install6");
+                    //ETS2 found in normal Steam folder
+                    //create plugins folder if necessary and copy dll
+                    if (!Directory.Exists(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + "plugins"))
+                        Directory.CreateDirectory(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + "plugins");
+                    if (File.Exists(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + @"plugins\scs-telemetry.dll"))
+                        File.Delete(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + @"plugins\scs-telemetry.dll");
+                    File.Copy(@"Resources/scs-telemetry.dll", SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder64 + @"plugins\scs-telemetry.dll");
+                    if (!Directory.Exists(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + "plugins"))
+                        Directory.CreateDirectory(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + "plugins");
+                    if (File.Exists(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + @"plugins\scs-telemetry.dll"))
+                        File.Delete(SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + @"plugins\scs-telemetry.dll");
+                    File.Copy(@"Resources/scs-telemetry.dll", SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\bin\" + ETS2Folder86 + @"plugins\scs-telemetry.dll");
+                    RegistryHandler.write("ETS2Path", SteamInstallPath + @"\steamapps\common\Euro Truck Simulator 2\", "Telemetry");
+                    RegistryHandler.write("Version", Config.TelemetryVersion, "Telemetry");
                 }
             }
         }
