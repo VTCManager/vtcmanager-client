@@ -1,4 +1,6 @@
-﻿namespace VTC_WPF
+﻿using System;
+
+namespace VTC_WPF
 {
     public static class Config
     {
@@ -16,5 +18,11 @@
         //REGISTRY ENTRIES
         public static string ETS2InstallFolderRegistryEntry = @"HKEY_CURRENT_USER\System\GameConfigStore\Children\03f2c1c8-e376-4256-93ff-d7dfded8044e";
         public static string ETS2InstallFolderRegistryEntryValue = "MatchedExeFullPath";
+
+        // Folder Settings
+        public static string LogRoot = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\VTCM3";
+        public static string ClientLogFileName = @"\Client_Log.txt";
+        public static string SystemLogFileName = @"\System_Log.txt";
+
     }
 }

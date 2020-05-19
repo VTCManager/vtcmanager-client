@@ -15,11 +15,10 @@ namespace VTC_WPF
         private delegate void UpdateProgressDelegate(DependencyProperty dp, object value);
         public DiscordHandler Discord;
         public JobHandler jobHandler;
-
-
         public MainWindow()
         {
-            TelemetryInstaller.install();
+            Logging.Make_Log_File(); // Muss als erstes stehen, damit vor allem anderen die Logs geleert werden !
+            TelemetryInstaller.install2();
             Telemetry = new SCSSdkTelemetry();
             Telemetry.Data += Telemetry_Data;
             Telemetry.JobStarted += TelemetryHandler.JobStarted;
@@ -34,6 +33,9 @@ namespace VTC_WPF
             Telemetry.RefuelPayed += TelemetryHandler.RefuelPayed;
             jobHandler = new JobHandler();
             Discord = new DiscordHandler();
+            
+
+
             InitializeComponent();
         }
 
