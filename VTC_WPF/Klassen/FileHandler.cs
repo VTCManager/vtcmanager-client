@@ -20,7 +20,7 @@ namespace VTC_WPF.Klassen
             }
             catch (UnauthorizedAccessException ex)
             {
-                MessageBox.Show("No permissions to create " + FilePath+"\n","ERROR",MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No permissions to create " + FilePath + ex.Message,"ERROR",MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
         }

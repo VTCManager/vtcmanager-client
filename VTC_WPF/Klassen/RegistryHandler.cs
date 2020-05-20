@@ -34,7 +34,7 @@ namespace VTC_WPF.Klassen
                 MessageBox.Show("Failed to load RegValue: " + registryPath + valueName + "\n SecurityException:" + ex.Message);
                 return null;
             }
-            catch (NullReferenceException ex)
+            catch
             {
                 return null;
             }
@@ -47,7 +47,7 @@ namespace VTC_WPF.Klassen
             {
                 RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\VTCManager\" + ordner);
                 return key.GetValue(value).ToString();
-            } catch (Exception ex)
+            } catch
             {
             
                 return null;

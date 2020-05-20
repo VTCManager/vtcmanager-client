@@ -6,18 +6,60 @@
         xmlns:local="clr-namespace:VTC_WPF"
         mc:Ignorable="d"
         xmlns:dxga="http://schemas.devexpress.com/winfx/2008/xaml/gauges"
-        Title="MainWindow" Height="600" Width="1200">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="VTC-Manager V3" Height="600" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="0fe05db00517d674af7072ce693d6459501620e8_full.jpg">
     <Window.Resources>
-        <local:App x:Key="Geschwindigkeit" />
+
     </Window.Resources>
-    <Grid Margin="-2,0,298,25">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="263*"/>
-            <ColumnDefinition Width="475*"/>
-            <ColumnDefinition Width="0*"/>
-        </Grid.ColumnDefinitions>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="90" Margin="67,70,0,0" VerticalAlignment="Top" Width="200" Grid.Column="1"/>
-        <Label x:Name="RPM_lbl" HorizontalContentAlignment="Center" Margin="393,136,69,372" Content="RPM_Label" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
+
+
+
+    <Grid Margin="-2,0,1,1">
+
+        <Grid VerticalAlignment="Top" Height="60" Background="#FF2E2E2E">
+            <TextBlock Text="VTC-Manager V3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="36" FontFamily="Segoe UI Black" >
+                <TextBlock.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF2E2E2E" Offset="1"/>
+                        <GradientStop Color="White" Offset="1"/>
+                        <GradientStop Color="#FF1B6BBB"/>
+                    </LinearGradientBrush>
+                </TextBlock.Foreground>
+            </TextBlock>
+            <Image x:Name="MenuIcon" Source="/Icons/icons8-einstellungen-30.png" HorizontalAlignment="Right" Margin="10" MouseDown="MenuIcon_MouseDown"/>
+
+
+
+        </Grid>
+
+        <StackPanel x:Name="MenuRightStack" Visibility="Hidden" Width="150" Height="500" Background="#FF2E2E2E" Margin="0, 50,0,0" HorizontalAlignment="Right">
+            <Button x:Name="btn_Settings" Width="120" Height="30" Content="Einstellungen" HorizontalAlignment="Center" Margin="5" Click="btn_Settings_Click" />
+            <Button x:Name="btn_Overlay" Width="120" Height="30" Content="Overlay" HorizontalAlignment="Center" Margin="5" Click="btn_Overlay_Click" />
+            <Separator/>
+            <Button x:Name="btn_Ueber" Width="120" Height="30" Content="Über uns..." HorizontalAlignment="Center" Margin="5" Click="btn_Ueber_Click" />
+            <Separator/>
+
+
+            <Button x:Name="btn_Logout" Width="120" Height="30" Content="Logout" HorizontalAlignment="Center" Margin="5" Click="btn_Logout_Click" />
+
+        </StackPanel>
+
+        <Grid Width="200" HorizontalAlignment="Left" Background="#FF2E2E2E">
+
+        </Grid>
+
+
+        <Rectangle HorizontalAlignment="Left" Height="100" Margin="259,316,0,0" Stroke="Red" StrokeThickness="2" VerticalAlignment="Top" Width="257" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="-15.37"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="13.744"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Label x:Name="Dashboard_RPM" HorizontalContentAlignment="Center" Margin="277,388,791,146" Content="RPM_Label" RenderTransformOrigin="0.5,0.5">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -27,39 +69,28 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="37" Margin="193,21,0,0" VerticalAlignment="Top" Width="40" Source="Resources/bremse_schwarz.png" Grid.Column="1"/>
-        <Image x:Name="image_Copy" HorizontalAlignment="Left" Height="37" Margin="238,21,0,0" VerticalAlignment="Top" Width="40" Source="Resources/icons8-autobatterie-80.png" Grid.Column="1"/>
-        <Image x:Name="image_Copy1" HorizontalAlignment="Left" Height="37" Margin="285,21,0,0" VerticalAlignment="Top" Width="40" Source="Resources/icons8-motor-128.png" Grid.Column="1"/>
-        <Image x:Name="image_Copy2" HorizontalAlignment="Left" Height="37" Margin="335,21,0,0" VerticalAlignment="Top" Width="40" Source="Resources/icons8-druck-96.png" Grid.Column="1"/>
-        <Label x:Name="speed_label_tacho" Content="000" Margin="78,72,310,0" HorizontalContentAlignment="Center" VerticalAlignment="Top" FontSize="34" Height="61" FontFamily="Segoe UI Black" FontStyle="Italic" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="-12.463"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="-5.81"/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
-        <Label x:Name="label1" Content="KM/H" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="127,113,0,0" VerticalAlignment="Top" FontSize="24" Height="42" Width="83" Grid.Column="1"/>
-        <Ellipse HorizontalAlignment="Left" Height="80" StrokeThickness="10" Margin="312,74,0,0" Stroke="Red" VerticalAlignment="Top" Width="78" Grid.Column="1"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="90" Margin="309,70,0,0" VerticalAlignment="Top" Width="200" Grid.Column="1">
 
-        </Border>
-        <Label x:Name="Speed_Limit_Label" Content="000" Margin="315,86,185,398" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" FontFamily="Segoe UI Black" FontSize="30" Grid.Column="1"/>
-        <Image x:Name="Speed_Limiter_Image" HorizontalAlignment="Left" Height="26" Margin="415,71,0,0" VerticalAlignment="Top" Width="29" Source="Resources/icons8-tacho-96.png" Grid.Column="1"/>
-        <Label x:Name="Speed_Limiter_Setting" Content="Speed_Limit" HorizontalAlignment="Left" Margin="444,71,0,0" VerticalAlignment="Top" Height="26" Width="69" Grid.Column="1"/>
-        <Label x:Name="Gang_Label" Content="1" HorizontalAlignment="Left" Margin="402,75,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Segoe UI Black" RenderTransformOrigin="0.5,0.5" Height="74" Width="111" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+        <Label x:Name="Dashboard_KMH_MILES" Content="KM/H" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="433,378,0,0" VerticalAlignment="Top" FontSize="24" Height="42" Width="83"/>
+        <Label x:Name="Dashboard_Gang" Content="1" HorizontalAlignment="Left" Margin="471,316,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Segoe UI Black" RenderTransformOrigin="3.319,2.835" Height="77" Width="52" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform AngleX="-9.462"/>
                     <RotateTransform/>
-                    <TranslateTransform X="-6.167"/>
+                    <TranslateTransform X="-36.134"/>
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <GroupBox x:Name="groupBox" Header="Verkehr" HorizontalAlignment="Left" Height="324" Margin="9,13,0,0" VerticalAlignment="Top" Width="297" FontSize="16"/>
+
+        <Label x:Name="Dashboard_Speed" Content="Label" HorizontalAlignment="Left" Margin="290,318,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Segoe UI Black" FontStyle="Italic" FontWeight="Bold"/>
+
+        <!--  LKW Image soll über dem Text stehen (muss ich noch Ingame machen -->
+        <Label x:Name="label_Truck_Manufactor" Content="T:Hersteller" HorizontalAlignment="Left" Margin="4,140,0,0" VerticalAlignment="Top" Width="188" Foreground="AliceBlue"/>
+        <Label x:Name="label_Truck_Model" Content="T:Model" HorizontalAlignment="Left" Margin="4,160,0,0" VerticalAlignment="Top" Width="188" Foreground="AliceBlue"/>
+        <Label x:Name="label_Tour_Start" Content="J:Start" HorizontalAlignment="Left" Margin="4,180,0,0" VerticalAlignment="Top" Width="188" Foreground="AliceBlue"/>
+        <Label x:Name="label_Tour_Cargo" Content="J:Cargo" HorizontalAlignment="Left" Margin="4,200,0,0" VerticalAlignment="Top" Width="188" Foreground="AliceBlue"/>
+        <Label x:Name="label_Tour_End" Content="J:End" HorizontalAlignment="Left" Margin="4,220,0,0" VerticalAlignment="Top" Width="188" Foreground="AliceBlue"/>
+        <!-- Eventuell in Textform 'Du Fährst mit 12T Frischfleisch von Hamburg nach Franzosenland' oder sowas -->
 
 
 

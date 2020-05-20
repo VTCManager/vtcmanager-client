@@ -47,16 +47,9 @@ namespace VTC_WPF
                 if (InvokeRequired) { }
                 else
                 {
-                        UpdateLabelContent(RPM_lbl, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.RPM).ToString() + " R/PM");
-                        UpdateLabelContent(speed_label_tacho, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString());
-                        UpdateLabelContent(Speed_Limit_Label, Convert.ToInt32(data.NavigationValues.SpeedLimit.Kph).ToString());
-                        UpdateLabelContent(Speed_Limiter_Setting, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.CruiseControlSpeed.Kph).ToString());
-
-                        if (data.TruckValues.CurrentValues.MotorValues.GearValues.Selected == -1)
-                        {
-                            UpdateLabelContent(Gang_Label, "R");
-                        }
-                        UpdateLabelContent(Gang_Label, Convert.ToInt32(data.TruckValues.CurrentValues.MotorValues.GearValues.Selected).ToString());
+                        UpdateLabelContent(Dashboard_RPM, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.RPM).ToString() + " R/PM");
+                        UpdateLabelContent(Dashboard_Speed, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString());
+           
                 }
             }
             catch
@@ -69,6 +62,39 @@ namespace VTC_WPF
                 Dispatcher.Invoke(new UpdateProgressDelegate(label.SetValue), DispatcherPriority.Background, ContentProperty, newContent);
         }
 
+        private void MenuIcon_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MenuRightStack.Visibility = (MenuRightStack.IsVisible) ? Visibility.Hidden : Visibility.Visible;
+        }
 
+        private void btn_Settings_Click(object sender, RoutedEventArgs e)
+        {
+            MenuRightStack.Visibility = Visibility.Hidden;
+            MessageBox.Show("Settings", "Settings", MessageBoxButton.OK, MessageBoxImage.Information);
+         
+        }
+
+        private void btn_Overlay_Click(object sender, RoutedEventArgs e)
+        {
+            MenuRightStack.Visibility = Visibility.Hidden;
+            MessageBox.Show("Overlay", "Overlay", MessageBoxButton.OK, MessageBoxImage.Information);
+          
+        }
+
+        private void btn_Logout_Click(object sender, RoutedEventArgs e)
+        {
+            MenuRightStack.Visibility = Visibility.Hidden;
+            MessageBox.Show("Logout", "Logout", MessageBoxButton.OK, MessageBoxImage.Information);
+            
+        }
+
+        private void btn_Ueber_Click(object sender, RoutedEventArgs e)
+        {
+            MenuRightStack.Visibility = Visibility.Hidden;
+            MessageBox.Show("Über", "Über", MessageBoxButton.OK, MessageBoxImage.Information);
+        
+        }
+
+      
     }
 }
