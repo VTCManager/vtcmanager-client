@@ -57,6 +57,9 @@
             <TabItem Header="Einstellungen" FontSize="24" Height="50" Width="200" Background="{x:Null}" Opacity="0.5">
                 <Grid Background="#FFE5E5E5" Margin="-1,0,-31,-262">
                     <Label x:Name="label1" Content="Einstellungen" HorizontalAlignment="Left" Margin="2,-1,0,0" VerticalAlignment="Top" FontSize="24"/>
+                    <TextBox x:Name="TMP_Pfad_Textbox" HorizontalAlignment="Left" Height="33" Margin="15,86,0,0" VerticalAlignment="Top" Width="257" FontSize="12" BorderBrush="#893341CF" AcceptsReturn="False" MaxLines="1" TextWrapping="NoWrap"/>
+                    <Label x:Name="TMP_Pfad_Label" Content="Pfad zu Truckers-MP:" HorizontalAlignment="Left" Margin="11,59,0,0" VerticalAlignment="Top" FontSize="12"/>
+                    <Button x:Name="button" Content="..." HorizontalAlignment="Left" Margin="286,86,0,0" VerticalAlignment="Top" Width="46" Click="btn_open_TMP_File_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>

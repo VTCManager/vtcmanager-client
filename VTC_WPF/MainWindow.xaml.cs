@@ -1,6 +1,8 @@
-﻿using SCSSdkClient;
+﻿using Microsoft.Win32;
+using SCSSdkClient;
 using SCSSdkClient.Object;
 using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -14,7 +16,10 @@ namespace VTC_WPF
         private readonly bool InvokeRequired;
         private delegate void UpdateProgressDelegate(DependencyProperty dp, object value);
         public DiscordHandler Discord;
+        Utilities utils = new Utilities();
         public JobHandler jobHandler;
+        private OpenFileDialog tmp_Trucker;
+
         public MainWindow()
         {
             Logging.Make_Log_File(); // Muss als erstes stehen, damit vor allem anderen die Logs geleert werden !
@@ -33,10 +38,11 @@ namespace VTC_WPF
             Telemetry.RefuelPayed += TelemetryHandler.RefuelPayed;
             jobHandler = new JobHandler();
             Discord = new DiscordHandler();
-            
-
 
             InitializeComponent();
+
+            TMP_Pfad_Textbox.Text = utils.Reg_Lesen("Config", "TMP_PFAD", true);
+            TMP_Pfad_Textbox.IsEnabled = (string.IsNullOrEmpty(utils.Reg_Lesen("Config", "TMP_PFAD", true))) ? true : false;
         }
 
         private void Telemetry_Data(SCSTelemetry data, bool updated)
@@ -96,6 +102,11 @@ namespace VTC_WPF
         
         }
 
-      
+        private void btn_open_TMP_File_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+                TMP_Pfad_Textbox.Text = openFileDialog.FileName.ToString(); utils.Reg_Schreiben("TMP_PFAD", openFileDialog.FileName.ToString(), "Config");
+        }
     }
 }

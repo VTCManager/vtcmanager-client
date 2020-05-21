@@ -59,6 +59,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -96,14 +98,19 @@
     <Compile Include="ETS2PathDialog.xaml.cs">
       <DependentUpon>ETS2PathDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Klassen\API.cs" />
     <Compile Include="Klassen\CirularGaugeControl.cs" />
     <Compile Include="Klassen\DiscordHandler.cs" />
     <Compile Include="Klassen\FileHandler.cs" />
     <Compile Include="Klassen\JobHandler.cs" />
     <Compile Include="Klassen\Logging.cs" />
+    <Compile Include="Klassen\Login.cs" />
     <Compile Include="Klassen\RegistryHandler.cs" />
+    <Compile Include="Klassen\SettingsManager.cs" />
     <Compile Include="Klassen\TelemetryHandler.cs" />
     <Compile Include="Klassen\TelemetryInstaller.cs" />
+    <Compile Include="Klassen\Translation.cs" />
+    <Compile Include="Klassen\Utilities.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
