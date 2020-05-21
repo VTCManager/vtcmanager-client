@@ -26,7 +26,6 @@
                     </LinearGradientBrush>
                 </TextBlock.Foreground>
             </TextBlock>
-            <Image x:Name="MenuIcon" Source="/Icons/icons8-einstellungen-30.png" HorizontalAlignment="Right" Margin="10" MouseDown="MenuIcon_MouseDown"/>
 
 
 
@@ -47,49 +46,22 @@
         <Grid Width="200" HorizontalAlignment="Left" Background="#FF2E2E2E">
 
         </Grid>
-
-
-        <Rectangle HorizontalAlignment="Left" Height="100" Margin="259,316,0,0" Stroke="Red" StrokeThickness="2" VerticalAlignment="Top" Width="257" RenderTransformOrigin="0.5,0.5">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="-15.37"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="13.744"/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Label x:Name="Dashboard_RPM" HorizontalContentAlignment="Center" Margin="277,388,791,146" Content="RPM_Label" RenderTransformOrigin="0.5,0.5">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
-
-        <Label x:Name="Dashboard_KMH_MILES" Content="KM/H" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="433,378,0,0" VerticalAlignment="Top" FontSize="24" Height="42" Width="83"/>
-        <Label x:Name="Dashboard_Gang" Content="1" HorizontalAlignment="Left" Margin="471,316,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Segoe UI Black" RenderTransformOrigin="3.319,2.835" Height="77" Width="52" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="-9.462"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="-36.134"/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
-
-        <Label x:Name="Dashboard_Speed" Content="Label" HorizontalAlignment="Left" Margin="290,318,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Segoe UI Black" FontStyle="Italic" FontWeight="Bold"/>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="510" Margin="-2,58,-1,0" VerticalAlignment="Top" Width="1198" TabStripPlacement="Left">
+            <TabItem Header="Fahrt" Height="50" Width="200" FontSize="24" Background="{x:Null}" Opacity="0.5">
+                <Grid Background="#FFE5E5E5">
+                    <Label x:Name="label" Content="Geschwindigkeit" HorizontalAlignment="Left" Margin="2,-1,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+            <TabItem Background="{x:Null}" Content="" Height="50" Width="200" Header="Freunde" FontSize="24" Opacity="0.5"/>
+            <TabItem Background="{x:Null}" Content="" FontSize="24" Height="50" Opacity="0.5" Width="200" Header="Verkehr"/>
+            <TabItem Header="Einstellungen" FontSize="24" Height="50" Width="200" Background="{x:Null}" Opacity="0.5">
+                <Grid Background="#FFE5E5E5" Margin="-1,0,-31,-262">
+                    <Label x:Name="label1" Content="Einstellungen" HorizontalAlignment="Left" Margin="2,-1,0,0" VerticalAlignment="Top" FontSize="24"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
 
         <!--  LKW Image soll über dem Text stehen (muss ich noch Ingame machen -->
-        <Label x:Name="label_Truck_Manufactor" Content="T:Hersteller" HorizontalAlignment="Left" Margin="4,140,0,0" VerticalAlignment="Top" Width="188" Foreground="AliceBlue"/>
-        <Label x:Name="label_Truck_Model" Content="T:Model" HorizontalAlignment="Left" Margin="4,160,0,0" VerticalAlignment="Top" Width="188" Foreground="AliceBlue"/>
-        <Label x:Name="label_Tour_Start" Content="J:Start" HorizontalAlignment="Left" Margin="4,180,0,0" VerticalAlignment="Top" Width="188" Foreground="AliceBlue"/>
-        <Label x:Name="label_Tour_Cargo" Content="J:Cargo" HorizontalAlignment="Left" Margin="4,200,0,0" VerticalAlignment="Top" Width="188" Foreground="AliceBlue"/>
-        <Label x:Name="label_Tour_End" Content="J:End" HorizontalAlignment="Left" Margin="4,220,0,0" VerticalAlignment="Top" Width="188" Foreground="AliceBlue"/>
         <!-- Eventuell in Textform 'Du Fährst mit 12T Frischfleisch von Hamburg nach Franzosenland' oder sowas -->
 
 

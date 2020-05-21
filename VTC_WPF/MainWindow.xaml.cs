@@ -47,8 +47,8 @@ namespace VTC_WPF
                 if (InvokeRequired) { }
                 else
                 {
-                        UpdateLabelContent(Dashboard_RPM, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.RPM).ToString() + " R/PM");
-                        UpdateLabelContent(Dashboard_Speed, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString());
+                        //UpdateLabelContent(Dashboard_RPM, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.RPM).ToString() + " R/PM");
+                        //UpdateLabelContent(Dashboard_Speed, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString());
            
                 }
             }
@@ -70,6 +70,7 @@ namespace VTC_WPF
         private void btn_Settings_Click(object sender, RoutedEventArgs e)
         {
             MenuRightStack.Visibility = Visibility.Hidden;
+  
             MessageBox.Show("Settings", "Settings", MessageBoxButton.OK, MessageBoxImage.Information);
          
         }
