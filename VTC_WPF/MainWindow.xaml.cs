@@ -3,11 +3,13 @@ using SCSSdkClient;
 using SCSSdkClient.Object;
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using VTC_WPF.Klassen;
@@ -25,7 +27,8 @@ namespace VTC_WPF
         public JobHandler jobHandler;
         private OpenFileDialog tmp_Trucker;
         public int Gesch2;
-
+        public const string DateTimeUiFormat = "dd/MM/yyyy";
+        int minutes;
         public MainWindow()
         {
             Logging.Make_Log_File(); // Muss als erstes stehen, damit vor allem anderen die Logs geleert werden !
@@ -56,33 +59,56 @@ namespace VTC_WPF
             try
             {
 
-                if (InvokeRequired) { }
-                else
-                {
-                    UpdateLabelContent(Truck_Manufactur_Label, data.TruckValues.ConstantsValues.Brand.ToString());
-                    UpdateLabelContent(Testlabel, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString());
-
-                        try
-                        {
-                            // Bild ändern geht noch nicht
-                            Truck_Manufactur_Image.Source = new BitmapImage(new Uri("Icons/icons8-mercedes-benz-256.png"));
+                if (!InvokeRequired) { 
                     
-                    } catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
-                        
-                    
-                        
+                        UpdateLabelContent(Truck_Manufactur_Label, data.TruckValues.ConstantsValues.Brand.ToString() + ", Modell: " + data.TruckValues.ConstantsValues.Name.ToString());
+                        UpdateLabelContent(Testlabel, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString() + " KM/H");
+                        UpdateLabelContent(Tour_Startort, "Du fährst " + data.JobValues.PlannedDistanceKm.ToString() + " km von " + data.JobValues.CitySource.ToString() + " nach " + data.JobValues.CityDestination.ToString());
+                        UpdateLabelContent(Label_Streckeninfos, "Deine Wegstrecke beträgt jetzt noch " + (int)(data.NavigationValues.NavigationDistance / 1000) + " KM");
+                        minutes = ((int)data.JobValues.RemainingDeliveryTime.Value >= 1) ? (int)data.JobValues.RemainingDeliveryTime.Value : 0;
+    
+                        UpdateLabelContent(Label_Streckeninfos_2, "Restzeit: " + String.Format("{0} Std. {1} Min.", minutes / 60, minutes % 60));
 
 
+                    // Tankanzeige
 
+                    UpdateLabelContent(Label_Fuel_Current, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.FuelValue.Amount).ToString() + " l");
+                    UpdateLabelContent(Label_Fuel_Maximum, Convert.ToDouble(data.TruckValues.ConstantsValues.CapacityValues.Fuel).ToString() + " l");
+
+                    Progress_Tank.Maximum = Convert.ToDouble(data.TruckValues.ConstantsValues.CapacityValues.Fuel);
+                    Progress_Tank.Value = Convert.ToDouble(data.TruckValues.CurrentValues.DashboardValues.FuelValue.Amount);
+
+                    Console.WriteLine(Convert.ToDouble(data.TruckValues.CurrentValues.DashboardValues.FuelValue.Amount));
                 }
+                
+
             }
             catch
             { }
             
         }
+        public class ProgressBarSmoother
+        {
+            public static double GetSmoothValue(DependencyObject obj)
+            {
+                return (double)obj.GetValue(SmoothValueProperty);
+            }
+
+            public static void SetSmoothValue(DependencyObject obj, double value)
+            {
+                obj.SetValue(SmoothValueProperty, value);
+            }
+
+            public static readonly DependencyProperty SmoothValueProperty =
+             DependencyProperty.RegisterAttached("SmoothValue", typeof(double), typeof(ProgressBarSmoother), new PropertyMetadata(0.0, changing));
+
+            private static void changing(DependencyObject d, DependencyPropertyChangedEventArgs e)
+            {
+                var anim = new DoubleAnimation((double)e.OldValue, (double)e.NewValue, new TimeSpan(0, 0, 0, 0, 250));
+                (d as ProgressBar).BeginAnimation(ProgressBar.ValueProperty, anim, HandoffBehavior.Compose);
+            }
+        }
+
 
         public void UpdateLabelContent(Label label, string newContent)
         {
@@ -133,6 +159,7 @@ namespace VTC_WPF
 
         private void TMP_Starten_Click(object sender, RoutedEventArgs e)
         {
+            FileHandler.StarteAnwednung(utils.Reg_Lesen("Config", "TMP_PFAD", true));
 
         }
     }

@@ -53,8 +53,17 @@
             <TabItem Header="Fahrt" Height="50" Width="200" FontSize="24" Background="{x:Null}" Opacity="0.5" Foreground="#FF4B9DFF" FontFamily="SF Movie Poster">
                 <Grid Background="#FFE5E5E5" Margin="0,0,0,66">
                     <Label x:Name="Testlabel" Content="Speed" HorizontalAlignment="Left"  Margin="313,45,0,0" VerticalAlignment="Top" Height="82" Width="320" FontStyle="Italic" FontWeight="Bold" FontFamily="Verdana" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                    <Label x:Name="Truck_Manufactur_Label" Content="Label" HorizontalAlignment="Left" Margin="171,179,0,0" VerticalAlignment="Top"/>
-                    <Image x:Name="Truck_Manufactur_Image" HorizontalAlignment="Left" Height="100" Margin="10,143,0,0" VerticalAlignment="Top" Width="100" Source="Icons/No_Truck.png"/>
+                    <Label x:Name="Truck_Manufactur_Label" Content="Label" HorizontalAlignment="Left" Margin="171,179,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light"/>
+                    <Label x:Name="Tour_Startort" Content="Label" HorizontalAlignment="Left" Margin="20,259,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Width="950" HorizontalContentAlignment="Center"/>
+                    <Label x:Name="Label_Streckeninfos" Content="Label" HorizontalAlignment="Left" Margin="20,299,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Width="950" HorizontalContentAlignment="Center"/>
+                    <Label x:Name="Label_Streckeninfos_2" Content="Label" HorizontalAlignment="Left" Margin="20,337,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Width="950" HorizontalContentAlignment="Center"/>
+                    <ProgressBar x:Name="Progress_Tank" HorizontalAlignment="Left" Height="192" Margin="772,29,0,0" VerticalAlignment="Top" Width="42" SmallChange="1" Value="-1">
+
+                    </ProgressBar>
+                    <Label x:Name="Label_Fuel_Maximum" Content="Label" HorizontalAlignment="Left" Margin="774,27,0,0" VerticalAlignment="Top" FontFamily="Verdana" FontSize="10"/>
+                    <Label x:Name="Label_Fuel_Current" Content="Label" HorizontalAlignment="Left" Margin="811,112,0,0" VerticalAlignment="Top" FontFamily="Verdana" FontSize="10"/>
+                    <!-- Kann das Truck Imaage nicht ändern im CodeBehind. Deshalb erstmal Deaktiviert -->
+                    <!--<Image x:Name="Truck_Manufactur_Image" HorizontalAlignment="Left" Height="100" Margin="10,143,0,0" VerticalAlignment="Top" Width="100" Source="Icons/No_Truck.png"/> -->
 
                 </Grid>
             </TabItem>
@@ -68,7 +77,7 @@
                     <Button x:Name="BTN_Suche_TMP_PFAD" Content="..." HorizontalAlignment="Left" Margin="286,86,0,0" VerticalAlignment="Top" Width="46" Click="btn_open_TMP_File_Click"/>
                 </Grid>
             </TabItem>
-          
+
 
 
         </TabControl>

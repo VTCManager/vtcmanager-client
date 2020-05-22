@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,20 @@ namespace VTC_WPF.Klassen
             {
                 MessageBox.Show("No permissions to create " + FilePath + ex.Message,"ERROR",MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
+            }
+        }
+
+
+
+        internal static void StarteAnwednung(string path)
+        {
+            try
+            {
+                Process.Start(path);
+            }
+            catch (Exception ex)
+            {
+                Logging.WriteClientLog("<ERROR> Konnte Anwendung in Pfad: " + path + " nicht starten. " + ex.Message + ex.StackTrace);
             }
         }
     }
