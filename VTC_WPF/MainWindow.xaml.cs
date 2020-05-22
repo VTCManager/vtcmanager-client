@@ -2,11 +2,16 @@
 using SCSSdkClient;
 using SCSSdkClient.Object;
 using System;
+using System.Drawing;
 using System.IO;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using VTC_WPF.Klassen;
+using Image = System.Drawing.Image;
 
 namespace VTC_WPF
 {
@@ -19,6 +24,7 @@ namespace VTC_WPF
         Utilities utils = new Utilities();
         public JobHandler jobHandler;
         private OpenFileDialog tmp_Trucker;
+        public int Gesch2;
 
         public MainWindow()
         {
@@ -53,9 +59,24 @@ namespace VTC_WPF
                 if (InvokeRequired) { }
                 else
                 {
-                        //UpdateLabelContent(Dashboard_RPM, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.RPM).ToString() + " R/PM");
-                        //UpdateLabelContent(Dashboard_Speed, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString());
-           
+                    UpdateLabelContent(Truck_Manufactur_Label, data.TruckValues.ConstantsValues.Brand.ToString());
+                    UpdateLabelContent(Testlabel, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString());
+
+                        try
+                        {
+                            // Bild ändern geht noch nicht
+                            Truck_Manufactur_Image.Source = new BitmapImage(new Uri("Icons/icons8-mercedes-benz-256.png"));
+                    
+                    } catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                        
+                    
+                        
+
+
+
                 }
             }
             catch
@@ -102,11 +123,17 @@ namespace VTC_WPF
         
         }
 
+
         private void btn_open_TMP_File_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
                 TMP_Pfad_Textbox.Text = openFileDialog.FileName.ToString(); utils.Reg_Schreiben("TMP_PFAD", openFileDialog.FileName.ToString(), "Config");
+        }
+
+        private void TMP_Starten_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

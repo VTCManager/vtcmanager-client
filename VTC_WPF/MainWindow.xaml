@@ -11,6 +11,9 @@
     <Window.Resources>
 
     </Window.Resources>
+    <Window.Background>
+        <ImageBrush ImageSource="TMP_BTN.png"/>
+    </Window.Background>
 
 
 
@@ -47,27 +50,32 @@
 
         </Grid>
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="510" Margin="-2,58,-1,0" VerticalAlignment="Top" Width="1198" TabStripPlacement="Left">
-            <TabItem Header="Fahrt" Height="50" Width="200" FontSize="24" Background="{x:Null}" Opacity="0.5">
-                <Grid Background="#FFE5E5E5">
-                    <Label x:Name="label" Content="Geschwindigkeit" HorizontalAlignment="Left" Margin="2,-1,0,0" VerticalAlignment="Top"/>
+            <TabItem Header="Fahrt" Height="50" Width="200" FontSize="24" Background="{x:Null}" Opacity="0.5" Foreground="#FF4B9DFF" FontFamily="SF Movie Poster">
+                <Grid Background="#FFE5E5E5" Margin="0,0,0,66">
+                    <Label x:Name="Testlabel" Content="Speed" HorizontalAlignment="Left"  Margin="313,45,0,0" VerticalAlignment="Top" Height="82" Width="320" FontStyle="Italic" FontWeight="Bold" FontFamily="Verdana" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    <Label x:Name="Truck_Manufactur_Label" Content="Label" HorizontalAlignment="Left" Margin="171,179,0,0" VerticalAlignment="Top"/>
+                    <Image x:Name="Truck_Manufactur_Image" HorizontalAlignment="Left" Height="100" Margin="10,143,0,0" VerticalAlignment="Top" Width="100" Source="Icons/No_Truck.png"/>
+
                 </Grid>
             </TabItem>
-            <TabItem Background="{x:Null}" Content="" Height="50" Width="200" Header="Freunde" FontSize="24" Opacity="0.5"/>
-            <TabItem Background="{x:Null}" Content="" FontSize="24" Height="50" Opacity="0.5" Width="200" Header="Verkehr"/>
-            <TabItem Header="Einstellungen" FontSize="24" Height="50" Width="200" Background="{x:Null}" Opacity="0.5">
+            <TabItem Background="{x:Null}" Content="" Height="50" Width="200" Header="Freunde" FontSize="24" Opacity="0.5" Foreground="#FF4B9DFF" FontFamily="SF Movie Poster"/>
+            <TabItem Background="{x:Null}" Content="" FontSize="24" Height="50" Opacity="0.5" Width="200" Header="Verkehr" Foreground="#FF4B9DFF" FontFamily="SF Movie Poster"/>
+            <TabItem Header="Einstellungen" FontSize="24" Height="50" Width="200" Background="{x:Null}" Opacity="0.5" Foreground="#FF4B9DFF" FontFamily="SF Movie Poster">
                 <Grid Background="#FFE5E5E5" Margin="-1,0,-31,-262">
                     <Label x:Name="label1" Content="Einstellungen" HorizontalAlignment="Left" Margin="2,-1,0,0" VerticalAlignment="Top" FontSize="24"/>
                     <TextBox x:Name="TMP_Pfad_Textbox" HorizontalAlignment="Left" Height="33" Margin="15,86,0,0" VerticalAlignment="Top" Width="257" FontSize="12" BorderBrush="#893341CF" AcceptsReturn="False" MaxLines="1" TextWrapping="NoWrap"/>
                     <Label x:Name="TMP_Pfad_Label" Content="Pfad zu Truckers-MP:" HorizontalAlignment="Left" Margin="11,59,0,0" VerticalAlignment="Top" FontSize="12"/>
-                    <Button x:Name="button" Content="..." HorizontalAlignment="Left" Margin="286,86,0,0" VerticalAlignment="Top" Width="46" Click="btn_open_TMP_File_Click"/>
+                    <Button x:Name="BTN_Suche_TMP_PFAD" Content="..." HorizontalAlignment="Left" Margin="286,86,0,0" VerticalAlignment="Top" Width="46" Click="btn_open_TMP_File_Click"/>
                 </Grid>
             </TabItem>
+          
+
+
         </TabControl>
 
-        <!--  LKW Image soll über dem Text stehen (muss ich noch Ingame machen -->
-        <!-- Eventuell in Textform 'Du Fährst mit 12T Frischfleisch von Hamburg nach Franzosenland' oder sowas -->
-
-
+        <Button x:Name="ETS2_Starten" Content="ETS2 Starten" Height="40" Width="150" Margin="530,509,515,10" />
+        <Button x:Name="ATS_Starten" Content="ATS Starten" Height="40" Width="150" Margin="370,509,675,10" />
+        <Button x:Name="TMP_Starten" Content="TMP Starten" Click="TMP_Starten_Click" Height="40" Width="150" Margin="210,509,835,10" />
 
     </Grid>
 </Window>

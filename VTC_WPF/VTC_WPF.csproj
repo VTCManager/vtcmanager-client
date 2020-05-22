@@ -107,6 +107,7 @@
     <Compile Include="Klassen\Login.cs" />
     <Compile Include="Klassen\RegistryHandler.cs" />
     <Compile Include="Klassen\SettingsManager.cs" />
+    <Compile Include="Klassen\Telemetry.cs" />
     <Compile Include="Klassen\TelemetryHandler.cs" />
     <Compile Include="Klassen\TelemetryInstaller.cs" />
     <Compile Include="Klassen\Translation.cs" />
@@ -132,7 +133,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -146,10 +147,27 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Resource Include="TMP_BTN.png" />
     <Resource Include="Icons\icons8-einstellungen-30.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="0fe05db00517d674af7072ce693d6459501620e8_full.jpg" />
+    <Resource Include="Icons\TMP_BTN.png" />
+    <Resource Include="euro_truck_simulator_2___icon_by_blagoicons_da107l6.png" />
+    <Resource Include="american_truck_simulator___icon_by_blagoicons_d9yju3g.png" />
+    <Resource Include="Icons\icons8-daf-256.png" />
+    <Resource Include="Icons\icons8-iveco-256.png" />
+    <Content Include="Icons\icons8-mercedes-benz-256.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Icons\icons8-renault-256.png" />
+    <Resource Include="Icons\icons8-scania-256.png" />
+    <Resource Include="Icons\icons8-volvo-256.png" />
+    <Resource Include="Icons\No_Truck.png" />
+    <Content Include="Resources\icons8-mercedes-benz-256.png" />
+    <Content Include="Resources\No_Truck.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\scs-telemetry.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
