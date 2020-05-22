@@ -57,7 +57,7 @@
                     <Label x:Name="Tour_Startort" Content="Label" HorizontalAlignment="Left" Margin="20,259,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Width="950" HorizontalContentAlignment="Center"/>
                     <Label x:Name="Label_Streckeninfos" Content="Label" HorizontalAlignment="Left" Margin="20,299,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Width="950" HorizontalContentAlignment="Center"/>
                     <Label x:Name="Label_Streckeninfos_2" Content="Label" HorizontalAlignment="Left" Margin="20,337,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Width="950" HorizontalContentAlignment="Center"/>
-                    <ProgressBar x:Name="Progress_Tank" HorizontalAlignment="Left" Height="192" Margin="772,29,0,0" VerticalAlignment="Top" Width="42" SmallChange="1" Value="-1">
+                    <ProgressBar x:Name="Progress_Tank" Value="{Binding CurrentProgress}" HorizontalAlignment="Left" Height="192" Margin="772,29,0,0" VerticalAlignment="Top" Width="42">
 
                     </ProgressBar>
                     <Label x:Name="Label_Fuel_Maximum" Content="Label" HorizontalAlignment="Left" Margin="774,27,0,0" VerticalAlignment="Top" FontFamily="Verdana" FontSize="10"/>
