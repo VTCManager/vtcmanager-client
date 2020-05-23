@@ -43,9 +43,8 @@ namespace VTC_WPF
             Telemetry.RefuelPayed += TelemetryHandler.RefuelPayed;
             jobHandler = new JobHandler();
             Discord = new DiscordHandler();
-            this.DataContext = new SpeedGauge();
-            InitializeComponent();
 
+            InitializeComponent();
 
             TMP_Pfad_Textbox.Text = utils.Reg_Lesen("Config", "TMP_PFAD", true);
             TMP_Pfad_Textbox.IsEnabled = (string.IsNullOrEmpty(utils.Reg_Lesen("Config", "TMP_PFAD", true))) ? true : false;
@@ -63,13 +62,13 @@ namespace VTC_WPF
                 {
 
                     UpdateLabelContent(Truck_Manufactur_Label, data.TruckValues.ConstantsValues.Brand.ToString() + ", Modell: " + data.TruckValues.ConstantsValues.Name.ToString());
-                    UpdateLabelContent(Testlabel, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString() + " KM/H");
+                    UpdateLabelContent(Speedlabel, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString() + " KM/H");
                     UpdateLabelContent(Tour_Startort, "Du fährst " + data.JobValues.PlannedDistanceKm.ToString() + " km von " + data.JobValues.CitySource.ToString() + " nach " + data.JobValues.CityDestination.ToString());
-                    UpdateLabelContent(Label_Streckeninfos, "Deine Wegstrecke beträgt jetzt noch " + (int)(data.NavigationValues.NavigationDistance / 1000) + " KM");
+                    UpdateLabelContent(Label_Streckeninfos, "Deine Wegstrecke beträgt jetzt noch " + (int)(data.NavigationValues.NavigationDistance / 1000) + Environment.NewLine + " KM");
                     minutes = ((int)data.JobValues.RemainingDeliveryTime.Value >= 1) ? (int)data.JobValues.RemainingDeliveryTime.Value : 0;
 
                     UpdateLabelContent(Label_Streckeninfos_2, "Restzeit: " + String.Format("{0} Std. {1} Min.", minutes / 60, minutes % 60));
-
+                    UpdateLabelContent(speed_fuer_tacho, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph-85).ToString());
 
                     // Tankanzeige
 

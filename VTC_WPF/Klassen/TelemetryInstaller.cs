@@ -11,7 +11,7 @@ namespace VTC_WPF.Klassen
         //ETS
         private static string ETS2Folder64 = @"win_x64\";
         private static string ETS2Folder86 = @"win_x86\";
-        private static string ETS2_EXE = "eurotrucks2.exe";
+        //private static string ETS2_EXE = "eurotrucks2.exe";
         //STEAM
         private static string SteamLibraryConfigFile = @"\steamapps\libraryfolders.vdf";
 
