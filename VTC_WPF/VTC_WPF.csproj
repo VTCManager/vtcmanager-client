@@ -65,7 +65,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DiscordRPC, Version=1.0.150.0, Culture=neutral, processorArchitecture=MSIL">
@@ -84,7 +84,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DLLs\SCSSdkClient.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -114,6 +116,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Joschis_Design.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -125,6 +131,9 @@
     <Compile Include="Config.cs" />
     <Compile Include="ETS2PathDialog.xaml.cs">
       <DependentUpon>ETS2PathDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Joschis_Design.xaml.cs">
+      <DependentUpon>Joschis_Design.xaml</DependentUpon>
     </Compile>
     <Compile Include="Klassen\API.cs" />
     <Compile Include="Klassen\CirularGaugeControl.cs" />
@@ -169,7 +178,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="VTC_WPF_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
