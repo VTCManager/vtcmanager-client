@@ -110,6 +110,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Klassen\SpeedGaugeControl.cs" />
+    <Compile Include="SpeedGauge.xaml.cs">
+      <DependentUpon>SpeedGauge.xaml</DependentUpon>
+    </Compile>
     <Page Include="ETS2PathDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -144,6 +148,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SpeedGauge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Objects\Job.cs" />
@@ -187,14 +195,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="TMP_BTN.png" />
     <Resource Include="Icons\icons8-einstellungen-30.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="0fe05db00517d674af7072ce693d6459501620e8_full.jpg" />
     <Resource Include="Icons\TMP_BTN.png" />
-    <Resource Include="euro_truck_simulator_2___icon_by_blagoicons_da107l6.png" />
-    <Resource Include="american_truck_simulator___icon_by_blagoicons_d9yju3g.png" />
     <Resource Include="Icons\icons8-daf-256.png" />
     <Resource Include="Icons\icons8-iveco-256.png" />
     <Content Include="Icons\icons8-mercedes-benz-256.png">

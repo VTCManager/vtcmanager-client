@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="VTC_WPF.SpeedGauge"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VTC_WPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Width="400" Height="300">
+    <Grid Width="400" Height="300">
+        <Slider Minimum="0" Maximum="170" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="40" Value="{Binding Path=Value}"/>
+        <Border HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="200" Width="400" BorderBrush="#ffcf5d1d" BorderThickness="2 2 2 0" CornerRadius="300 300 0 0" Margin="1,0,1,2"/>
+        <Border HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="192" Width="380" BorderBrush="#ffcf5d1d" BorderThickness="0 2 0 2" CornerRadius="300 300 0 0" Margin="10,0,10,2" Background="#FF323232">
+            <Border.Effect>
+                <DropShadowEffect Color="#ffff792c" BlurRadius="10" ShadowDepth="2"/>
+
+            </Border.Effect>
+
+        </Border>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="100" FontSize="80" FontFamily="Agency FB" Foreground="#ff95d4ff" Text="{Binding Path=Value}">
+            <TextBlock.Effect>
+                <DropShadowEffect BlurRadius="20" Color="#FF91DEFB" ShadowDepth="0"/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <Border Width="6" CornerRadius="120 120 0 0" RenderTransformOrigin="0.5 2" Background="#FF005BA6" Height="100" Margin="0 0 0 100" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="{Binding Path=Angle}"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Border.RenderTransform>
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="#FFB9B9B9" ShadowDepth="0"/>
+            </Border.Effect>
+        </Border>
+    </Grid>
+</UserControl>

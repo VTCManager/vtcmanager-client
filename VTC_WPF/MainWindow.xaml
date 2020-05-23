@@ -8,17 +8,8 @@
         xmlns:dxga="http://schemas.devexpress.com/winfx/2008/xaml/gauges"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="VTC-Manager V3" Height="600" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="0fe05db00517d674af7072ce693d6459501620e8_full.jpg">
-    <Window.Resources>
-
-    </Window.Resources>
-    <Window.Background>
-        <ImageBrush ImageSource="TMP_BTN.png"/>
-    </Window.Background>
-
-
 
     <Grid Margin="-2,0,1,1">
-
         <Grid VerticalAlignment="Top" Height="60" Background="#FF2E2E2E">
             <TextBlock Text="VTC-Manager V3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="36" FontFamily="Segoe UI Black" >
                 <TextBlock.Foreground>
@@ -55,13 +46,13 @@
                     <Label x:Name="Testlabel" Content="Speed" HorizontalAlignment="Left"  Margin="313,45,0,0" VerticalAlignment="Top" Height="82" Width="320" FontStyle="Italic" FontWeight="Bold" FontFamily="Verdana" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                     <Label x:Name="Truck_Manufactur_Label" Content="Label" HorizontalAlignment="Left" Margin="171,179,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light"/>
                     <Label x:Name="Tour_Startort" Content="Label" HorizontalAlignment="Left" Margin="20,259,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Width="950" HorizontalContentAlignment="Center"/>
-                    <Label x:Name="Label_Streckeninfos" Content="Label" HorizontalAlignment="Left" Margin="20,299,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Width="950" HorizontalContentAlignment="Center"/>
+                    <Label x:Name="Label_Streckeninfos" HorizontalAlignment="Left" Margin="20,299,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Width="950" HorizontalContentAlignment="Center">
+                        
+                    </Label>
                     <Label x:Name="Label_Streckeninfos_2" Content="Label" HorizontalAlignment="Left" Margin="20,337,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Width="950" HorizontalContentAlignment="Center"/>
-                    <ProgressBar x:Name="Progress_Tank" Value="{Binding CurrentProgress}" HorizontalAlignment="Left" Height="192" Margin="772,29,0,0" VerticalAlignment="Top" Width="42">
 
-                    </ProgressBar>
-                    <Label x:Name="Label_Fuel_Maximum" Content="Label" HorizontalAlignment="Left" Margin="774,27,0,0" VerticalAlignment="Top" FontFamily="Verdana" FontSize="10"/>
-                    <Label x:Name="Label_Fuel_Current" Content="Label" HorizontalAlignment="Left" Margin="811,112,0,0" VerticalAlignment="Top" FontFamily="Verdana" FontSize="10"/>
+                    <Label x:Name="Label_Fuel_Maximum" Content="Maximum" HorizontalAlignment="Left" Margin="644,28,0,0" VerticalAlignment="Top" FontFamily="Verdana" FontSize="10" Height="21" Width="55"/>
+                    <Label x:Name="Label_Fuel_Current" Content="Current" HorizontalAlignment="Left" Margin="811,112,0,0" VerticalAlignment="Top" FontFamily="Verdana" FontSize="10"/>
                     <!-- Kann das Truck Imaage nicht ändern im CodeBehind. Deshalb erstmal Deaktiviert -->
                     <!--<Image x:Name="Truck_Manufactur_Image" HorizontalAlignment="Left" Height="100" Margin="10,143,0,0" VerticalAlignment="Top" Width="100" Source="Icons/No_Truck.png"/> -->
 
@@ -81,10 +72,10 @@
 
 
         </TabControl>
-
+      
         <Button x:Name="ETS2_Starten" Content="ETS2 Starten" Height="40" Width="150" Margin="530,509,515,10" />
         <Button x:Name="ATS_Starten" Content="ATS Starten" Height="40" Width="150" Margin="370,509,675,10" />
         <Button x:Name="TMP_Starten" Content="TMP Starten" Click="TMP_Starten_Click" Height="40" Width="150" Margin="210,509,835,10" />
-
+        <local:SpeedGauge Margin="221,-20,574,290"/>
     </Grid>
 </Window>

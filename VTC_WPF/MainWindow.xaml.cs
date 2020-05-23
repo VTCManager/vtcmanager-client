@@ -2,10 +2,10 @@
 using SCSSdkClient;
 using SCSSdkClient.Object;
 using System;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.Windows.Media;
+using System.Windows.Shapes;
 using System.Windows.Threading;
 using VTC_WPF.Klassen;
 
@@ -22,6 +22,8 @@ namespace VTC_WPF
         private OpenFileDialog tmp_Trucker;
         public int Gesch2;
         int minutes;
+        int Tankinhalt;
+        private object polyline1;
 
         public MainWindow()
         {
@@ -41,15 +43,14 @@ namespace VTC_WPF
             Telemetry.RefuelPayed += TelemetryHandler.RefuelPayed;
             jobHandler = new JobHandler();
             Discord = new DiscordHandler();
-
+            this.DataContext = new SpeedGauge();
             InitializeComponent();
 
 
             TMP_Pfad_Textbox.Text = utils.Reg_Lesen("Config", "TMP_PFAD", true);
             TMP_Pfad_Textbox.IsEnabled = (string.IsNullOrEmpty(utils.Reg_Lesen("Config", "TMP_PFAD", true))) ? true : false;
 
-
-
+            
         }
 
 
@@ -75,7 +76,7 @@ namespace VTC_WPF
                     UpdateLabelContent(Label_Fuel_Current, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.FuelValue.Amount).ToString() + " l");
                     UpdateLabelContent(Label_Fuel_Maximum, Convert.ToDouble(data.TruckValues.ConstantsValues.CapacityValues.Fuel).ToString() + " l");
 
-                   
+                 
                 }
 
 
@@ -138,5 +139,7 @@ namespace VTC_WPF
             FileHandler.StarteAnwednung(utils.Reg_Lesen("Config", "TMP_PFAD", true));
 
         }
+
+
     }
 }
