@@ -7,23 +7,22 @@
         mc:Ignorable="d"
         Title="VTCManager" Height="450" Width="800">
     <Grid>
-        <WebBrowser HorizontalAlignment="Left" Height="419" VerticalAlignment="Top" Width="792" Source="http://localhost:25555/dashboard-host.html?skin=ets2-mobile-route-advisor&amp;ip=localhost"/>
         <Rectangle Fill="#121212" HorizontalAlignment="Left" Height="60" Stroke="Black" VerticalAlignment="Top" Width="792" Margin="0,359,0,0"/>
-        <ProgressBar HorizontalAlignment="Left" Height="3" Margin="0,403,0,0" VerticalAlignment="Top" Width="792" Value="66" Foreground="White" Background="#FF006EC7">
+        <ProgressBar x:Name="Progessbar" HorizontalAlignment="Left" Height="3" Margin="0,403,0,0" VerticalAlignment="Top" Width="792" Value="66" Foreground="White" Background="#FF006EC7">
             <ProgressBar.BorderBrush>
                 <SolidColorBrush Color="#FF006EC7"/>
             </ProgressBar.BorderBrush>
         </ProgressBar>
-        <Label Content="350" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="505,359,0,0" Foreground="#DDFFFFFF" Width="42" FontFamily="Segoe UI Semibold" FontSize="18"/>
-        <Label Content="m" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="514,378,0,0" Foreground="#DDC7C7C7" Width="24" FontFamily="Segoe UI Semibold" Height="28"/>
-        <Label Content="21:44" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="248,359,0,0" Foreground="#DDFFFFFF" Width="58" FontFamily="Segoe UI Semibold" FontSize="18"/>
-        <Label Content="1h 40min" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="255,381,0,0" Foreground="#DDC7C7C7" Width="61" FontFamily="Segoe UI Semibold" Height="28" FontSize="8"/>
+        <Label x:Name="DistanceLeft" Content="350" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="505,359,0,0" Foreground="#DDFFFFFF" Width="42" FontFamily="Segoe UI Semibold" FontSize="18"/>
+        <Label x:Name="DistanceLeftUnit" Content="m" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="514,378,0,0" Foreground="#DDC7C7C7" Width="24" FontFamily="Segoe UI Semibold" Height="28"/>
+        <Label x:Name="ArrivalTime" Content="21:44" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="248,359,0,0" Foreground="#DDFFFFFF" Width="58" FontFamily="Segoe UI Semibold" FontSize="18"/>
+        <Label x:Name="ArrivalTimeLeft" Content="1h 40min" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="255,381,0,0" Foreground="#DDC7C7C7" Width="61" FontFamily="Segoe UI Semibold" Height="28" FontSize="8"/>
         <Ellipse Fill="#FF3E3E3E" HorizontalAlignment="Left" Height="49" Stroke="#FF3E3E3E" VerticalAlignment="Top" Width="49" Margin="733,296,0,0"/>
         <Ellipse Fill="White" HorizontalAlignment="Left" Height="34" Stroke="White" VerticalAlignment="Top" Width="34" Margin="741,264,0,0" Panel.ZIndex="40"/>
         <Ellipse Fill="Red" HorizontalAlignment="Left" Height="40" Stroke="Red" VerticalAlignment="Top" Width="40" Margin="738,261,0,0"/>
-        <Label Content="40" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="743,298,0,0" Foreground="#DDFFFFFF" Width="30" FontFamily="Segoe UI Semibold" FontSize="18"/>
+        <Label x:Name="SpeedLabel" Content="40" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="743,298,0,0" Foreground="#DDFFFFFF" Width="30" FontFamily="Segoe UI Semibold" FontSize="18"/>
         <Label Content="km/h" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="745,318,0,0" Foreground="#DDC7C7C7" Width="30" FontFamily="Segoe UI Semibold" Height="20" FontSize="7"/>
-        <Label Content="50" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="744,264,0,0" Foreground="#DD000000" Width="31" FontFamily="Segoe UI Semibold" FontSize="18" Panel.ZIndex="55"/>
+        <Label x:Name="MaxSpeed" Content="50" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="744,264,0,0" Foreground="#DD000000" Width="31" FontFamily="Segoe UI Semibold" FontSize="18" Panel.ZIndex="55"/>
 
     </Grid>
 </Window>
