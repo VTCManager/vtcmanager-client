@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,41 +15,10 @@ namespace VTC_WPF.Klassen
 
     class API
     {
-        public string login_path;
-        public string api_server;
-        public string load_data_path;
-        public string canceltourpath;
-        public string finishjob_path;
-        public string loc_update_path;
-        public string get_traffic_path;
-        public string job_update_path;
-        public string tollgate_path;
-        public string new_job_path;
-        public string trucky_api_server;
-        public string traffic_data;
-        public string get_cities_path = "load_cities.php";
-        public string get_cities_path_to = "load_cities_to.php";
-        public string load_firmen_in_city = "load_firmen_in_city.php";
+        public static string server = "http://localhost:8000/api/";
+        public static string log_in = server + "key/login/";
 
-
-        public API()
-        {
-            login_path = "login.php";
-            //this.api_server = "https://vtc.northwestvideo.de/api/app/";
-            api_server = "https://vtc.northwestvideo.de/api/app_beta/";
-            traffic_data = "http://vtc.northwestvideo.de/api/web/traffic/data";
-            trucky_api_server = "https://api.truckyapp.com/v2/";
-            load_data_path = "load_data.php";
-            canceltourpath = "cancel_tour.php";
-            job_update_path = "job_update.php";
-            finishjob_path = "job_finish.php";
-            new_job_path = "start_tour.php";
-            tollgate_path = "tollgate.php";
-            loc_update_path = "loc_update.php";
-            get_traffic_path = "traffic/top";
-        }
-
-        public string HTTPSRequestGet(string url, Dictionary<string, string> getParameters = null)
+        public static string HTTPSRequestGet(string url, Dictionary<string, string> getParameters = null)
         {
             string str = "";
             if (getParameters != null)
@@ -59,7 +30,7 @@ namespace VTC_WPF.Klassen
                 }
             }
             HttpWebRequest request1 = (HttpWebRequest)WebRequest.Create(url + ((getParameters != null) ? ("?" + str) : ""));
-            request1.UserAgent = "VTCManager 1.0.0";
+            request1.UserAgent = "VTCM "+Config.ClientVersion;
             request1.AutomaticDecompression = DecompressionMethods.GZip;
             WebResponse response = request1.GetResponse();
             string str2 = null;
@@ -67,8 +38,9 @@ namespace VTC_WPF.Klassen
             {
                 str2 = new StreamReader(stream).ReadToEnd();
             }
-            Console.WriteLine(str2);
             response.Close();
+            var json = JObject.Parse(str2);
+            Console.WriteLine(json["data"]);
             return str2;
         }
         public string HTTPSRequestPost(string url, Dictionary<string, string> postParameters, bool outputError = true)

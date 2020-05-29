@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VTC_WPF.Klassen;
 
 namespace VTC_WPF
 {
@@ -21,7 +22,20 @@ namespace VTC_WPF
     {
         public LogIn()
         {
-            InitializeComponent();
+            if(RegistryHandler.read("Config", "ClientKey") != null)
+            {
+
+            }
+            else
+            {
+                InitializeComponent();
+                LoginButton.Click += LoginButton_Click;
+            }
+        }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            API.HTTPSRequestGet(API.log_in + "1768501590593126");
         }
     }
 }

@@ -144,11 +144,12 @@ namespace VTC_WPF.Klassen
         public static string Authenticate(string email, string password)
         {
             API api = new API();
-            return api.HTTPSRequestPost(api.api_server + api.login_path, new Dictionary<string, string>()
+            /*return api.HTTPSRequestPost(api.api_server + api.login_path, new Dictionary<string, string>()
               {
                 { "username", email },
                 { "password", password }
-              }, true).ToString();
+              }, true).ToString();*/
+            return null;
         }
 
         private void submit_login_Click(object sender, EventArgs e)
@@ -182,13 +183,13 @@ namespace VTC_WPF.Klassen
                // preferences.Config.Password = thePassword;
                 preferences.SaveConfig();
                 login_panel.Visible = false;
-                string[] strArray = api.HTTPSRequestPost(api.api_server + api.load_data_path, new Dictionary<string, string>()
+                /*string[] strArray = api.HTTPSRequestPost(api.api_server + api.load_data_path, new Dictionary<string, string>()
                 {
                   {
                     "authcode",
                     authCode
                   }
-                }, true).ToString().Split(',');
+                }, true).ToString().Split(',');*/
 
                 if (authCode.Equals("Error: PIN_Invalid") || authCode.Equals("Error: User_Invalid") || authCode.Equals("Error: Serverside"))
                 {
