@@ -16,9 +16,9 @@ namespace VTC_WPF.Klassen
     class API
     {
         public static string server = "http://localhost:8000/api/";
-        public static string log_in = server + "key/login/";
+        public static string register = server + "key/register/";
 
-        public static string HTTPSRequestGet(string url, Dictionary<string, string> getParameters = null)
+        public static JObject HTTPSRequestGet(string url, Dictionary<string, string> getParameters = null)
         {
             string str = "";
             if (getParameters != null)
@@ -39,11 +39,10 @@ namespace VTC_WPF.Klassen
                 str2 = new StreamReader(stream).ReadToEnd();
             }
             response.Close();
-            var json = JObject.Parse(str2);
-            Console.WriteLine(json["data"]);
-            return str2;
+            JObject json = JObject.Parse(str2);
+            return json;
         }
-        public string HTTPSRequestPost(string url, Dictionary<string, string> postParameters, bool outputError = true)
+        public static JObject HTTPSRequestPost(string url, Dictionary<string, string> postParameters, bool outputError = true)
         {
             string s = "";
             foreach (string str2 in postParameters.Keys)
@@ -68,9 +67,8 @@ namespace VTC_WPF.Klassen
                 reader1.Close();
                 response.GetResponseStream().Close();
                 response.Close();
-                Console.WriteLine(str3);
-                Console.WriteLine(s);
-                return str3;
+                JObject json = JObject.Parse(str3);
+                return json;
 
 
             }
