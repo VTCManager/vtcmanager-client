@@ -17,6 +17,7 @@ namespace VTC_WPF.Klassen
     {
         public static string server = "http://localhost:8000/api/";
         public static string register = server + "key/register/";
+        public static string login = server + "key/login/";
 
         public static JObject HTTPSRequestGet(string url, Dictionary<string, string> getParameters = null)
         {

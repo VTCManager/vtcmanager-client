@@ -22,10 +22,30 @@ namespace VTC_WPF
     /// </summary>
     public partial class RegisterClient : Window
     {
+        private string macAddr;
         public RegisterClient()
         {
-            if (!String.IsNullOrEmpty(RegistryHandler.read("Config", "ClientKey")))
+            //get mac address as client unique id
+            macAddr =
+            (
+                from nic in NetworkInterface.GetAllNetworkInterfaces()
+                where nic.OperationalStatus == OperationalStatus.Up
+                select nic.GetPhysicalAddress().ToString()
+            ).FirstOrDefault().ToString();
+            String found_client_key = RegistryHandler.read("Config", "ClientKey");
+            if (!String.IsNullOrWhiteSpace(found_client_key))
             {
+                //Check the key
+                Dictionary<string, string> login_post_param = new Dictionary<string, string>();
+                login_post_param.Add("client_ident", macAddr);
+                JObject response = API.HTTPSRequestPost(API.login + found_client_key, login_post_param);
+                var parsed_response = response.SelectToken("data");
+                if ((bool)parsed_response["success"] == false)
+                {
+                    InitializeComponent();
+                    LoginButton.Click += LoginButton_Click;
+                    return;
+                }
                 //open MainInterface
                 MainWindow mainwin = new MainWindow();
                 mainwin.Show();
@@ -43,16 +63,9 @@ namespace VTC_WPF
             String key_input = InputClientKey.Text;
             if (String.IsNullOrWhiteSpace(key_input))
                 return;
-            //get mac adress 
-            var macAddr =
-            (
-                from nic in NetworkInterface.GetAllNetworkInterfaces()
-                where nic.OperationalStatus == OperationalStatus.Up
-                select nic.GetPhysicalAddress().ToString()
-            ).FirstOrDefault();
             //Check the key
             Dictionary<string, string> client_ident = new Dictionary<string, string>();
-            client_ident.Add("client_ident", macAddr.ToString());
+            client_ident.Add("client_ident", macAddr);
             JObject response = API.HTTPSRequestPost(API.register + key_input, client_ident);
             var parsed_response = response.SelectToken("data");
             if((bool)parsed_response["success"] == false)
