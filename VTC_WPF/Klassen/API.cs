@@ -15,9 +15,10 @@ namespace VTC_WPF.Klassen
 
     class API
     {
-        public static string server = "https://vtcmanager.eu/api/";
+        public static string server = "http://localhost:8000/api/";
         public static string register = server + "key/register/";
         public static string login = server + "key/login/";
+        public static string jobStarted = ""; //init after success login
 
         public static JObject HTTPSRequestGet(string url, Dictionary<string, string> getParameters = null)
         {
@@ -42,6 +43,11 @@ namespace VTC_WPF.Klassen
             response.Close();
             JObject json = JObject.Parse(str2);
             return json;
+        }
+
+        public static void init()
+        {
+            jobStarted = server + "key/" + Config.ClientKey + "/job/start";
         }
         public static JObject HTTPSRequestPost(string url, Dictionary<string, string> postParameters, bool outputError = true)
         {

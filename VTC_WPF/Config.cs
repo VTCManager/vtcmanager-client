@@ -25,5 +25,9 @@ namespace VTC_WPF
         public static string ClientLogFileName = @"\Client_Log.txt";
         public static string SystemLogFileName = @"\System_Log.txt";
 
+        //KEY
+        public static string macAddr = "";
+        public static string ClientKey = "";
+
     }
 }

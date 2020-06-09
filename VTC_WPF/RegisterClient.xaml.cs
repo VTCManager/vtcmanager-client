@@ -46,6 +46,9 @@ namespace VTC_WPF
                     LoginButton.Click += LoginButton_Click;
                     return;
                 }
+                Config.macAddr = macAddr;
+                Config.ClientKey = found_client_key;
+                API.init();
                 //open MainInterface
                 MainWindow mainwin = new MainWindow();
                 mainwin.Show();
@@ -74,6 +77,9 @@ namespace VTC_WPF
             }
             //safe the key
             RegistryHandler.write("ClientKey", key_input, "Config");
+            Config.macAddr = macAddr;
+            Config.ClientKey = key_input;
+            API.init();
             //open MainInterface
             MainWindow mainwin = new MainWindow();
             mainwin.Show();

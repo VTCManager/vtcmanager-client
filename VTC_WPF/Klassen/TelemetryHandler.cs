@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
@@ -7,6 +9,7 @@ namespace VTC_WPF.Klassen
 {
     public class TelemetryHandler
     {
+        public static SCSSdkClient.Object.SCSTelemetry Telemetry_Data;
         public static bool IsETSRunning()
         {
             string procName = Process.GetCurrentProcess().ProcessName;    
@@ -70,7 +73,21 @@ namespace VTC_WPF.Klassen
 
         public static void JobStarted(object sender, EventArgs e)
         {
-
+            while (Telemetry_Data == null)
+            {
+                Console.WriteLine("wait");
+            }
+            Console.WriteLine("start");
+            Console.WriteLine(Telemetry_Data.JobValues.CityDestination);
+            Console.WriteLine(API.jobStarted);
+            Dictionary<string, string> post_param = new Dictionary<string, string>();
+            post_param.Add("client_ident", Config.macAddr);
+            post_param.Add("origin", Telemetry_Data.JobValues.CitySource);
+            post_param.Add("destination", Telemetry_Data.JobValues.CityDestination);
+            post_param.Add("cargo", Telemetry_Data.JobValues.CargoValues.Name);
+            post_param.Add("cargo_weight", Telemetry_Data.JobValues.CargoValues.Mass.ToString());
+            post_param.Add("planned_distance", Telemetry_Data.JobValues.PlannedDistanceKm.ToString());
+            Console.WriteLine(API.HTTPSRequestPost(API.jobStarted, post_param));
         }
     }
 }
