@@ -19,6 +19,7 @@ namespace VTC_WPF.Klassen
         public static string register = server + "key/register/";
         public static string login = server + "key/login/";
         public static string jobStarted = ""; //init after success login
+        public static string jobDelivered = "";
 
         public static JObject HTTPSRequestGet(string url, Dictionary<string, string> getParameters = null)
         {
@@ -48,6 +49,7 @@ namespace VTC_WPF.Klassen
         public static void init()
         {
             jobStarted = server + "key/" + Config.ClientKey + "/job/start";
+            jobDelivered = server + "key/" + Config.ClientKey + "/job/delivered";
         }
         public static JObject HTTPSRequestPost(string url, Dictionary<string, string> postParameters, bool outputError = true)
         {
@@ -74,6 +76,7 @@ namespace VTC_WPF.Klassen
                 reader1.Close();
                 response.GetResponseStream().Close();
                 response.Close();
+                Console.WriteLine(Config.macAddr);
                 JObject json = JObject.Parse(str3);
                 return json;
 

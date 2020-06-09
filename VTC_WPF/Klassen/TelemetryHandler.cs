@@ -63,7 +63,10 @@ namespace VTC_WPF.Klassen
 
         public static void JobDelivered(object sender, EventArgs e)
         {
-
+            checkTelemetry();
+            Dictionary<string, string> post_param = new Dictionary<string, string>();
+            post_param.Add("client_ident", Config.macAddr);
+            JObject response = API.HTTPSRequestPost(API.jobDelivered, post_param);
         }
 
         public static void JobCancelled(object sender, EventArgs e)
@@ -73,13 +76,7 @@ namespace VTC_WPF.Klassen
 
         public static void JobStarted(object sender, EventArgs e)
         {
-            while (Telemetry_Data == null)
-            {
-                Console.WriteLine("wait");
-            }
-            Console.WriteLine("start");
-            Console.WriteLine(Telemetry_Data.JobValues.CityDestination);
-            Console.WriteLine(API.jobStarted);
+            checkTelemetry();
             Dictionary<string, string> post_param = new Dictionary<string, string>();
             post_param.Add("client_ident", Config.macAddr);
             post_param.Add("origin", Telemetry_Data.JobValues.CitySource);
@@ -87,7 +84,15 @@ namespace VTC_WPF.Klassen
             post_param.Add("cargo", Telemetry_Data.JobValues.CargoValues.Name);
             post_param.Add("cargo_weight", Telemetry_Data.JobValues.CargoValues.Mass.ToString());
             post_param.Add("planned_distance", Telemetry_Data.JobValues.PlannedDistanceKm.ToString());
-            Console.WriteLine(API.HTTPSRequestPost(API.jobStarted, post_param));
+            JObject response = API.HTTPSRequestPost(API.jobStarted, post_param);
+        }
+
+        private static void checkTelemetry()
+        {
+            while (Telemetry_Data == null)
+            {
+                Console.WriteLine("Waiting for init to be finished");
+            }
         }
     }
 }

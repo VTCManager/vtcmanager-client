@@ -62,7 +62,7 @@ namespace VTC_WPF
                     TelemetryHandler.Telemetry_Data = data;
 
                     UpdateLabelContent(Truck_Manufactur_Label, data.TruckValues.ConstantsValues.Brand.ToString() + ", Modell: " + data.TruckValues.ConstantsValues.Name.ToString());
-                    UpdateLabelContent(Speedlabel, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString() + " KM/H");
+                    UpdateLabelContent(Speedlabel, Convert.ToInt32(TelemetryHandler.Telemetry_Data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString() + " KM/H");
                     UpdateLabelContent(Tour_Startort, "Du fährst " + data.JobValues.PlannedDistanceKm.ToString() + " km von " + data.JobValues.CitySource.ToString() + " nach " + data.JobValues.CityDestination.ToString());
                     UpdateLabelContent(Label_Streckeninfos, "Deine Wegstrecke beträgt jetzt noch " + (int)(data.NavigationValues.NavigationDistance / 1000) + Environment.NewLine + " KM");
                     minutes = ((int)data.JobValues.RemainingDeliveryTime.Value >= 1) ? (int)data.JobValues.RemainingDeliveryTime.Value : 0;
