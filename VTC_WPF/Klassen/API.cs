@@ -15,7 +15,7 @@ namespace VTC_WPF.Klassen
 
     class API
     {
-        public static string server = "http://localhost:8000/api/";
+        public static string server = "https://vtcmanager.eu/api/";
         public static string register = server + "key/register/";
         public static string login = server + "key/login/";
 
