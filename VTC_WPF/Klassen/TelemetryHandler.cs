@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
@@ -7,6 +9,7 @@ namespace VTC_WPF.Klassen
 {
     public class TelemetryHandler
     {
+        public static SCSSdkClient.Object.SCSTelemetry Telemetry_Data;
         public static bool IsETSRunning()
         {
             string procName = Process.GetCurrentProcess().ProcessName;    
@@ -60,7 +63,10 @@ namespace VTC_WPF.Klassen
 
         public static void JobDelivered(object sender, EventArgs e)
         {
-
+            checkTelemetry();
+            Dictionary<string, string> post_param = new Dictionary<string, string>();
+            post_param.Add("client_ident", Config.macAddr);
+            JObject response = API.HTTPSRequestPost(API.jobDelivered, post_param);
         }
 
         public static void JobCancelled(object sender, EventArgs e)
@@ -70,7 +76,23 @@ namespace VTC_WPF.Klassen
 
         public static void JobStarted(object sender, EventArgs e)
         {
+            checkTelemetry();
+            Dictionary<string, string> post_param = new Dictionary<string, string>();
+            post_param.Add("client_ident", Config.macAddr);
+            post_param.Add("origin", Telemetry_Data.JobValues.CitySource);
+            post_param.Add("destination", Telemetry_Data.JobValues.CityDestination);
+            post_param.Add("cargo", Telemetry_Data.JobValues.CargoValues.Name);
+            post_param.Add("cargo_weight", Telemetry_Data.JobValues.CargoValues.Mass.ToString());
+            post_param.Add("planned_distance", Telemetry_Data.JobValues.PlannedDistanceKm.ToString());
+            JObject response = API.HTTPSRequestPost(API.jobStarted, post_param);
+        }
 
+        private static void checkTelemetry()
+        {
+            while (Telemetry_Data == null)
+            {
+                Console.WriteLine("Waiting for init to be finished");
+            }
         }
     }
 }

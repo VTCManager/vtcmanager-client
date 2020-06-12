@@ -22,6 +22,7 @@ namespace VTC_WPF
     /// </summary>
     public partial class RegisterClient : Window
     {
+        private string macAddr;
         public RegisterClient()
         {
             if (!String.IsNullOrEmpty(RegistryHandler.read("Config", "AccessToken")))

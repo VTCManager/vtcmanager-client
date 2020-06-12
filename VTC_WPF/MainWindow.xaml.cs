@@ -30,7 +30,7 @@ namespace VTC_WPF
             Logging.Make_Log_File(); // Muss als erstes stehen, damit vor allem anderen die Logs geleert werden !
             TelemetryInstaller.check();
             Telemetry = new SCSSdkTelemetry();
-            Telemetry.Data += Telemetry_Data;
+            Telemetry.Data += Telemetry_Data_Handler;
             Telemetry.JobStarted += TelemetryHandler.JobStarted;
             Telemetry.JobCancelled += TelemetryHandler.JobCancelled;
             Telemetry.JobDelivered += TelemetryHandler.JobDelivered;
@@ -48,21 +48,21 @@ namespace VTC_WPF
 
             TMP_Pfad_Textbox.Text = utils.Reg_Lesen("Config", "TMP_PFAD", true);
             TMP_Pfad_Textbox.IsEnabled = (string.IsNullOrEmpty(utils.Reg_Lesen("Config", "TMP_PFAD", true))) ? true : false;
-
-            
         }
 
 
-        private void Telemetry_Data(SCSTelemetry data, bool updated)
+        private void Telemetry_Data_Handler(SCSTelemetry data, bool updated)
         {
             try
             {
 
                 if (!InvokeRequired)
                 {
+                    //set the data globally
+                    TelemetryHandler.Telemetry_Data = data;
 
                     UpdateLabelContent(Truck_Manufactur_Label, data.TruckValues.ConstantsValues.Brand.ToString() + ", Modell: " + data.TruckValues.ConstantsValues.Name.ToString());
-                    UpdateLabelContent(Speedlabel, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString() + " KM/H");
+                    UpdateLabelContent(Speedlabel, Convert.ToInt32(TelemetryHandler.Telemetry_Data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString() + " KM/H");
                     UpdateLabelContent(Tour_Startort, "Du fährst " + data.JobValues.PlannedDistanceKm.ToString() + " km von " + data.JobValues.CitySource.ToString() + " nach " + data.JobValues.CityDestination.ToString());
                     UpdateLabelContent(Label_Streckeninfos, "Deine Wegstrecke beträgt jetzt noch " + (int)(data.NavigationValues.NavigationDistance / 1000) + Environment.NewLine + " KM");
                     minutes = ((int)data.JobValues.RemainingDeliveryTime.Value >= 1) ? (int)data.JobValues.RemainingDeliveryTime.Value : 0;
