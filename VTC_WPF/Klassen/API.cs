@@ -16,7 +16,7 @@ namespace VTC_WPF.Klassen
     class API
     {
         public static string server = "http://localhost:8000/api/";
-        public static string register = server + "key/register/";
+        public static string get_user = server + "user";
 
         public static JObject HTTPSRequestGet(string url, Dictionary<string, string> getParameters = null)
         {
@@ -31,16 +31,43 @@ namespace VTC_WPF.Klassen
             }
             HttpWebRequest request1 = (HttpWebRequest)WebRequest.Create(url + ((getParameters != null) ? ("?" + str) : ""));
             request1.UserAgent = "VTCM "+Config.ClientVersion;
+            request1.Accept = "application/json";
             request1.AutomaticDecompression = DecompressionMethods.GZip;
-            WebResponse response = request1.GetResponse();
-            string str2 = null;
-            using (Stream stream = response.GetResponseStream())
-            {
-                str2 = new StreamReader(stream).ReadToEnd();
+            request1.Headers.Add("Authorization", "Bearer " + Config.AccessToken);
+            try{
+                WebResponse response = request1.GetResponse();
+                string str2 = null;
+                using (Stream stream = response.GetResponseStream())
+                {
+                    str2 = new StreamReader(stream).ReadToEnd();
+                }
+                response.Close();
+                Console.WriteLine(str2);
+                JObject json = JObject.Parse(str2);
+                return json;
             }
-            response.Close();
-            JObject json = JObject.Parse(str2);
-            return json;
+            catch (WebException ex)
+            {
+                if (ex.Status == WebExceptionStatus.ProtocolError)
+                {
+                    var response = ex.Response as HttpWebResponse;
+                    if (response != null)
+                    {
+                        String error_response = "{'error': true,'error_code': " + (int)response.StatusCode + ",}";
+                        return JObject.Parse(error_response);
+                    }
+                    else
+                    {
+                        String error_response = "{'error': true,'error_code': 000,}";
+                        return JObject.Parse(error_response);
+                    }
+                }
+                else
+                {
+                    String error_response = "{'error': true,'error_code': 000,}";
+                    return JObject.Parse(error_response);
+                }
+            }
         }
         public static JObject HTTPSRequestPost(string url, Dictionary<string, string> postParameters, bool outputError = true)
         {

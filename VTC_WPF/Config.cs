@@ -25,5 +25,8 @@ namespace VTC_WPF
         public static string ClientLogFileName = @"\Client_Log.txt";
         public static string SystemLogFileName = @"\System_Log.txt";
 
+        //TOKENS
+        public static string AccessToken = "";
+
     }
 }

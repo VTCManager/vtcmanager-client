@@ -24,8 +24,9 @@ namespace VTC_WPF
     {
         public RegisterClient()
         {
-            if (!String.IsNullOrEmpty(RegistryHandler.read("Config", "ClientKey")))
+            if (!String.IsNullOrEmpty(RegistryHandler.read("Config", "AccessToken")))
             {
+                Config.AccessToken = RegistryHandler.read("Config", "AccessToken");
                 //open MainInterface
                 MainWindow mainwin = new MainWindow();
                 mainwin.Show();
@@ -43,24 +44,15 @@ namespace VTC_WPF
             String key_input = InputClientKey.Text;
             if (String.IsNullOrWhiteSpace(key_input))
                 return;
-            //get mac adress 
-            var macAddr =
-            (
-                from nic in NetworkInterface.GetAllNetworkInterfaces()
-                where nic.OperationalStatus == OperationalStatus.Up
-                select nic.GetPhysicalAddress().ToString()
-            ).FirstOrDefault();
+            Config.AccessToken = key_input;
             //Check the key
-            Dictionary<string, string> client_ident = new Dictionary<string, string>();
-            client_ident.Add("client_ident", macAddr.ToString());
-            JObject response = API.HTTPSRequestPost(API.register + key_input, client_ident);
-            var parsed_response = response.SelectToken("data");
-            if((bool)parsed_response["success"] == false)
+            JObject response = API.HTTPSRequestGet(API.get_user);
+            if((bool)response["error"] == true)
             {
                 return;
             }
             //safe the key
-            RegistryHandler.write("ClientKey", key_input, "Config");
+            RegistryHandler.write("AccessToken", key_input, "Config");
             //open MainInterface
             MainWindow mainwin = new MainWindow();
             mainwin.Show();
