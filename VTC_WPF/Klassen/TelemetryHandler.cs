@@ -64,9 +64,8 @@ namespace VTCManager.Klassen
         public static void JobDelivered(object sender, EventArgs e)
         {
             checkTelemetry();
-            Dictionary<string, string> post_param = new Dictionary<string, string>();
-            post_param.Add("client_ident", Config.macAddr);
-            JObject response = API.HTTPSRequestPost(API.jobDelivered, post_param);
+            // currently disabled cause it's missing in the API
+            //JObject response = API.HTTPSRequestGet(API.jobDelivered);
         }
 
         public static void JobCancelled(object sender, EventArgs e)
@@ -78,17 +77,18 @@ namespace VTCManager.Klassen
         {
             checkTelemetry();
             Dictionary<string, string> post_param = new Dictionary<string, string>();
-            post_param.Add("client_ident", Config.macAddr);
             post_param.Add("origin", Telemetry_Data.JobValues.CitySource);
             post_param.Add("destination", Telemetry_Data.JobValues.CityDestination);
             post_param.Add("cargo", Telemetry_Data.JobValues.CargoValues.Name);
             post_param.Add("cargo_weight", Telemetry_Data.JobValues.CargoValues.Mass.ToString());
             post_param.Add("planned_distance", Telemetry_Data.JobValues.PlannedDistanceKm.ToString());
-            JObject response = API.HTTPSRequestPost(API.jobStarted, post_param);
+            // currently disabled cause it's missing in the API
+            //JObject response = API.HTTPSRequestPost(API.jobStarted, post_param);
         }
 
         private static void checkTelemetry()
         {
+            //bug fix when an event occures while booting the app -> Telemetry_Data is null
             while (Telemetry_Data == null)
             {
                 Console.WriteLine("Waiting for init to be finished");
