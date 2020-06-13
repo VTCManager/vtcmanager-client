@@ -91,10 +91,11 @@ namespace VTCManager.Klassen
             post_param.Add("destination_company", Telemetry_Data.JobValues.CompanyDestination);
             post_param.Add("destination_company_id", Telemetry_Data.JobValues.CompanyDestinationId);
             post_param.Add("cargo", Telemetry_Data.JobValues.CargoValues.Name);
+            post_param.Add("cargo_id", Telemetry_Data.JobValues.CargoValues.Id);
             post_param.Add("cargo_weight", Telemetry_Data.JobValues.CargoValues.Mass.ToString());
             post_param.Add("planned_distance", Telemetry_Data.JobValues.PlannedDistanceKm.ToString());
             post_param.Add("ets_income", Telemetry_Data.JobValues.Income.ToString());
-            post_param.Add("delivery_time", Telemetry_Data.JobValues.DeliveryTime.Date.ToString());
+            post_param.Add("delivery_deadline", Telemetry_Data.JobValues.DeliveryTime.Date.ToString());
             post_param.Add("freight_market", Telemetry_Data.JobValues.Market.ToString());
             post_param.Add("fuel_at_beginning", Telemetry_Data.TruckValues.CurrentValues.DashboardValues.FuelValue.Amount.ToString());
             post_param.Add("truck_damage_at_beginning", Telemetry_Data.TruckValues.CurrentValues.DamageValues.Engine.ToString());
