@@ -48,9 +48,13 @@ namespace VTCManager
             Config.AccessToken = key_input;
             //Check the key
             JObject response = API.HTTPSRequestGet(API.get_user);
-            if((bool)response["error"] == true)
+            //when no error key was found, the login was successful
+            if(response["error"] != null)
             {
-                return;
+                if ((bool)response["error"] == true)
+                {
+                    return;
+                }
             }
             //safe the key
             RegistryHandler.write("AccessToken", key_input, "Config");
