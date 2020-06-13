@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace VTC_WPF
+namespace VTCManager
 {
     public static class Config
     {
-        //Versions
+        //VERSIONS
         public static string ClientVersion = "3.0.0 DevAlpha";
         public static string TelemetryVersion = "1.10";
 
@@ -20,13 +20,13 @@ namespace VTC_WPF
         public static string ETS2InstallFolderRegistryEntry = @"HKEY_CURRENT_USER\System\GameConfigStore\Children\03f2c1c8-e376-4256-93ff-d7dfded8044e";
         public static string ETS2InstallFolderRegistryEntryValue = "MatchedExeFullPath";
 
-        // Folder Settings
-        public static string LogRoot = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\VTCM3";
+        // LOGGING
+        public static string LogRoot = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\VTCManager";
         public static string ClientLogFileName = @"\Client_Log.txt";
         public static string SystemLogFileName = @"\System_Log.txt";
 
         //TOKENS
-        public static string AccessToken = "";
+        public static string AccessToken = ""; //set in the login process
 
     }
 }

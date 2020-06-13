@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace VTC_WPF
+namespace VTCManager
 {
     /// <summary>
     /// Interaktionslogik für "App.xaml"

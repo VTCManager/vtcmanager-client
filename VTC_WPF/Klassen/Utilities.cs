@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace VTC_WPF.Klassen
+namespace VTCManager.Klassen
 {
     class Utilities
     {

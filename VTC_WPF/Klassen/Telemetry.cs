@@ -1,4 +1,4 @@
-﻿namespace VTC_WPF.Klassen
+﻿namespace VTCManager.Klassen
 {
     public class Telemetry
     {

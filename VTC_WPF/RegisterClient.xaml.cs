@@ -13,21 +13,41 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using VTC_WPF.Klassen;
+using VTCManager.Klassen;
 
-namespace VTC_WPF
+namespace VTCManager
 {
     /// <summary>
     /// Interaktionslogik für LogIn.xaml
     /// </summary>
     public partial class RegisterClient : Window
     {
-        private string macAddr;
         public RegisterClient()
         {
             if (!String.IsNullOrEmpty(RegistryHandler.read("Config", "AccessToken")))
             {
                 Config.AccessToken = RegistryHandler.read("Config", "AccessToken");
+                //Check the key
+                JObject response = API.HTTPSRequestGet(API.get_user);
+                Console.WriteLine(response);
+                //when no error key was found, the login was successful
+                if (response["error"] != null)
+                {
+                    if ((bool)response["error"] == true && (int)response["error_code"] == 401)
+                    {
+                        InitializeComponent();
+                        LoginButton.Click += LoginButton_Click;
+                        MessageBox.Show("Der Key existiert nicht. Anmeldung fehlgeschlange.", "FEHLER", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    else
+                    {
+                        InitializeComponent();
+                        LoginButton.Click += LoginButton_Click;
+                        MessageBox.Show("Ein unbekannter Fehler ist beim Anmelden aufgetreten", "FEHLER", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                }
                 //open MainInterface
                 MainWindow mainwin = new MainWindow();
                 mainwin.Show();
@@ -48,9 +68,14 @@ namespace VTC_WPF
             Config.AccessToken = key_input;
             //Check the key
             JObject response = API.HTTPSRequestGet(API.get_user);
-            if((bool)response["error"] == true)
+            //when no error key was found, the login was successful
+            if(response["error"] != null)
             {
-                return;
+                if ((bool)response["error"] == true && (int)response["error_code"] == 401)
+                {
+                    MessageBox.Show("Der Key existiert nicht. Anmeldung fehlgeschlange.", "FEHLER", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
             }
             //safe the key
             RegistryHandler.write("AccessToken", key_input, "Config");

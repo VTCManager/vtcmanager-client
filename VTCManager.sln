@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VTC_WPF", "VTC_WPF\VTC_WPF.csproj", "{EF016EC9-B8DC-4FC6-94F1-03D46F93388D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VTCManager", "VTC_WPF\VTCManager.csproj", "{EF016EC9-B8DC-4FC6-94F1-03D46F93388D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

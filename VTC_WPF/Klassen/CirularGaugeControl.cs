@@ -1,4 +1,4 @@
-﻿namespace VTC_WPF
+﻿namespace VTCManager
 {
     internal class CirularGaugeControl : MainWindow
     {

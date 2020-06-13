@@ -4,7 +4,7 @@ using System.IO;
 using System.Windows;
 using VdfParser;
 
-namespace VTC_WPF.Klassen
+namespace VTCManager.Klassen
 {
     class TelemetryInstaller
     {

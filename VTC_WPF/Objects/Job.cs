@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VTC_WPF.Objects
+namespace VTCManager.Objects
 {
     public class Job
     {

@@ -15,10 +15,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using VTC_WPF.Klassen;
+using VTCManager.Klassen;
 using Label = System.Windows.Forms.Label;
 
-namespace VTC_WPF
+namespace VTCManager
 {
     /// <summary>
     /// Interaktionslogik für Joschis_Design.xaml
