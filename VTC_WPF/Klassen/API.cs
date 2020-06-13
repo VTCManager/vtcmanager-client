@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Windows;
 
-namespace VTC_WPF.Klassen
+namespace VTCManager.Klassen
 {
 
     class API

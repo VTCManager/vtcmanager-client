@@ -7,9 +7,9 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using VTC_WPF.Klassen;
+using VTCManager.Klassen;
 
-namespace VTC_WPF
+namespace VTCManager
 {
     public partial class MainWindow : Window
     {

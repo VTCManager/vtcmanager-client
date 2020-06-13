@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 
-namespace VTC_WPF.Klassen
+namespace VTCManager.Klassen
 {
     public class TelemetryHandler
     {

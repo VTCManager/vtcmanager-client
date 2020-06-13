@@ -13,9 +13,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using VTC_WPF.Klassen;
+using VTCManager.Klassen;
 
-namespace VTC_WPF
+namespace VTCManager
 {
     /// <summary>
     /// Interaktionslogik für LogIn.xaml

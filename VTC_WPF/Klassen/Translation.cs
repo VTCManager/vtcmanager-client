@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VTC_WPF.Klassen
+namespace VTCManager.Klassen
 {
     public class Translation
     {

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Windows.Controls;
 using System.Windows.Forms;
 
-namespace VTC_WPF.Klassen
+namespace VTCManager.Klassen
 {
     public class Login : MainWindow
     {

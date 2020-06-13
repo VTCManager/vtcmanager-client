@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace VTC_WPF
+namespace VTCManager
 {
     /// <summary>
     /// Interaktionslogik für ETS2PathDialog.xaml

@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VTC_WPF.Objects;
+using VTCManager.Objects;
 
-namespace VTC_WPF.Klassen
+namespace VTCManager.Klassen
 {
     public class JobHandler
     {

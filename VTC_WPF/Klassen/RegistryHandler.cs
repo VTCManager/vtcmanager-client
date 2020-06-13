@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace VTC_WPF.Klassen
+namespace VTCManager.Klassen
 {
     class RegistryHandler
     {

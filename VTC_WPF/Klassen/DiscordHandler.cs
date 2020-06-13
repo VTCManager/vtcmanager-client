@@ -1,6 +1,6 @@
 ﻿using DiscordRPC;
 
-namespace VTC_WPF.Klassen
+namespace VTCManager.Klassen
 {
     public class DiscordHandler
     {

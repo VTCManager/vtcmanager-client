@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VTC_WPF
+namespace VTCManager
 {
     public static class Config
     {

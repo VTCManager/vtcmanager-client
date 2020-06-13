@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace VTC_WPF.Klassen
+namespace VTCManager.Klassen
 {
     class Logging
     {
