@@ -53,7 +53,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>VTC_WPF.App</StartupObject>
+    <StartupObject>VTCManager.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>C39943514FF1F5E0C568031A17054877D17386C4</ManifestCertificateThumbprint>
