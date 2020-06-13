@@ -154,6 +154,7 @@
     <Compile Include="Klassen\Telemetry.cs" />
     <Compile Include="Klassen\TelemetryHandler.cs" />
     <Compile Include="Klassen\TelemetryInstaller.cs" />
+    <Compile Include="Truck_Daten.cs" />
     <Compile Include="Klassen\Translation.cs" />
     <Compile Include="Klassen\Utilities.cs" />
     <Compile Include="RegisterClient.xaml.cs">
