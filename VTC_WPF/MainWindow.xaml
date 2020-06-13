@@ -68,17 +68,64 @@
                             </TransformGroup>
                         </Border.RenderTransform>
                     </Border>
+                    <!--
                     <Label x:Name="Truck_Manufactur_Label" Content="Fahrzeug" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="18,220,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Width="950"/>
                     <Label x:Name="Tour_Startort" Content="Streckeninfos 1" HorizontalAlignment="Left" Margin="20,260,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Width="950" HorizontalContentAlignment="Center"/>
                     <Label x:Name="Label_Streckeninfos" Content="Streckeninfos 2" HorizontalAlignment="Left" Margin="20,300,0,0" VerticalAlignment="Top" Height="37" FontFamily="Bahnschrift Light" Width="950" HorizontalContentAlignment="Center"/>
                     <Label x:Name="Label_Streckeninfos_2" Content="Restzeit" HorizontalAlignment="Left" Margin="20,340,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Width="950" HorizontalContentAlignment="Center"/>
                     <Label x:Name="Label_Fuel_Maximum" Content="Maximum" HorizontalAlignment="Left" Margin="644,28,0,0" VerticalAlignment="Top" FontFamily="Verdana" FontSize="10" Height="21" Width="55"/>
-                    <Label x:Name="Label_Fuel_Current" Content="Current" HorizontalAlignment="Left" Margin="811,112,0,0" VerticalAlignment="Top" FontFamily="Verdana" FontSize="10"/>
+                    -->
                     <Label x:Name="speed_fuer_tacho" Content="Label" Visibility="Hidden" HorizontalAlignment="Left" Margin="439,137,0,0" VerticalAlignment="Top"/>
                     
-                    <!-- LABELS in der MainWindow.cs an Truck_Data binden-->
-                    <Label x:Name="Truck_TestLabel1" Content="{Binding RPM}" HorizontalAlignment="Left" Margin="659,60,0,0" VerticalAlignment="Top" Height="36" Width="278"/>
-                    <Label x:Name="Trailer_Rad_Schaden" Content="{Binding RAD_SCHADEN}" Height="30" Width="50" Margin="811,132,129,276"/>
+                    <StackPanel Orientation="Vertical" Margin="433,0,0,0">
+                        
+                        <StackPanel Width="560" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Label Content="Dein Truck:" Height="30" Width="120" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
+                            <Label x:Name="LBL_TRUCK_HERSTELLER" Content="{Binding HERSTELLER}" HorizontalContentAlignment="Left" Height="30" Width="459"/>
+                        </StackPanel>
+                        <StackPanel Width="560" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Label Content="Dein Modell:" Height="30" Width="120" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
+                            <Label x:Name="LBL_TRUCK_NAME" Content="{Binding MODELL}" Height="30" Width="459"/>
+                        </StackPanel>
+                        
+                        
+                        <Separator/>
+                        <Label Content="{Binding START_ORT}" Height="30" />
+                        <Label Content="{Binding START_FIRMA}" Height="30" />
+                        <Label Content="{Binding ZIEL_ORT}" Height="30" />
+                        <Label Content="{Binding ZIEL_FIRMA}" Height="30" />
+                    </StackPanel>
+                        
+
+                    <Label Content="{Binding FUEL_MAX}" Height="20" FontSize="12" Margin="909,151,31,267" HorizontalContentAlignment="Center"/>
+                    <Label Content="{Binding FUEL_BESTAND}" Height="20" FontSize="12" Margin="909,406,31,12" HorizontalContentAlignment="Center"/>
+
+                    <Label Content="{Binding ADBLUE_MAX}" Height="20" FontSize="12" Margin="861,153,81,265" HorizontalContentAlignment="Center"/>
+                    <Label Content="{Binding ADBLUE_BESTAND}" Height="20" FontSize="12" Margin="861,408,81,10" HorizontalContentAlignment="Center"/>
+
+
+
+                    <ProgressBar HorizontalAlignment="Left" Background="WhiteSmoke" Foreground="Green" Height="34" Margin="819,276,-55,0" VerticalAlignment="Top" Width="226" RenderTransformOrigin="0.5,0.5" Maximum="{Binding FUEL_MAX}" Value="{Binding FUEL_BESTAND}" Minimum="1">
+                        <ProgressBar.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-90"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ProgressBar.RenderTransform>
+                    </ProgressBar>
+                    <ProgressBar HorizontalAlignment="Left" Height="34" Margin="773,276,-9,0" Background="WhiteSmoke" Foreground="Blue" VerticalAlignment="Top" Width="225" RenderTransformOrigin="0.5,0.5" Maximum="{Binding ADBLUE_MAX}" Value="{Binding ADBLUE_BESTAND}" Minimum="1">
+                        <ProgressBar.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-90"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ProgressBar.RenderTransform>
+                    </ProgressBar>
+                    <Image x:Name="BRAND_IMAGE" HorizontalAlignment="Left" Height="100" Margin="78,262,0,0" VerticalAlignment="Top" Width="100"/>
 
 
                     <!-- Kann das Truck Imaage nicht ändern im CodeBehind. Deshalb erstmal Deaktiviert -->

@@ -25,7 +25,7 @@ namespace VTCManager
         private string tempomat;
         // TRAILER VALUES
         private string angehangen;
-        private string fracht_schaden;
+        
         private string rad_schaden;
         private string chassis_schaden;
 
@@ -37,7 +37,147 @@ namespace VTCManager
         private string ziel_ort;
         private string start_firma;
         private string ziel_firma;
+        private string einkommen;
+        private string geplante_distanz;
+        private string fracht_gewicht;
+        private string fracht_name;
+        private string fracht_schaden;
 
+        // NAVIGATIONS DATEN
+        private string navigation_distanz;
+        private string navigation_zeit;
+        private string navigation_speed_limit;
+
+        // MAUTSTATION
+        private string maut_bezahlt;
+
+        // TANKEN
+        private string tanken_bezahlt;
+
+
+        public string MAUT_BEZAHLT
+        {
+            get { return maut_bezahlt; }
+            set
+            {
+                if (maut_bezahlt != value)
+                {
+                    maut_bezahlt = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public string TANKEN_BEZAHLT
+        {
+            get { return tanken_bezahlt; }
+            set
+            {
+                if (tanken_bezahlt != value)
+                {
+                    tanken_bezahlt = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public string NAVIGATION_DISTANZ
+        {
+            get { return navigation_distanz; }
+            set
+            {
+                if (navigation_distanz != value)
+                {
+                    navigation_distanz = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+
+        public string NAVIGATION_ZEIT
+        {
+            get { return navigation_zeit; }
+            set
+            {
+                if (navigation_zeit != value)
+                {
+                    navigation_zeit = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public string NAVIGATION_SPEED_LIMIT
+        {
+            get { return navigation_speed_limit; }
+            set
+            {
+                if (navigation_speed_limit != value)
+                {
+                    navigation_speed_limit = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+        public string FRACHT_NAME
+        {
+            get { return fracht_name; }
+            set
+            {
+                if (fracht_name != value)
+                {
+                    fracht_name = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public string FRACHT_GEWICHT
+        {
+            get { return fracht_gewicht; }
+            set
+            {
+                if (fracht_gewicht != value)
+                {
+                    fracht_gewicht = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+        public string GEPLANTE_DISTANZ
+        {
+            get { return geplante_distanz; }
+            set
+            {
+                if (geplante_distanz != value)
+                {
+                    geplante_distanz = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+
+        public string JOB_EINKOMMEN
+        {
+            get { return einkommen; }
+            set
+            {
+                if (einkommen != value)
+                {
+                    einkommen = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
 
         public string ZIEL_FIRMA
         {
