@@ -3,8 +3,11 @@ using SCSSdkClient;
 using SCSSdkClient.Object;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
@@ -18,6 +21,7 @@ namespace VTCManager
         private readonly bool InvokeRequired;
         private delegate void UpdateProgressDelegate(DependencyProperty dp, object value);
         public DiscordHandler Discord;
+        public Truck_Daten Truck_Daten;
         Utilities utils = new Utilities();
         public JobHandler jobHandler;
         private OpenFileDialog tmp_Trucker;
@@ -26,6 +30,7 @@ namespace VTCManager
         int Tankinhalt;
         private object polyline1;
 
+        public string TEST { get; set; }
         public MainWindow()
         {
             Logging.Make_Log_File(); // Muss als erstes stehen, damit vor allem anderen die Logs geleert werden !
@@ -44,11 +49,15 @@ namespace VTCManager
             Telemetry.RefuelPayed += TelemetryHandler.RefuelPayed;
             jobHandler = new JobHandler();
             Discord = new DiscordHandler();
+            Truck_Daten = new Truck_Daten();
+
 
             InitializeComponent();
 
             TMP_Pfad_Textbox.Text = utils.Reg_Lesen("Config", "TMP_PFAD", true);
-            TMP_Pfad_Textbox.IsEnabled = (string.IsNullOrEmpty(utils.Reg_Lesen("Config", "TMP_PFAD", true))) ? true : false;
+            TMP_Pfad_Textbox.IsEnabled = string.IsNullOrEmpty(utils.Reg_Lesen("Config", "TMP_PFAD", true)) ? true : false;
+
+            this.DataContext = Truck_Daten;
         }
 
 
@@ -56,9 +65,12 @@ namespace VTCManager
         {
             try
             {
+                
+               
 
                 if (!InvokeRequired)
                 {
+                    
                     //set the data globally
                     TelemetryHandler.Telemetry_Data = data;
 
@@ -76,7 +88,10 @@ namespace VTCManager
                     UpdateLabelContent(Label_Fuel_Current, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.FuelValue.Amount).ToString() + " l");
                     UpdateLabelContent(Label_Fuel_Maximum, Convert.ToDouble(data.TruckValues.ConstantsValues.CapacityValues.Fuel).ToString() + " l");
 
-                 
+                    // TODO Alle Daten müssen hier an die Truck_Daten gebunden werden. Danach in der XAML mit dem Content an den VALUE binden (RPM / RAD_SCHADEN / ZIEL_FIRMA etc)
+                    Truck_Daten.RPM = data.TruckValues.CurrentValues.DashboardValues.RPM.ToString();
+                    Truck_Daten.RAD_SCHADEN = data.TruckValues.CurrentValues.DamageValues.WheelsAvg.ToString();
+
                 }
 
 
