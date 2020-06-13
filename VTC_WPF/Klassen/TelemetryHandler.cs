@@ -64,8 +64,7 @@ namespace VTCManager.Klassen
         public static void JobDelivered(object sender, EventArgs e)
         {
             checkTelemetry();
-            // currently disabled cause it's missing in the API
-            //JObject response = API.HTTPSRequestGet(API.jobDelivered);
+            JObject response = API.HTTPSRequestGet(API.job_delivered);
         }
 
         public static void JobCancelled(object sender, EventArgs e)
@@ -82,8 +81,8 @@ namespace VTCManager.Klassen
             post_param.Add("cargo", Telemetry_Data.JobValues.CargoValues.Name);
             post_param.Add("cargo_weight", Telemetry_Data.JobValues.CargoValues.Mass.ToString());
             post_param.Add("planned_distance", Telemetry_Data.JobValues.PlannedDistanceKm.ToString());
-            // currently disabled cause it's missing in the API
-            //JObject response = API.HTTPSRequestPost(API.jobStarted, post_param);
+            post_param.Add("ets_income", Telemetry_Data.JobValues.Income.ToString());
+            JObject response = API.HTTPSRequestPost(API.job_started, post_param);
         }
 
         private static void checkTelemetry()

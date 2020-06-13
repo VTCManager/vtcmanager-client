@@ -17,6 +17,8 @@ namespace VTCManager.Klassen
     {
         public static string server = "http://localhost:8000/api/";
         public static string get_user = server + "user";
+        public static string job_delivered = server + "job/delivered";
+        public static string job_started = server + "job/started";
 
         public static JObject HTTPSRequestGet(string url, Dictionary<string, string> getParameters = null)
         {
@@ -85,6 +87,8 @@ namespace VTCManager.Klassen
                 request1.ContentType = "application/x-www-form-urlencoded";
                 request1.UserAgent = "VTCManager 1.0.0";
                 request1.ContentLength = bytes.Length;
+                request1.Accept = "application/json";
+                request1.Headers.Add("Authorization", "Bearer " + Config.AccessToken);
                 Stream requestStream = request1.GetRequestStream();
                 requestStream.Write(bytes, 0, bytes.Length);
                 requestStream.Close();
