@@ -94,7 +94,6 @@ namespace VTCManager.Klassen
                 reader1.Close();
                 response.GetResponseStream().Close();
                 response.Close();
-                Console.WriteLine(Config.macAddr);
                 JObject json = JObject.Parse(str3);
                 return json;
 
