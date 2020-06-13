@@ -94,11 +94,11 @@ namespace VTC_WPF.Klassen
                 reader1.Close();
                 response.GetResponseStream().Close();
                 response.Close();
-                Console.WriteLine(Config.macAddr);
+
+                // TODO Thommy: fehlende macAddr ??
+                //Console.WriteLine(Config.macAddr); 
                 JObject json = JObject.Parse(str3);
                 return json;
-
-
             }
             catch (WebException exception)
             {

@@ -66,7 +66,9 @@ namespace VTC_WPF.Klassen
             checkTelemetry();
             Dictionary<string, string> post_param = new Dictionary<string, string>();
             post_param.Add("client_ident", Config.macAddr);
+            // TODO Thommy: fehlende macAddr
             JObject response = API.HTTPSRequestPost(API.jobDelivered, post_param);
+            // TODO Thommy: Fehlende jobDelivered in API
         }
 
         public static void JobCancelled(object sender, EventArgs e)
@@ -79,12 +81,14 @@ namespace VTC_WPF.Klassen
             checkTelemetry();
             Dictionary<string, string> post_param = new Dictionary<string, string>();
             post_param.Add("client_ident", Config.macAddr);
+            // TODO Thommy: fehlende macAddr
             post_param.Add("origin", Telemetry_Data.JobValues.CitySource);
             post_param.Add("destination", Telemetry_Data.JobValues.CityDestination);
             post_param.Add("cargo", Telemetry_Data.JobValues.CargoValues.Name);
             post_param.Add("cargo_weight", Telemetry_Data.JobValues.CargoValues.Mass.ToString());
             post_param.Add("planned_distance", Telemetry_Data.JobValues.PlannedDistanceKm.ToString());
             JObject response = API.HTTPSRequestPost(API.jobStarted, post_param);
+            // TODO Thommy: fehlende jobStarted in API
         }
 
         private static void checkTelemetry()
