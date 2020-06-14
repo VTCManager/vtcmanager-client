@@ -81,6 +81,8 @@ namespace VTCManager.Klassen
         public static void JobStarted(object sender, EventArgs e)
         {
             checkTelemetry();
+            if (!checkTelemetryJobState())
+                return;
             Dictionary<string, string> post_param = new Dictionary<string, string>();
             post_param.Add("origin", Telemetry_Data.JobValues.CitySource);
             post_param.Add("origin_id", Telemetry_Data.JobValues.CitySourceId);
@@ -112,6 +114,29 @@ namespace VTCManager.Klassen
             while (Telemetry_Data == null)
             {
                 Console.WriteLine("Waiting for init to be finished");
+            }
+        }
+
+        private static bool checkTelemetryJobState()
+        {
+            int i = 0;
+            while (Telemetry_Data.JobValues.CargoLoaded == false)
+            {
+                i++;
+                Console.WriteLine("Waiting for init to be finished");
+                if(i > 500)
+                {
+                    break;
+                }
+            }
+            if(i > 500)
+            {
+                MessageBox.Show("Can't init Telemetry");
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }

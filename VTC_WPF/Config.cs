@@ -5,7 +5,7 @@ namespace VTCManager
     public static class Config
     {
         //VERSIONS
-        public static string ClientVersion = "3.2.0.0 DevAlpha";
+        public static string ClientVersion = "3.2.0.1 DevAlpha";
         public static string TelemetryVersion = "1.10";
 
         //DISCORD
