@@ -5,10 +5,15 @@ namespace VTCManager
 {
     public class Truck_Daten : INotifyPropertyChanged
     {
+        // Algemeines
+        private string telemetryVersion;
+        private string spiel_pause;
+        private string liter_gallonen;
+
+        // Truck
         private string hersteller;
         private string modell;
         private string name;
-        private string telemetryVersion;
         private string vorwaertsGaenge;
         private string rueckwaertsGange;
         private string gang;
@@ -23,11 +28,29 @@ namespace VTCManager
         private string adblue_max;
         private string adblue_bestand;
         private string tempomat;
+        private string blinker_links;
+        private string blinker_rechts;
+        private double speed;
+        private double speed_tacho;
+
+
+        // Truck Schaden
+        private double truck_motor_schaden;
+        private double truck_getriebe_schaden;
+        private double truck_fahrwerk_schaden;
+        private double truck_chassis_schaden;
+        private double truck_raeder_schaden;
+
+
+
         // TRAILER VALUES
         private string angehangen;
-        private string fracht_schaden;
-        private string rad_schaden;
-        private string chassis_schaden;
+
+        // Trailer Schaden
+        private double trailer_fracht_schaden;
+        private double trailer_fahrwerk_schaden;
+        private double trailer_chassis_schaden;
+
 
         // JOB DATEN
         private string fracht_geladen;
@@ -37,7 +60,345 @@ namespace VTCManager
         private string ziel_ort;
         private string start_firma;
         private string ziel_firma;
+        private string einkommen;
+        private string geplante_distanz;
+        private string fracht_gewicht;
+        private string fracht_name;
 
+        // NAVIGATIONS DATEN
+        private string navigation_distanz;
+        private string navigation_zeit;
+        private string navigation_speed_limit;
+
+        // MAUTSTATION
+        private string maut_bezahlt;
+
+        // TANKEN
+        private string tanken_bezahlt;
+
+
+
+
+        // SCHADEN TRUCK ANFANG
+        public double TRUCK_MOTOR_SCHADEN
+        {
+            get { return truck_motor_schaden; }
+            set
+            {
+                if (truck_motor_schaden != value)
+                {
+                    truck_motor_schaden = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public double TRUCK_GETRIEBE_SCHADEN
+        {
+            get { return truck_getriebe_schaden; }
+            set
+            {
+                if (truck_getriebe_schaden != value)
+                {
+                    truck_getriebe_schaden = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public double TRUCK_CHASSIS_SCHADEN
+        {
+            get { return truck_chassis_schaden; }
+            set
+            {
+                if (truck_chassis_schaden != value)
+                {
+                    truck_chassis_schaden = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+        public double TRUCK_FAHRWERK_SCHADEN
+        {
+            get { return truck_fahrwerk_schaden; }
+            set
+            {
+                if (truck_fahrwerk_schaden != value)
+                {
+                    truck_fahrwerk_schaden = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public double TRUCK_RAEDER_SCHADEN
+        {
+            get { return truck_raeder_schaden; }
+            set
+            {
+                if (truck_raeder_schaden != value)
+                {
+                    truck_raeder_schaden = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+        // ENDE SCHADEN TRUCK
+
+
+        // ANFANG TRAILER SCHADEN
+
+        public double TRAILER_FRACHT_SCHADEN
+        {
+            get { return trailer_fracht_schaden; }
+            set
+            {
+                if (trailer_fracht_schaden != value)
+                {
+                    trailer_fracht_schaden = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+        public double TRAILER_FAHRWERK_SCHADEN
+        {
+            get { return trailer_fahrwerk_schaden; }
+            set
+            {
+                if (trailer_fahrwerk_schaden != value)
+                {
+                    trailer_fahrwerk_schaden = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public double TRAILER_CHASSIS_SCHADEN
+        {
+            get { return trailer_chassis_schaden; }
+            set
+            {
+                if (trailer_chassis_schaden != value)
+                {
+                    trailer_chassis_schaden = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+
+        // ENDE TRAILER SCHADEN
+
+        public string LITER_GALLONEN
+        {
+            get { return liter_gallonen; }
+            set
+            {
+                if (liter_gallonen != value)
+                {
+                    liter_gallonen = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public double SPEED
+        {
+            get { return speed; }
+            set
+            {
+                if (speed != value)
+                {
+                    speed = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+        public double SPEED_TACHO
+        {
+            get { return speed_tacho; }
+            set
+            {
+                if (speed_tacho != value)
+                {
+                    speed_tacho = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+        public string BLINKER_RECHTS
+        {
+            get { return blinker_rechts; }
+            set
+            {
+                if (blinker_rechts != value)
+                {
+                    blinker_rechts = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public string BLINKER_LINKS
+        {
+            get { return blinker_links; }
+            set
+            {
+                if (blinker_links != value)
+                {
+                    blinker_links = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public string SPIEL_PAUSE
+        {
+            get { return spiel_pause; }
+            set
+            {
+                if (spiel_pause != value)
+                {
+                    spiel_pause = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public string MAUT_BEZAHLT
+        {
+            get { return maut_bezahlt; }
+            set
+            {
+                if (maut_bezahlt != value)
+                {
+                    maut_bezahlt = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public string TANKEN_BEZAHLT
+        {
+            get { return tanken_bezahlt; }
+            set
+            {
+                if (tanken_bezahlt != value)
+                {
+                    tanken_bezahlt = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public string NAVIGATION_DISTANZ
+        {
+            get { return navigation_distanz; }
+            set
+            {
+                if (navigation_distanz != value)
+                {
+                    navigation_distanz = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+
+        public string NAVIGATION_ZEIT
+        {
+            get { return navigation_zeit; }
+            set
+            {
+                if (navigation_zeit != value)
+                {
+                    navigation_zeit = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public string NAVIGATION_SPEED_LIMIT
+        {
+            get { return navigation_speed_limit; }
+            set
+            {
+                if (navigation_speed_limit != value)
+                {
+                    navigation_speed_limit = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+        public string FRACHT_NAME
+        {
+            get { return fracht_name; }
+            set
+            {
+                if (fracht_name != value)
+                {
+                    fracht_name = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public string FRACHT_GEWICHT
+        {
+            get { return fracht_gewicht; }
+            set
+            {
+                if (fracht_gewicht != value)
+                {
+                    fracht_gewicht = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+        public string GEPLANTE_DISTANZ
+        {
+            get { return geplante_distanz; }
+            set
+            {
+                if (geplante_distanz != value)
+                {
+                    geplante_distanz = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+
+        public string JOB_EINKOMMEN
+        {
+            get { return einkommen; }
+            set
+            {
+                if (einkommen != value)
+                {
+                    einkommen = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
 
         public string ZIEL_FIRMA
         {
@@ -133,45 +494,7 @@ namespace VTCManager
 
         }
 
-        public string CHASSIS_SCHADEN
-        {
-            get { return chassis_schaden; }
-            set
-            {
-                if (chassis_schaden != value)
-                {
-                    chassis_schaden = value;
-                    NotifyPropertyChanged();
-                }
-            }
-
-        }
-        public string RAD_SCHADEN
-        {
-            get { return rad_schaden; }
-            set
-            {
-                if (rad_schaden != value)
-                {
-                    rad_schaden = value;
-                    NotifyPropertyChanged();
-                }
-            }
-
-        }
-        public string FRACHT_SCHADEN
-        {
-            get { return fracht_schaden; }
-            set
-            {
-                if (fracht_schaden != value)
-                {
-                    fracht_schaden = value;
-                    NotifyPropertyChanged();
-                }
-            }
-
-        }
+     
         public string ANGEHANGEN
         {
             get { return angehangen; }

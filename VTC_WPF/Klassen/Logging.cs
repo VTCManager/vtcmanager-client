@@ -22,6 +22,11 @@ namespace VTCManager.Klassen
             {
                 File.Create(Config.LogRoot + Config.ClientLogFileName); File.WriteAllText(Config.LogRoot + Config.ClientLogFileName, String.Empty);
                 File.Create(Config.LogRoot + Config.SystemLogFileName); File.WriteAllText(Config.LogRoot + Config.SystemLogFileName, String.Empty);
+            } else
+            {
+                // Dateien exisitieren -> erstmal Leeren
+                File.WriteAllText(Config.LogRoot + Config.ClientLogFileName, String.Empty);
+                File.WriteAllText(Config.LogRoot + Config.SystemLogFileName, String.Empty);
             }
 
             // TODO Thommy: File Create in eine Abfrage gepackt. Wenn die eine Datei nicht exisitert, kann die andere auch nicht existieren
