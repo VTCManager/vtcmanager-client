@@ -193,11 +193,66 @@
             <TabItem Header="Einstellungen" FontSize="24" Height="50" Width="200" Opacity="0.7">
                 <Grid Margin="-1,0,-1,-4">
                     <Label x:Name="label1" Content="Einstellungen" HorizontalAlignment="Left" Margin="2,-1,0,0" VerticalAlignment="Top" FontSize="24"/>
-                    <TextBox x:Name="TMP_Pfad_Textbox" HorizontalAlignment="Left" Height="33" Margin="15,86,0,0" VerticalAlignment="Top" Width="257" FontSize="14" BorderBrush="#893341CF" AcceptsReturn="False" MaxLines="1" TextWrapping="NoWrap"/>
-                    <Label x:Name="TMP_Pfad_Label" Content="Pfad zu Truckers-MP:" HorizontalAlignment="Left" Margin="11,59,0,0" VerticalAlignment="Top" FontSize="12"/>
+                    <TextBox x:Name="TMP_Pfad_Textbox" HorizontalAlignment="Left" Height="30" Margin="15,86,0,0" VerticalAlignment="Top" Width="257" FontSize="14" BorderBrush="#893341CF" AcceptsReturn="False" MaxLines="1" TextWrapping="NoWrap"/>
+                    <Label x:Name="TMP_Pfad_Label" Content="Pfad zu Truckers-MP:" HorizontalAlignment="Left" Margin="15,59,0,0" VerticalAlignment="Top" FontSize="12"/>
                     <Button x:Name="BTN_Suche_TMP_PFAD" Content="..." HorizontalAlignment="Left" Margin="286,86,0,0" VerticalAlignment="Top" Width="46" Click="btn_open_TMP_File_Click"/>
+                    
+                    <Label Content="Design Auswahl:" HorizontalAlignment="Left" Margin="16,120,0,0" VerticalAlignment="Top" FontSize="12"/>
+                    <ComboBox x:Name="Designauswahl" Width="300" Height="30" Margin="15,146,677,332" 
+                              SelectionChanged="Designauswahl_SelectionChanged" 
+                              SelectedValuePath="Content">
+                        <ComboBoxItem>Dark.Blue</ComboBoxItem>
+                        <ComboBoxItem>Dark.Red</ComboBoxItem>
+                        <ComboBoxItem>Dark.Green</ComboBoxItem>
+                        <ComboBoxItem>Dark.Purple</ComboBoxItem>
+                        <ComboBoxItem>Dark.Orange</ComboBoxItem>
+                        <ComboBoxItem>Dark.Lime</ComboBoxItem>
+                        <ComboBoxItem>Dark.Emerald</ComboBoxItem>
+                        <ComboBoxItem>Dark.Teal</ComboBoxItem>
+                        <ComboBoxItem>Dark.Cyan</ComboBoxItem>
+                        <ComboBoxItem>Dark.Cobalt</ComboBoxItem>
+                        <ComboBoxItem>Dark.Indigo</ComboBoxItem>
+                        <ComboBoxItem>Dark.Violet</ComboBoxItem>
+                        <ComboBoxItem>Dark.Pink</ComboBoxItem>
+                        <ComboBoxItem>Dark.Magenta</ComboBoxItem>
+                        <ComboBoxItem>Dark.Crimson</ComboBoxItem>
+                        <ComboBoxItem>Dark.Amber</ComboBoxItem>
+                        <ComboBoxItem>Dark.Yellow</ComboBoxItem>
+                        <ComboBoxItem>Dark.Brown</ComboBoxItem>
+                        <ComboBoxItem>Dark.Olive</ComboBoxItem>
+                        <ComboBoxItem>Dark.Steel</ComboBoxItem>
+                        <ComboBoxItem>Dark.Mauve</ComboBoxItem>
+                        <ComboBoxItem>Dark.Taupe</ComboBoxItem>
+                        <ComboBoxItem>Dark.Sienna</ComboBoxItem>
+                        <ComboBoxItem>Light.Red</ComboBoxItem>
+                        <ComboBoxItem>Light.Green</ComboBoxItem>
+                        <ComboBoxItem>Light.Blue</ComboBoxItem>
+                        <ComboBoxItem>Light.Purple</ComboBoxItem>
+                        <ComboBoxItem>Light.Orange</ComboBoxItem>
+                        <ComboBoxItem>Light.Lime</ComboBoxItem>
+                        <ComboBoxItem>Light.Emerald</ComboBoxItem>
+                        <ComboBoxItem>Light.Teal</ComboBoxItem>
+                        <ComboBoxItem>Light.Cyan</ComboBoxItem>
+                        <ComboBoxItem>Light.Cobalt</ComboBoxItem>
+                        <ComboBoxItem>Light.Indigo</ComboBoxItem>
+                        <ComboBoxItem>Light.Violet</ComboBoxItem>
+                        <ComboBoxItem>Light.Pink</ComboBoxItem>
+                        <ComboBoxItem>Light.Magenta</ComboBoxItem>
+                        <ComboBoxItem>Light.Crimson</ComboBoxItem>
+                        <ComboBoxItem>Light.Amber</ComboBoxItem>
+                        <ComboBoxItem>Light.Yellow</ComboBoxItem>
+                        <ComboBoxItem>Light.Brown</ComboBoxItem>
+                        <ComboBoxItem>Light.Olive</ComboBoxItem>
+                        <ComboBoxItem>Light.Steel</ComboBoxItem>
+                        <ComboBoxItem>Light.Mauve</ComboBoxItem>
+                        <ComboBoxItem>Light.Taupe</ComboBoxItem>
+                        <ComboBoxItem>Light.Sienna</ComboBoxItem>
+                    </ComboBox>
                 </Grid>
+                
+                
             </TabItem>
+
 
 
 

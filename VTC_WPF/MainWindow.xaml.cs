@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using VTCManager.Klassen;
 using MahApps.Metro.Controls;
+using ControlzEx.Theming;
 
 namespace VTCManager
 {
@@ -57,12 +58,31 @@ namespace VTCManager
 
             InitializeComponent();
 
+
+
+
+            Lade_Themes();
+
             TMP_Pfad_Textbox.Text = utils.Reg_Lesen("Config", "TMP_PFAD", true);
             TMP_Pfad_Textbox.IsEnabled = string.IsNullOrEmpty(utils.Reg_Lesen("Config", "TMP_PFAD", true)) ? true : false;
 
             this.DataContext = Truck_Daten;
         }
 
+
+        private void Lade_Themes()
+        {
+            if (string.IsNullOrEmpty(utils.Reg_Lesen("Config", "Design", false)))
+            {
+                utils.Reg_Schreiben("Design", "Dark.Blue", "Config");
+                ThemeManager.Current.ChangeTheme(this, "Dark.Blue");
+            }
+            else
+            {
+                Designauswahl.SelectedValue = utils.Reg_Lesen("Config", "Design", false);
+                ThemeManager.Current.ChangeTheme(this, utils.Reg_Lesen("Config", "Design", false));
+            }
+        }
 
         private void Telemetry_Data_Handler(SCSTelemetry data, bool updated)
         {
@@ -146,6 +166,18 @@ namespace VTCManager
         private void LaunchWebsite(object sender, RoutedEventArgs e)
         {
             FileHandler.StarteAnwendung("https://vtc.northwestvideo.de/");
+        }
+
+        private void Designauswahl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string theme = (string)(Designauswahl.SelectedValue);
+            utils.Reg_Schreiben("Design", theme, "Config");
+            try
+            {
+                ThemeManager.Current.ChangeTheme(this, theme);
+            } catch { }
+                
+
         }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VTCManager"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="VTCManager.RegisterClient"
         mc:Ignorable="d"
-        Title="LogIn" Height="450" Width="800">
+        Title="VTC Manager Log-In" Height="450" Width="800" WindowStartupLocation="CenterScreen" Icon="0fe05db00517d674af7072ce693d6459501620e8_full.jpg" ResizeMode="NoResize">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Resources/login_background.jpg" Stretch="UniformToFill"/>
@@ -14,9 +14,18 @@
         <Rectangle Fill="#FF1D1D1D" HorizontalAlignment="Center" Height="242" Stroke="Black" VerticalAlignment="Center" Width="352" Margin="0" StrokeThickness="0"/>
         <Image HorizontalAlignment="Left" Height="54" VerticalAlignment="Top" Width="53" Margin="236,104,0,0" Source="Resources/vtcm_logo.png" RenderTransformOrigin="0.453,0.5"/>
         <Label Content="VTCManager - Key-Login" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="298,111,0,0" Foreground="#DDFFFFFF" FontFamily="Segoe UI Black" Height="37" Width="262" FontSize="20"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="236,158,0,0" Foreground="White" Width="320" FontSize="11"><Run Text="Zur Anmeldung ist ein Client-Key erforderlich. Bitte registriere im Interface einen Client-Key und trage ihn hier ein."/><LineBreak/><Run Text="https://vtc.northwestvideo.de/interface/account/settings/"/></TextBlock>
-        <TextBox x:Name="InputClientKey" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Width="240" VerticalAlignment="Top" Margin="230,246,0,0" Foreground="White" BorderBrush="#FF37B6FF"/>
-        <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="480,244,0,0" Height="27"/>
-        <Label Content="Client-Key" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,267,0,0" Foreground="#DDFFFFFF" Height="25" Width="67" FontSize="12"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="236,158,0,0" Foreground="White" Width="320" FontSize="11"><Run Text="Zur Anmeldung ist ein Client-Key erforderlich. Bitte registriere im Interface einen Client-Key und trage ihn hier ein."/><LineBreak/>
+        </TextBlock>
+        <Button Content="Jetzt zur Webseite wechseln" Click="Button_Click" Width="200" Height="30" Margin="0,30,0,0" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF1D1D1D" Offset="0"/>
+                    <GradientStop Color="#FF37B6FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <TextBox x:Name="InputClientKey" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Width="240" VerticalAlignment="Top" Margin="234,287,0,0" Foreground="White" BorderBrush="#FF37B6FF" VerticalContentAlignment="Center"/>
+        <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="484,285,0,0" Height="27"/>
+        <Label Content="Client-Key hier eintragen" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="234,265,0,0" Foreground="#DDFFFFFF" Height="25" Width="240" FontSize="12"/>
     </Grid>
 </Window>

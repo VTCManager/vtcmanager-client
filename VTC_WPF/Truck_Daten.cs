@@ -11,7 +11,7 @@ namespace VTCManager
         private string liter_gallonen;
 
         // Truck
-        private string hersteller;
+        private string hersteller = " --- ";
         private string modell;
         private string name;
         private string vorwaertsGaenge;
