@@ -15,7 +15,7 @@ namespace VTCManager.Klassen
 
     class API
     {
-        public static string server = "http://localhost:8000/api/";
+        public static string server = "https://vtcmanager.eu/api/";
         public static string get_user = server + "user";
         public static string job_delivered = server + "job/delivered";
         public static string job_started = server + "job/started";
