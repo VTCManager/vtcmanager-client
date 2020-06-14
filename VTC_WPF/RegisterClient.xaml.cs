@@ -13,6 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
+
 using VTCManager.Klassen;
 
 namespace VTCManager
@@ -20,7 +22,7 @@ namespace VTCManager
     /// <summary>
     /// Interaktionslogik für LogIn.xaml
     /// </summary>
-    public partial class RegisterClient : Window
+    public partial class RegisterClient
     {
         public RegisterClient()
         {
@@ -51,7 +53,7 @@ namespace VTCManager
                 //open MainInterface
                 MainWindow mainwin = new MainWindow();
                 mainwin.Show();
-                this.Close();
+               this.Close();
             }
             else
             {

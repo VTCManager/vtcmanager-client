@@ -14,10 +14,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using VTCManager.Klassen;
+using MahApps.Metro.Controls;
 
 namespace VTCManager
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         public SCSSdkTelemetry Telemetry;
         private readonly bool InvokeRequired;
@@ -32,7 +33,6 @@ namespace VTCManager
         int Tankinhalt;
         private object polyline1;
 
-        public string TEST { get; set; }
 
         public MainWindow()
         {
@@ -80,8 +80,8 @@ namespace VTCManager
                     TelemetryHandler.Telemetry_Data = data;
 
                    
-                    UpdateLabelContent(Speedlabel, Convert.ToInt32(TelemetryHandler.Telemetry_Data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString() + " KM/H");
-                    UpdateLabelContent(speed_fuer_tacho, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph-85).ToString());
+                   // UpdateLabelContent(Speedlabel, Convert.ToInt32(TelemetryHandler.Telemetry_Data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString() + " KM/H");
+                   // UpdateLabelContent(speed_fuer_tacho, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph-85).ToString());
 
 
                     Truck_Daten.BLINKER_LINKS = data.TruckValues.CurrentValues.LightsValues.BlinkerLeftOn.ToString();
@@ -119,11 +119,6 @@ namespace VTCManager
 
         }
 
-        public void UpdateLabelContent(Label label, string newContent)
-        {
-            Dispatcher.Invoke(new UpdateProgressDelegate(label.SetValue), DispatcherPriority.Background, ContentProperty, newContent);
-           
-        }
 
         private void MenuIcon_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -172,6 +167,19 @@ namespace VTCManager
                 FileHandler.StarteAnwendung(utils.Reg_Lesen("Config", "TMP_PFAD", true));
         }
 
+        private void LaunchFaceBookSiteSite(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        private void LaunchDiscord(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void LaunchWebsite(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
