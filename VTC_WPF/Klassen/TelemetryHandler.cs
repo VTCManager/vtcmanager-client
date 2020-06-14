@@ -99,6 +99,10 @@ namespace VTCManager.Klassen
             post_param.Add("freight_market", Telemetry_Data.JobValues.Market.ToString());
             post_param.Add("fuel_at_beginning", Telemetry_Data.TruckValues.CurrentValues.DashboardValues.FuelValue.Amount.ToString());
             post_param.Add("truck_damage_at_beginning", Telemetry_Data.TruckValues.CurrentValues.DamageValues.Engine.ToString());
+            post_param.Add("truck_id", Telemetry_Data.TruckValues.ConstantsValues.Id);
+            post_param.Add("truck", Telemetry_Data.TruckValues.ConstantsValues.Name);
+            post_param.Add("truck_brand_id", Telemetry_Data.TruckValues.ConstantsValues.BrandId);
+            post_param.Add("truck_brand", Telemetry_Data.TruckValues.ConstantsValues.Brand);
             JObject response = API.HTTPSRequestPost(API.job_started, post_param);
         }
 
