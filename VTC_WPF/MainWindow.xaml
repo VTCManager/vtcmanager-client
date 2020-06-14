@@ -40,7 +40,7 @@
 
         
 
-        <Grid VerticalAlignment="Top" Height="60" Background="#FF2E2E2E">
+        <Grid VerticalAlignment="Top" Height="60" Background="Transparent">
             <TextBlock Text="VTC-Manager V3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="36" FontFamily="Segoe UI Black" >
                 <TextBlock.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -55,22 +55,13 @@
 
         </Grid>
 
-        <StackPanel x:Name="MenuRightStack" Visibility="Hidden" Width="150" Height="500" Background="#FF2E2E2E" Margin="0, 50,0,0" HorizontalAlignment="Right">
-            <Button x:Name="btn_Settings" Width="120" Height="30" Content="Einstellungen" HorizontalAlignment="Center" Margin="5" Click="btn_Settings_Click" />
-            <Button x:Name="btn_Overlay" Width="120" Height="30" Content="Overlay" HorizontalAlignment="Center" Margin="5" Click="btn_Overlay_Click" />
-            <Separator/>
-            <Button x:Name="btn_Ueber" Width="120" Height="30" Content="Über uns..." HorizontalAlignment="Center" Margin="5" Click="btn_Ueber_Click" />
-            <Separator/>
 
 
-            <Button x:Name="btn_Logout" Width="120" Height="30" Content="Logout" HorizontalAlignment="Center" Margin="5" Click="btn_Logout_Click" />
-        </StackPanel>
-
-        <Grid Width="200" HorizontalAlignment="Left" Background="#FF2E2E2E"/>
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="510" Margin="-2,58,-1,0" VerticalAlignment="Top" Width="1198" TabStripPlacement="Left" Background="#2e2e2e">
-            <TabItem Header="Fahrt" Height="50" Width="200" FontSize="24" Background="{x:Null}" Opacity="0.5" Foreground="#FF4B9DFF">
+        <Grid Width="200" HorizontalAlignment="Left"/>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="510" Margin="-2,58,-1,0" VerticalAlignment="Top" Width="1198" TabStripPlacement="Left">
+            <TabItem Header="Fahrt" Height="50" Width="200" FontSize="24" Opacity="0.5">
                 <Grid x:Name="GRID_FAHRT" Margin="0,0,0,66">
-                    <Label Panel.ZIndex="250" x:Name="Speedlabel" Content="Speed" HorizontalAlignment="Left"  Margin="84,112,0,0" VerticalAlignment="Top" Height="61" Width="282" FontStyle="Italic" FontWeight="Bold" FontFamily="Verdana" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#DDC5C5C5">
+                    <Label Panel.ZIndex="250" Content="{Binding SPEED}" HorizontalAlignment="Left"  Margin="84,112,0,0" VerticalAlignment="Top" Height="61" Width="282" FontStyle="Italic" FontWeight="Bold" FontFamily="Verdana" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#DDC5C5C5">
                         <Label.Effect>
                             <DropShadowEffect BlurRadius="20" Color="#FF91DEFB" ShadowDepth="0"/>
                         </Label.Effect>
@@ -98,7 +89,7 @@
                         </Border.RenderTransform>
                     </Border>
 
-                    <Label x:Name="speed_fuer_tacho" Content="Label" Visibility="Hidden" HorizontalAlignment="Left" Margin="439,137,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="speed_fuer_tacho" Content="{Binding SPEED_TACHO}" Visibility="Hidden" HorizontalAlignment="Left" Margin="439,137,0,0" VerticalAlignment="Top"/>
 
 
                     <StackPanel Orientation="Vertical" Margin="433,0,0,0">
@@ -197,10 +188,10 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Background="{x:Null}" Content="" Height="50" Width="200" Header="Freunde" FontSize="24" Opacity="0.5" Foreground="#FF4B9DFF"/>
-            <TabItem Background="{x:Null}" Content="" FontSize="24" Height="50" Opacity="0.5" Width="200" Header="Verkehr" Foreground="#FF4B9DFF"/>
-            <TabItem Header="Einstellungen" FontSize="24" Height="50" Width="200" Background="{x:Null}" Opacity="0.5" Foreground="#FF4B9DFF">
-                <Grid Background="#FFE5E5E5" Margin="-1,0,-1,-4">
+            <TabItem Content="" Height="50" Width="200" Header="Freunde" FontSize="24" Opacity="0.5" Foreground="#FF4B9DFF"/>
+            <TabItem Content="" FontSize="24" Height="50" Opacity="0.5" Width="200" Header="Verkehr" Foreground="#FF4B9DFF"/>
+            <TabItem Header="Einstellungen" FontSize="24" Height="50" Width="200" Opacity="0.7">
+                <Grid Margin="-1,0,-1,-4">
                     <Label x:Name="label1" Content="Einstellungen" HorizontalAlignment="Left" Margin="2,-1,0,0" VerticalAlignment="Top" FontSize="24"/>
                     <TextBox x:Name="TMP_Pfad_Textbox" HorizontalAlignment="Left" Height="33" Margin="15,86,0,0" VerticalAlignment="Top" Width="257" FontSize="14" BorderBrush="#893341CF" AcceptsReturn="False" MaxLines="1" TextWrapping="NoWrap"/>
                     <Label x:Name="TMP_Pfad_Label" Content="Pfad zu Truckers-MP:" HorizontalAlignment="Left" Margin="11,59,0,0" VerticalAlignment="Top" FontSize="12"/>

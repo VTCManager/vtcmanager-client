@@ -80,8 +80,9 @@ namespace VTCManager
                     TelemetryHandler.Telemetry_Data = data;
 
                    
-                   // UpdateLabelContent(Speedlabel, Convert.ToInt32(TelemetryHandler.Telemetry_Data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString() + " KM/H");
-                   // UpdateLabelContent(speed_fuer_tacho, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph-85).ToString());
+                    Truck_Daten.SPEED = Convert.ToInt32(TelemetryHandler.Telemetry_Data.TruckValues.CurrentValues.DashboardValues.Speed.Kph);
+
+                    Truck_Daten.SPEED_TACHO = Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph-85);
 
 
                     Truck_Daten.BLINKER_LINKS = data.TruckValues.CurrentValues.LightsValues.BlinkerLeftOn.ToString();
@@ -120,41 +121,6 @@ namespace VTCManager
         }
 
 
-        private void MenuIcon_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            MenuRightStack.Visibility = (MenuRightStack.IsVisible) ? Visibility.Hidden : Visibility.Visible;
-        }
-
-        private void btn_Settings_Click(object sender, RoutedEventArgs e)
-        {
-            MenuRightStack.Visibility = Visibility.Hidden;
-  
-            MessageBox.Show("Settings", "Settings", MessageBoxButton.OK, MessageBoxImage.Information);
-         
-        }
-
-        private void btn_Overlay_Click(object sender, RoutedEventArgs e)
-        {
-            MenuRightStack.Visibility = Visibility.Hidden;
-            MessageBox.Show("Overlay", "Overlay", MessageBoxButton.OK, MessageBoxImage.Information);
-          
-        }
-
-        private void btn_Logout_Click(object sender, RoutedEventArgs e)
-        {
-            MenuRightStack.Visibility = Visibility.Hidden;
-            MessageBox.Show("Logout", "Logout", MessageBoxButton.OK, MessageBoxImage.Information);
-            
-        }
-
-        private void btn_Ueber_Click(object sender, RoutedEventArgs e)
-        {
-            MenuRightStack.Visibility = Visibility.Hidden;
-            MessageBox.Show("Über", "Über", MessageBoxButton.OK, MessageBoxImage.Information);
-        
-        }
-
-
         private void btn_open_TMP_File_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -179,7 +145,7 @@ namespace VTCManager
 
         private void LaunchWebsite(object sender, RoutedEventArgs e)
         {
-
+            FileHandler.StarteAnwendung("https://vtc.northwestvideo.de/");
         }
     }
 }

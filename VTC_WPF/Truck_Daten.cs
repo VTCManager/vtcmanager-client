@@ -5,7 +5,7 @@ namespace VTCManager
 {
     public class Truck_Daten : INotifyPropertyChanged
     {
-        // Alggemeines
+        // Algemeines
         private string telemetryVersion;
         private string spiel_pause;
         private string liter_gallonen;
@@ -30,6 +30,9 @@ namespace VTCManager
         private string tempomat;
         private string blinker_links;
         private string blinker_rechts;
+        private double speed;
+        private double speed_tacho;
+
 
         // Truck Schaden
         private double truck_motor_schaden;
@@ -206,7 +209,33 @@ namespace VTCManager
             }
 
         }
+        public double SPEED
+        {
+            get { return speed; }
+            set
+            {
+                if (speed != value)
+                {
+                    speed = value;
+                    NotifyPropertyChanged();
+                }
+            }
 
+        }
+
+        public double SPEED_TACHO
+        {
+            get { return speed_tacho; }
+            set
+            {
+                if (speed_tacho != value)
+                {
+                    speed_tacho = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
 
         public string BLINKER_RECHTS
         {
