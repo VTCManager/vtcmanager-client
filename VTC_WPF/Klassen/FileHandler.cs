@@ -28,14 +28,16 @@ namespace VTCManager.Klassen
 
 
 
-        internal static void StarteAnwednung(string path)
+        internal static void StarteAnwendung(string path)
         {
             try
             {
                 Process.Start(path);
+                Logging.WriteClientLog("<INFO> Anwendung gestartet: " + path);
             }
             catch (Exception ex)
             {
+                MessageBox.Show("Ich konnte die Anwendung im Pfad: " + path + " nicht finden !" + Environment.NewLine + Environment.NewLine + "Bitte stelle den Pfad in den Einstellungen richtig ein !", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
                 Logging.WriteClientLog("<ERROR> Konnte Anwendung in Pfad: " + path + " nicht starten. " + ex.Message + ex.StackTrace);
             }
         }

@@ -4,6 +4,7 @@ using SCSSdkClient.Object;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,6 +33,7 @@ namespace VTCManager
         private object polyline1;
 
         public string TEST { get; set; }
+
         public MainWindow()
         {
             Logging.Make_Log_File(); // Muss als erstes stehen, damit vor allem anderen die Logs geleert werden !
@@ -71,26 +73,19 @@ namespace VTCManager
 
                 if (!InvokeRequired)
                 {
-                    
+
+
+
                     //set the data globally
                     TelemetryHandler.Telemetry_Data = data;
 
-                    /* TODO UMBAU 13-06-2020
-
-                    UpdateLabelContent(Truck_Manufactur_Label, data.TruckValues.ConstantsValues.Brand.ToString() + ", Modell: " + data.TruckValues.ConstantsValues.Name.ToString());
-                    
-                    UpdateLabelContent(Tour_Startort, "Du fährst " + data.JobValues.PlannedDistanceKm.ToString() + " km von " + data.JobValues.CitySource.ToString() + " nach " + data.JobValues.CityDestination.ToString());
-                    UpdateLabelContent(Label_Streckeninfos, "Deine Wegstrecke beträgt jetzt noch " + (int)(data.NavigationValues.NavigationDistance / 1000) + Environment.NewLine + " KM");
-                    minutes = ((int)data.JobValues.RemainingDeliveryTime.Value >= 1) ? (int)data.JobValues.RemainingDeliveryTime.Value : 0;
-
-                    UpdateLabelContent(Label_Streckeninfos_2, "Restzeit: " + String.Format("{0} Std. {1} Min.", minutes / 60, minutes % 60));
-                    
-                    */
+                   
                     UpdateLabelContent(Speedlabel, Convert.ToInt32(TelemetryHandler.Telemetry_Data.TruckValues.CurrentValues.DashboardValues.Speed.Kph).ToString() + " KM/H");
                     UpdateLabelContent(speed_fuer_tacho, Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph-85).ToString());
 
-         
 
+                    Truck_Daten.BLINKER_LINKS = data.TruckValues.CurrentValues.LightsValues.BlinkerLeftOn.ToString();
+                    
 
                     Truck_Daten.HERSTELLER = data.TruckValues.ConstantsValues.Brand;
                     Truck_Daten.MODELL = data.TruckValues.ConstantsValues.Name;
@@ -100,13 +95,20 @@ namespace VTCManager
                     Truck_Daten.ADBLUE_MAX = Convert.ToInt32(data.TruckValues.ConstantsValues.CapacityValues.AdBlue).ToString();
                     Truck_Daten.ADBLUE_BESTAND = Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.AdBlue).ToString();
 
-                    if (Truck_Daten.HERSTELLER == "Mercedes-Benz")
-                       BRAND_IMAGE.Source = new BitmapImage(new Uri(@"/Icons/icons8-mercedes-benz-256.png"));
-
                     // TODO Alle Daten müssen hier an die Truck_Daten gebunden werden. Danach in der XAML mit dem Content an den VALUE binden (RPM / RAD_SCHADEN / ZIEL_FIRMA etc)
                     Truck_Daten.RPM = data.TruckValues.CurrentValues.DashboardValues.RPM.ToString();
-                    Truck_Daten.RAD_SCHADEN = data.TruckValues.CurrentValues.DamageValues.WheelsAvg.ToString();
 
+
+                    // Schadensanzeige
+                    Truck_Daten.TRUCK_MOTOR_SCHADEN = Convert.ToInt32(data.TruckValues.CurrentValues.DamageValues.Engine * 100);
+                    Truck_Daten.TRUCK_GETRIEBE_SCHADEN = Convert.ToInt32(data.TruckValues.CurrentValues.DamageValues.Transmission * 100);
+                    Truck_Daten.TRUCK_FAHRWERK_SCHADEN = Convert.ToInt32(data.TruckValues.CurrentValues.DamageValues.Chassis * 100);
+                    Truck_Daten.TRUCK_CHASSIS_SCHADEN = Convert.ToInt32(data.TruckValues.CurrentValues.DamageValues.Cabin * 100);
+                    Truck_Daten.TRUCK_RAEDER_SCHADEN = Convert.ToInt32(data.TruckValues.CurrentValues.DamageValues.WheelsAvg * 100);
+                    
+                    Truck_Daten.TRAILER_FRACHT_SCHADEN = Convert.ToInt32(data.JobValues.CargoValues.CargoDamage*100);
+
+                    Truck_Daten.LITER_GALLONEN = (data.Game.ToString() == "Ets2") ? "Liter" : "Gall.";
 
                 }
 
@@ -167,8 +169,7 @@ namespace VTCManager
 
         private void TMP_Starten_Click(object sender, RoutedEventArgs e)
         {
-            FileHandler.StarteAnwednung(utils.Reg_Lesen("Config", "TMP_PFAD", true));
-
+                FileHandler.StarteAnwendung(utils.Reg_Lesen("Config", "TMP_PFAD", true));
         }
 
 
