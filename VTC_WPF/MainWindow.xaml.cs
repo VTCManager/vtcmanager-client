@@ -150,12 +150,12 @@ namespace VTCManager
 
         private void LaunchFaceBookSiteSite(object sender, RoutedEventArgs e)
         {
-
+            FileHandler.StarteAnwendung("https://www.facebook.com/groups/vtcmanager");
         }
 
         private void LaunchDiscord(object sender, RoutedEventArgs e)
         {
-
+            FileHandler.StarteAnwendung("https://discord.gg/tye7APA");
         }
 
         private void LaunchWebsite(object sender, RoutedEventArgs e)
