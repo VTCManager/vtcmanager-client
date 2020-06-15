@@ -249,5 +249,10 @@ namespace VTCManager
 
 
         }
+
+        private void Minimize_Window(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
     }
 }

@@ -53,6 +53,13 @@
                 <ComboBoxItem>EN</ComboBoxItem>
             </ComboBox>
 
+            <Button Click="Minimize_Window" ToolTip="Minimiere das Fenster">
+                <iconPacks:PackIconFontAwesome Width="22"
+                                  Height="22"
+                                  Kind="WindowMinimizeSolid" />
+            </Button>
+
+
         </mah:WindowCommands>
     </mah:MetroWindow.RightWindowCommands>
 
