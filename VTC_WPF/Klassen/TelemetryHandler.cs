@@ -1,16 +1,53 @@
 ﻿using Newtonsoft.Json.Linq;
 using SCSSdkClient;
+using SCSSdkClient.Object;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Timers;
 using System.Windows;
 
 namespace VTCManager.Klassen
 {
     public class TelemetryHandler
     {
-        public static SCSSdkClient.Object.SCSTelemetry Telemetry_Data;
+        public static SCSTelemetry Telemetry_Data;
+        public SCSSdkTelemetry Telemetry;
+        private MainWindow mainWindow;
+        public static DiscordHandler Discord;
+        public static bool onJob = false;
+
+        public TelemetryHandler(MainWindow mainWindow)
+        {
+            this.mainWindow = mainWindow;
+            Discord = new DiscordHandler();
+            Telemetry = new SCSSdkTelemetry();
+            Telemetry.Data += Telemetry_Data_Handler;
+            Telemetry.JobStarted += TelemetryHandler.JobStarted;
+            Telemetry.JobCancelled += TelemetryHandler.JobCancelled;
+            Telemetry.JobDelivered += TelemetryHandler.JobDelivered;
+            Telemetry.Fined += TelemetryHandler.Fined;
+            Telemetry.Tollgate += TelemetryHandler.Tollgate;
+            Telemetry.Ferry += TelemetryHandler.FerryUsed;
+            Telemetry.Train += TelemetryHandler.TrainUsed;
+            Telemetry.RefuelStart += TelemetryHandler.RefuelStart;
+            Telemetry.RefuelEnd += TelemetryHandler.RefuelEnd;
+            Telemetry.RefuelPayed += TelemetryHandler.RefuelPayed;
+        }
+
+        private void Telemetry_Data_Handler(SCSTelemetry data, bool newTimestamp)
+        {
+            Telemetry_Data = data;
+            if(data != null)
+            {
+                if (!String.IsNullOrWhiteSpace(data.TruckValues.ConstantsValues.BrandId) && !onJob)
+                {
+                    Discord.FreeRoam(Telemetry_Data.TruckValues.ConstantsValues.BrandId, Telemetry_Data.TruckValues.ConstantsValues.Brand + " " + Telemetry_Data.TruckValues.ConstantsValues.Name);
+                }
+            }
+        }
+
         public static bool IsETSRunning()
         {
             string procName = Process.GetCurrentProcess().ProcessName;    
@@ -71,17 +108,17 @@ namespace VTCManager.Klassen
             post_param.Add("fuel_at_end", Telemetry_Data.TruckValues.CurrentValues.DashboardValues.FuelValue.Amount.ToString());
             post_param.Add("truck_damage_at_end", Telemetry_Data.TruckValues.CurrentValues.DamageValues.Engine.ToString());
             JObject response = API.HTTPSRequestPost(API.job_delivered, post_param);
+            onJob = false;
         }
 
         public static void JobCancelled(object sender, EventArgs e)
         {
-
+            onJob = false;
         }
 
         public static void JobStarted(object sender, EventArgs e)
         {
             checkTelemetry();
-            checkTelemetryJobState();
             Dictionary<string, string> post_param = new Dictionary<string, string>();
             post_param.Add("origin", Telemetry_Data.JobValues.CitySource);
             post_param.Add("origin_id", Telemetry_Data.JobValues.CitySourceId);
@@ -105,20 +142,14 @@ namespace VTCManager.Klassen
             post_param.Add("truck_brand_id", Telemetry_Data.TruckValues.ConstantsValues.BrandId);
             post_param.Add("truck_brand", Telemetry_Data.TruckValues.ConstantsValues.Brand);
             JObject response = API.HTTPSRequestPost(API.job_started, post_param);
+            Discord.OnJobStart(Telemetry_Data.JobValues.CargoValues.Name, (int)Telemetry_Data.JobValues.CargoValues.Mass, Telemetry_Data.JobValues.CitySource, Telemetry_Data.JobValues.CityDestination, Telemetry_Data.TruckValues.ConstantsValues.BrandId, Telemetry_Data.TruckValues.ConstantsValues.Brand+" "+ Telemetry_Data.TruckValues.ConstantsValues.Name);
+            onJob = true;
         }
 
         private static void checkTelemetry()
         {
             //bug fix when an event occures while booting the app -> Telemetry_Data is null
             while (Telemetry_Data == null)
-            {
-                Console.WriteLine("Waiting for init to be finished");
-            }
-        }
-
-        private static void checkTelemetryJobState()
-        {
-            while (Telemetry_Data.JobValues.CargoLoaded == false)
             {
                 Console.WriteLine("Waiting for init to be finished");
             }

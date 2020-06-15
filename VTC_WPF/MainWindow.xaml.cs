@@ -33,27 +33,18 @@ namespace VTCManager
         int minutes;
         int Tankinhalt;
         private object polyline1;
+        private TelemetryHandler telemetryhandler;
 
 
         public MainWindow()
         {
             Logging.Make_Log_File(); // Muss als erstes stehen, damit vor allem anderen die Logs geleert werden !
-            TelemetryInstaller.check();
             Telemetry = new SCSSdkTelemetry();
             Telemetry.Data += Telemetry_Data_Handler;
-            Telemetry.JobStarted += TelemetryHandler.JobStarted;
-            Telemetry.JobCancelled += TelemetryHandler.JobCancelled;
-            Telemetry.JobDelivered += TelemetryHandler.JobDelivered;
-            Telemetry.Fined += TelemetryHandler.Fined;
-            Telemetry.Tollgate += TelemetryHandler.Tollgate;
-            Telemetry.Ferry += TelemetryHandler.FerryUsed;
-            Telemetry.Train += TelemetryHandler.TrainUsed;
-            Telemetry.RefuelStart += TelemetryHandler.RefuelStart;
-            Telemetry.RefuelEnd += TelemetryHandler.RefuelEnd;
-            Telemetry.RefuelPayed += TelemetryHandler.RefuelPayed;
+            TelemetryInstaller.check();
             jobHandler = new JobHandler();
-            Discord = new DiscordHandler();
             Truck_Daten = new Truck_Daten();
+            telemetryhandler = new TelemetryHandler(this);
 
 
             InitializeComponent();

@@ -8,11 +8,6 @@ namespace VTCManager
         public static string ClientVersion = "3.2.0.1 DevAlpha";
         public static string TelemetryVersion = "1.10";
 
-        //DISCORD
-        public static string DiscordAppID = "659036297561767948";
-        public static string DiscordLargeImageKey = "truck-icon";
-        public static string DiscordSmallImageKey = "vtcm-logo";
-
         //FILES
         public static string JobsCache = "JobsCache.json";
 
