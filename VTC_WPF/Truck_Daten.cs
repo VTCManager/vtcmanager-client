@@ -77,7 +77,7 @@ namespace VTCManager
         private string tanken_bezahlt;
 
 
-
+        
 
         // SCHADEN TRUCK ANFANG
         public double TRUCK_MOTOR_SCHADEN

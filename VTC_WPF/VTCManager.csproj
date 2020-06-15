@@ -227,6 +227,7 @@
     <Compile Include="Klassen\CirularGaugeControl.cs" />
     <Compile Include="Klassen\DiscordHandler.cs" />
     <Compile Include="Klassen\FileHandler.cs" />
+    <Compile Include="Klassen\ISettings.cs" />
     <Compile Include="Klassen\JobHandler.cs" />
     <Compile Include="Klassen\Logging.cs" />
     <Compile Include="Klassen\Login.cs" />

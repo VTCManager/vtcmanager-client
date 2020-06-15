@@ -49,12 +49,11 @@ namespace VTCManager
             Truck_Daten = new Truck_Daten();
             telemetryhandler = new TelemetryHandler(this);
 
-
             InitializeComponent();
 
             Lade_Themes();
+            lade_Translations();
             utils.Build_Registry();
-            Translation Translation = new Translation(utils.Reg_Lesen("Config", "Sprache", false));
 
             Sprachauswahl.SelectedValue = utils.Reg_Lesen("Config", "Sprache", false);
 
@@ -62,12 +61,10 @@ namespace VTCManager
             Sprachauswahl.SelectedItem = utils.Reg_Lesen("Config", "Sprache", false);
             TMP_Pfad_Textbox.IsEnabled = string.IsNullOrEmpty(utils.Reg_Lesen("Config", "TMP_PFAD", true)) ? true : false;
 
-            LBL_TRUCK.Content = Translation.truck_lb;
-
             this.DataContext = Truck_Daten;
         }
 
-
+     
 
 
         private void Telemetry_Data_Handler(SCSTelemetry data, bool updated)
@@ -109,6 +106,30 @@ namespace VTCManager
 
         }
 
+
+        public void lade_Translations()
+        {
+            Translation trans = new Translation(utils.Reg_Lesen("Config", "Sprache", false));
+            TAB_FAHRT.Header = trans.TAB_Fahrt_Text;
+            TAB_FREUNDE.Header = trans.TAB_FREUNDE_TEXT;
+            TAB_VERKEHR.Header = trans.TAB_VERKEHR_TEXT;
+            TAB_EINSTELLUNGEN.Header = trans.TAB_EINSTELLUNGEN_TEXT;
+            LBL_FAHRT_SCHADEN_TITEL.Content = trans.SCHADENSANZEIGE_TITEL;
+            LBL_Truck_Name.Content = trans.TRUCK_NAME;
+            LBL_Truck_Model.Content = trans.TRUCK_MODELL;
+            TAB_FAHRT_LBL_MOTOR.Content = trans.TAB_FAHRT_LBL_MOTOR;
+            TAB_FAHRT_LBL_GETRIEBE.Content = trans.TAB_FAHRT_LBL_GETRIEBE;
+            TAB_FAHRT_LBL_RAEDER.Content = trans.TAB_FAHRT_LBL_RAEDER;
+            TAB_FAHRT_LBL_FAHRWERK.Content = trans.TAB_FAHRT_LBL_FAHRWERK;
+            TAB_FAHRT_LBL_FAHRERHAUS.Content = trans.TAB_FAHRT_LBL_FAHRERHAUS;
+            TAB_FAHRT_LBL_FRACHTSCHADEN.Content = trans.TAB_FAHRT_LBL_FRACHTSCHADEN;
+            BUTTON_ATS_STARTEN.Text = trans.BUTTON_ATS_STARTEN;
+            BUTTON_ETS_STARTEN.Text = trans.BUTTON_ETS_STARTEN;
+            BUTTON_TMP_STARTEN.Text = trans.BUTTON_TMP_STARTEN;
+
+
+
+        }
 
         private void btn_open_TMP_File_Click(object sender, RoutedEventArgs e)
         {

@@ -16,6 +16,12 @@
         SaveWindowPosition="True"
         Title="VTC-Manager V3" Height="600" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="VTCManager.png">
 
+    <mah:MetroWindow.LeftWindowCommands>
+        <mah:WindowCommands>
+
+        </mah:WindowCommands>
+    </mah:MetroWindow.LeftWindowCommands>
+
     <mah:MetroWindow.RightWindowCommands>
 
         <mah:WindowCommands>
@@ -74,7 +80,7 @@
         <Grid Width="200" HorizontalAlignment="Left"/>
 
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="510" Margin="-2,58,-1,0" VerticalAlignment="Top" Width="1198" TabStripPlacement="Left">
-            <TabItem Header="Fahrt" Height="45" Width="200" FontSize="24" Opacity="0.7" BorderBrush="Gray" VerticalAlignment="Center" BorderThickness="1">
+            <TabItem x:Name="TAB_FAHRT" Height="45" Width="200" FontSize="24" Opacity="0.7" BorderBrush="Gray" VerticalAlignment="Center" BorderThickness="1">
                 <Grid x:Name="GRID_FAHRT" Margin="0,0,0,66">
                     <Label Panel.ZIndex="250" Content="{Binding SPEED}" HorizontalAlignment="Left"  Margin="84,112,0,0" VerticalAlignment="Top" Height="61" Width="282" FontStyle="Italic" FontWeight="Bold" FontFamily="Verdana" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#DDC5C5C5">
                         <Label.Effect>
@@ -110,14 +116,14 @@
                     <StackPanel Orientation="Vertical" Margin="433,0,0,0">
 
                         <StackPanel Width="560" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Label x:Name="LBL_TRUCK" Padding="0" Margin="5" Height="30" Width="150" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
+                            <Label x:Name="LBL_Truck_Name" Padding="0" Margin="5" Height="30" Width="150" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
 
-                            <Label Padding="0" Margin="5" x:Name="LBL_TRUCK_HERSTELLER" Content="{Binding HERSTELLER}" HorizontalContentAlignment="Left" Height="30" Width="459"/>
+                            <Label Padding="0" Margin="5" Content="{Binding HERSTELLER}" HorizontalContentAlignment="Left" Height="30" Width="459"/>
                         </StackPanel>
                         <Separator/>
                         <StackPanel Width="560" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Label Padding="0" Margin="5" Content="Dein Modell:" Height="30" Width="150" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
-                            <Label Padding="0" Margin="5" x:Name="LBL_TRUCK_NAME" Content="{Binding MODELL}" Height="30" Width="459"/>
+                            <Label x:Name="LBL_Truck_Model" Padding="0" Margin="5" Height="30" Width="150" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
+                            <Label Padding="0" Margin="5" Content="{Binding MODELL}" Height="30" Width="459"/>
                         </StackPanel>
                         <Separator/>
 
@@ -160,41 +166,41 @@
                     </ProgressBar>
 
                     <StackPanel Margin="78,204,612,0" Orientation="Vertical">
-                        <Label Content="Schadensanzeige:" />
+                        <Label x:Name="LBL_FAHRT_SCHADEN_TITEL" Content="Schadensanzeige:" />
 
                         <StackPanel Orientation="Horizontal">
-                            <Label FontSize="14" Padding="0" Content="Motor: " VerticalContentAlignment="Center" Width="150" Height="20" HorizontalContentAlignment="Right"/>
+                            <Label x:Name="TAB_FAHRT_LBL_MOTOR" FontSize="14" Padding="0" Content="Motor: " VerticalContentAlignment="Center" Width="150" Height="20" HorizontalContentAlignment="Right"/>
                             <Label FontSize="14" Padding="0" Content="{Binding TRUCK_MOTOR_SCHADEN}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="30" Height="20"/>
                             <Label FontSize="14" Padding="0" Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <Label FontSize="14" Padding="0 " Content="Getriebe: " VerticalContentAlignment="Center" Width="150" Height="20" HorizontalContentAlignment="Right"/>
+                            <Label x:Name="TAB_FAHRT_LBL_GETRIEBE" FontSize="14" Padding="0 " Content="Getriebe: " VerticalContentAlignment="Center" Width="150" Height="20" HorizontalContentAlignment="Right"/>
                             <Label FontSize="14" Padding="0" Content="{Binding TRUCK_GETRIEBE_SCHADEN}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="30" Height="20"/>
                             <Label FontSize="14" Padding="0" Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <Label FontSize="14" Padding="0" Content="Fahrwerk: " VerticalContentAlignment="Center" Width="150" Height="20" HorizontalContentAlignment="Right"/>
+                            <Label x:Name="TAB_FAHRT_LBL_FAHRWERK" FontSize="14" Padding="0" Content="Fahrwerk: " VerticalContentAlignment="Center" Width="150" Height="20" HorizontalContentAlignment="Right"/>
                             <Label FontSize="14" Padding="0" Content="{Binding TRUCK_FAHRWERK_SCHADEN}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="30" Height="20"/>
                             <Label FontSize="14" Padding="0" Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <Label FontSize="14" Padding="0" Content="Fahrerhaus: " VerticalContentAlignment="Center" Width="150" Height="20" HorizontalContentAlignment="Right"/>
+                            <Label x:Name="TAB_FAHRT_LBL_FAHRERHAUS" FontSize="14" Padding="0" Content="Fahrerhaus: " VerticalContentAlignment="Center" Width="150" Height="20" HorizontalContentAlignment="Right"/>
                             <Label FontSize="14" Padding="0" Content="{Binding TRUCK_CHASSIS_SCHADEN}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="30" Height="20"/>
                             <Label FontSize="14" Padding="0" Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <Label FontSize="14" Padding="0" Content="Räder: " Width="150" VerticalContentAlignment="Center" Height="20" HorizontalContentAlignment="Right"/>
+                            <Label x:Name="TAB_FAHRT_LBL_RAEDER" FontSize="14" Padding="0" Content="Räder: " Width="150" VerticalContentAlignment="Center" Height="20" HorizontalContentAlignment="Right"/>
                             <Label FontSize="14" Padding="0" Content="{Binding TRUCK_RAEDER_SCHADEN}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="30" Height="20"/>
                             <Label FontSize="14" Padding="0" Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                         </StackPanel>
 
                         <Separator/>
                         <StackPanel Orientation="Horizontal">
-                            <Label FontSize="14" Padding="0" Content="Frachtschaden: " VerticalContentAlignment="Center" Width="150" Height="20" HorizontalContentAlignment="Right"/>
+                            <Label x:Name="TAB_FAHRT_LBL_FRACHTSCHADEN" FontSize="14" Padding="0" Content="Frachtschaden: " VerticalContentAlignment="Center" Width="150" Height="20" HorizontalContentAlignment="Right"/>
                             <Label FontSize="14" Padding="0" Content="{Binding TRAILER_FRACHT_SCHADEN}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="30" Height="20"/>
                             <Label FontSize="14" Padding="0" Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                         </StackPanel>
@@ -203,9 +209,9 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Content="" Height="50" Width="200" Header="Freunde" FontSize="24" Opacity="0.7" BorderBrush="Gray" VerticalAlignment="Center" BorderThickness="1"/>
-            <TabItem Content="" FontSize="24" Height="50" Opacity="0.7" Width="200" Header="Verkehr" BorderBrush="Gray" VerticalAlignment="Center" BorderThickness="1"/>
-            <TabItem Header="Einstellungen" FontSize="24" Height="50" Width="200" Opacity="0.7" BorderBrush="Gray" VerticalAlignment="Center" BorderThickness="1">
+            <TabItem x:Name="TAB_FREUNDE" Content="" Height="50" Width="200" FontSize="24" Opacity="0.7" BorderBrush="Gray" VerticalAlignment="Center" BorderThickness="1"/>
+            <TabItem x:Name="TAB_VERKEHR" Content="" FontSize="24" Height="50" Opacity="0.7" Width="200" BorderBrush="Gray" VerticalAlignment="Center" BorderThickness="1"/>
+            <TabItem x:Name="TAB_EINSTELLUNGEN" FontSize="24" Height="50" Width="200" Opacity="0.7" BorderBrush="Gray" VerticalAlignment="Center" BorderThickness="1">
                 <Grid Margin="-1,0,-1,-4">
                     <Label x:Name="label1" Content="Einstellungen" HorizontalAlignment="Left" Margin="2,-1,0,0" VerticalAlignment="Top" FontSize="24"/>
                     <TextBox x:Name="TMP_Pfad_Textbox" HorizontalAlignment="Left" Height="30" Margin="15,86,0,0" VerticalAlignment="Top" Width="257" FontSize="14" BorderBrush="#893341CF" AcceptsReturn="False" MaxLines="1" TextWrapping="NoWrap" mah:TextBoxHelper.Watermark="Kein TruckersMP Pfad angegeben !"/>
@@ -278,16 +284,24 @@
 
         </TabControl>
 
-        <Button x:Name="ETS2_Starten" Content="ETS2 Starten" Height="40" Width="150" Margin="530,509,515,10" Click="Launch_ETS" />
-        <Button x:Name="ATS_Starten" Content="ATS Starten" Height="40" Width="150" Margin="370,509,675,10" Click="Launch_ATS" />
-        <Button x:Name="TMP_Starten" Content="TMP Starten" Click="TMP_Starten_Click" Height="40" Width="150" Margin="210,509,835,10">
-            <Button.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Command="ApplicationCommands.New" />
-                    <MenuItem Command="ApplicationCommands.Delete" />
-                    <MenuItem Command="ApplicationCommands.Print" />
-                </ContextMenu>
-            </Button.ContextMenu>
+        <Button Height="47" Margin="205,502,790,21" Style="{DynamicResource MahApps.Styles.Button.Dialogs.Accent}">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{iconPacks:BoxIconsImage Kind=SolidTruck}" Margin="0,0,10,0" Height="30" />
+                <TextBlock x:Name="BUTTON_ETS_STARTEN" VerticalAlignment="Center">ETS Start</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button Height="46" Margin="805,502,190,22" Style="{DynamicResource MahApps.Styles.Button.Dialogs.Accent}">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{iconPacks:BoxIconsImage Kind=SolidTruck}" Margin="0,0,10,0" Height="30" />
+                <TextBlock x:Name="BUTTON_ATS_STARTEN" VerticalAlignment="Center">ATS Start</TextBlock>
+            </StackPanel>
+        </Button>
+
+        <Button Height="47" Margin="505,502,490,21" Style="{DynamicResource MahApps.Styles.Button.Dialogs.Accent}">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{iconPacks:BoxIconsImage Kind=SolidTruck}" Margin="0,0,10,0" Height="30" />
+                <TextBlock x:Name="BUTTON_TMP_STARTEN" VerticalAlignment="Center">TMP Start</TextBlock>
+            </StackPanel>
         </Button>
 
 
