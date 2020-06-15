@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VTCManager.Klassen
 {
@@ -81,7 +77,7 @@ namespace VTCManager.Klassen
         public Translation(String language)
         {
             version = "Version: 1.1.0";
-            if (language == "Deutsch (Deutschland)")
+            if (language == "de" || language == "DE")
             {
       
                 waehrung = " €";
@@ -97,7 +93,7 @@ namespace VTCManager.Klassen
                 update_part2 = ") für VTCManager verfügbar! Bitte aktualisiere VTCManager.";
                 update_avail_window = "Update verfügbar";
                 car_lb = "Auto: ";
-                truck_lb = "LKW: ";
+                truck_lb = "Dein Truck: ";
                 wait_ets2_is_ready = "Initialisierung...";
                 freight_lb = "Fracht: ";
                 gewicht = " t ";
@@ -153,9 +149,85 @@ namespace VTCManager.Klassen
                 rest_time_minutes = " Minuten";
                 verspaetet = "Du bist zu Spät!!! ";
             }
-            else
+            else if (language == "en" || language == "EN")
             {
     
+                waehrung = " $";
+                speeding = " mp/h";
+                waiting_for_ets = "Waiting for the Game...";
+                logout = "Logout";
+                login = "Login";
+                ready = "Ready";
+                login_username = "Username";
+                password = "Password";
+                login_failed = "Username or password is wrong!";
+                update_part1 = "An new update(version ";
+                update_part2 = ") is available! Please update VTCManager.";
+                update_avail_window = "Update available";
+                car_lb = "Car: ";
+                truck_lb = "Your Truck: ";
+                wait_ets2_is_ready = "Initialization...";
+                freight_lb = "Freight: ";
+                gewicht = " t ";
+                depature_lb = "Departure: ";
+                destination_lb = "Destination: ";
+                no_cargo_lb = "Driving without freigt";
+                settings_lb = "Settings";
+                exit_lb = "Exit";
+                topmenuaccount_lb = "Account";
+                not_avail = "Available soon";
+                error_window = "Error";
+                update_message = "Changes in version 1.1.0:\n" +
+"- Credits available\n" +
+                    "- Speed is now selectable between km / h and mph\n" +
+                    "- We cleaned up! VTCManager now uses even\n" +
+                    "  fewer resources! Yeah!\n" +
+                    "- using Discord RPC";
+                update_caption = "Changes in version 1.1.0\n";
+                traffic_main_lb = "Traffic";
+                statistic_panel_topic = "Statistics ";
+                driven_tours_lb = "driven tours: ";
+                act_bank_balance = "bank balance: ";
+                user_company_lb = "employed by: ";
+                no_company_text = "self-employed";
+                jb_canc_lb = "Your last job was canceled!";
+                save_info = "Please restart VTCManager to save the changes!";
+                discord_rpc_tra_p1 = "Current tour from ";
+                discord_rpc_tra_p2 = " to ";
+                progress = "Progress: ";
+                speed_setup_box = "Speed in mph?";
+                settings_window = "Settings";
+                loading_text = "Loading...";
+                settings_window_save_button = "Save...";
+                settings_window_groupBox1text = "Server Settings";
+                btn_TruckersMP_suchentext = "TruckersMP Settings";
+                settings_window_label3text = "Path to TruckersMP";
+                settings_window_titel_text = "Settings";
+                settings_window_tmp_error_text = "The path to TruckersMP is missing";
+                settings_window_tmp_error_text2 = "Please correct the information in the following window!";
+                settings_window_tmp_error_text3 = "TruckersMP path failed";
+                settings_window_dir_error = "The Directory was not Found !";
+                settings_log_failed = "can't create the log file!";
+                log_ok = "Log File was Created !";
+                error = "Error";
+                warning = "Warning";
+                error_sound_load = "An error occured while initialising the sound system";
+                error_sound_missing_file = "The sound system has been initialised but some sound my not be available.";
+                Frachtmarkt_no_profiles = "No Profiles found!";
+                Frachtmarkt_from_City = "Start-City: ";
+                Frachtmarkt_from_Company = "Start-Company: ";
+                Frachtmarkt_to_City = "Destination-City: ";
+                Frachtmarkt_to_Company = "Destination-Company: ";
+                error_sound_play = "An error occured while playing a sound.";
+                Settings_CheckBox_NUMPAD_ONOFF = "Show NUM-Pad Button";
+                rest_text = "Resttime: ";
+                rest_time_days = " Days, ";
+                rest_time_hours = " Hours, ";
+                rest_time_minutes = " Minutes";
+                verspaetet = "You're to late!";
+            }
+            else
+            {
                 waehrung = " $";
                 speeding = " mp/h";
                 waiting_for_ets = "Waiting for the Game...";

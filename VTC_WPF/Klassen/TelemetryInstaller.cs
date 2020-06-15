@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using VdfParser;
+using System.Threading.Tasks;
 
 namespace VTCManager.Klassen
 {
@@ -105,17 +106,13 @@ namespace VTCManager.Klassen
             try
             {
                 telemetryETS2Path = RegistryHandler.read("Telemetry", "ETS2Path").ToString();
-            }
-            catch
-            {
-            }
+            } catch {}
             try
             {
                 telemetryVersion = RegistryHandler.read("Telemetry", "Version").ToString();
             }
-            catch
-            {
-            }
+            catch {}
+
             if (String.IsNullOrWhiteSpace(telemetryETS2Path) || String.IsNullOrWhiteSpace(telemetryVersion))
             {
                 Console.WriteLine("running installation of Telemetry");
@@ -130,6 +127,9 @@ namespace VTCManager.Klassen
                 Console.WriteLine("running installation of Telemetry3");
                 install();
             }
+
         }
+
+
     }
 }
