@@ -1,13 +1,11 @@
-﻿using Microsoft.Win32;
+﻿using ControlzEx.Theming;
+using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
+
 
 namespace VTCManager.Klassen
 {
@@ -194,5 +192,13 @@ namespace VTCManager.Klassen
                 return null;
             }
         }
+
+
+        public void Build_Registry()
+        {
+            if (string.IsNullOrEmpty(this.Reg_Lesen("Config", "Sprache", false))) this.Reg_Schreiben("Sprache", "", "Config");
+        }
+
+
     }
 }

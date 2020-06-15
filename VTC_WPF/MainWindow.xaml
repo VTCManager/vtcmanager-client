@@ -6,11 +6,15 @@
         xmlns:local="clr-namespace:VTCManager"
         xmlns:dxga="http://schemas.devexpress.com/winfx/2008/xaml/gauges"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:Object="clr-namespace:SCSSdkClient.Object;assembly=SCSSdkClient" xmlns:Klassen="clr-namespace:VTCManager.Klassen"
         xmlns:SCSSdkClient="clr-namespace:SCSSdkClient;assembly=SCSSdkClient" x:Class="VTCManager.MainWindow"
         mc:Ignorable="d"
-        Title="VTC-Manager V3" Height="600" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="VTCManager.png">
+        GlowBrush="Gold"
+        BorderThickness="0"
+        SaveWindowPosition="True"
+        Title="VTC-Manager V3" Height="600" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="0fe05db00517d674af7072ce693d6459501620e8_full.jpg">
 
     <mah:MetroWindow.RightWindowCommands>
 
@@ -30,15 +34,25 @@
                                   Height="22"
                                   Kind="InternetExplorer" />
             </Button>
-            
-            
+
+            <ComboBox Name="Sprachauswahl" 
+                      Background="Transparent" 
+                      Width="50" Height="25" 
+                      BorderBrush="Gray" 
+                      BorderThickness="1" 
+                      HorizontalAlignment="Center" HorizontalContentAlignment="Center" 
+                      SelectedValuePath="Content"
+                      SelectionChanged="Sprachauswahl_SelectionChanged">
+                <ComboBoxItem>DE</ComboBoxItem>
+                <ComboBoxItem>EN</ComboBoxItem>
+            </ComboBox>
+
         </mah:WindowCommands>
     </mah:MetroWindow.RightWindowCommands>
 
+
+
     <Grid Margin="-2,0,1,1">
-
-
-        
 
         <Grid VerticalAlignment="Top" Height="60" Background="Transparent">
             <TextBlock Text="VTC-Manager V3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="36" FontFamily="Segoe UI Black" >
@@ -58,8 +72,9 @@
 
 
         <Grid Width="200" HorizontalAlignment="Left"/>
+
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="510" Margin="-2,58,-1,0" VerticalAlignment="Top" Width="1198" TabStripPlacement="Left">
-            <TabItem Header="Fahrt" Height="50" Width="200" FontSize="24" Opacity="0.5">
+            <TabItem Header="Fahrt" Height="45" Width="200" FontSize="24" Opacity="0.7" BorderBrush="Gray" VerticalAlignment="Center" BorderThickness="1">
                 <Grid x:Name="GRID_FAHRT" Margin="0,0,0,66">
                     <Label Panel.ZIndex="250" Content="{Binding SPEED}" HorizontalAlignment="Left"  Margin="84,112,0,0" VerticalAlignment="Top" Height="61" Width="282" FontStyle="Italic" FontWeight="Bold" FontFamily="Verdana" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#DDC5C5C5">
                         <Label.Effect>
@@ -95,8 +110,8 @@
                     <StackPanel Orientation="Vertical" Margin="433,0,0,0">
 
                         <StackPanel Width="560" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Label Padding="0" Margin="5" Content="Dein Truck:" Height="30" Width="150" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
-                            
+                            <Label x:Name="LBL_TRUCK" Padding="0" Margin="5" Height="30" Width="150" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
+
                             <Label Padding="0" Margin="5" x:Name="LBL_TRUCK_HERSTELLER" Content="{Binding HERSTELLER}" HorizontalContentAlignment="Left" Height="30" Width="459"/>
                         </StackPanel>
                         <Separator/>
@@ -105,7 +120,7 @@
                             <Label Padding="0" Margin="5" x:Name="LBL_TRUCK_NAME" Content="{Binding MODELL}" Height="30" Width="459"/>
                         </StackPanel>
                         <Separator/>
-                        
+
                         <Label Content="{Binding START_ORT}" Height="30" />
                         <Label Content="{Binding START_FIRMA}" Height="30" />
                         <Label Content="{Binding ZIEL_ORT}" Height="30" />
@@ -188,17 +203,17 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Content="" Height="50" Width="200" Header="Freunde" FontSize="24" Opacity="0.5" Foreground="#FF4B9DFF"/>
-            <TabItem Content="" FontSize="24" Height="50" Opacity="0.5" Width="200" Header="Verkehr" Foreground="#FF4B9DFF"/>
-            <TabItem Header="Einstellungen" FontSize="24" Height="50" Width="200" Opacity="0.7">
+            <TabItem Content="" Height="50" Width="200" Header="Freunde" FontSize="24" Opacity="0.7" BorderBrush="Gray" VerticalAlignment="Center" BorderThickness="1"/>
+            <TabItem Content="" FontSize="24" Height="50" Opacity="0.7" Width="200" Header="Verkehr" BorderBrush="Gray" VerticalAlignment="Center" BorderThickness="1"/>
+            <TabItem Header="Einstellungen" FontSize="24" Height="50" Width="200" Opacity="0.7" BorderBrush="Gray" VerticalAlignment="Center" BorderThickness="1">
                 <Grid Margin="-1,0,-1,-4">
                     <Label x:Name="label1" Content="Einstellungen" HorizontalAlignment="Left" Margin="2,-1,0,0" VerticalAlignment="Top" FontSize="24"/>
-                    <TextBox x:Name="TMP_Pfad_Textbox" HorizontalAlignment="Left" Height="30" Margin="15,86,0,0" VerticalAlignment="Top" Width="257" FontSize="14" BorderBrush="#893341CF" AcceptsReturn="False" MaxLines="1" TextWrapping="NoWrap"/>
+                    <TextBox x:Name="TMP_Pfad_Textbox" HorizontalAlignment="Left" Height="30" Margin="15,86,0,0" VerticalAlignment="Top" Width="257" FontSize="14" BorderBrush="#893341CF" AcceptsReturn="False" MaxLines="1" TextWrapping="NoWrap" mah:TextBoxHelper.Watermark="Kein TruckersMP Pfad angegeben !"/>
                     <Label x:Name="TMP_Pfad_Label" Content="Pfad zu Truckers-MP:" HorizontalAlignment="Left" Margin="15,59,0,0" VerticalAlignment="Top" FontSize="12"/>
                     <Button x:Name="BTN_Suche_TMP_PFAD" Content="..." HorizontalAlignment="Left" Margin="286,86,0,0" VerticalAlignment="Top" Width="46" Click="btn_open_TMP_File_Click"/>
-                    
-                    <Label Content="Design Auswahl:" HorizontalAlignment="Left" Margin="16,120,0,0" VerticalAlignment="Top" FontSize="12"/>
-                    <ComboBox x:Name="Designauswahl" Width="300" Height="30" Margin="15,146,677,332" 
+
+                    <Label Content="Design Auswahl:" HorizontalAlignment="Left" Margin="477,59,0,0" VerticalAlignment="Top" FontSize="12"/>
+                    <ComboBox x:Name="Designauswahl" Width="300" Height="30" Margin="476,85,216,393" 
                               SelectionChanged="Designauswahl_SelectionChanged" 
                               SelectedValuePath="Content">
                         <ComboBoxItem>Dark.Blue</ComboBoxItem>
@@ -248,9 +263,14 @@
                         <ComboBoxItem>Light.Taupe</ComboBoxItem>
                         <ComboBoxItem>Light.Sienna</ComboBoxItem>
                     </ComboBox>
+                    <TextBox x:Name="ETS2_Pfad_Textbox" HorizontalAlignment="Left" Height="30" Margin="15,132,0,0" VerticalAlignment="Top" Width="257" FontSize="14" BorderBrush="#893341CF" AcceptsReturn="False" MaxLines="1" TextWrapping="NoWrap" mah:TextBoxHelper.Watermark="Kein ETS2 Pfad angegeben !" mah:TextBoxHelper.WatermarkAlignment="Right" mah:TextBoxHelper.IsWaitingForData="True"/>
+                    <Button x:Name="BTN_SUCHE_ETS" Content="..." HorizontalAlignment="Left" Margin="286,132,0,0" VerticalAlignment="Top" Width="46" Click="btn_open_suche_ets_pfad"/>
+
+                    <TextBox x:Name="ATS_Pfad_Textbox" HorizontalAlignment="Left" Height="30" Margin="15,180,0,0" VerticalAlignment="Top" Width="257" FontSize="14" BorderBrush="#893341CF" AcceptsReturn="False" MaxLines="1" TextWrapping="NoWrap" mah:TextBoxHelper.Watermark="Kein ATS Pfad angegeben !" mah:TextBoxHelper.WatermarkAlignment="Right" mah:TextBoxHelper.IsWaitingForData="True"/>
+                    <Button x:Name="BTN_SUCHE_ATS" Content="..." HorizontalAlignment="Left" Margin="286,180,0,0" VerticalAlignment="Top" Width="46" Click="btn_open_suche_ats_pfad"/>
                 </Grid>
-                
-                
+
+
             </TabItem>
 
 
@@ -258,9 +278,20 @@
 
         </TabControl>
 
-        <Button x:Name="ETS2_Starten" Content="ETS2 Starten" Height="40" Width="150" Margin="530,509,515,10" />
-        <Button x:Name="ATS_Starten" Content="ATS Starten" Height="40" Width="150" Margin="370,509,675,10" />
-        <Button x:Name="TMP_Starten" Content="TMP Starten" Click="TMP_Starten_Click" Height="40" Width="150" Margin="210,509,835,10" />
+        <Button x:Name="ETS2_Starten" Content="ETS2 Starten" Height="40" Width="150" Margin="530,509,515,10" Click="Launch_ETS" />
+        <Button x:Name="ATS_Starten" Content="ATS Starten" Height="40" Width="150" Margin="370,509,675,10" Click="Launch_ATS" />
+        <Button x:Name="TMP_Starten" Content="TMP Starten" Click="TMP_Starten_Click" Height="40" Width="150" Margin="210,509,835,10">
+            <Button.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="ApplicationCommands.New" />
+                    <MenuItem Command="ApplicationCommands.Delete" />
+                    <MenuItem Command="ApplicationCommands.Print" />
+                </ContextMenu>
+            </Button.ContextMenu>
+        </Button>
+
+
 
     </Grid>
+
 </mah:MetroWindow>
