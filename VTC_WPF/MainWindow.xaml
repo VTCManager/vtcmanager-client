@@ -14,7 +14,7 @@
         GlowBrush="Gold"
         BorderThickness="0"
         SaveWindowPosition="True"
-        Title="VTC-Manager V3" Height="600" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="0fe05db00517d674af7072ce693d6459501620e8_full.jpg">
+        Title="VTC-Manager V3" Height="600" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="VTCManager.png">
 
     <mah:MetroWindow.RightWindowCommands>
 
