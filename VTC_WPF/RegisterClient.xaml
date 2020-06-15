@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VTCManager"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="VTCManager.RegisterClient"
         mc:Ignorable="d"
-        Title="VTC Manager Log-In" Height="450" Width="800" WindowStartupLocation="CenterScreen" Icon="0fe05db00517d674af7072ce693d6459501620e8_full.jpg" ResizeMode="NoResize">
+        Title="VTC Manager Log-In" Height="450" Width="800" WindowStartupLocation="CenterScreen" Icon="VTCManager.png" ResizeMode="NoResize">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Resources/login_background.jpg" Stretch="UniformToFill"/>

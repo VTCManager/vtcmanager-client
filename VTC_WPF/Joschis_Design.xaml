@@ -20,9 +20,9 @@
         <Ellipse Fill="#FF3E3E3E" HorizontalAlignment="Left" Height="49" Stroke="#FF3E3E3E" VerticalAlignment="Top" Width="49" Margin="733,296,0,0"/>
         <Ellipse Fill="White" HorizontalAlignment="Left" Height="34" Stroke="White" VerticalAlignment="Top" Width="34" Margin="741,264,0,0" Panel.ZIndex="40"/>
         <Ellipse Fill="Red" HorizontalAlignment="Left" Height="40" Stroke="Red" VerticalAlignment="Top" Width="40" Margin="738,261,0,0"/>
-        <Label x:Name="SpeedLabel" Content="40" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="743,298,0,0" Foreground="#DDFFFFFF" Width="30" FontFamily="Segoe UI Semibold" FontSize="18"/>
-        <Label Content="km/h" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="745,318,0,0" Foreground="#DDC7C7C7" Width="30" FontFamily="Segoe UI Semibold" Height="20" FontSize="7"/>
-        <Label x:Name="MaxSpeed" Content="50" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="744,264,0,0" Foreground="#DD000000" Width="31" FontFamily="Segoe UI Semibold" FontSize="18" Panel.ZIndex="55"/>
+        <Label x:Name="SpeedLabel" Content="40" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="741,298,0,0" Foreground="#DDFFFFFF" Width="30" FontFamily="Segoe UI Semibold" FontSize="18"/>
+        <Label Content="km/h" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="742,319,0,0" Foreground="#DDC7C7C7" Width="30" FontFamily="Segoe UI Semibold" Height="20" FontSize="7"/>
+        <Label x:Name="MaxSpeed" Content="50" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="743,263,0,0" Foreground="#DD000000" Width="31" FontFamily="Segoe UI Semibold" FontSize="18" Panel.ZIndex="55"/>
 
     </Grid>
 </Window>

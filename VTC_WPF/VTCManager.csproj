@@ -297,7 +297,6 @@
     <Resource Include="Icons\icons8-einstellungen-30.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="0fe05db00517d674af7072ce693d6459501620e8_full.jpg" />
     <Resource Include="Icons\TMP_BTN.png" />
     <Resource Include="Icons\icons8-daf-256.png" />
     <Resource Include="Icons\icons8-iveco-256.png" />
@@ -307,6 +306,7 @@
     <Resource Include="Icons\blinker_rechts.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="VTCManager.png" />
     <Content Include="Icons\icons8-mercedes-benz-256.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

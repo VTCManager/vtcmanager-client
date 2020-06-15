@@ -10,7 +10,7 @@
         xmlns:Object="clr-namespace:SCSSdkClient.Object;assembly=SCSSdkClient" xmlns:Klassen="clr-namespace:VTCManager.Klassen"
         xmlns:SCSSdkClient="clr-namespace:SCSSdkClient;assembly=SCSSdkClient" x:Class="VTCManager.MainWindow"
         mc:Ignorable="d"
-        Title="VTC-Manager V3" Height="600" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="0fe05db00517d674af7072ce693d6459501620e8_full.jpg">
+        Title="VTC-Manager V3" Height="600" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="VTCManager.png">
 
     <mah:MetroWindow.RightWindowCommands>
 
