@@ -19,6 +19,7 @@ namespace VTCManager.Klassen
         public static string get_user = server + "user";
         public static string job_delivered = server + "job/delivered";
         public static string job_started = server + "job/started";
+        public static string job_canceled = server + "job/cancel";
 
         public static JObject HTTPSRequestGet(string url, Dictionary<string, string> getParameters = null)
         {

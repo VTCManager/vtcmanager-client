@@ -113,6 +113,8 @@ namespace VTCManager.Klassen
 
         public static void JobCancelled(object sender, EventArgs e)
         {
+            checkTelemetry();
+            JObject response = API.HTTPSRequestGet(API.job_canceled);
             onJob = false;
         }
 
