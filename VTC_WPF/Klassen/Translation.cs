@@ -27,7 +27,9 @@ namespace VTCManager.Klassen
             TAB_FAHRT_LBL_FRACHTSCHADEN,
             BUTTON_ETS_STARTEN,
             BUTTON_ATS_STARTEN,
-            BUTTON_TMP_STARTEN;
+            BUTTON_TMP_STARTEN,
+            ATS_PATH_NOT_FOUND,
+            ETS2_PATH_NOT_FOUND;
         public Translation(String lang)
         {
             version = "Version: 3.0";
@@ -53,8 +55,10 @@ namespace VTCManager.Klassen
             BUTTON_ATS_STARTEN = lang == "DE" ? "ATS Starten" : "Start ATS";
             BUTTON_ETS_STARTEN = lang == "DE" ? "ETS2 Starten" : "Start ETS2";
             BUTTON_TMP_STARTEN = lang == "DE" ? "Truckers-MP" : "Truckers-MP";
+            ATS_PATH_NOT_FOUND = lang == "DE" ? "Du hast in den Einstellungen noch keinen Link für ATS angegeben ! Du kannst den Pfad jederzeit nachtragen!" : "You have not yet specified a link for ATS in the settings! You can add the path at any time!";
+            ETS2_PATH_NOT_FOUND = lang == "DE" ? "Du hast in den Einstellungen noch keinen Link für ETS2 angegeben ! Du kannst den Pfad jederzeit nachtragen!" : "You have not yet specified a link for ETS2 in the settings! You can add the path at any time!";
 
-            
+
         }
     }
 }

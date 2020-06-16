@@ -9,9 +9,10 @@ namespace VTCManager
             private string telemetryVersion;
             private bool spiel_pause;
             private string anzeige_liter_gallonen;
+            private string anzeige_km_miles;
 
         // Truck
-            private string hersteller;
+        private string hersteller;
             private string modell;
 
             private int vorwaertsGaenge;
@@ -19,6 +20,7 @@ namespace VTCManager
             private int gang;
             private double fuel_max;
             private double fuel_bestand;
+            private int fuel_rest;
             private double fuel_verbrauch;
             private double rpm;
             private double rpm_max;
@@ -82,6 +84,8 @@ namespace VTCManager
             private double navigation_zeit;
             private int navigation_speed_limit_kmh;
             private int navigation_speed_limit_mph;
+            private int rest_strecke;
+
 
         // MAUTSTATION
             private int maut_bezahlt;
@@ -99,6 +103,41 @@ namespace VTCManager
 
 
 
+        public string ANZEIGE_KM_MILES
+        {
+            get { return anzeige_km_miles; }
+            set
+            {
+                if (anzeige_km_miles != value)
+                {
+                    anzeige_km_miles = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public int FUEL_REST
+        {
+            get { return fuel_rest; }
+            set
+            {
+                if (fuel_rest != value)
+                {
+                    fuel_rest = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        private bool _is_job_data_visible;
+        public bool IS_JOB_DATA_VISIBLE
+        {
+            get { return _is_job_data_visible; }
+            set
+            {
+                _is_job_data_visible = value;
+                NotifyPropertyChanged();
+            }
+        }
         public string ABGABE_JOB_BEENDET
         {
             get { return abgabe_job_beendet; }
@@ -133,6 +172,20 @@ namespace VTCManager
                 if (abgabe_distanz_km != value)
                 {
                     abgabe_distanz_km = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+        public int REST_STRECKE
+        {
+            get { return rest_strecke; }
+            set
+            {
+                if (rest_strecke != value)
+                {
+                    rest_strecke = value;
                     NotifyPropertyChanged();
                 }
             }

@@ -16,6 +16,12 @@
         SaveWindowPosition="True"
         Title="VTC-Manager V3" Height="600" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="VTCManager.png">
 
+    <mah:MetroWindow.Resources>
+        <BooleanToVisibilityConverter x:Key="job_visibilityConverter" />
+
+    </mah:MetroWindow.Resources>
+
+
     <mah:MetroWindow.LeftWindowCommands>
         <mah:WindowCommands>
 
@@ -133,81 +139,63 @@
                             <Label Padding="0" Margin="5" Content="{Binding MODELL}" Height="30" Width="459"/>
                         </StackPanel>
                         <Separator/>
-                        <StackPanel x:Name="Job_Daten_Stack" Orientation="Vertical" Width="400" HorizontalAlignment="Left">
+
+                        <StackPanel x:Name="Job_Daten_Stack" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}" Orientation="Vertical" Width="400" HorizontalAlignment="Left">
                             <StackPanel Orientation="Horizontal">
-                                <Label FontSize="9" Content="Start-Ort:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-                                <Label FontSize="9" Content="{Binding START_ORT}" Height="30" Width="300" VerticalContentAlignment="Center"/>
+                                <Label FontSize="12" Content="Start-Ort:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                                <Label FontSize="12" Content="{Binding START_ORT}" Height="30" Width="300" VerticalContentAlignment="Center"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal">
-                                <Label FontSize="9" Content="Start-Firma:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-                                <Label FontSize="9" Content="{Binding START_FIRMA}" Height="30" Width="300" VerticalContentAlignment="Center"/>
+                                <Label FontSize="12" Content="Start-Firma:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                                <Label FontSize="2" Content="{Binding START_FIRMA}" Height="30" Width="300" VerticalContentAlignment="Center"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Label FontSize="9" Content="Ziel-Ort:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-                                <Label FontSize="9" Content="{Binding ZIEL_ORT}" Height="30" Width="300" VerticalContentAlignment="Center" />
+                                <Label FontSize="12" Content="Ziel-Ort:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                                <Label FontSize="12" Content="{Binding ZIEL_ORT}" Height="30" Width="300" VerticalContentAlignment="Center" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Label FontSize="9" Content="Ziel-Firma:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-                                <Label FontSize="9" Content="{Binding ZIEL_FIRMA}" Height="30" Width="300" VerticalContentAlignment="Center" />
+                                <Label FontSize="12" Content="Ziel-Firma:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                                <Label FontSize="12" Content="{Binding ZIEL_FIRMA}" Height="30" Width="300" VerticalContentAlignment="Center" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Label FontSize="9" Content="Pausen-Status:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-                                <Label FontSize="9" Content="{Binding SPIEL_PAUSE}" Height="30" Width="300" VerticalContentAlignment="Center"/>
+                                <Label FontSize="12" Content="Pausen-Status:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                                <Label FontSize="12" Content="{Binding SPIEL_PAUSE}" Height="30" Width="300" VerticalContentAlignment="Center"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Label FontSize="9" Content="Marketplace:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-                                <Label FontSize="9" Content="{Binding MARKET}" Height="30" Width="300" VerticalContentAlignment="Center"/>
+                                <Label FontSize="12" Content="Marketplace:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                                <Label FontSize="12" Content="{Binding MARKET}" Height="30" Width="300" VerticalContentAlignment="Center"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal">
-                                <Label FontSize="9" Content="Frachtgewicht:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-                                <Label FontSize="9" Content="{Binding FRACHT_GEWICHT}" Height="30" Width="300" VerticalContentAlignment="Center"/>
+                                <Label FontSize="12" Content="Frachtgewicht:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                                <Label FontSize="12" Content="{Binding FRACHT_GEWICHT}" Height="30" Width="300" VerticalContentAlignment="Center"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Label FontSize="9" Content="Fracht-Name:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-                                <Label FontSize="9" Content="{Binding FRACHT_NAME}" Height="30" Width="300" VerticalContentAlignment="Center"/>
+                                <Label FontSize="12" Content="Fracht-Name:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                                <Label FontSize="12" Content="{Binding FRACHT_NAME}" Height="30" Width="300" VerticalContentAlignment="Center"/>
                             </StackPanel>
+
                             <StackPanel Orientation="Horizontal">
-                                <Label FontSize="9" Content="Geplante-Distanz:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-                                <Label FontSize="9" Content="{Binding GEPLANTE_DISTANZ}" Height="30" Width="300" VerticalContentAlignment="Center"/>
+                                <Label Content="Rest-Strecke:" Width="100" FontSize="12" HorizontalContentAlignment="Right"/>
+                                <Label Content="{Binding REST_STRECKE}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="12"/>
+                                <Label Content="{Binding ANZEIGE_KM_MILES}" VerticalAlignment="Center" FontSize="12" HorizontalContentAlignment="Left"/>
+
+                                <Label Content="von insg.:" FontSize="12" HorizontalContentAlignment="Right"/>
+                                <Label Content="{Binding GEPLANTE_DISTANZ}" VerticalContentAlignment="Center" FontSize="12"/>
+                                <Label Content="{Binding ANZEIGE_KM_MILES}" VerticalAlignment="Center" FontSize="12" HorizontalAlignment="Left"/>
                             </StackPanel>
-                            
+
                         </StackPanel>
 
-                        
+
+
                     </StackPanel>
 
 
-                    <Label Content="{Binding FUEL_MAX}" Padding="0" Height="20" FontSize="12" Margin="909,153,31,265" HorizontalContentAlignment="Center"/>
-                    <Label Content="{Binding FUEL_BESTAND}" Padding="0" Width="50" Height="15" FontSize="12" Margin="910,400,30,18" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"/>
-                    <Label Content="{Binding LITER_GALLONEN}" Padding="0" FontSize="12" Width="50" Height="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Margin="909,417,31,6"/>
-
-                    <ProgressBar HorizontalAlignment="Left" Background="WhiteSmoke" Foreground="Green" Height="34" Margin="822,269,-58,0" VerticalAlignment="Top" Width="226" RenderTransformOrigin="0.5,0.5" Maximum="{Binding FUEL_MAX}" Value="{Binding FUEL_BESTAND}" Minimum="1">
-                        <ProgressBar.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="-90"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </ProgressBar.RenderTransform>
-                    </ProgressBar>
 
 
-                    <Label Visibility="Hidden" Content="{Binding ADBLUE_MAX}" Height="20" FontSize="12" Margin="861,153,81,265" HorizontalContentAlignment="Center"/>
-                    <Label Visibility="Hidden" Content="{Binding ADBLUE_BESTAND}" Height="20" FontSize="12" Margin="861,408,81,10" HorizontalContentAlignment="Center"/>
 
-                    <ProgressBar Visibility="Hidden" HorizontalAlignment="Left" Height="34" Margin="773,276,-9,0" Background="WhiteSmoke" Foreground="Blue" VerticalAlignment="Top" Width="225" RenderTransformOrigin="0.5,0.5" Maximum="{Binding ADBLUE_MAX}" Value="{Binding ADBLUE_BESTAND}" Minimum="1">
-                        <ProgressBar.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="-90"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </ProgressBar.RenderTransform>
-                    </ProgressBar>
 
                     <StackPanel Margin="78,204,612,0" Orientation="Vertical">
                         <Label x:Name="LBL_FAHRT_SCHADEN_TITEL" Content="Schadensanzeige:" />
@@ -249,6 +237,22 @@
                             <Label FontSize="14" Padding="0" Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                         </StackPanel>
                     </StackPanel>
+
+                    <!-- ANZEIGE STRECKE -->
+                    <StackPanel Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Left" Orientation="Horizontal"/>
+                    <ProgressBar HorizontalAlignment="Left" Height="50" Margin="10,388,0,0" VerticalAlignment="Top" Width="798" RenderTransformOrigin="0.5,0.5" Maximum="{Binding GEPLANTE_DISTANZ}" Minimum="1" Value="{Binding REST_STRECKE}" BorderBrush="Red" BorderThickness="2" Background="White">
+                        <ProgressBar.Foreground>
+                            <LinearGradientBrush EndPoint="1,0" StartPoint="0,1">
+                                <GradientStop Color="#FF05FF49" Offset="0"/>
+                                <GradientStop Color="Red" Offset="1"/>
+                            </LinearGradientBrush>
+                        </ProgressBar.Foreground>
+                    </ProgressBar>
+
+                    <Image Source="{iconPacks:FontAwesomeImage Kind=GrimaceRegular}" Margin="768,398,192,10" Width="30" Height="30"/>
+                    <Image Source="{iconPacks:UniconsImage Kind=Crosshair}" Margin="12,393,938,5" Width="40" Height="40" />
+
+
 
 
                 </Grid>
@@ -328,20 +332,20 @@
 
         </TabControl>
 
-        <Button Height="47" Margin="205,502,790,21" Style="{DynamicResource MahApps.Styles.Button.Dialogs.Accent}">
+        <Button Height="47" Margin="213,502,782,21" Style="{DynamicResource MahApps.Styles.Button.Dialogs.Accent}" Click="Launch_ETS">
             <StackPanel Orientation="Horizontal">
                 <Image Source="{iconPacks:BoxIconsImage Kind=SolidTruck}" Margin="0,0,10,0" Height="30" />
                 <TextBlock x:Name="BUTTON_ETS_STARTEN" VerticalAlignment="Center">ETS Start</TextBlock>
             </StackPanel>
         </Button>
-        <Button Height="46" Margin="805,502,190,22" Style="{DynamicResource MahApps.Styles.Button.Dialogs.Accent}">
+        <Button Height="46" Margin="805,502,190,22" Style="{DynamicResource MahApps.Styles.Button.Dialogs.Accent}" Click="Launch_ATS">
             <StackPanel Orientation="Horizontal">
                 <Image Source="{iconPacks:BoxIconsImage Kind=SolidTruck}" Margin="0,0,10,0" Height="30" />
                 <TextBlock x:Name="BUTTON_ATS_STARTEN" VerticalAlignment="Center">ATS Start</TextBlock>
             </StackPanel>
         </Button>
 
-        <Button Height="47" Margin="505,502,490,21" Style="{DynamicResource MahApps.Styles.Button.Dialogs.Accent}">
+        <Button Height="47" Margin="505,502,490,21" Style="{DynamicResource MahApps.Styles.Button.Dialogs.Accent}" Click="TMP_Starten_Click">
             <StackPanel Orientation="Horizontal">
                 <Image Source="{iconPacks:BoxIconsImage Kind=SolidTruck}" Margin="0,0,10,0" Height="30" />
                 <TextBlock x:Name="BUTTON_TMP_STARTEN" VerticalAlignment="Center">TMP Start</TextBlock>

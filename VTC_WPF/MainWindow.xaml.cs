@@ -78,7 +78,9 @@ namespace VTCManager
 
                     // ALLGEMEINES
                         Truck_Daten.TelemetryVersion = data.TelemetryVersion.Major.ToString() + "." + data.TelemetryVersion.Minor.ToString();
-                        Truck_Daten.SPIEL_PAUSE = (bool)data.Paused;
+                        Truck_Daten.SPIEL_PAUSE = data.Paused;
+                        Truck_Daten.ANZEIGE_KM_MILES = (data.Game.ToString() == "Ets2") ? "KM" : "Meilen";
+
                         Truck_Daten.SPEED_KMH = (int)TelemetryHandler.Telemetry_Data.TruckValues.CurrentValues.DashboardValues.Speed.Kph;
                         Truck_Daten.SPEED_TACHO_KMH = (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph-85;
                         Truck_Daten.SPEED_MPH = (int)TelemetryHandler.Telemetry_Data.TruckValues.CurrentValues.DashboardValues.Speed.Kph;
@@ -94,7 +96,8 @@ namespace VTCManager
                         Truck_Daten.MODELL = data.TruckValues.ConstantsValues.Name;
                         Truck_Daten.FUEL_MAX = (int)data.TruckValues.ConstantsValues.CapacityValues.Fuel;
                         Truck_Daten.FUEL_BESTAND = (int)data.TruckValues.CurrentValues.DashboardValues.FuelValue.Amount;
-                        Truck_Daten.FUEL_VERBRAUCH = data.TruckValues.CurrentValues.DashboardValues.FuelValue.AverageConsumption;
+                        Truck_Daten.FUEL_REST = (int)data.TruckValues.CurrentValues.DashboardValues.FuelValue.Amount;
+                    Truck_Daten.FUEL_VERBRAUCH = data.TruckValues.CurrentValues.DashboardValues.FuelValue.AverageConsumption;
                         Truck_Daten.ADBLUE_MAX = Convert.ToInt32(data.TruckValues.ConstantsValues.CapacityValues.AdBlue).ToString();
                         Truck_Daten.ADBLUE_BESTAND = Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.AdBlue).ToString();
                         Truck_Daten.RPM = (int)data.TruckValues.CurrentValues.DashboardValues.RPM;
@@ -113,7 +116,8 @@ namespace VTCManager
                         Truck_Daten.TRAILER_CHASSIS_SCHADEN = (double)data.TrailerValues[0].DamageValues.Chassis;
                     // JOB DATEN
                         Truck_Daten.FRACHT_GELADEN = (bool)data.TrailerValues[0].Attached;
-                        Job_Daten_Stack.Visibility = Truck_Daten.FRACHT_GELADEN == true ? Visibility.Visible : Visibility.Hidden;
+                        Truck_Daten.IS_JOB_DATA_VISIBLE = (bool)data.TrailerValues[0].Attached;
+                        Truck_Daten.REST_STRECKE = (int)data.NavigationValues.NavigationDistance / 1000;
                         Truck_Daten.SPEZIAL_JOB = (bool)data.JobValues.SpecialJob;
                         Truck_Daten.MARKET = data.JobValues.Market.ToString();
                         Truck_Daten.START_ORT = (string)data.JobValues.CitySource;
@@ -127,7 +131,7 @@ namespace VTCManager
                     // TODO Es fehlen noch :CARGO_ID : UNIT_COUNT : UNIT_MASS und die ganzen ID von Job City Source/Destination etc. Falls benötigt, kurz sagen
 
                     // NAVIGATION
-                        Truck_Daten.NAVIGATION_DISTANZ = (double)data.NavigationValues.NavigationDistance;
+                        Truck_Daten.NAVIGATION_DISTANZ = (double)data.NavigationValues.NavigationDistance / 1000;
                         Truck_Daten.NAVIGATION_SPEED_LIMIT_KMH = (int)data.NavigationValues.SpeedLimit.Kph;
                         Truck_Daten.NAVIGATION_SPEED_LIMIT_MPH = (int)data.NavigationValues.SpeedLimit.Mph;
                         Truck_Daten.NAVIGATION_ZEIT = (double)data.NavigationValues.NavigationTime;
@@ -219,7 +223,7 @@ namespace VTCManager
 
         private void TMP_Starten_Click(object sender, RoutedEventArgs e)
         {
-                FileHandler.StarteAnwendung(utils.Reg_Lesen("Config", "TMP_PFAD", true));
+            FileHandler.StarteAnwendung(utils.Reg_Lesen("Config", "TMP_PFAD", true));
         }
 
         private void LaunchFaceBookSiteSite(object sender, RoutedEventArgs e)
@@ -258,19 +262,20 @@ namespace VTCManager
 
         private void Launch_ATS(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                FileHandler.StarteAnwendung(utils.Reg_Lesen("Telemetry", "ETS2PathDialog", true));
-            } catch
-            {
-                Show_Message("Leider ist der Link noch nicht Implementiert ! Dieser wird in einem der nächten Updates folgen...");
-            }
-            
+            Translation trans = new Translation(utils.Reg_Lesen("Config", "Sprache", false));
+            if (string.IsNullOrEmpty(utils.Reg_Lesen("Config", "ATS_Pfad", false)))
+                Show_Message(trans.ETS2_PATH_NOT_FOUND);
+
+            FileHandler.StarteAnwendung(utils.Reg_Lesen("Config", "ATS_Pfad", false));
         }
 
         private void Launch_ETS(object sender, RoutedEventArgs e)
         {
-            Show_Message("Leider ist der Link noch nicht Implementiert ! Dieser wird in einem der nächten Updates folgen...");
+            Translation trans = new Translation(utils.Reg_Lesen("Config", "Sprache", false));
+            if (string.IsNullOrEmpty(utils.Reg_Lesen("Config", "ETS2_Pfad", false)))
+                Show_Message(trans.ATS_PATH_NOT_FOUND);
+
+            FileHandler.StarteAnwendung(utils.Reg_Lesen("Config", "ETS2_Pfad", false));
         }
 
 
