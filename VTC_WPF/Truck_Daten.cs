@@ -6,40 +6,42 @@ namespace VTCManager
     public class Truck_Daten : INotifyPropertyChanged
     {
         // Algemeines
-        private string telemetryVersion;
-        private string spiel_pause;
-        private string liter_gallonen;
+            private string telemetryVersion;
+            private bool spiel_pause;
+            private string anzeige_liter_gallonen;
 
         // Truck
-        private string hersteller = " --- ";
-        private string modell;
-        private string name;
-        private string vorwaertsGaenge;
-        private string rueckwaertsGange;
-        private string gang;
-        private string rpm_max;
-        private string fuel_max;
-        private string fuel_bestand;
-        private string fuel_verbrauch;
-        private string rpm;
-        private string kmh;
-        private string mph;
-        private string elektrik_Status;
-        private string adblue_max;
-        private string adblue_bestand;
-        private string tempomat;
-        private string blinker_links;
-        private string blinker_rechts;
-        private double speed;
-        private double speed_tacho;
+            private string hersteller;
+            private string modell;
+
+            private int vorwaertsGaenge;
+            private int rueckwaertsGange;
+            private int gang;
+            private double fuel_max;
+            private double fuel_bestand;
+            private double fuel_verbrauch;
+            private double rpm;
+            private double rpm_max;
+
+            private bool elektrik_Status;
+            private string adblue_max;
+            private string adblue_bestand;
+            private double tempomat_kmh;
+            private double tempomat_mph;
+            private bool blinker_links;
+            private bool blinker_rechts;
+            private double speed_kmh;
+            private double speed_tacho_kmh;
+            private double speed_mph;
+            private double speed_tacho_mph;
 
 
         // Truck Schaden
-        private double truck_motor_schaden;
-        private double truck_getriebe_schaden;
-        private double truck_fahrwerk_schaden;
-        private double truck_chassis_schaden;
-        private double truck_raeder_schaden;
+            private double truck_motor_schaden;
+            private double truck_getriebe_schaden;
+            private double truck_fahrwerk_schaden;
+            private double truck_chassis_schaden;
+            private double truck_raeder_schaden;
 
 
 
@@ -47,37 +49,204 @@ namespace VTCManager
         private string angehangen;
 
         // Trailer Schaden
-        private double trailer_fracht_schaden;
-        private double trailer_fahrwerk_schaden;
-        private double trailer_chassis_schaden;
+            private double trailer_fracht_schaden;
+            private double trailer_fahrwerk_schaden;
+            private double trailer_chassis_schaden;
 
 
         // JOB DATEN
-        private string fracht_geladen;
-        private string spezial_job;
-        private string market;
-        private string start_ort;
-        private string ziel_ort;
-        private string start_firma;
-        private string ziel_firma;
-        private string einkommen;
-        private string geplante_distanz;
-        private string fracht_gewicht;
-        private string fracht_name;
+            private bool fracht_geladen;
+            private bool spezial_job;
+            private string market;
+            private string start_ort;
+            private string ziel_ort;
+            private string start_firma;
+            private string ziel_firma;
+            private double job_einkommen;
+            private int geplante_distanz;
+            private double fracht_gewicht;
+            private string fracht_name;
+
+        // JOB ABGABE
+
+            private string abgabe_job_beendet;
+            private bool abgabe_autoparking;
+            private double abgabe_frachtschaden;
+            private string abgabe_abgabezeit;
+            private int abgabe_distanz_km;
+            private int abgabe_xp;
+            private double abgabe_einnahmen;
 
         // NAVIGATIONS DATEN
-        private string navigation_distanz;
-        private string navigation_zeit;
-        private string navigation_speed_limit;
+            private double navigation_distanz;
+            private double navigation_zeit;
+            private int navigation_speed_limit_kmh;
+            private int navigation_speed_limit_mph;
 
         // MAUTSTATION
-        private string maut_bezahlt;
+            private int maut_bezahlt;
 
         // TANKEN
-        private string tanken_bezahlt;
+            private int tanken_bezahlt;
+
+        // STRAFEN
+            private int strafe_bezahlt;
+
+        // FÄHREN
+            private int faehre_bezahlt;
+            private string faehre_abfahrt_von;
+            private string faehre_ankunft_in;
 
 
-        
+
+        public string ABGABE_JOB_BEENDET
+        {
+            get { return abgabe_job_beendet; }
+            set
+            {
+                if (abgabe_job_beendet != value)
+                {
+                    abgabe_job_beendet = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public bool ABGABE_AUTOPARKING
+        {
+            get { return abgabe_autoparking; }
+            set
+            {
+                if (abgabe_autoparking != value)
+                {
+                    abgabe_autoparking = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public int ABGABE_DISTANZ_KM
+        {
+            get { return abgabe_distanz_km; }
+            set
+            {
+                if (abgabe_distanz_km != value)
+                {
+                    abgabe_distanz_km = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public int ABGABE_XP
+        {
+            get { return abgabe_xp; }
+            set
+            {
+                if (abgabe_xp != value)
+                {
+                    abgabe_xp = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+        public string ABGABE_ABGABEZEIT
+        {
+            get { return abgabe_abgabezeit; }
+            set
+            {
+                if (abgabe_abgabezeit != value)
+                {
+                    abgabe_abgabezeit = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+        public double ABGABE_FRACHTSCHADEN
+        {
+            get { return abgabe_frachtschaden; }
+            set
+            {
+                if (abgabe_frachtschaden != value)
+                {
+                    abgabe_frachtschaden = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public double ABGABE_EINNAHMEN
+        {
+            get { return abgabe_einnahmen; }
+            set
+            {
+                if (abgabe_einnahmen != value)
+                {
+                    abgabe_einnahmen = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+        public int FAEHRE_BEZAHLT
+        {
+            get { return faehre_bezahlt; }
+            set
+            {
+                if (faehre_bezahlt != value)
+                {
+                    faehre_bezahlt = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public string FAEHRE_ABFAHRT_VON
+        {
+            get { return faehre_abfahrt_von; }
+            set
+            {
+                if (faehre_abfahrt_von != value)
+                {
+                    faehre_abfahrt_von = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+        public string FAEHRE_ANKUNFT_IN
+        {
+            get { return faehre_ankunft_in; }
+            set
+            {
+                if (faehre_ankunft_in != value)
+                {
+                    faehre_ankunft_in = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+        public int STRAFE_BEZAHLT
+        {
+            get { return strafe_bezahlt; }
+            set
+            {
+                if (strafe_bezahlt != value)
+                {
+                    strafe_bezahlt = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
 
         // SCHADEN TRUCK ANFANG
         public double TRUCK_MOTOR_SCHADEN
@@ -196,48 +365,74 @@ namespace VTCManager
 
         // ENDE TRAILER SCHADEN
 
-        public string LITER_GALLONEN
+        public string ANZEIGE_LITER_GALLONEN
         {
-            get { return liter_gallonen; }
+            get { return anzeige_liter_gallonen; }
             set
             {
-                if (liter_gallonen != value)
+                if (anzeige_liter_gallonen != value)
                 {
-                    liter_gallonen = value;
+                    anzeige_liter_gallonen = value;
                     NotifyPropertyChanged();
                 }
             }
 
         }
-        public double SPEED
+        public double SPEED_KMH
         {
-            get { return speed; }
+            get { return speed_kmh; }
             set
             {
-                if (speed != value)
+                if (speed_kmh != value)
                 {
-                    speed = value;
-                    NotifyPropertyChanged();
-                }
-            }
-
-        }
-
-        public double SPEED_TACHO
-        {
-            get { return speed_tacho; }
-            set
-            {
-                if (speed_tacho != value)
-                {
-                    speed_tacho = value;
+                    speed_kmh = value;
                     NotifyPropertyChanged();
                 }
             }
 
         }
 
-        public string BLINKER_RECHTS
+        public double SPEED_TACHO_KMH
+        {
+            get { return speed_tacho_kmh; }
+            set
+            {
+                if (speed_tacho_kmh != value)
+                {
+                    speed_tacho_kmh = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public double SPEED_MPH
+        {
+            get { return speed_mph; }
+            set
+            {
+                if (speed_mph != value)
+                {
+                    speed_mph = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+        public double SPEED_TACHO_MPH
+        {
+            get { return speed_tacho_mph; }
+            set
+            {
+                if (speed_tacho_mph != value)
+                {
+                    speed_tacho_mph = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public bool BLINKER_RECHTS
         {
             get { return blinker_rechts; }
             set
@@ -250,7 +445,7 @@ namespace VTCManager
             }
 
         }
-        public string BLINKER_LINKS
+        public bool BLINKER_LINKS
         {
             get { return blinker_links; }
             set
@@ -263,7 +458,7 @@ namespace VTCManager
             }
 
         }
-        public string SPIEL_PAUSE
+        public bool SPIEL_PAUSE
         {
             get { return spiel_pause; }
             set
@@ -276,7 +471,7 @@ namespace VTCManager
             }
 
         }
-        public string MAUT_BEZAHLT
+        public int MAUT_BEZAHLT
         {
             get { return maut_bezahlt; }
             set
@@ -289,7 +484,7 @@ namespace VTCManager
             }
 
         }
-        public string TANKEN_BEZAHLT
+        public int TANKEN_BEZAHLT
         {
             get { return tanken_bezahlt; }
             set
@@ -302,7 +497,7 @@ namespace VTCManager
             }
 
         }
-        public string NAVIGATION_DISTANZ
+        public double NAVIGATION_DISTANZ
         {
             get { return navigation_distanz; }
             set
@@ -317,7 +512,7 @@ namespace VTCManager
         }
 
 
-        public string NAVIGATION_ZEIT
+        public double NAVIGATION_ZEIT
         {
             get { return navigation_zeit; }
             set
@@ -330,14 +525,27 @@ namespace VTCManager
             }
 
         }
-        public string NAVIGATION_SPEED_LIMIT
+        public int NAVIGATION_SPEED_LIMIT_KMH
         {
-            get { return navigation_speed_limit; }
+            get { return navigation_speed_limit_kmh; }
             set
             {
-                if (navigation_speed_limit != value)
+                if (navigation_speed_limit_kmh != value)
                 {
-                    navigation_speed_limit = value;
+                    navigation_speed_limit_kmh = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+        public int NAVIGATION_SPEED_LIMIT_MPH
+        {
+            get { return navigation_speed_limit_mph; }
+            set
+            {
+                if (navigation_speed_limit_mph != value)
+                {
+                    navigation_speed_limit_mph = value;
                     NotifyPropertyChanged();
                 }
             }
@@ -357,7 +565,7 @@ namespace VTCManager
             }
 
         }
-        public string FRACHT_GEWICHT
+        public double FRACHT_GEWICHT
         {
             get { return fracht_gewicht; }
             set
@@ -371,7 +579,7 @@ namespace VTCManager
 
         }
 
-        public string GEPLANTE_DISTANZ
+        public int GEPLANTE_DISTANZ
         {
             get { return geplante_distanz; }
             set
@@ -386,14 +594,14 @@ namespace VTCManager
         }
 
 
-        public string JOB_EINKOMMEN
+        public double JOB_EINKOMMEN
         {
-            get { return einkommen; }
+            get { return job_einkommen; }
             set
             {
-                if (einkommen != value)
+                if (job_einkommen != value)
                 {
-                    einkommen = value;
+                    job_einkommen = value;
                     NotifyPropertyChanged();
                 }
             }
@@ -467,7 +675,7 @@ namespace VTCManager
 
         }
 
-        public string SPEZIAL_JOB
+        public bool SPEZIAL_JOB
         {
             get { return spezial_job; }
             set
@@ -480,7 +688,7 @@ namespace VTCManager
             }
 
         }
-        public string FRACHT_GELADEN
+        public bool FRACHT_GELADEN
         {
             get { return fracht_geladen; }
             set
@@ -508,21 +716,35 @@ namespace VTCManager
             }
 
         }
-        public string TEMPOMAT
+        public double TEMPOMAT_KMH
         {
-            get { return tempomat; }
+            get { return tempomat_kmh; }
             set
             {
-                if (tempomat != value)
+                if (tempomat_kmh != value)
                 {
-                    tempomat = value;
+                    tempomat_kmh = value;
                     NotifyPropertyChanged();
                 }
             }
 
         }
 
-        public string GANG
+        public double TEMPOMAT_MPH
+        {
+            get { return tempomat_mph; }
+            set
+            {
+                if (tempomat_mph != value)
+                {
+                    tempomat_mph = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+        public int GANG
         {
             get { return gang; }
             set
@@ -535,7 +757,7 @@ namespace VTCManager
             }
 
         }
-        public string FUEL_VERBRAUCH
+        public double FUEL_VERBRAUCH
         {
             get { return fuel_verbrauch; }
             set
@@ -562,7 +784,7 @@ namespace VTCManager
 
         }
 
-        public string FUEL_BESTAND
+        public double FUEL_BESTAND
         {
             get { return fuel_bestand; }
             set
@@ -575,19 +797,7 @@ namespace VTCManager
             }
 
         }
-        public string NAME
-        {
-            get { return name; }
-            set
-            {
-                if (name != value)
-                {
-                    name = value;
-                    NotifyPropertyChanged();
-                }
-            }
 
-        }
         public string MODELL
         {
             get { return modell; }
@@ -627,7 +837,7 @@ namespace VTCManager
             }
 
         }
-        public string FUEL_MAX
+        public double FUEL_MAX
         {
             get { return fuel_max; }
             set
@@ -641,7 +851,7 @@ namespace VTCManager
 
         }
 
-        public string RPM_MAX
+        public double RPM_MAX
         {
             get { return rpm_max; }
             set
@@ -655,7 +865,7 @@ namespace VTCManager
 
         }
 
-        public string RueckwaertsGaenge
+        public int RUECKWAERTS_GAENGE
         {
             get { return rueckwaertsGange; }
             set
@@ -669,7 +879,7 @@ namespace VTCManager
 
         }
 
-        public string VorwaertsGaenge
+        public int VorwaertsGaenge
         {
             get { return vorwaertsGaenge; }
             set
@@ -696,7 +906,7 @@ namespace VTCManager
             }
 
         }
-        public string RPM
+        public double RPM
         {
             get { return rpm; }
             set
@@ -709,35 +919,8 @@ namespace VTCManager
             }
 
         }
-        public string KMH
-        {
-            get { return kmh; }
-            set
-            {
-                if (kmh != value)
-                {
-                    kmh = value;
-                    NotifyPropertyChanged();
-                }
-            }
 
-        }
-
-        public string MPH
-        {
-            get { return mph; }
-            set
-            {
-                if (mph != value)
-                {
-                    mph = value;
-                    NotifyPropertyChanged();
-                }
-            }
-
-        }
-
-        public string Elektrik_Status
+        public bool ELEKTRIK_STATUS
         {
             get { return elektrik_Status; }
             set

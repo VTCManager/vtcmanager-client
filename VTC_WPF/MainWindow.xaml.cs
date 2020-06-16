@@ -76,26 +76,86 @@ namespace VTCManager
                     //set the data globally
                     TelemetryHandler.Telemetry_Data = data;
 
-                    Truck_Daten.SPEED = Convert.ToInt32(TelemetryHandler.Telemetry_Data.TruckValues.CurrentValues.DashboardValues.Speed.Kph);
-                    Truck_Daten.SPEED_TACHO = Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.Speed.Kph-85);
-                    Truck_Daten.BLINKER_LINKS = data.TruckValues.CurrentValues.LightsValues.BlinkerLeftOn.ToString();
-                    Truck_Daten.HERSTELLER = data.TruckValues.ConstantsValues.Brand;
-                    Truck_Daten.MODELL = data.TruckValues.ConstantsValues.Name;
-                    Truck_Daten.FUEL_MAX = Convert.ToInt32(data.TruckValues.ConstantsValues.CapacityValues.Fuel).ToString();
-                    Truck_Daten.FUEL_BESTAND = Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.FuelValue.Amount).ToString();
-                    Truck_Daten.ADBLUE_MAX = Convert.ToInt32(data.TruckValues.ConstantsValues.CapacityValues.AdBlue).ToString();
-                    Truck_Daten.ADBLUE_BESTAND = Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.AdBlue).ToString();
-                    Truck_Daten.RPM = data.TruckValues.CurrentValues.DashboardValues.RPM.ToString();
-
+                    // ALLGEMEINES
+                        Truck_Daten.TelemetryVersion = data.TelemetryVersion.Major.ToString() + "." + data.TelemetryVersion.Minor.ToString();
+                        Truck_Daten.SPIEL_PAUSE = (bool)data.Paused;
+                        Truck_Daten.SPEED_KMH = (int)TelemetryHandler.Telemetry_Data.TruckValues.CurrentValues.DashboardValues.Speed.Kph;
+                        Truck_Daten.SPEED_TACHO_KMH = (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph-85;
+                        Truck_Daten.SPEED_MPH = (int)TelemetryHandler.Telemetry_Data.TruckValues.CurrentValues.DashboardValues.Speed.Kph;
+                        Truck_Daten.SPEED_TACHO_MPH = (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph - 85;
+                        Truck_Daten.BLINKER_LINKS = (bool)data.TruckValues.CurrentValues.LightsValues.BlinkerLeftActive;
+                        Truck_Daten.BLINKER_RECHTS = (bool)data.TruckValues.CurrentValues.LightsValues.BlinkerRightActive;
+                        Truck_Daten.TEMPOMAT_KMH =(int)data.TruckValues.CurrentValues.DashboardValues.CruiseControlSpeed.Kph;
+                        Truck_Daten.TEMPOMAT_MPH = (int)data.TruckValues.CurrentValues.DashboardValues.CruiseControlSpeed.Mph;
+                        Truck_Daten.VorwaertsGaenge = (int)data.TruckValues.ConstantsValues.MotorValues.ForwardGearCount;
+                        Truck_Daten.RUECKWAERTS_GAENGE = (int)data.TruckValues.ConstantsValues.MotorValues.ReverseGearCount;
+                        Truck_Daten.GANG = (int)data.TruckValues.CurrentValues.MotorValues.GearValues.Selected;
+                        Truck_Daten.HERSTELLER = data.TruckValues.ConstantsValues.Brand;
+                        Truck_Daten.MODELL = data.TruckValues.ConstantsValues.Name;
+                        Truck_Daten.FUEL_MAX = (int)data.TruckValues.ConstantsValues.CapacityValues.Fuel;
+                        Truck_Daten.FUEL_BESTAND = (int)data.TruckValues.CurrentValues.DashboardValues.FuelValue.Amount;
+                        Truck_Daten.FUEL_VERBRAUCH = data.TruckValues.CurrentValues.DashboardValues.FuelValue.AverageConsumption;
+                        Truck_Daten.ADBLUE_MAX = Convert.ToInt32(data.TruckValues.ConstantsValues.CapacityValues.AdBlue).ToString();
+                        Truck_Daten.ADBLUE_BESTAND = Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.AdBlue).ToString();
+                        Truck_Daten.RPM = (int)data.TruckValues.CurrentValues.DashboardValues.RPM;
+                        Truck_Daten.RPM_MAX = (int)data.TruckValues.ConstantsValues.MotorValues.EngineRpmMax;
+                    // STATUS ANZEIGEN
+                        Truck_Daten.ELEKTRIK_STATUS = data.TruckValues.CurrentValues.ElectricEnabled;
                     // Schadensanzeige
-                    Truck_Daten.TRUCK_MOTOR_SCHADEN = Convert.ToInt32(data.TruckValues.CurrentValues.DamageValues.Engine * 100);
-                    Truck_Daten.TRUCK_GETRIEBE_SCHADEN = Convert.ToInt32(data.TruckValues.CurrentValues.DamageValues.Transmission * 100);
-                    Truck_Daten.TRUCK_FAHRWERK_SCHADEN = Convert.ToInt32(data.TruckValues.CurrentValues.DamageValues.Chassis * 100);
-                    Truck_Daten.TRUCK_CHASSIS_SCHADEN = Convert.ToInt32(data.TruckValues.CurrentValues.DamageValues.Cabin * 100);
-                    Truck_Daten.TRUCK_RAEDER_SCHADEN = Convert.ToInt32(data.TruckValues.CurrentValues.DamageValues.WheelsAvg * 100);
-                    Truck_Daten.TRAILER_FRACHT_SCHADEN = Convert.ToInt32(data.JobValues.CargoValues.CargoDamage*100);
+                        Truck_Daten.TRUCK_MOTOR_SCHADEN = Convert.ToInt32(data.TruckValues.CurrentValues.DamageValues.Engine * 100);
+                        Truck_Daten.TRUCK_GETRIEBE_SCHADEN = Convert.ToInt32(data.TruckValues.CurrentValues.DamageValues.Transmission * 100);
+                        Truck_Daten.TRUCK_FAHRWERK_SCHADEN = Convert.ToInt32(data.TruckValues.CurrentValues.DamageValues.Chassis * 100);
+                        Truck_Daten.TRUCK_CHASSIS_SCHADEN = Convert.ToInt32(data.TruckValues.CurrentValues.DamageValues.Cabin * 100);
+                        Truck_Daten.TRUCK_RAEDER_SCHADEN = Convert.ToInt32(data.TruckValues.CurrentValues.DamageValues.WheelsAvg * 100);
+                        Truck_Daten.TRAILER_FRACHT_SCHADEN = (double)data.JobValues.CargoValues.CargoDamage*100;
+
+                        Truck_Daten.TRAILER_FAHRWERK_SCHADEN = (double)data.TrailerValues[0].DamageValues.Wheels;
+                        Truck_Daten.TRAILER_CHASSIS_SCHADEN = (double)data.TrailerValues[0].DamageValues.Chassis;
+                    // JOB DATEN
+                        Truck_Daten.FRACHT_GELADEN = (bool)data.TrailerValues[0].Attached;
+                        Truck_Daten.SPEZIAL_JOB = (bool)data.JobValues.SpecialJob;
+                        Truck_Daten.MARKET = data.JobValues.Market.ToString();
+                        Truck_Daten.START_ORT = (string)data.JobValues.CitySource;
+                        Truck_Daten.ZIEL_ORT = (string)data.JobValues.CityDestination;
+                        Truck_Daten.START_FIRMA = (string)data.JobValues.CompanySource;
+                        Truck_Daten.ZIEL_FIRMA = (string)data.JobValues.CompanyDestination;
+                        Truck_Daten.JOB_EINKOMMEN = (double)data.JobValues.Income;
+                        Truck_Daten.GEPLANTE_DISTANZ = (int)data.JobValues.PlannedDistanceKm;
+                        Truck_Daten.FRACHT_GEWICHT = (double)data.JobValues.CargoValues.Mass;
+                        Truck_Daten.FRACHT_NAME = (string)data.JobValues.CargoValues.Name;
+                    // TODO Es fehlen noch :CARGO_ID : UNIT_COUNT : UNIT_MASS und die ganzen ID von Job City Source/Destination etc. Falls benötigt, kurz sagen
+
+                    // NAVIGATION
+                        Truck_Daten.NAVIGATION_DISTANZ = (double)data.NavigationValues.NavigationDistance;
+                        Truck_Daten.NAVIGATION_SPEED_LIMIT_KMH = (int)data.NavigationValues.SpeedLimit.Kph;
+                        Truck_Daten.NAVIGATION_SPEED_LIMIT_MPH = (int)data.NavigationValues.SpeedLimit.Mph;
+                        Truck_Daten.NAVIGATION_ZEIT = (double)data.NavigationValues.NavigationTime;
+
+                    // MAUTSTATIONEN
+                        Truck_Daten.MAUT_BEZAHLT = (int)data.GamePlay.TollgateEvent.PayAmount;
+
+                    // TANKEN
+                        Truck_Daten.TANKEN_BEZAHLT = (int)data.GamePlay.RefuelEvent.Amount;
+
+                    // STRAFEN
+                        Truck_Daten.TANKEN_BEZAHLT = (int)data.GamePlay.FinedEvent.Amount;
+
+                    // FÄHREN
+                        Truck_Daten.FAEHRE_BEZAHLT = (int)data.GamePlay.FerryEvent.PayAmount;
+                        Truck_Daten.FAEHRE_ABFAHRT_VON = (string)data.GamePlay.FerryEvent.SourceName;
+                        Truck_Daten.FAEHRE_ANKUNFT_IN = (string)data.GamePlay.FerryEvent.TargetName;
+
+                    // JOB ABGABE
+                        Truck_Daten.ABGABE_JOB_BEENDET = data.GamePlay.JobDelivered.Finished.ToString();
+                        Truck_Daten.ABGABE_AUTOPARKING = (bool)data.GamePlay.JobDelivered.AutoParked;
+                        Truck_Daten.ABGABE_FRACHTSCHADEN = (double)data.GamePlay.JobDelivered.CargoDamage;
+                        Truck_Daten.ABGABE_ABGABEZEIT = data.GamePlay.JobDelivered.DeliveryTime.ToString();
+                        Truck_Daten.ABGABE_DISTANZ_KM = (int)data.GamePlay.JobDelivered.DistanceKm;
+                        Truck_Daten.ABGABE_XP = (int)data.GamePlay.JobDelivered.EarnedXp;
+                        Truck_Daten.ABGABE_EINNAHMEN = (double)data.GamePlay.JobDelivered.Revenue;
+
                     // Definition ETS / ATS
-                    Truck_Daten.LITER_GALLONEN = (data.Game.ToString() == "Ets2") ? "Liter" : "Gall.";
+                    Truck_Daten.ANZEIGE_LITER_GALLONEN = (data.Game.ToString() == "Ets2") ? "Liter" : "Gall.";
 
                 }
 
