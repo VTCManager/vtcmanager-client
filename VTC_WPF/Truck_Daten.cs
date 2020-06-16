@@ -12,7 +12,7 @@ namespace VTCManager
             private string anzeige_km_miles;
 
         // Truck
-        private string hersteller;
+            private string hersteller;
             private string modell;
 
             private int vorwaertsGaenge;
@@ -26,15 +26,19 @@ namespace VTCManager
             private double rpm_max;
 
             private bool elektrik_Status;
+            private bool abblendlicht;
+            private bool normmallicht;
+            private bool parking_brake;
+            private bool brake_visibility;
             private string adblue_max;
             private string adblue_bestand;
             private double tempomat_kmh;
             private double tempomat_mph;
             private bool blinker_links;
             private bool blinker_rechts;
-            private double speed_kmh;
+            private int speed_kmh;
             private double speed_tacho_kmh;
-            private double speed_mph;
+            private int speed_mph;
             private double speed_tacho_mph;
 
 
@@ -125,6 +129,61 @@ namespace VTCManager
                     fuel_rest = value;
                     NotifyPropertyChanged();
                 }
+            }
+        }
+
+        public bool BRAKE_VISIBILITY
+        {
+            get { return brake_visibility; }
+            set
+            {
+                if (brake_visibility != value)
+                {
+                    brake_visibility = value;
+                    NotifyPropertyChanged();
+                }
+
+            }
+        }
+
+        public bool PARKING_BRAKE
+        {
+            get { return parking_brake; }
+            set
+            {
+                if (parking_brake != value)
+                {
+                    parking_brake = value;
+                    NotifyPropertyChanged();
+                }
+
+            }
+        }
+        public bool ABBLENDLICHT
+        {
+            get { return abblendlicht; }
+            set
+            {
+                if(abblendlicht != value)
+                {
+                    abblendlicht = value;
+                    NotifyPropertyChanged();
+                }
+
+            }
+        }
+
+        public bool NORMMALLICHT
+        {
+            get { return normmallicht; }
+            set
+            {
+                if (normmallicht != value)
+                {
+                    normmallicht = value;
+                    NotifyPropertyChanged();
+                }
+
             }
         }
 
@@ -431,7 +490,7 @@ namespace VTCManager
             }
 
         }
-        public double SPEED_KMH
+        public int SPEED_KMH
         {
             get { return speed_kmh; }
             set
@@ -458,7 +517,7 @@ namespace VTCManager
             }
 
         }
-        public double SPEED_MPH
+        public int SPEED_MPH
         {
             get { return speed_mph; }
             set

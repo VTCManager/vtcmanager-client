@@ -81,9 +81,9 @@ namespace VTCManager
                         Truck_Daten.SPIEL_PAUSE = data.Paused;
                         Truck_Daten.ANZEIGE_KM_MILES = (data.Game.ToString() == "Ets2") ? "KM" : "Meilen";
 
-                        Truck_Daten.SPEED_KMH = (int)TelemetryHandler.Telemetry_Data.TruckValues.CurrentValues.DashboardValues.Speed.Kph;
+                        Truck_Daten.SPEED_KMH = (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph;
                         Truck_Daten.SPEED_TACHO_KMH = (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph-85;
-                        Truck_Daten.SPEED_MPH = (int)TelemetryHandler.Telemetry_Data.TruckValues.CurrentValues.DashboardValues.Speed.Kph;
+                        Truck_Daten.SPEED_MPH = (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph;
                         Truck_Daten.SPEED_TACHO_MPH = (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph - 85;
                         Truck_Daten.BLINKER_LINKS = (bool)data.TruckValues.CurrentValues.LightsValues.BlinkerLeftActive;
                         Truck_Daten.BLINKER_RECHTS = (bool)data.TruckValues.CurrentValues.LightsValues.BlinkerRightActive;
@@ -104,8 +104,13 @@ namespace VTCManager
                         Truck_Daten.RPM_MAX = (int)data.TruckValues.ConstantsValues.MotorValues.EngineRpmMax;
                     // STATUS ANZEIGEN
                         Truck_Daten.ELEKTRIK_STATUS = data.TruckValues.CurrentValues.ElectricEnabled;
+                        Truck_Daten.ABBLENDLICHT = (bool)data.TruckValues.CurrentValues.LightsValues.Parking;
+                        Truck_Daten.NORMMALLICHT = (bool)data.TruckValues.CurrentValues.LightsValues.BeamLow;
+                        Truck_Daten.PARKING_BRAKE = (bool)data.TruckValues.CurrentValues.MotorValues.BrakeValues.ParkingBrake;
+                        Truck_Daten.BRAKE_VISIBILITY = (bool)data.TruckValues.CurrentValues.MotorValues.BrakeValues.MotorBrake;
+
                     // Schadensanzeige
-                        Truck_Daten.TRUCK_MOTOR_SCHADEN = Convert.ToInt32(data.TruckValues.CurrentValues.DamageValues.Engine * 100);
+                    Truck_Daten.TRUCK_MOTOR_SCHADEN = Convert.ToInt32(data.TruckValues.CurrentValues.DamageValues.Engine * 100);
                         Truck_Daten.TRUCK_GETRIEBE_SCHADEN = Convert.ToInt32(data.TruckValues.CurrentValues.DamageValues.Transmission * 100);
                         Truck_Daten.TRUCK_FAHRWERK_SCHADEN = Convert.ToInt32(data.TruckValues.CurrentValues.DamageValues.Chassis * 100);
                         Truck_Daten.TRUCK_CHASSIS_SCHADEN = Convert.ToInt32(data.TruckValues.CurrentValues.DamageValues.Cabin * 100);

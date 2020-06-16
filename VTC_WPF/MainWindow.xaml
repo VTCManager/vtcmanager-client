@@ -18,7 +18,11 @@
 
     <mah:MetroWindow.Resources>
         <BooleanToVisibilityConverter x:Key="job_visibilityConverter" />
-
+        <BooleanToVisibilityConverter x:Key="elektrik_visibility" />
+        <BooleanToVisibilityConverter x:Key="abblendlicht_visibility" />
+        <BooleanToVisibilityConverter x:Key="normallicht_visibility" />
+        <BooleanToVisibilityConverter x:Key="parkingbrake_visibility" />
+        <BooleanToVisibilityConverter x:Key="carbrake_visibility" />
     </mah:MetroWindow.Resources>
 
 
@@ -95,35 +99,24 @@
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="510" Margin="-2,58,-1,0" VerticalAlignment="Top" Width="1198" TabStripPlacement="Left">
             <TabItem x:Name="TAB_FAHRT" Height="45" Width="200" FontSize="24" Opacity="0.7" BorderBrush="Gray" VerticalAlignment="Center" BorderThickness="1">
                 <Grid x:Name="GRID_FAHRT" Margin="0,0,0,66">
-                    <Label Panel.ZIndex="250" Content="{Binding SPEED}" HorizontalAlignment="Left"  Margin="84,112,0,0" VerticalAlignment="Top" Height="61" Width="282" FontStyle="Italic" FontWeight="Bold" FontFamily="Verdana" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#DDC5C5C5">
-                        <Label.Effect>
-                            <DropShadowEffect BlurRadius="20" Color="#FF91DEFB" ShadowDepth="0"/>
-                        </Label.Effect>
-                    </Label>
 
+                    <Rectangle x:Name="Anzeigen_Oben" Fill="#FFB2B2B2" RadiusX="50" Margin="0,0,562,239" RadiusY="50" StrokeThickness="5">
+                        <Rectangle.Stroke>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black" Offset="0"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Stroke>
+                    </Rectangle>
 
+                    <Image Source="{iconPacks:SimpleIconsImage Kind=Mercedes}" Margin="61,11,878,377"/>
 
-                    <Border HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="150" Width="300" BorderBrush="Orange" BorderThickness="2 6 11 0" CornerRadius="300 300 0 0" Margin="78,0,612,267" Background="#FF464646"/>
+                    <Image Source="{iconPacks:MaterialImage Kind=CarBrakeAlert}" Width="50" Height="50" Margin="10,112,928,276" Visibility="{Binding BRAKE_VISIBILITY, Converter={StaticResource carbrake_visibility}}"/>
+                    <Image Source="{iconPacks:MaterialImage Kind=CarBrakeParking}" Width="50" Height="50" Margin="60,112,862,276" Visibility="{Binding PARKING_BRAKE, Converter={StaticResource parkingbrake_visibility}}"/>
+                    <Image Source="{iconPacks:OcticonsImage Kind=Zap}" Width="50" Height="50" Margin="110,112,807,276" Visibility="{Binding ELEKTRIK_STATUS, Converter={StaticResource elektrik_visibility}}"/>
+                    <Image Source="{iconPacks:MaterialImage Kind=CarLightDimmed}" Width="50" Height="50" Margin="170,112,757,276" Visibility="{Binding ABBLENDLICHT, Converter={StaticResource abblendlicht_visibility}}"/>
+                    <Image Source="{iconPacks:MaterialImage Kind=CarLightHigh}" Width="50" Height="50" Margin="230,112,702,276" Visibility="{Binding NORMMALLICHT, Converter={StaticResource normallicht_visibility}}"/>
 
-                    <Border Panel.ZIndex="210" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="80" Width="160" BorderBrush="red" BorderThickness="2 2 2 0" CornerRadius="300 300 0 0" Margin="78,0,612,267" Background="#FF464646">
-                        <Border.Effect>
-                            <DropShadowEffect Color="White" BlurRadius="50" ShadowDepth="1"/>
-                        </Border.Effect>
-                    </Border>
-
-                    <Border Width="5" BorderBrush="red" BorderThickness="1" CornerRadius="120 120 0 0" RenderTransformOrigin="0.5 2" Height="70" VerticalAlignment="Bottom" HorizontalAlignment="Center" Background="White" Margin="220,0,760,336">
-
-                        <Border.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="{Binding Content, ElementName=speed_fuer_tacho}"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Border.RenderTransform>
-                    </Border>
-
-                    <Label x:Name="speed_fuer_tacho" Content="{Binding SPEED_TACHO}" Visibility="Hidden" HorizontalAlignment="Left" Margin="439,137,0,0" VerticalAlignment="Top"/>
 
 
                     <StackPanel Orientation="Vertical" Margin="433,0,0,0">
@@ -136,7 +129,7 @@
                         <Separator/>
                         <StackPanel Width="560" Orientation="Horizontal" HorizontalAlignment="Right">
                             <Label x:Name="LBL_Truck_Model" Padding="0" Margin="5" Height="30" Width="150" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
-                            <Label Padding="0" Margin="5" Content="{Binding MODELL}" Height="30" Width="459"/>
+
                         </StackPanel>
                         <Separator/>
 
@@ -251,6 +244,9 @@
 
                     <Image Source="{iconPacks:FontAwesomeImage Kind=GrimaceRegular}" Margin="768,398,192,10" Width="30" Height="30"/>
                     <Image Source="{iconPacks:UniconsImage Kind=Crosshair}" Margin="12,393,938,5" Width="40" Height="40" />
+                    <Label Padding="0" FontSize="14" Foreground="Black" Margin="12,63,828,345" Content="{Binding MODELL}" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Height="30" Width="150"/>
+                    <Label Content="{Binding ANZEIGE_KM_MILES}" FontFamily="Verdana" Margin="184,50,706,347" FontWeight="Bold" Foreground="Gray" FontStyle="Italic" FontSize="20" Height="35" Width="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Top"/>
+                    <Label Content="{Binding SPEED_KMH}" FontFamily="Verdana" Margin="184,10,706,378" FontWeight="Bold" Foreground="Black" FontStyle="Italic" FontSize="32" Width="100" Height="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
 
 
