@@ -119,6 +119,17 @@ namespace VTCManager.Klassen
         public static void JobStarted(object sender, EventArgs e)
         {
             checkTelemetry();
+            if (String.IsNullOrWhiteSpace(Telemetry_Data.JobValues.CitySource))
+            {
+                Stopwatch stopWatch = new Stopwatch(); //as timeout
+                stopWatch.Start();
+                while (String.IsNullOrWhiteSpace(Telemetry_Data.JobValues.CitySource) && stopWatch.ElapsedMilliseconds < 5000)
+                {
+                    Console.WriteLine("Waiting for tour data to init");
+                }
+                stopWatch.Stop();
+                Console.WriteLine("Wait for data took "+ stopWatch.ElapsedMilliseconds+" ms");
+            }
             Dictionary<string, string> post_param = new Dictionary<string, string>();
             post_param.Add("origin", Telemetry_Data.JobValues.CitySource);
             post_param.Add("origin_id", Telemetry_Data.JobValues.CitySourceId);
