@@ -113,6 +113,7 @@ namespace VTCManager
                         Truck_Daten.TRAILER_CHASSIS_SCHADEN = (double)data.TrailerValues[0].DamageValues.Chassis;
                     // JOB DATEN
                         Truck_Daten.FRACHT_GELADEN = (bool)data.TrailerValues[0].Attached;
+                        Job_Daten_Stack.Visibility = Truck_Daten.FRACHT_GELADEN == true ? Visibility.Visible : Visibility.Hidden;
                         Truck_Daten.SPEZIAL_JOB = (bool)data.JobValues.SpecialJob;
                         Truck_Daten.MARKET = data.JobValues.Market.ToString();
                         Truck_Daten.START_ORT = (string)data.JobValues.CitySource;

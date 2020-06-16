@@ -133,12 +133,49 @@
                             <Label Padding="0" Margin="5" Content="{Binding MODELL}" Height="30" Width="459"/>
                         </StackPanel>
                         <Separator/>
+                        <StackPanel x:Name="Job_Daten_Stack" Orientation="Vertical" Width="400" HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontSize="9" Content="Start-Ort:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                                <Label FontSize="9" Content="{Binding START_ORT}" Height="30" Width="300" VerticalContentAlignment="Center"/>
+                            </StackPanel>
 
-                        <Label Content="{Binding START_ORT}" Height="30" />
-                        <Label Content="{Binding START_FIRMA}" Height="30" />
-                        <Label Content="{Binding ZIEL_ORT}" Height="30" />
-                        <Label Content="{Binding ZIEL_FIRMA}" Height="30" />
-                        <Label Content="{Binding SPIEL_PAUSE}" Height="30"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontSize="9" Content="Start-Firma:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                                <Label FontSize="9" Content="{Binding START_FIRMA}" Height="30" Width="300" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontSize="9" Content="Ziel-Ort:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                                <Label FontSize="9" Content="{Binding ZIEL_ORT}" Height="30" Width="300" VerticalContentAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontSize="9" Content="Ziel-Firma:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                                <Label FontSize="9" Content="{Binding ZIEL_FIRMA}" Height="30" Width="300" VerticalContentAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontSize="9" Content="Pausen-Status:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                                <Label FontSize="9" Content="{Binding SPIEL_PAUSE}" Height="30" Width="300" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontSize="9" Content="Marketplace:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                                <Label FontSize="9" Content="{Binding MARKET}" Height="30" Width="300" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontSize="9" Content="Frachtgewicht:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                                <Label FontSize="9" Content="{Binding FRACHT_GEWICHT}" Height="30" Width="300" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontSize="9" Content="Fracht-Name:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                                <Label FontSize="9" Content="{Binding FRACHT_NAME}" Height="30" Width="300" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontSize="9" Content="Geplante-Distanz:" Height="30" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                                <Label FontSize="9" Content="{Binding GEPLANTE_DISTANZ}" Height="30" Width="300" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+                            
+                        </StackPanel>
+
+                        
                     </StackPanel>
 
 
