@@ -145,5 +145,22 @@ namespace VTCManager.Klassen
             }
             return DiscordLargeImageKey;
         }
+        public void idle()
+        {
+            client = new DiscordRpcClient(DiscordAppID);
+            client.Initialize();
+            client.SetPresence(new RichPresence()
+            {
+                Details = translation.DISCORD_IDLE,
+                Assets = new Assets()
+                {
+                    LargeImageKey = DefaultDiscordLargeImageKey,
+                    LargeImageText = "Beyond the limits",
+                    SmallImageKey = DiscordSmallImageKey,
+                    SmallImageText = "v" + Config.ClientVersion
+                }
+
+            });
+        }
     }
 }

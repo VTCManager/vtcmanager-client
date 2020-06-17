@@ -18,6 +18,7 @@ namespace VTCManager.Klassen
         public static DiscordHandler Discord;
         public static bool onJob = false;
         public static bool freeroamactive = false;
+        public static bool idleactive = false;
 
         public TelemetryHandler(MainWindow mainWindow, Translation translation)
         {
@@ -42,10 +43,30 @@ namespace VTCManager.Klassen
             Telemetry_Data = data;
             if(data != null)
             {
-                if (!String.IsNullOrWhiteSpace(data.TruckValues.ConstantsValues.BrandId) && !onJob && !freeroamactive)
+                if (!String.IsNullOrWhiteSpace(data.TruckValues.ConstantsValues.BrandId))
                 {
-                    Discord.FreeRoam();
-                    freeroamactive = true;
+                    if (!String.IsNullOrWhiteSpace(data.TruckValues.ConstantsValues.BrandId) && !onJob && !freeroamactive)
+                    {
+                        Discord.FreeRoam();
+                        freeroamactive = true;
+                        idleactive = false;
+                    }
+                }
+                else
+                {
+                    if (!idleactive)
+                    {
+                        Discord.idle();
+                        idleactive = true;
+                    }
+                }
+            }
+            else
+            {
+                if (!idleactive)
+                {
+                    Discord.idle();
+                    idleactive = true;
                 }
             }
         }
