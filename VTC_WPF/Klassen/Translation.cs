@@ -29,7 +29,12 @@ namespace VTCManager.Klassen
             BUTTON_ATS_STARTEN,
             BUTTON_TMP_STARTEN,
             ATS_PATH_NOT_FOUND,
-            ETS2_PATH_NOT_FOUND;
+            ETS2_PATH_NOT_FOUND,
+            DISCORD_IDLE,
+            DISCORD_JOB_CARGO,
+            DISCORD_DRIVING,
+            DISCORD_JOB_REMAINING,
+            DISCORD_FREEROAM;
         public Translation(String lang)
         {
             version = "Version: 3.0";
@@ -57,6 +62,22 @@ namespace VTCManager.Klassen
             BUTTON_TMP_STARTEN = lang == "DE" ? "Truckers-MP" : "Truckers-MP";
             ATS_PATH_NOT_FOUND = lang == "DE" ? "Du hast in den Einstellungen noch keinen Link für ATS angegeben ! Du kannst den Pfad jederzeit nachtragen!" : "You have not yet specified a link for ATS in the settings! You can add the path at any time!";
             ETS2_PATH_NOT_FOUND = lang == "DE" ? "Du hast in den Einstellungen noch keinen Link für ETS2 angegeben ! Du kannst den Pfad jederzeit nachtragen!" : "You have not yet specified a link for ETS2 in the settings! You can add the path at any time!";
+            if(lang == "DE")
+            {
+                DISCORD_IDLE = "Kein Spiel aktiv.";
+                DISCORD_JOB_CARGO = "Fracht";
+                DISCORD_DRIVING = "Fährt";
+                DISCORD_JOB_REMAINING = "verbleibend";
+                DISCORD_FREEROAM = "Frei wie der Wind";
+            }
+            else
+            {
+                DISCORD_IDLE = "No game running.";
+                DISCORD_JOB_CARGO = "Cargo";
+                DISCORD_DRIVING = "Driving";
+                DISCORD_JOB_REMAINING = "remaining";
+                DISCORD_FREEROAM = "Free as the wind";
+            }
 
 
         }

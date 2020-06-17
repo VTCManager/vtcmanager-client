@@ -53,7 +53,6 @@ namespace VTCManager
             Telemetry.RefuelEnd += TelemetryHandler.RefuelEnd;
             Telemetry.RefuelPayed += TelemetryHandler.RefuelPayed;
             jobHandler = new JobHandler();
-            Discord = new DiscordHandler();
 
             InitializeComponent();
         }
