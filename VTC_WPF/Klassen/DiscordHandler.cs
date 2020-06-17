@@ -11,17 +11,19 @@ namespace VTCManager.Klassen
         private const string DiscordAppID = "659036297561767948";
         private const string DefaultDiscordLargeImageKey = "truck-icon";
         private static Timer onJobInfoTimer;
+        public static Timer FreeRoamSpeedUpdateTimer;
         private static RichPresence jobRPC;
         private static bool JobInfoActive;
+        private static Translation translation;
 
         public DiscordHandler(Translation translation)
         {
-
+            DiscordHandler.translation = translation;
             client = new DiscordRpcClient(DiscordAppID);
             client.Initialize();
             client.SetPresence(new RichPresence()
             {
-                Details = "Idle",
+                Details = translation.DISCORD_IDLE,
                 Assets = new Assets()
                 {
                     LargeImageKey = DefaultDiscordLargeImageKey,
@@ -35,16 +37,17 @@ namespace VTCManager.Klassen
 
         public void OnJobStart(string cargo, int weight, string origin, string destination, string truck_brand_id, string truck)
         {
+            FreeRoamSpeedUpdateTimer.Enabled = false;
             string DiscordLargeImageKey = getTruckImageKey(truck_brand_id);
             jobRPC = new RichPresence()
             {
-                Details = "Fracht: " + cargo + "(" + weight/1000 + "t)",
-                State = "von " + origin + " nach " + destination,
+                Details = translation.DISCORD_JOB_CARGO+": " + cargo + "(" + weight/1000 + "t)",
+                State = origin + "->" + destination,
 
                 Assets = new Assets()
                 {
                     LargeImageKey = DiscordLargeImageKey,
-                    LargeImageText = "Fährt "+ truck,
+                    LargeImageText = translation.DISCORD_DRIVING + " " + truck,
                     SmallImageKey = DiscordSmallImageKey,
                     SmallImageText = "v" + Config.ClientVersion
                 }
@@ -66,7 +69,7 @@ namespace VTCManager.Klassen
                 RichPresence RPC = new RichPresence()
                 {
                     Details = (int)TelemetryHandler.Telemetry_Data.TruckValues.CurrentValues.DashboardValues.Speed.Kph+" km/h",
-                    State = (int)TelemetryHandler.Telemetry_Data.NavigationValues.NavigationDistance/1000+" km("+ (int)((((TelemetryHandler.Telemetry_Data.NavigationValues.NavigationDistance/1000)/TelemetryHandler.Telemetry_Data.JobValues.PlannedDistanceKm)*100)) + "%) verbleibend",
+                    State = (int)TelemetryHandler.Telemetry_Data.NavigationValues.NavigationDistance/1000+" km("+ (int)((((TelemetryHandler.Telemetry_Data.NavigationValues.NavigationDistance/1000)/TelemetryHandler.Telemetry_Data.JobValues.PlannedDistanceKm)*100)) + "%) "+translation.DISCORD_JOB_REMAINING,
 
                     Assets = new Assets()
                     {
@@ -87,24 +90,50 @@ namespace VTCManager.Klassen
                 JobInfoActive = true;
             }
         }
-
-        public void FreeRoam(string truck_brand_id, string truck)
+        private void updateFreeRoamSpeed(object sender, ElapsedEventArgs e)
         {
-            string DiscordLargeImageKey = getTruckImageKey(truck_brand_id);
+            string DiscordLargeImageKey = getTruckImageKey(TelemetryHandler.Telemetry_Data.TruckValues.ConstantsValues.BrandId);
+            RichPresence RPC = new RichPresence()
+                {
+                    Details = translation.DISCORD_FREEROAM,
+                    State = (int)TelemetryHandler.Telemetry_Data.TruckValues.CurrentValues.DashboardValues.Speed.Kph + " km/h",
+
+                    Assets = new Assets()
+                    {
+                        LargeImageKey = DiscordLargeImageKey,
+                        LargeImageText = translation.DISCORD_DRIVING + " " + TelemetryHandler.Telemetry_Data.TruckValues.ConstantsValues.Brand+" "+ TelemetryHandler.Telemetry_Data.TruckValues.ConstantsValues.Name,
+                        SmallImageKey = DiscordSmallImageKey,
+                        SmallImageText = "v" + Config.ClientVersion
+                    }
+                };
+                client.SetPresence(RPC);
+                client.Invoke();
+                JobInfoActive = false;
+        }
+
+        public void FreeRoam()
+        {
+            onJobInfoTimer.Enabled = false;
+            string DiscordLargeImageKey = getTruckImageKey(TelemetryHandler.Telemetry_Data.TruckValues.ConstantsValues.BrandId);
             RichPresence RPC = new RichPresence()
             {
-                Details = "Frei wie der Wind",
+                Details = translation.DISCORD_FREEROAM,
+                State = (int)TelemetryHandler.Telemetry_Data.TruckValues.CurrentValues.DashboardValues.Speed.Kph + " km/h",
 
                 Assets = new Assets()
                 {
                     LargeImageKey = DiscordLargeImageKey,
-                    LargeImageText = "Driving " + truck,
+                    LargeImageText = translation.DISCORD_DRIVING + " " + TelemetryHandler.Telemetry_Data.TruckValues.ConstantsValues.Brand + " " + TelemetryHandler.Telemetry_Data.TruckValues.ConstantsValues.Name,
                     SmallImageKey = DiscordSmallImageKey,
                     SmallImageText = "v" + Config.ClientVersion
                 }
             };
             client.SetPresence(RPC);
             client.Invoke();
+            FreeRoamSpeedUpdateTimer = new Timer();
+            FreeRoamSpeedUpdateTimer.Elapsed += new ElapsedEventHandler(updateFreeRoamSpeed);
+            FreeRoamSpeedUpdateTimer.Interval = 3000;
+            FreeRoamSpeedUpdateTimer.Enabled = true;
         }
 
         private string getTruckImageKey(string truck_brand_id)

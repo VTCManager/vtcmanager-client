@@ -17,6 +17,7 @@ namespace VTCManager.Klassen
         private MainWindow mainWindow;
         public static DiscordHandler Discord;
         public static bool onJob = false;
+        public static bool freeroamactive = false;
 
         public TelemetryHandler(MainWindow mainWindow, Translation translation)
         {
@@ -41,9 +42,10 @@ namespace VTCManager.Klassen
             Telemetry_Data = data;
             if(data != null)
             {
-                if (!String.IsNullOrWhiteSpace(data.TruckValues.ConstantsValues.BrandId) && !onJob)
+                if (!String.IsNullOrWhiteSpace(data.TruckValues.ConstantsValues.BrandId) && !onJob && !freeroamactive)
                 {
-                    Discord.FreeRoam(Telemetry_Data.TruckValues.ConstantsValues.BrandId, Telemetry_Data.TruckValues.ConstantsValues.Brand + " " + Telemetry_Data.TruckValues.ConstantsValues.Name);
+                    Discord.FreeRoam();
+                    freeroamactive = true;
                 }
             }
         }
@@ -109,6 +111,7 @@ namespace VTCManager.Klassen
             post_param.Add("truck_damage_at_end", Telemetry_Data.TruckValues.CurrentValues.DamageValues.Engine.ToString());
             JObject response = API.HTTPSRequestPost(API.job_delivered, post_param);
             onJob = false;
+            Discord.FreeRoam();
         }
 
         public static void JobCancelled(object sender, EventArgs e)
@@ -116,6 +119,7 @@ namespace VTCManager.Klassen
             checkTelemetry();
             JObject response = API.HTTPSRequestGet(API.job_canceled);
             onJob = false;
+            Discord.FreeRoam();
         }
 
         public static void JobStarted(object sender, EventArgs e)
