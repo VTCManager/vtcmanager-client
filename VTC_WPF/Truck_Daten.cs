@@ -6,106 +6,181 @@ namespace VTCManager
     public class Truck_Daten : INotifyPropertyChanged
     {
         // Algemeines
-            private string telemetryVersion;
-            private bool spiel_pause;
-            private string anzeige_liter_gallonen;
-            private string anzeige_km_miles;
+        private string telemetryVersion;
+        private string spiel;
+        private bool spiel_pause;
+        private string anzeige_liter_gallonen;
+        private string anzeige_km_miles;
+        private string anzeige_to_lbs;
+        private string txt_fahrt;
+
 
         // Truck
-            private string hersteller;
-            private string modell;
+        private string hersteller;
+        private string hersteller_id;
+        private string modell;
 
-            private int vorwaertsGaenge;
-            private int rueckwaertsGange;
-            private int gang;
-            private double fuel_max;
-            private double fuel_bestand;
-            private int fuel_rest;
-            private double fuel_verbrauch;
-            private double rpm;
-            private double rpm_max;
+        private int vorwaertsGaenge;
+        private int rueckwaertsGange;
+        private int gang;
+        private double fuel_max;
+        private double fuel_bestand;
+        private int fuel_rest;
+        private double fuel_verbrauch;
+        private double rpm;
+        private double rpm_max;
 
-            private bool elektrik_Status;
-            private bool abblendlicht;
-            private bool normmallicht;
-            private bool parking_brake;
-            private bool brake_visibility;
-            private string adblue_max;
-            private string adblue_bestand;
-            private double tempomat_kmh;
-            private double tempomat_mph;
-            private bool blinker_links;
-            private bool blinker_rechts;
-            private int speed_kmh;
-            private double speed_tacho_kmh;
-            private int speed_mph;
-            private double speed_tacho_mph;
+        private bool elektrik_Status;
+        private bool abblendlicht;
+        private bool normmallicht;
+        private bool parking_brake;
+        private bool brake_visibility;
+        private string adblue_max;
+        private string adblue_bestand;
+        private double tempomat_kmh;
+        private double tempomat_mph;
+        private bool blinker_links;
+        private bool blinker_rechts;
+        private int speed_kmh;
+        private double speed_tacho_kmh;
+        private int speed_mph;
+        private double speed_tacho_mph;
 
 
         // Truck Schaden
-            private double truck_motor_schaden;
-            private double truck_getriebe_schaden;
-            private double truck_fahrwerk_schaden;
-            private double truck_chassis_schaden;
-            private double truck_raeder_schaden;
+        private double truck_motor_schaden;
+        private double truck_getriebe_schaden;
+        private double truck_fahrwerk_schaden;
+        private double truck_chassis_schaden;
+        private double truck_raeder_schaden;
 
 
 
-        // TRAILER VALUES
-        private string angehangen;
+    // TRAILER VALUES
+    private string angehangen;
 
-        // Trailer Schaden
-            private double trailer_fracht_schaden;
-            private double trailer_fahrwerk_schaden;
-            private double trailer_chassis_schaden;
-
-
-        // JOB DATEN
-            private bool fracht_geladen;
-            private bool spezial_job;
-            private string market;
-            private string start_ort;
-            private string ziel_ort;
-            private string start_firma;
-            private string ziel_firma;
-            private double job_einkommen;
-            private int geplante_distanz;
-            private double fracht_gewicht;
-            private string fracht_name;
-
-        // JOB ABGABE
-
-            private string abgabe_job_beendet;
-            private bool abgabe_autoparking;
-            private double abgabe_frachtschaden;
-            private string abgabe_abgabezeit;
-            private int abgabe_distanz_km;
-            private int abgabe_xp;
-            private double abgabe_einnahmen;
-
-        // NAVIGATIONS DATEN
-            private double navigation_distanz;
-            private double navigation_zeit;
-            private int navigation_speed_limit_kmh;
-            private int navigation_speed_limit_mph;
-            private int rest_strecke;
+    // Trailer Schaden
+        private double trailer_fracht_schaden;
+        private double trailer_fahrwerk_schaden;
+        private double trailer_chassis_schaden;
 
 
-        // MAUTSTATION
-            private int maut_bezahlt;
+    // JOB DATEN
+        private bool fracht_geladen;
+        private bool spezial_job;
+        private string market;
+        private string start_ort;
+        private string ziel_ort;
+        private string start_firma;
+        private string ziel_firma;
+        private double job_einkommen;
+        private int geplante_distanz;
+        private double fracht_gewicht;
+        private int fracht_gewicht_tonnen;
+        private string fracht_name;
 
-        // TANKEN
-            private int tanken_bezahlt;
+    // JOB ABGABE
 
-        // STRAFEN
-            private int strafe_bezahlt;
+        private string abgabe_job_beendet;
+        private bool abgabe_autoparking;
+        private double abgabe_frachtschaden;
+        private string abgabe_abgabezeit;
+        private int abgabe_distanz_km;
+        private int abgabe_xp;
+        private double abgabe_einnahmen;
 
-        // FÄHREN
-            private int faehre_bezahlt;
-            private string faehre_abfahrt_von;
-            private string faehre_ankunft_in;
+    // NAVIGATIONS DATEN
+        private double navigation_distanz;
+        private double navigation_zeit;
+        private int navigation_speed_limit_kmh;
+        private int navigation_speed_limit_mph;
+        private int rest_strecke;
 
 
+    // MAUTSTATION
+        private int maut_bezahlt;
+
+    // TANKEN
+        private int tanken_bezahlt;
+
+    // STRAFEN
+        private int strafe_bezahlt;
+
+    // FÄHREN
+        private int faehre_bezahlt;
+        private string faehre_abfahrt_von;
+        private string faehre_ankunft_in;
+
+
+
+
+
+        // BEGIN INOTIFYPROPERTYCHANGED DONT CHANGE ANYTHING !
+        public string HERSTELLER_ID
+        {
+            get { return hersteller_id; }
+            set
+            {
+                if (hersteller_id != value)
+                {
+                    hersteller_id = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public int FRACHT_GEWICHT_TONNEN
+        {
+            get { return fracht_gewicht_tonnen; }
+            set
+            {
+                if (fracht_gewicht_tonnen != value)
+                {
+                    fracht_gewicht_tonnen = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public string ANZEIGE_TO_LBS
+        {
+            get { return anzeige_to_lbs; }
+            set
+            {
+                if (anzeige_to_lbs != value)
+                {
+                    anzeige_to_lbs = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public string SPIEL
+        {
+            get { return spiel; }
+            set
+            {
+                if (spiel != value)
+                {
+                    spiel = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+
+
+        public string TXT_FAHRT
+        {
+            get { return txt_fahrt; }
+            set
+            {
+                if (txt_fahrt != value)
+                {
+                    txt_fahrt = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
 
         public string ANZEIGE_KM_MILES
         {

@@ -315,6 +315,7 @@
     </Resource>
     <Resource Include="VTCManager.png" />
     <Resource Include="favicon.ico" />
+    <Resource Include="background-pattern-lines-01.png" />
     <Content Include="Icons\icons8-mercedes-benz-256.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
