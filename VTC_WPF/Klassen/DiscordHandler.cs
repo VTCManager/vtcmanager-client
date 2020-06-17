@@ -14,14 +14,14 @@ namespace VTCManager.Klassen
         private static RichPresence jobRPC;
         private static bool JobInfoActive;
 
-        public DiscordHandler()
+        public DiscordHandler(Translation translation)
         {
 
             client = new DiscordRpcClient(DiscordAppID);
             client.Initialize();
             client.SetPresence(new RichPresence()
             {
-                Details = "Starte...",
+                Details = "Idle",
                 Assets = new Assets()
                 {
                     LargeImageKey = DefaultDiscordLargeImageKey,

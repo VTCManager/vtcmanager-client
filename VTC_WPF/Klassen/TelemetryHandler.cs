@@ -18,10 +18,10 @@ namespace VTCManager.Klassen
         public static DiscordHandler Discord;
         public static bool onJob = false;
 
-        public TelemetryHandler(MainWindow mainWindow)
+        public TelemetryHandler(MainWindow mainWindow, Translation translation)
         {
             this.mainWindow = mainWindow;
-            Discord = new DiscordHandler();
+            Discord = new DiscordHandler(translation);
             Telemetry = new SCSSdkTelemetry();
             Telemetry.Data += Telemetry_Data_Handler;
             Telemetry.JobStarted += TelemetryHandler.JobStarted;
