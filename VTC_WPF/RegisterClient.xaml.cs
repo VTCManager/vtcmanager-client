@@ -26,7 +26,7 @@ namespace VTCManager
     {
         public RegisterClient()
         {
-            Updater updater = new Updater(new Translation(RegistryHandler.read("Config", "Sprache")));
+            
             if (!String.IsNullOrEmpty(RegistryHandler.read("Config", "AccessToken")))
             {
                 Config.AccessToken = RegistryHandler.read("Config", "AccessToken");

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Toolkit.Uwp.Notifications; // Notifications library
 
 namespace VTCManager.Klassen
 {
@@ -16,6 +17,42 @@ namespace VTCManager.Klassen
         {
             this.translation = translation;
             this.mainWindow = mainWindow;
+            // In a real app, these would be initialized with actual data
+            string title = "Andrew sent you a picture";
+            string content = "Check this out, Happy Canyon in Utah!";
+            string image = "https://picsum.photos/360/202?image=883";
+            string logo = "ms-appdata:///local/Andrew.jpg";
+
+            // Construct the visuals of the toast
+            ToastVisual visual = new ToastVisual()
+            {
+                BindingGeneric = new ToastBindingGeneric()
+                {
+                    Children =
+        {
+            new AdaptiveText()
+            {
+                Text = title
+            },
+
+            new AdaptiveText()
+            {
+                Text = content
+            },
+
+            new AdaptiveImage()
+            {
+                Source = image
+            }
+        },
+
+                    AppLogoOverride = new ToastGenericAppLogo()
+                    {
+                        Source = logo,
+                        HintCrop = ToastGenericAppLogoCrop.Circle
+                    }
+                }
+            };yyy
         }
 
         private static void standaloneCheckForUpdate()

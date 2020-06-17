@@ -55,7 +55,7 @@ namespace VTCManager
             lade_Translations();
             //must be after lade_Translations
             telemetryhandler = new TelemetryHandler(this, translation);
-            updater = new Updater(translation);
+            updater = new Updater(translation, this);
             utils.Build_Registry();
 
             Sprachauswahl.SelectedValue = utils.Reg_Lesen("Config", "Sprache", false);
