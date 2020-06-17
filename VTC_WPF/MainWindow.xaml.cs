@@ -36,6 +36,7 @@ namespace VTCManager
         int Tankinhalt;
         private object polyline1;
         private TelemetryHandler telemetryhandler;
+        private Translation translation;
 
         public MainWindow()
         {
@@ -46,12 +47,13 @@ namespace VTCManager
             TelemetryInstaller.check();
             jobHandler = new JobHandler();
             Truck_Daten = new Truck_Daten();
-            telemetryhandler = new TelemetryHandler(this);
 
             InitializeComponent();
 
             Lade_Themes();
             lade_Translations();
+            //must be after lade_Translations
+            telemetryhandler = new TelemetryHandler(this, translation);
             utils.Build_Registry();
 
             Sprachauswahl.SelectedValue = utils.Reg_Lesen("Config", "Sprache", false);
@@ -218,21 +220,23 @@ namespace VTCManager
 
         public void lade_Translations()
         {
-            Translation trans = new Translation(utils.Reg_Lesen("Config", "Sprache", false));
-            TAB_FAHRT.Header = trans.TAB_Fahrt_Text;
-            TAB_FREUNDE.Header = trans.TAB_FREUNDE_TEXT;
-            TAB_VERKEHR.Header = trans.TAB_VERKEHR_TEXT;
-            TAB_EINSTELLUNGEN.Header = trans.TAB_EINSTELLUNGEN_TEXT;
-            LBL_FAHRT_SCHADEN_TITEL.Content = trans.SCHADENSANZEIGE_TITEL;
-            TAB_FAHRT_LBL_MOTOR.Content = trans.TAB_FAHRT_LBL_MOTOR;
-            TAB_FAHRT_LBL_GETRIEBE.Content = trans.TAB_FAHRT_LBL_GETRIEBE;
-            TAB_FAHRT_LBL_RAEDER.Content = trans.TAB_FAHRT_LBL_RAEDER;
-            TAB_FAHRT_LBL_FAHRWERK.Content = trans.TAB_FAHRT_LBL_FAHRWERK;
-            TAB_FAHRT_LBL_FAHRERHAUS.Content = trans.TAB_FAHRT_LBL_FAHRERHAUS;
-            TAB_FAHRT_LBL_FRACHTSCHADEN.Content = trans.TAB_FAHRT_LBL_FRACHTSCHADEN;
-            BUTTON_ATS_STARTEN.Text = trans.BUTTON_ATS_STARTEN;
-            BUTTON_ETS_STARTEN.Text = trans.BUTTON_ETS_STARTEN;
-            BUTTON_TMP_STARTEN.Text = trans.BUTTON_TMP_STARTEN;
+            translation = new Translation(utils.Reg_Lesen("Config", "Sprache", false));
+            TAB_FAHRT.Header = translation.TAB_Fahrt_Text;
+            TAB_FREUNDE.Header = translation.TAB_FREUNDE_TEXT;
+            TAB_VERKEHR.Header = translation.TAB_VERKEHR_TEXT;
+            TAB_EINSTELLUNGEN.Header = translation.TAB_EINSTELLUNGEN_TEXT;
+            LBL_FAHRT_SCHADEN_TITEL.Content = translation.SCHADENSANZEIGE_TITEL;
+            LBL_Truck_Name.Content = translation.TRUCK_NAME;
+            LBL_Truck_Model.Content = translation.TRUCK_MODELL;
+            TAB_FAHRT_LBL_MOTOR.Content = translation.TAB_FAHRT_LBL_MOTOR;
+            TAB_FAHRT_LBL_GETRIEBE.Content = translation.TAB_FAHRT_LBL_GETRIEBE;
+            TAB_FAHRT_LBL_RAEDER.Content = translation.TAB_FAHRT_LBL_RAEDER;
+            TAB_FAHRT_LBL_FAHRWERK.Content = translation.TAB_FAHRT_LBL_FAHRWERK;
+            TAB_FAHRT_LBL_FAHRERHAUS.Content = translation.TAB_FAHRT_LBL_FAHRERHAUS;
+            TAB_FAHRT_LBL_FRACHTSCHADEN.Content = translation.TAB_FAHRT_LBL_FRACHTSCHADEN;
+            BUTTON_ATS_STARTEN.Text = translation.BUTTON_ATS_STARTEN;
+            BUTTON_ETS_STARTEN.Text = translation.BUTTON_ETS_STARTEN;
+            BUTTON_TMP_STARTEN.Text = translation.BUTTON_TMP_STARTEN;
 
 
 
