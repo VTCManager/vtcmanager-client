@@ -18,6 +18,8 @@ namespace VTCManager.Klassen
 
         public DiscordHandler(Translation translation)
         {
+            FreeRoamSpeedUpdateTimer = new Timer();
+            onJobInfoTimer = new Timer();
             DiscordHandler.translation = translation;
             client = new DiscordRpcClient(DiscordAppID);
             client.Initialize();
@@ -56,7 +58,6 @@ namespace VTCManager.Klassen
             client.SetPresence(jobRPC);
             client.Invoke();
             JobInfoActive = true;
-            onJobInfoTimer = new Timer();
             onJobInfoTimer.Elapsed += new ElapsedEventHandler(updateOnJob);
             onJobInfoTimer.Interval = 5000;
             onJobInfoTimer.Enabled = true;
@@ -130,7 +131,6 @@ namespace VTCManager.Klassen
             };
             client.SetPresence(RPC);
             client.Invoke();
-            FreeRoamSpeedUpdateTimer = new Timer();
             FreeRoamSpeedUpdateTimer.Elapsed += new ElapsedEventHandler(updateFreeRoamSpeed);
             FreeRoamSpeedUpdateTimer.Interval = 3000;
             FreeRoamSpeedUpdateTimer.Enabled = true;
