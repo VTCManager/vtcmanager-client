@@ -143,6 +143,14 @@ namespace VTCManager.Klassen
             {
                 DiscordLargeImageKey = "brand-renault";
             }
+            else if (truck_brand_id == "scania")
+            {
+                DiscordLargeImageKey = "brand-scania";
+            }
+            else if (truck_brand_id == "mercedes")
+            {
+                DiscordLargeImageKey = "brand-mercedes";
+            }
             return DiscordLargeImageKey;
         }
         public void idle()
