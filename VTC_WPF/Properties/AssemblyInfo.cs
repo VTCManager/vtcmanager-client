@@ -5,11 +5,11 @@ using System.Windows;
 // Allgemeine Informationen über eine Assembly werden über die folgenden
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
-[assembly: AssemblyTitle("VTC_WPF")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("VTCManager")]
+[assembly: AssemblyDescription("A powerful Euro Truck Simulator 2 job logger.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("VTC_WPF")]
+[assembly: AssemblyProduct("VTCManager")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
