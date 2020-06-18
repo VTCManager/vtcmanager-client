@@ -223,8 +223,6 @@ namespace VTCManager
             TAB_VERKEHR.Header = translation.TAB_VERKEHR_TEXT;
             TAB_EINSTELLUNGEN.Header = translation.TAB_EINSTELLUNGEN_TEXT;
             LBL_FAHRT_SCHADEN_TITEL.Content = translation.SCHADENSANZEIGE_TITEL;
-            LBL_Truck_Name.Content = translation.TRUCK_NAME;
-            LBL_Truck_Model.Content = translation.TRUCK_MODELL;
             TAB_FAHRT_LBL_MOTOR.Content = translation.TAB_FAHRT_LBL_MOTOR;
             TAB_FAHRT_LBL_GETRIEBE.Content = translation.TAB_FAHRT_LBL_GETRIEBE;
             TAB_FAHRT_LBL_RAEDER.Content = translation.TAB_FAHRT_LBL_RAEDER;
