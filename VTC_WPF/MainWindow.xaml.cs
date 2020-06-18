@@ -95,9 +95,6 @@ namespace VTCManager
             {
                 if (!InvokeRequired)
                 {
-                    //set the data globally
-                    TelemetryHandler.Telemetry_Data = data;
-
                     // ALLGEMEINES
                     Truck_Daten.TelemetryVersion = data.TelemetryVersion.Major.ToString() + "." + data.TelemetryVersion.Minor.ToString();
                     Truck_Daten.SPIEL_PAUSE = data.Paused;
