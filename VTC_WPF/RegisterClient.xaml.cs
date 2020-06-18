@@ -26,7 +26,7 @@ namespace VTCManager
     {
         public RegisterClient()
         {
-            
+            Updater.standaloneCheckForUpdate();
             if (!String.IsNullOrEmpty(RegistryHandler.read("Config", "AccessToken")))
             {
                 Config.AccessToken = RegistryHandler.read("Config", "AccessToken");

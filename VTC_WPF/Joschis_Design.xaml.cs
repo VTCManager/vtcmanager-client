@@ -29,7 +29,7 @@ namespace VTCManager
         private readonly bool InvokeRequired;
         private delegate void UpdateProgressDelegate(DependencyProperty dp, object value);
         public DiscordHandler Discord;
-        Utilities utils = new Utilities();
+        Klassen.Utilities utils = new Klassen.Utilities();
         public JobHandler jobHandler;
         private OpenFileDialog tmp_Trucker;
         public int Gesch2;
