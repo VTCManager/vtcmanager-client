@@ -141,7 +141,10 @@ namespace VTCManager.Klassen
 
         public static void JobStarted(object sender, EventArgs e)
         {
-            checkTelemetry();
+            if (!checkTelemetry())
+            {
+                return;
+            }
             if (String.IsNullOrWhiteSpace(Telemetry_Data.JobValues.CitySource))
             {
                 Stopwatch stopWatch = new Stopwatch(); //as timeout
@@ -185,12 +188,25 @@ namespace VTCManager.Klassen
             onJob = true;
         }
 
-        private static void checkTelemetry()
+        private static bool checkTelemetry()
         {
             //bug fix when an event occures while booting the app -> Telemetry_Data is null
-            while (Telemetry_Data == null)
+            Stopwatch stopWatch = new Stopwatch(); //as timeout
+            stopWatch.Start();
+            while (Telemetry_Data == null && stopWatch.ElapsedMilliseconds < 5000)
             {
-                Console.WriteLine("Waiting for init to be finished");
+                Console.WriteLine("Waiting for tour data to init");
+            }
+            stopWatch.Stop();
+            Console.WriteLine("Wait for data took " + stopWatch.ElapsedMilliseconds + " ms");
+            if (Telemetry_Data == null && stopWatch.ElapsedMilliseconds < 5000)
+            {
+                MessageBox.Show("Could not init telemetry or it took longer than 5 seconds.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }
