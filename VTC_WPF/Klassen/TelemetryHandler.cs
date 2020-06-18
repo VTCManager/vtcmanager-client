@@ -19,6 +19,7 @@ namespace VTCManager.Klassen
         public static bool onJob = false;
         public static bool freeroamactive = false;
         public static bool idleactive = false;
+        private readonly bool InvokeRequired;
 
         public TelemetryHandler(MainWindow mainWindow, Translation translation)
         {
@@ -40,16 +41,27 @@ namespace VTCManager.Klassen
 
         private void Telemetry_Data_Handler(SCSTelemetry data, bool newTimestamp)
         {
-            Telemetry_Data = data;
-            if(data != null)
+            if (!InvokeRequired)
             {
-                if (!String.IsNullOrWhiteSpace(data.TruckValues.ConstantsValues.BrandId))
+                Telemetry_Data = data;
+                if (data != null)
                 {
-                    if (!String.IsNullOrWhiteSpace(data.TruckValues.ConstantsValues.BrandId) && !onJob && !freeroamactive)
+                    if (!String.IsNullOrWhiteSpace(data.TruckValues.ConstantsValues.BrandId))
                     {
-                        Discord.FreeRoam();
-                        freeroamactive = true;
-                        idleactive = false;
+                        if (!String.IsNullOrWhiteSpace(data.TruckValues.ConstantsValues.BrandId) && !onJob && !freeroamactive)
+                        {
+                            Discord.FreeRoam();
+                            freeroamactive = true;
+                            idleactive = false;
+                        }
+                    }
+                    else
+                    {
+                        if (!idleactive)
+                        {
+                            Discord.idle();
+                            idleactive = true;
+                        }
                     }
                 }
                 else
@@ -59,14 +71,6 @@ namespace VTCManager.Klassen
                         Discord.idle();
                         idleactive = true;
                     }
-                }
-            }
-            else
-            {
-                if (!idleactive)
-                {
-                    Discord.idle();
-                    idleactive = true;
                 }
             }
         }
