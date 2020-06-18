@@ -152,6 +152,10 @@ namespace VTCManager.Klassen
             {
                 DiscordLargeImageKey = "brand-mercedes";
             }
+            else if (truck_brand_id == "volvo")
+            {
+                DiscordLargeImageKey = "brand-volvo";
+            }
             return DiscordLargeImageKey;
         }
         public static void idle()
