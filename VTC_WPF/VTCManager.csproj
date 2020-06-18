@@ -330,6 +330,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Entypo-license.txt" />
+    <Resource Include="Icons\man-256.png" />
     <Content Include="Resources\icons8-mercedes-benz-256.png" />
     <Content Include="Resources\No_Truck.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

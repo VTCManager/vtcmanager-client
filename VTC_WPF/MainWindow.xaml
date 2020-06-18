@@ -18,12 +18,16 @@
 
     <mah:MetroWindow.Resources>
         <BooleanToVisibilityConverter x:Key="job_visibilityConverter" />
+        <BooleanToVisibilityConverter x:Key="sdk_activ_Converter" />
+        <BooleanToVisibilityConverter x:Key="is_game_runningConverter" />
         <BooleanToVisibilityConverter x:Key="elektrik_visibility" />
         <BooleanToVisibilityConverter x:Key="abblendlicht_visibility" />
         <BooleanToVisibilityConverter x:Key="normallicht_visibility" />
         <BooleanToVisibilityConverter x:Key="parkingbrake_visibility" />
         <BooleanToVisibilityConverter x:Key="carbrake_visibility" />
         <Image x:Key="Herst_Bild" />
+
+     
     </mah:MetroWindow.Resources>
 
 
@@ -122,19 +126,9 @@
 
 
                     <StackPanel Orientation="Vertical" Margin="433,204,0,55">
-
-
-
-                        <Separator/>
-
                         <StackPanel x:Name="Job_Daten_Stack" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}" Orientation="Vertical" Width="557" HorizontalAlignment="Left">
                             <TextBlock x:Name="TXT_BOX_FAHRT" Text="{Binding TXT_FAHRT}" Width="557" FontSize="18" TextAlignment="Center" TextWrapping="Wrap"/>
-
-
                         </StackPanel>
-
-
-
                     </StackPanel>
 
 
@@ -142,7 +136,7 @@
 
 
 
-                    <StackPanel Margin="78,204,612,0" Orientation="Vertical">
+                    <StackPanel Margin="78,204,612,0" Orientation="Vertical" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}">
                         <Label x:Name="LBL_FAHRT_SCHADEN_TITEL" Content="Schadensanzeige:" />
 
                         <StackPanel Orientation="Horizontal">
@@ -185,7 +179,7 @@
 
                     <!-- ANZEIGE STRECKE -->
                     <StackPanel Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Left" Orientation="Horizontal"/>
-                    <ProgressBar HorizontalAlignment="Left" Height="50" Margin="10,388,0,0" VerticalAlignment="Top" Width="798" RenderTransformOrigin="0.5,0.5" Maximum="{Binding GEPLANTE_DISTANZ}" Minimum="1" Value="{Binding REST_STRECKE}" BorderBrush="Red" BorderThickness="2" Background="White">
+                    <ProgressBar HorizontalAlignment="Left" Height="50" Margin="10,388,0,0" VerticalAlignment="Top" Width="798" RenderTransformOrigin="0.5,0.5" Maximum="{Binding GEPLANTE_DISTANZ}" Minimum="1" Value="{Binding REST_STRECKE}" BorderBrush="Red" BorderThickness="2" Background="White" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}">
                         <ProgressBar.Foreground>
                             <LinearGradientBrush EndPoint="1,0" StartPoint="0,1">
                                 <GradientStop Color="#FF05FF49" Offset="0"/>
@@ -194,16 +188,12 @@
                         </ProgressBar.Foreground>
                     </ProgressBar>
 
-                    <Image Source="{iconPacks:FontAwesomeImage Kind=GrimaceRegular}" Margin="768,398,192,10" Width="30" Height="30"/>
-                    <Image Source="{iconPacks:UniconsImage Kind=Crosshair}" Margin="12,393,938,5" Width="40" Height="40" />
+                    <Image Source="{iconPacks:FontAwesomeImage Kind=GrimaceRegular}" Margin="768,398,192,10" Width="30" Height="30" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}"/>
+                    <Image Source="{iconPacks:UniconsImage Kind=Crosshair}" Margin="12,393,938,5" Width="40" Height="40" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}"/>
                     <Label Padding="0" FontSize="20" Foreground="Black" Margin="71,117,719,291" Content="{Binding MODELL}" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Height="30" Width="200"/>
-                    <Label Content="{Binding ANZEIGE_KM_MILES}" FontFamily="Verdana" Margin="414,77,476,326" FontWeight="Bold" Foreground="Gray" FontStyle="Italic" FontSize="20" Height="35" Width="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Top"/>
-                    <Label Content="{Binding SPEED_KMH}" FontFamily="Verdana" Margin="369,22,432,366" FontWeight="Bold" Foreground="Black" FontStyle="Italic" FontSize="40" Height="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                    <Image Source="{Binding HERSTELLER_LOGO}" x:Name="BILD_ANZEIGE" Margin="129,28,777,329"/>
-
-
-
-
+                    <Label Content="{Binding ANZEIGE_KM_MILES}" FontFamily="Verdana" Margin="414,77,476,326" FontWeight="Bold" Foreground="Gray" FontStyle="Italic" FontSize="20" Height="35" Width="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
+                    <Label Content="{Binding SPEED_KMH}" x:Name="LBL_SPEED" FontFamily="Verdana" Margin="369,22,432,366" FontWeight="Bold" FontStyle="Italic" FontSize="40" Height="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
+                    <Image x:Name="BILD_ANZEIGE" Margin="129,28,777,329" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="TAB_FREUNDE" Content="" Height="50" Width="200" FontSize="24" Opacity="0.7" BorderBrush="Gray" VerticalAlignment="Center" BorderThickness="1"/>

@@ -37,6 +37,7 @@ namespace VTCManager
         private object polyline1;
         private TelemetryHandler telemetryhandler;
         private Translation translation;
+        DispatcherTimer updateHersteller_Image = new DispatcherTimer();
 
         public MainWindow()
         {
@@ -47,7 +48,10 @@ namespace VTCManager
             TelemetryInstaller.check();
             jobHandler = new JobHandler();
             Truck_Daten = new Truck_Daten();
-
+            
+            updateHersteller_Image.Interval = TimeSpan.FromSeconds(5);
+            updateHersteller_Image.Tick += timer_Tick;
+            updateHersteller_Image.Start();
             InitializeComponent();
 
             Lade_Themes();
@@ -63,7 +67,18 @@ namespace VTCManager
             TMP_Pfad_Textbox.IsEnabled = string.IsNullOrEmpty(utils.Reg_Lesen("Config", "TMP_PFAD", true)) ? true : false;
 
 
-            switch(Truck_Daten.HERSTELLER_ID)
+            
+
+
+
+
+            this.DataContext = Truck_Daten;
+        }
+
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            switch (Truck_Daten.HERSTELLER_ID)
             {
                 case "mercedes":
                     BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-mercedes-benz-256.png", UriKind.Relative));
@@ -71,22 +86,24 @@ namespace VTCManager
                 case "scania":
                     BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-scania-256.png", UriKind.Relative));
                     break;
+                case "volvo":
+                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-volvo-256.png", UriKind.Relative));
+                    break;
                 case "iveco":
                     BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-iveco-256.png", UriKind.Relative));
                     break;
-                case "daf":
-                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-iveco-256.png", UriKind.Relative));
+                case "renault":
+                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-renault-256.png", UriKind.Relative));
                     break;
-
+                case "daf":
+                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-daf-256.png", UriKind.Relative));
+                    break;
+                case "man":
+                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/man-256.png", UriKind.Relative));
+                    break;
             }
-
- 
-
-
-            this.DataContext = Truck_Daten;
+                
         }
-
-     
 
 
         private void Telemetry_Data_Handler(SCSTelemetry data, bool updated)
@@ -100,14 +117,13 @@ namespace VTCManager
 
                     // ALLGEMEINES
                     Truck_Daten.TelemetryVersion = data.TelemetryVersion.Major.ToString() + "." + data.TelemetryVersion.Minor.ToString();
-                    Truck_Daten.SPIEL_PAUSE = data.Paused;
+                    Truck_Daten.DLL_VERSION = data.DllVersion;
+                    Truck_Daten.IS_GAME_RUNNING = data.Paused;
+                    Truck_Daten.SDK_ACTIVE = data.SdkActive;
                     Truck_Daten.SPIEL = data.Game.ToString();
 
                     Truck_Daten.ANZEIGE_KM_MILES = (Truck_Daten.SPIEL == "Ets2") ? " km " : " mi";
                     Truck_Daten.ANZEIGE_TO_LBS = (Truck_Daten.SPIEL == "Ets2") ? " t " : " lb ";
-
-                    var uriSource = new Uri(@"Resourcen/icon8-mercedes-benz-256.png", UriKind.Relative);
-                   
                     Truck_Daten.SPEED_KMH = (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph;
                     Truck_Daten.SPEED_TACHO_KMH = (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph-85;
                     Truck_Daten.SPEED_MPH = (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph;
@@ -203,20 +219,18 @@ namespace VTCManager
                     Truck_Daten.TXT_FAHRT += "Zur Firma " + data.JobValues.CompanyDestination + " in " +data.JobValues.CityDestination + " fahren !" +Environment.NewLine;
                     Truck_Daten.TXT_FAHRT += Environment.NewLine;
                     Truck_Daten.TXT_FAHRT += "Du musst noch " + Truck_Daten.REST_STRECKE + Truck_Daten.ANZEIGE_KM_MILES + " von " + Truck_Daten.REST_STRECKE + Truck_Daten.ANZEIGE_KM_MILES + " fahren !";
-                   
-                   // Image finalImage = new Image();
+
+                    if(Truck_Daten.HERSTELLER_ID == "mercedes")
+                        BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-mercedes-benz-256.png", UriKind.Relative));
 
 
 
                 }
-
-
             }
             catch
             { }
 
         }
-
 
         public void lade_Translations()
         {
@@ -226,8 +240,6 @@ namespace VTCManager
             TAB_VERKEHR.Header = translation.TAB_VERKEHR_TEXT;
             TAB_EINSTELLUNGEN.Header = translation.TAB_EINSTELLUNGEN_TEXT;
             LBL_FAHRT_SCHADEN_TITEL.Content = translation.SCHADENSANZEIGE_TITEL;
-            LBL_Truck_Name.Content = translation.TRUCK_NAME;
-            LBL_Truck_Model.Content = translation.TRUCK_MODELL;
             TAB_FAHRT_LBL_MOTOR.Content = translation.TAB_FAHRT_LBL_MOTOR;
             TAB_FAHRT_LBL_GETRIEBE.Content = translation.TAB_FAHRT_LBL_GETRIEBE;
             TAB_FAHRT_LBL_RAEDER.Content = translation.TAB_FAHRT_LBL_RAEDER;

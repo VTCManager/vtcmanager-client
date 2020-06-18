@@ -34,7 +34,8 @@ namespace VTCManager.Klassen
             DISCORD_JOB_CARGO,
             DISCORD_DRIVING,
             DISCORD_JOB_REMAINING,
-            DISCORD_FREEROAM;
+            DISCORD_FREEROAM,
+            TXT_WARTE_AUF_SPIEL;
         public Translation(String lang)
         {
             version = "Version: 3.0";
@@ -62,6 +63,9 @@ namespace VTCManager.Klassen
             BUTTON_TMP_STARTEN = lang == "DE" ? "Truckers-MP" : "Truckers-MP";
             ATS_PATH_NOT_FOUND = lang == "DE" ? "Du hast in den Einstellungen noch keinen Link für ATS angegeben ! Du kannst den Pfad jederzeit nachtragen!" : "You have not yet specified a link for ATS in the settings! You can add the path at any time!";
             ETS2_PATH_NOT_FOUND = lang == "DE" ? "Du hast in den Einstellungen noch keinen Link für ETS2 angegeben ! Du kannst den Pfad jederzeit nachtragen!" : "You have not yet specified a link for ETS2 in the settings! You can add the path at any time!";
+            TXT_WARTE_AUF_SPIEL = lang == "DE" ? "Warte auf ETS2 / ATS" : "Waiting for ETS2 / ATS";
+            
+            
             if(lang == "DE")
             {
                 DISCORD_IDLE = "Kein Spiel aktiv.";

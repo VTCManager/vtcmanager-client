@@ -7,8 +7,10 @@ namespace VTCManager
     {
         // Algemeines
         private string telemetryVersion;
+        private uint dll_version;
         private string spiel;
-        private bool spiel_pause;
+        private bool is_game_running;
+        private bool sdk_activ;
         private string anzeige_liter_gallonen;
         private string anzeige_km_miles;
         private string anzeige_to_lbs;
@@ -116,6 +118,20 @@ namespace VTCManager
 
 
         // BEGIN INOTIFYPROPERTYCHANGED DONT CHANGE ANYTHING !
+
+        public uint DLL_VERSION
+        {
+            get { return dll_version; }
+            set
+            {
+                if (dll_version != value)
+                {
+                    dll_version = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
         public string HERSTELLER_ID
         {
             get { return hersteller_id; }
@@ -140,7 +156,18 @@ namespace VTCManager
                 }
             }
         }
-
+        public bool SDK_ACTIVE
+        {
+            get { return sdk_activ; }
+            set
+            {
+                if (sdk_activ != value)
+                {
+                    sdk_activ = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
         public string ANZEIGE_TO_LBS
         {
             get { return anzeige_to_lbs; }
@@ -645,14 +672,14 @@ namespace VTCManager
             }
 
         }
-        public bool SPIEL_PAUSE
+        public bool IS_GAME_RUNNING
         {
-            get { return spiel_pause; }
+            get { return is_game_running; }
             set
             {
-                if (spiel_pause != value)
+                if (is_game_running != value)
                 {
-                    spiel_pause = value;
+                    is_game_running = value;
                     NotifyPropertyChanged();
                 }
             }
