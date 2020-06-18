@@ -28,7 +28,6 @@ namespace VTCManager
         public SCSSdkTelemetry Telemetry;
         private readonly bool InvokeRequired;
         private delegate void UpdateProgressDelegate(DependencyProperty dp, object value);
-        public DiscordHandler Discord;
         Utilities utils = new Utilities();
         public JobHandler jobHandler;
         private OpenFileDialog tmp_Trucker;
