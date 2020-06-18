@@ -15,15 +15,15 @@ namespace VTCManager.Klassen
         public static SCSTelemetry Telemetry_Data;
         public SCSSdkTelemetry Telemetry;
         private MainWindow mainWindow;
-        public static DiscordHandler Discord;
         public static bool onJob = false;
         public static bool freeroamactive = false;
         public static bool idleactive = false;
+        private readonly bool InvokeRequired;
 
         public TelemetryHandler(MainWindow mainWindow, Translation translation)
         {
             this.mainWindow = mainWindow;
-            Discord = new DiscordHandler(translation);
+            DiscordHandler.init(translation);
             Telemetry = new SCSSdkTelemetry();
             Telemetry.Data += Telemetry_Data_Handler;
             Telemetry.JobStarted += TelemetryHandler.JobStarted;
@@ -40,33 +40,29 @@ namespace VTCManager.Klassen
 
         private void Telemetry_Data_Handler(SCSTelemetry data, bool newTimestamp)
         {
-            Telemetry_Data = data;
-            if(data != null)
+            if (!InvokeRequired)
             {
-                if (!String.IsNullOrWhiteSpace(data.TruckValues.ConstantsValues.BrandId))
+                Telemetry_Data = data;
+                if (data != null)
                 {
-                    if (!String.IsNullOrWhiteSpace(data.TruckValues.ConstantsValues.BrandId) && !onJob && !freeroamactive)
+                    if (!String.IsNullOrWhiteSpace(data.TruckValues.ConstantsValues.BrandId))
                     {
-                        Discord.FreeRoam();
-                        freeroamactive = true;
-                        idleactive = false;
+                        if (!String.IsNullOrWhiteSpace(data.TruckValues.ConstantsValues.BrandId) && !onJob && !freeroamactive)
+                        {
+                            DiscordHandler.FreeRoam();
+                            freeroamactive = true;
+                            idleactive = false;
+                        }
                     }
-                }
-                else
-                {
-                    if (!idleactive)
+                    else
                     {
-                        Discord.idle();
-                        idleactive = true;
+                        if (!idleactive)
+                        {
+                            Console.WriteLine("hit");
+                            DiscordHandler.idle();
+                            idleactive = true;
+                        }
                     }
-                }
-            }
-            else
-            {
-                if (!idleactive)
-                {
-                    Discord.idle();
-                    idleactive = true;
                 }
             }
         }
@@ -132,7 +128,7 @@ namespace VTCManager.Klassen
             post_param.Add("truck_damage_at_end", Telemetry_Data.TruckValues.CurrentValues.DamageValues.Engine.ToString());
             JObject response = API.HTTPSRequestPost(API.job_delivered, post_param);
             onJob = false;
-            Discord.FreeRoam();
+            DiscordHandler.FreeRoam();
         }
 
         public static void JobCancelled(object sender, EventArgs e)
@@ -140,12 +136,15 @@ namespace VTCManager.Klassen
             checkTelemetry();
             JObject response = API.HTTPSRequestGet(API.job_canceled);
             onJob = false;
-            Discord.FreeRoam();
+            DiscordHandler.FreeRoam();
         }
 
         public static void JobStarted(object sender, EventArgs e)
         {
-            checkTelemetry();
+            if (!checkTelemetry())
+            {
+                return;
+            }
             if (String.IsNullOrWhiteSpace(Telemetry_Data.JobValues.CitySource))
             {
                 Stopwatch stopWatch = new Stopwatch(); //as timeout
@@ -156,6 +155,11 @@ namespace VTCManager.Klassen
                 }
                 stopWatch.Stop();
                 Console.WriteLine("Wait for data took "+ stopWatch.ElapsedMilliseconds+" ms");
+                if(String.IsNullOrWhiteSpace(Telemetry_Data.JobValues.CitySource) && stopWatch.ElapsedMilliseconds < 5000)
+                {
+                    MessageBox.Show("Could not get required data. Job couldn't start.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
             }
             Dictionary<string, string> post_param = new Dictionary<string, string>();
             post_param.Add("origin", Telemetry_Data.JobValues.CitySource);
@@ -180,16 +184,29 @@ namespace VTCManager.Klassen
             post_param.Add("truck_brand_id", Telemetry_Data.TruckValues.ConstantsValues.BrandId);
             post_param.Add("truck_brand", Telemetry_Data.TruckValues.ConstantsValues.Brand);
             JObject response = API.HTTPSRequestPost(API.job_started, post_param);
-            Discord.OnJobStart(Telemetry_Data.JobValues.CargoValues.Name, (int)Telemetry_Data.JobValues.CargoValues.Mass, Telemetry_Data.JobValues.CitySource, Telemetry_Data.JobValues.CityDestination, Telemetry_Data.TruckValues.ConstantsValues.BrandId, Telemetry_Data.TruckValues.ConstantsValues.Brand+" "+ Telemetry_Data.TruckValues.ConstantsValues.Name);
+            DiscordHandler.OnJobStart(Telemetry_Data.JobValues.CargoValues.Name, (int)Telemetry_Data.JobValues.CargoValues.Mass, Telemetry_Data.JobValues.CitySource, Telemetry_Data.JobValues.CityDestination, Telemetry_Data.TruckValues.ConstantsValues.BrandId, Telemetry_Data.TruckValues.ConstantsValues.Brand+" "+ Telemetry_Data.TruckValues.ConstantsValues.Name);
             onJob = true;
         }
 
-        private static void checkTelemetry()
+        private static bool checkTelemetry()
         {
             //bug fix when an event occures while booting the app -> Telemetry_Data is null
-            while (Telemetry_Data == null)
+            Stopwatch stopWatch = new Stopwatch(); //as timeout
+            stopWatch.Start();
+            while (Telemetry_Data == null && stopWatch.ElapsedMilliseconds < 5000)
             {
-                Console.WriteLine("Waiting for init to be finished");
+                Console.WriteLine("Waiting for tour data to init");
+            }
+            stopWatch.Stop();
+            Console.WriteLine("Wait for data took " + stopWatch.ElapsedMilliseconds + " ms");
+            if (Telemetry_Data == null && stopWatch.ElapsedMilliseconds < 5000)
+            {
+                MessageBox.Show("Could not init telemetry or it took longer than 5 seconds.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }

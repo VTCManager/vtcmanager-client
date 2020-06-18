@@ -26,7 +26,6 @@ namespace VTCManager
         public SCSSdkTelemetry Telemetry;
         private readonly bool InvokeRequired;
         private delegate void UpdateProgressDelegate(DependencyProperty dp, object value);
-        public DiscordHandler Discord;
         public Truck_Daten Truck_Daten;
         Utilities utils = new Utilities();
         public JobHandler jobHandler;
@@ -95,9 +94,6 @@ namespace VTCManager
             {
                 if (!InvokeRequired)
                 {
-                    //set the data globally
-                    TelemetryHandler.Telemetry_Data = data;
-
                     // ALLGEMEINES
                     Truck_Daten.TelemetryVersion = data.TelemetryVersion.Major.ToString() + "." + data.TelemetryVersion.Minor.ToString();
                     Truck_Daten.SPIEL_PAUSE = data.Paused;
@@ -226,8 +222,6 @@ namespace VTCManager
             TAB_VERKEHR.Header = translation.TAB_VERKEHR_TEXT;
             TAB_EINSTELLUNGEN.Header = translation.TAB_EINSTELLUNGEN_TEXT;
             LBL_FAHRT_SCHADEN_TITEL.Content = translation.SCHADENSANZEIGE_TITEL;
-            LBL_Truck_Name.Content = translation.TRUCK_NAME;
-            LBL_Truck_Model.Content = translation.TRUCK_MODELL;
             TAB_FAHRT_LBL_MOTOR.Content = translation.TAB_FAHRT_LBL_MOTOR;
             TAB_FAHRT_LBL_GETRIEBE.Content = translation.TAB_FAHRT_LBL_GETRIEBE;
             TAB_FAHRT_LBL_RAEDER.Content = translation.TAB_FAHRT_LBL_RAEDER;

@@ -1,12 +1,13 @@
 ﻿using DiscordRPC;
+using DiscordRPC.Logging;
 using System;
 using System.Timers;
 
 namespace VTCManager.Klassen
 {
-    public class DiscordHandler
+    public static class DiscordHandler
     {
-        private DiscordRpcClient client;
+        private static DiscordRpcClient client;
         private const string DiscordSmallImageKey = "vtcm-logo-orig";
         private const string DiscordAppID = "659036297561767948";
         private const string DefaultDiscordLargeImageKey = "truck-icon";
@@ -16,30 +17,33 @@ namespace VTCManager.Klassen
         private static bool JobInfoActive;
         private static Translation translation;
 
-        public DiscordHandler(Translation translation)
+        public static void init(Translation translation)
         {
             FreeRoamSpeedUpdateTimer = new Timer();
             onJobInfoTimer = new Timer();
             DiscordHandler.translation = translation;
             client = new DiscordRpcClient(DiscordAppID);
+            client.Logger = new ConsoleLogger() { Level = LogLevel.Info };
             client.Initialize();
-            client.SetPresence(new RichPresence()
-            {
-                Details = translation.DISCORD_IDLE,
-                Assets = new Assets()
-                {
-                    LargeImageKey = DefaultDiscordLargeImageKey,
-                    LargeImageText = "Beyond the limits",
-                    SmallImageKey = DiscordSmallImageKey,
-                    SmallImageText = "v" + Config.ClientVersion
-                }
 
-            });
+            client.OnPresenceUpdate += (sender, e) =>
+            {
+                Console.WriteLine("Received Update! {0}", e.Presence);
+            };
+
+            //FREEROAM INIT
+            FreeRoamSpeedUpdateTimer.Elapsed += new ElapsedEventHandler(updateFreeRoamSpeed);
+            FreeRoamSpeedUpdateTimer.Interval = 3000;
+            //JOBINFO INIT
+            onJobInfoTimer.Elapsed += new ElapsedEventHandler(updateOnJob);
+            onJobInfoTimer.Interval = 5000;
         }
 
-        public void OnJobStart(string cargo, int weight, string origin, string destination, string truck_brand_id, string truck)
+        public static void OnJobStart(string cargo, int weight, string origin, string destination, string truck_brand_id, string truck)
         {
-            FreeRoamSpeedUpdateTimer.Enabled = false;
+            Console.WriteLine("job start");
+            FreeRoamSpeedUpdateTimer.Stop();
+            TelemetryHandler.freeroamactive = false;
             string DiscordLargeImageKey = getTruckImageKey(truck_brand_id);
             jobRPC = new RichPresence()
             {
@@ -56,17 +60,16 @@ namespace VTCManager.Klassen
             };
             jobRPC = jobRPC.WithTimestamps(Timestamps.Now);
             client.SetPresence(jobRPC);
-            client.Invoke();
             JobInfoActive = true;
-            onJobInfoTimer.Elapsed += new ElapsedEventHandler(updateOnJob);
-            onJobInfoTimer.Interval = 5000;
-            onJobInfoTimer.Enabled = true;
+            onJobInfoTimer.Start();
         }
 
-        private void updateOnJob(object sender, ElapsedEventArgs e)
+        private static void updateOnJob(object sender, ElapsedEventArgs e)
         {
+            Console.WriteLine(sender);
             if (JobInfoActive)
             {
+                Console.WriteLine("job update 1");
                 RichPresence RPC = new RichPresence()
                 {
                     Details = (int)TelemetryHandler.Telemetry_Data.TruckValues.CurrentValues.DashboardValues.Speed.Kph+" km/h",
@@ -86,13 +89,14 @@ namespace VTCManager.Klassen
             }
             else
             {
+                Console.WriteLine("job update2");
                 client.SetPresence(jobRPC);
-                client.Invoke();
                 JobInfoActive = true;
             }
         }
-        private void updateFreeRoamSpeed(object sender, ElapsedEventArgs e)
+        private static void updateFreeRoamSpeed(object sender, ElapsedEventArgs e)
         {
+            Console.WriteLine("free roam update");
             string DiscordLargeImageKey = getTruckImageKey(TelemetryHandler.Telemetry_Data.TruckValues.ConstantsValues.BrandId);
             RichPresence RPC = new RichPresence()
                 {
@@ -108,13 +112,13 @@ namespace VTCManager.Klassen
                     }
                 };
                 client.SetPresence(RPC);
-                client.Invoke();
                 JobInfoActive = false;
         }
 
-        public void FreeRoam()
+        public static void FreeRoam()
         {
-            onJobInfoTimer.Enabled = false;
+            Console.WriteLine("free roam");
+            onJobInfoTimer.Stop();
             string DiscordLargeImageKey = getTruckImageKey(TelemetryHandler.Telemetry_Data.TruckValues.ConstantsValues.BrandId);
             RichPresence RPC = new RichPresence()
             {
@@ -130,13 +134,10 @@ namespace VTCManager.Klassen
                 }
             };
             client.SetPresence(RPC);
-            client.Invoke();
-            FreeRoamSpeedUpdateTimer.Elapsed += new ElapsedEventHandler(updateFreeRoamSpeed);
-            FreeRoamSpeedUpdateTimer.Interval = 3000;
-            FreeRoamSpeedUpdateTimer.Enabled = true;
+            FreeRoamSpeedUpdateTimer.Start();
         }
 
-        private string getTruckImageKey(string truck_brand_id)
+        private static string getTruckImageKey(string truck_brand_id)
         {
             string DiscordLargeImageKey = DefaultDiscordLargeImageKey;
             if (truck_brand_id == "renault")
@@ -151,10 +152,17 @@ namespace VTCManager.Klassen
             {
                 DiscordLargeImageKey = "brand-mercedes";
             }
+            else if (truck_brand_id == "volvo")
+            {
+                DiscordLargeImageKey = "brand-volvo";
+            }
             return DiscordLargeImageKey;
         }
-        public void idle()
+        public static void idle()
         {
+            Console.WriteLine("idle");
+            FreeRoamSpeedUpdateTimer.Stop();
+            onJobInfoTimer.Stop();
             client = new DiscordRpcClient(DiscordAppID);
             client.Initialize();
             client.SetPresence(new RichPresence()
