@@ -152,6 +152,11 @@ namespace VTCManager.Klassen
                 }
                 stopWatch.Stop();
                 Console.WriteLine("Wait for data took "+ stopWatch.ElapsedMilliseconds+" ms");
+                if(String.IsNullOrWhiteSpace(Telemetry_Data.JobValues.CitySource) && stopWatch.ElapsedMilliseconds < 5000)
+                {
+                    MessageBox.Show("Could not get required data. Job couldn't start.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
             }
             Dictionary<string, string> post_param = new Dictionary<string, string>();
             post_param.Add("origin", Telemetry_Data.JobValues.CitySource);
