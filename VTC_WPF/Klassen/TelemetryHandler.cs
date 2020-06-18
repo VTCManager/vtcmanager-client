@@ -64,14 +64,6 @@ namespace VTCManager.Klassen
                         }
                     }
                 }
-                else
-                {
-                    if (!idleactive)
-                    {
-                        Discord.idle();
-                        idleactive = true;
-                    }
-                }
             }
         }
 
