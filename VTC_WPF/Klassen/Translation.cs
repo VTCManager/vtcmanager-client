@@ -50,7 +50,7 @@ namespace VTCManager.Klassen
             TAB_EINSTELLUNGEN_TEXT = lang == "DE" ? "Einstellungen" : "Settings";
             waiting_for_ets_ats = lang == "DE" ? "Warte auf ETS2 / ATS" : "Waiting of ETS2 / ATS";
             TRUCK_NAME = lang == "DE" ? "Hersteller: " : "Manufacturer: ";
-            TRUCK_MODELL = lang == "DE" ? "Truck-Modell: " : "Truck-Model: ";
+            TRUCK_MODELL = lang == "DE" ? "Modell: " : "Model: ";
             SCHADENSANZEIGE_TITEL = lang == "DE" ? "Schadensanzeige:" : "Damage-Report:";
             TAB_FAHRT_LBL_MOTOR = lang == "DE" ? "Motor-Schaden:" : "Engine-Damage:";
             TAB_FAHRT_LBL_GETRIEBE = lang == "DE" ? "Getiebe-Schaden:" : "Gearbox-Damage:";

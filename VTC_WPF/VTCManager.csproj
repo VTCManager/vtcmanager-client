@@ -300,6 +300,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="road-1303617_640.jpg" />
     <Resource Include="Resources\WindowsIcons-license.txt" />
     <Resource Include="Icons\icons8-einstellungen-30.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -316,6 +317,8 @@
     <Resource Include="VTCManager.png" />
     <Resource Include="favicon.ico" />
     <Resource Include="background-pattern-lines-01.png" />
+    <Resource Include="340341_632_canny_pic.jpg" />
+    <Resource Include="icons8-tankstelle-64.png" />
     <Content Include="Icons\icons8-mercedes-benz-256.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -331,6 +334,7 @@
     </Resource>
     <Resource Include="Resources\Entypo-license.txt" />
     <Resource Include="Icons\man-256.png" />
+    <Resource Include="PearlessenceSmoke_Lattice-768x766.jpg" />
     <Content Include="Resources\icons8-mercedes-benz-256.png" />
     <Content Include="Resources\No_Truck.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

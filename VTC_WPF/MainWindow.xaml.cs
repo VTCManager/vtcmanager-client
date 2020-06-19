@@ -137,7 +137,7 @@ namespace VTCManager
                     Truck_Daten.GANG = (int)data.TruckValues.CurrentValues.MotorValues.GearValues.Selected;
                     Truck_Daten.HERSTELLER = data.TruckValues.ConstantsValues.Brand;
                     Truck_Daten.HERSTELLER_ID = data.TruckValues.ConstantsValues.BrandId;
-                    Truck_Daten.MODELL = data.TruckValues.ConstantsValues.Name;
+                    Truck_Daten.MODELL = translation.TRUCK_MODELL + data.TruckValues.ConstantsValues.Name;
                     Truck_Daten.FUEL_MAX = (int)data.TruckValues.ConstantsValues.CapacityValues.Fuel;
                     Truck_Daten.FUEL_BESTAND = (int)data.TruckValues.CurrentValues.DashboardValues.FuelValue.Amount;
                     Truck_Daten.FUEL_REST = (int)data.TruckValues.CurrentValues.DashboardValues.FuelValue.Amount;
