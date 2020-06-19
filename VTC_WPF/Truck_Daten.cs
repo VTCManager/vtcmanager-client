@@ -96,6 +96,7 @@ namespace VTCManager
         private double navigation_zeit;
         private int navigation_speed_limit_kmh;
         private int navigation_speed_limit_mph;
+        private string anzeige_speed_limit;
         private int rest_strecke;
 
 
@@ -132,6 +133,18 @@ namespace VTCManager
             }
         }
 
+        public string ANZEIGE_SPEED_LIMIT
+        {
+            get { return anzeige_speed_limit; }
+            set
+            {
+                if (anzeige_speed_limit != value)
+                {
+                    anzeige_speed_limit = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
         public string HERSTELLER_ID
         {
             get { return hersteller_id; }

@@ -39,6 +39,8 @@ namespace VTCManager
         private Translation translation;
         DispatcherTimer updateHersteller_Image = new DispatcherTimer();
 
+        public int NAVIGATION_SPEED_LIMIT { get; private set; }
+
         public MainWindow()
         {
             Logging.Make_Log_File(); 
@@ -186,6 +188,8 @@ namespace VTCManager
                     Truck_Daten.NAVIGATION_SPEED_LIMIT_MPH = (int)data.NavigationValues.SpeedLimit.Mph;
                     Truck_Daten.NAVIGATION_ZEIT = (double)data.NavigationValues.NavigationTime;
 
+                    Truck_Daten.ANZEIGE_SPEED_LIMIT = Truck_Daten.SPIEL == "Ets2" ? Truck_Daten.NAVIGATION_SPEED_LIMIT_KMH.ToString() : Truck_Daten.NAVIGATION_SPEED_LIMIT_MPH.ToString();
+
                     // MAUTSTATIONEN
                      Truck_Daten.MAUT_BEZAHLT = (int)data.GamePlay.TollgateEvent.PayAmount;
 
@@ -214,11 +218,11 @@ namespace VTCManager
 
                     // TEXTANZEIGE IM MAINVIEW-STREETVIEW
                     // TODO TRANSLATION DE EN
-                    Truck_Daten.TXT_FAHRT = "Du fährst " + Truck_Daten.FRACHT_GEWICHT_TONNEN + Truck_Daten.ANZEIGE_TO_LBS + data.JobValues.CargoValues.Name + " von" + Environment.NewLine;
-                    Truck_Daten.TXT_FAHRT += "Firma " + data.JobValues.CompanySource + " in " + data.JobValues.CitySource + Environment.NewLine;
-                    Truck_Daten.TXT_FAHRT += "Zur Firma " + data.JobValues.CompanyDestination + " in " +data.JobValues.CityDestination + " fahren !" +Environment.NewLine;
+                    Truck_Daten.TXT_FAHRT = "Du fährst " + Truck_Daten.FRACHT_GEWICHT_TONNEN + Truck_Daten.ANZEIGE_TO_LBS + data.JobValues.CargoValues.Name + " von ";
+                    Truck_Daten.TXT_FAHRT += data.JobValues.CitySource + " nach ";
+                    Truck_Daten.TXT_FAHRT += data.JobValues.CityDestination;
                     Truck_Daten.TXT_FAHRT += Environment.NewLine;
-                    Truck_Daten.TXT_FAHRT += "Du musst noch " + Truck_Daten.REST_STRECKE + Truck_Daten.ANZEIGE_KM_MILES + " von " + Truck_Daten.REST_STRECKE + Truck_Daten.ANZEIGE_KM_MILES + " fahren !";
+                    Truck_Daten.TXT_FAHRT += "Du musst noch " +  Truck_Daten.REST_STRECKE + Truck_Daten.ANZEIGE_KM_MILES + " fahren !";
 
                     if(Truck_Daten.HERSTELLER_ID == "mercedes")
                         BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-mercedes-benz-256.png", UriKind.Relative));

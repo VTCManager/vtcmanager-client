@@ -106,7 +106,7 @@
 
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="489" Margin="-2,58,-1,0" VerticalAlignment="Top" Width="1198" TabStripPlacement="Left" Background="{x:Null}">
             <TabItem x:Name="TAB_FAHRT" Height="45" Width="200" FontSize="24" Opacity="1"  VerticalAlignment="Center" Foreground="Black" Background="LightGray">
-                <Grid x:Name="GRID_FAHRT" Margin="0">
+                <Grid x:Name="GRID_FAHRT">
 
                     <Rectangle x:Name="Anzeigen_Oben" RadiusX="230" Margin="10,0,10,239" RadiusY="70" StrokeThickness="20" Opacity="100">
                         <Rectangle.Fill>
@@ -128,11 +128,8 @@
 
 
 
-                    <StackPanel Orientation="Vertical" Margin="0,204,0,139">
-                        <StackPanel x:Name="Job_Daten_Stack" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}" Orientation="Vertical" Width="557" HorizontalAlignment="Left">
-                            <TextBlock x:Name="TXT_BOX_FAHRT" Text="{Binding TXT_FAHRT}" Width="557" FontSize="18" TextAlignment="Center" TextWrapping="Wrap"/>
-                        </StackPanel>
-                    </StackPanel>
+                    <TextBlock x:Name="TXT_BOX_FAHRT" Text="{Binding TXT_FAHRT}" FontSize="14" TextAlignment="Center" TextWrapping="Wrap" Margin="269,122,273,315"/>
+
 
 
 
@@ -186,35 +183,39 @@
 
                     <!-- ANZEIGE STRECKE -->
                     <StackPanel Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Left" Orientation="Horizontal"/>
-                    <ProgressBar HorizontalAlignment="Left" Height="47" Margin="10,360,0,0" VerticalAlignment="Top" Width="970" RenderTransformOrigin="0.5,0.5" Maximum="{Binding GEPLANTE_DISTANZ}" Minimum="1" Value="{Binding REST_STRECKE}" BorderBrush="Red" BorderThickness="2" Background="White" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}">
-                        <ProgressBar.Foreground>
-                            <LinearGradientBrush EndPoint="1,0" StartPoint="0,1">
-                                <GradientStop Color="#FF05FF49" Offset="0"/>
-                                <GradientStop Color="Red" Offset="1"/>
-                            </LinearGradientBrush>
-                        </ProgressBar.Foreground>
-                    </ProgressBar>
+                    <ProgressBar HorizontalAlignment="Left" Height="47" Margin="10,360,0,0" VerticalAlignment="Top" Width="970" RenderTransformOrigin="0.5,0.5" Maximum="{Binding GEPLANTE_DISTANZ}" Minimum="1" Value="{Binding REST_STRECKE}" BorderBrush="Black" BorderThickness="2" Background="{x:Null}" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}" Foreground="{x:Null}"/>
 
-                    <Image Source="{iconPacks:FontAwesomeImage Kind=GrimaceRegular}" Margin="944,368,16,19" Width="30" Height="30" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}"/>
+                    <Image Source="{iconPacks:FontAwesomeImage Kind=GrimaceRegular}" Margin="944,368,16,85" Width="30" Height="30" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}"/>
                     <Image Source="{iconPacks:UniconsImage Kind=Crosshair}" Margin="12,364,938,79" Width="40" Height="40" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}"/>
                     <Label FontSize="18" Foreground="Black" Margin="39,158,751,295" Content="{Binding MODELL}" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Height="30" Width="200" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
-                    <Label Content="{Binding ANZEIGE_KM_MILES}" FontFamily="Verdana" Margin="414,104,476,344" FontWeight="Bold" Foreground="Gray" FontStyle="Italic" FontSize="20" Height="35" Width="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
-                    <Label Foreground="Black" Content="{Binding SPEED_KMH}" x:Name="LBL_SPEED" FontFamily="Verdana" Margin="369,20,432,379" FontWeight="Bold" FontStyle="Italic" FontSize="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
+                    <Label Content="{Binding ANZEIGE_KM_MILES}" FontFamily="Verdana" Margin="414,84,476,364" FontWeight="Bold" Foreground="Gray" FontStyle="Italic" FontSize="20" Height="35" Width="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
+                    <Label Foreground="Black" Content="{Binding SPEED_KMH}" x:Name="LBL_SPEED" FontFamily="Verdana" Margin="369,20,432,400" FontWeight="Bold" FontStyle="Italic" FontSize="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
                     <Image x:Name="BILD_ANZEIGE" Margin="87,44,804,309" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
                     <ProgressBar x:Name="FUEL_ANZEGE" Width="20" Margin="244,25,726,295" Minimum="1" Maximum="{Binding FUEL_MAX}" Value="{Binding FUEL_BESTAND}" Background="Transparent"/>
                     <Image Height="30" Width="30" Margin="240,190,720,263" Source="icons8-tankstelle-64.png"/>
 
-            
-                        <Border Margin="659,23,271,400"
+
+                    <Border Margin="659,23,271,400"
                             Background="#FF7AA0CD"
                             BorderBrush="Black"
                                 BorderThickness="3"
                             Height="60"
                             CornerRadius="60"
                             Width="60">
-                            <Label x:Name="GANG_ANZEIGE" Content="{Binding GANG}" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="50" Height="50" FontSize="30"/>
-                        </Border>
-               
+                        <Label x:Name="GANG_ANZEIGE" Content="{Binding GANG}" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="50" Height="50" FontSize="30"/>
+                    </Border>
+
+
+                    <Border Margin="271,23,659,400"
+                            Background="White"
+                            BorderBrush="red"
+                                BorderThickness="7"
+                            Height="60"
+                            CornerRadius="60"
+                            Width="60">
+                        <Label Content="{Binding ANZEIGE_SPEED_LIMIT}" Foreground="Black" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Height="50" FontSize="28" FontWeight="Bold" Margin="-7,-2"/>
+                    </Border>
+
 
                     <Button Height="48" Width="200" Style="{DynamicResource MahApps.Styles.Button.Dialogs.Accent}" Click="Launch_ETS" Margin="780,425,10,10">
                         <StackPanel Orientation="Horizontal">
