@@ -300,6 +300,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="TMP_Logo.png" />
     <Resource Include="road-1303617_640.jpg" />
     <Resource Include="Resources\WindowsIcons-license.txt" />
     <Resource Include="Icons\icons8-einstellungen-30.png">
@@ -319,6 +320,8 @@
     <Resource Include="background-pattern-lines-01.png" />
     <Resource Include="340341_632_canny_pic.jpg" />
     <Resource Include="icons8-tankstelle-64.png" />
+    <Resource Include="ATS_Logo.png" />
+    <Resource Include="ets2_logo.png" />
     <Content Include="Icons\icons8-mercedes-benz-256.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

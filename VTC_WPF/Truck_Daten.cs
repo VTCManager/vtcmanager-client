@@ -6,9 +6,10 @@ namespace VTCManager
     public class Truck_Daten : INotifyPropertyChanged
     {
         // Algemeines
-        private string telemetryVersion;
-        private uint dll_version;
+        private string telemetry_version;
+        private string dll_version;
         private string spiel;
+        private string spiel_version;
         private bool is_game_running;
         private bool sdk_activ;
         private string anzeige_liter_gallonen;
@@ -120,7 +121,7 @@ namespace VTCManager
 
         // BEGIN INOTIFYPROPERTYCHANGED DONT CHANGE ANYTHING !
 
-        public uint DLL_VERSION
+        public string DLL_VERSION
         {
             get { return dll_version; }
             set
@@ -132,7 +133,18 @@ namespace VTCManager
                 }
             }
         }
-
+        public string SPIEL_VERSION
+        {
+            get { return spiel_version; }
+            set
+            {
+                if (spiel_version != value)
+                {
+                    spiel_version = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
         public string ANZEIGE_SPEED_LIMIT
         {
             get { return anzeige_speed_limit; }
@@ -1120,14 +1132,14 @@ namespace VTCManager
 
         }
 
-        public string TelemetryVersion
+        public string TELEMETRY_VERSION
         {
-            get { return telemetryVersion; }
+            get { return telemetry_version; }
             set
             {
-                if (telemetryVersion != value)
+                if (telemetry_version != value)
                 {
-                    telemetryVersion = value;
+                    telemetry_version = value;
                     NotifyPropertyChanged();
                 }
             }

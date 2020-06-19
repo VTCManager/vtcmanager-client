@@ -25,6 +25,8 @@
         <BooleanToVisibilityConverter x:Key="normallicht_visibility" />
         <BooleanToVisibilityConverter x:Key="parkingbrake_visibility" />
         <BooleanToVisibilityConverter x:Key="carbrake_visibility" />
+        <BooleanToVisibilityConverter x:Key="blinker_left_visibility" />
+        <BooleanToVisibilityConverter x:Key="blinker_right_visibility" />
         <Image x:Key="Herst_Bild" />
 
 
@@ -43,7 +45,7 @@
     <mah:MetroWindow.RightWindowCommands>
 
         <mah:WindowCommands>
-            <Button Click="LaunchFaceBookSiteSite" ToolTip="Besuchen Sie uns auf unserer Facebook-Seite">
+            <Button Click="LaunchFaceBookSite" ToolTip="Besuchen Sie uns auf unserer Facebook-Seite">
                 <iconPacks:PackIconModern Width="22"
                                   Height="22"
                                   Kind="SocialFacebook" />
@@ -104,9 +106,18 @@
 
         <Grid Width="200" HorizontalAlignment="Left"/>
 
+
+
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="489" Margin="-2,58,-1,0" VerticalAlignment="Top" Width="1198" TabStripPlacement="Left" Background="{x:Null}">
             <TabItem x:Name="TAB_FAHRT" Height="45" Width="200" FontSize="24" Opacity="1"  VerticalAlignment="Center" Foreground="Black" Background="LightGray">
                 <Grid x:Name="GRID_FAHRT">
+
+                    <!-- HÄNGEBILDER ETS/ATS/TMP -->
+                    <Image x:Name="image" HorizontalAlignment="Left" Height="262" Margin="294,128,0,0" VerticalAlignment="Top" Width="126" Source="ATS_Logo.png" MouseDown="image_MouseDown" MouseEnter="image_MouseEnter_1" MouseLeave="image_MouseLeave"/>
+                    <Image x:Name="image2" HorizontalAlignment="Left" Height="262" Margin="400,228,0,0" VerticalAlignment="Top" Width="126" Source="TMP_Logo.png" MouseDown="image2_MouseDown" MouseEnter="image2_MouseEnter" MouseLeave="image2_MouseLeave"/>
+                    <Image x:Name="image3" HorizontalAlignment="Left" Height="262" Margin="501,131,0,0" VerticalAlignment="Top" Width="152" Source="ets2_logo.png" Stretch="Fill" MouseDown="image3_MouseDown" MouseEnter="image3_MouseEnter" MouseLeave="image3_MouseLeave"/>
+
+
 
                     <Rectangle x:Name="Anzeigen_Oben" RadiusX="230" Margin="10,0,10,239" RadiusY="70" StrokeThickness="20" Opacity="100">
                         <Rectangle.Fill>
@@ -127,8 +138,13 @@
                     <Image Source="{iconPacks:MaterialImage Kind=CarLightHigh}" Width="50" Height="50" Margin="550,168,390,265" Visibility="{Binding NORMMALLICHT, Converter={StaticResource normallicht_visibility}}"/>
 
 
+                    <!-- BLINKER LINKS / RECHTS -->
+                    <Image Source="{iconPacks:EvaIconsImage Kind=ArrowLeft}" Width="50" Height="50" Margin="319,25,621,408" Visibility="{Binding BLINKER_LINKS, Converter={StaticResource blinker_left_visibility}}"/>
+                    <Image Source="{iconPacks:EvaIconsImage Kind=ArrowRight}" Width="50" Height="50" Margin="560,25,380,408" Visibility="{Binding BLINKER_RECHTS, Converter={StaticResource blinker_right_visibility}}"/>
 
-                    <TextBlock x:Name="TXT_BOX_FAHRT" Text="{Binding TXT_FAHRT}" FontSize="14" TextAlignment="Center" TextWrapping="Wrap" Margin="269,122,273,315"/>
+
+
+                    <TextBlock x:Name="TXT_BOX_FAHRT" Text="{Binding TXT_FAHRT}" FontSize="14" TextAlignment="Center" TextWrapping="Wrap" Margin="269,122,273,315" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}"/>
 
 
 
@@ -183,16 +199,18 @@
 
                     <!-- ANZEIGE STRECKE -->
                     <StackPanel Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Left" Orientation="Horizontal"/>
-                    <ProgressBar HorizontalAlignment="Left" Height="47" Margin="10,360,0,0" VerticalAlignment="Top" Width="970" RenderTransformOrigin="0.5,0.5" Maximum="{Binding GEPLANTE_DISTANZ}" Minimum="1" Value="{Binding REST_STRECKE}" BorderBrush="Black" BorderThickness="2" Background="{x:Null}" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}" Foreground="{x:Null}"/>
+                    <ProgressBar HorizontalAlignment="Left" Height="47" Margin="-191,426,0,0" VerticalAlignment="Top" Width="1171" RenderTransformOrigin="0.5,0.5" Maximum="{Binding GEPLANTE_DISTANZ}" Minimum="1" Value="{Binding REST_STRECKE}" BorderBrush="Black" BorderThickness="2" Background="{x:Null}" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}" Foreground="{x:Null}"/>
 
-                    <Image Source="{iconPacks:FontAwesomeImage Kind=GrimaceRegular}" Margin="944,368,16,85" Width="30" Height="30" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}"/>
-                    <Image Source="{iconPacks:UniconsImage Kind=Crosshair}" Margin="12,364,938,79" Width="40" Height="40" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}"/>
+                    <Image Source="{iconPacks:FontAwesomeImage Kind=GrimaceRegular}" Margin="944,434,16,19" Width="30" Height="30" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}"/>
+                    <Image Source="{iconPacks:UniconsImage Kind=Crosshair}" Margin="-189,428,1139,15" Width="40" Height="40" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}"/>
                     <Label FontSize="18" Foreground="Black" Margin="39,158,751,295" Content="{Binding MODELL}" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Height="30" Width="200" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
                     <Label Content="{Binding ANZEIGE_KM_MILES}" FontFamily="Verdana" Margin="414,84,476,364" FontWeight="Bold" Foreground="Gray" FontStyle="Italic" FontSize="20" Height="35" Width="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
                     <Label Foreground="Black" Content="{Binding SPEED_KMH}" x:Name="LBL_SPEED" FontFamily="Verdana" Margin="369,20,432,400" FontWeight="Bold" FontStyle="Italic" FontSize="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
-                    <Image x:Name="BILD_ANZEIGE" Margin="87,44,804,309" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
-                    <ProgressBar x:Name="FUEL_ANZEGE" Width="20" Margin="244,25,726,295" Minimum="1" Maximum="{Binding FUEL_MAX}" Value="{Binding FUEL_BESTAND}" Background="Transparent"/>
-                    <Image Height="30" Width="30" Margin="240,190,720,263" Source="icons8-tankstelle-64.png"/>
+                    <Image x:Name="BILD_ANZEIGE" Margin="87,44,804,309" Width="100" Height="100" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
+                    <ProgressBar x:Name="FUEL_ANZEGE" Width="20" Margin="244,25,726,295" Minimum="1" Maximum="{Binding FUEL_MAX}" Value="{Binding FUEL_BESTAND}" BorderThickness="1" Background="Transparent"  Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}" RenderTransformOrigin="0.5,0.5" Orientation="Vertical" ToolTip="{Binding TXT_TANKANZEIGE}" BorderBrush="Black">
+
+                    </ProgressBar>
+                    <Image Height="30" Width="30" Margin="240,190,720,263" Source="icons8-tankstelle-64.png"  Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
 
 
                     <Border Margin="659,23,271,400"
@@ -201,41 +219,21 @@
                                 BorderThickness="3"
                             Height="60"
                             CornerRadius="60"
-                            Width="60">
+                            Width="60" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}">
                         <Label x:Name="GANG_ANZEIGE" Content="{Binding GANG}" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="50" Height="50" FontSize="30"/>
                     </Border>
 
 
-                    <Border Margin="271,23,659,400"
+                    <Border Margin="659,156,269,267"
                             Background="White"
                             BorderBrush="red"
                                 BorderThickness="7"
                             Height="60"
                             CornerRadius="60"
-                            Width="60">
+                            Width="60" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}">
                         <Label Content="{Binding ANZEIGE_SPEED_LIMIT}" Foreground="Black" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Height="50" FontSize="28" FontWeight="Bold" Margin="-7,-2"/>
                     </Border>
 
-
-                    <Button Height="48" Width="200" Style="{DynamicResource MahApps.Styles.Button.Dialogs.Accent}" Click="Launch_ETS" Margin="780,425,10,10">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="{iconPacks:BoxIconsImage Kind=SolidTruck}" Margin="0,0,10,0" Height="30" />
-                            <TextBlock x:Name="BUTTON_ETS_STARTEN" VerticalAlignment="Center">ETS Start</TextBlock>
-                        </StackPanel>
-                    </Button>
-                    <Button Height="46" Width="200" Style="{DynamicResource MahApps.Styles.Button.Dialogs.Accent}" Click="Launch_ATS" Margin="362,425,428,12">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="{iconPacks:BoxIconsImage Kind=SolidTruck}" Margin="0,0,10,0" Height="30" />
-                            <TextBlock x:Name="BUTTON_ATS_STARTEN" VerticalAlignment="Center">ATS Start</TextBlock>
-                        </StackPanel>
-                    </Button>
-
-                    <Button Height="48" Width="200" Style="{DynamicResource MahApps.Styles.Button.Dialogs.Accent}" Click="TMP_Starten_Click" Margin="12,425,778,10">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="{iconPacks:BoxIconsImage Kind=SolidTruck}" Margin="0,0,10,0" Height="30" />
-                            <TextBlock x:Name="BUTTON_TMP_STARTEN" VerticalAlignment="Center">TMP Start</TextBlock>
-                        </StackPanel>
-                    </Button>
 
 
                 </Grid>
@@ -250,7 +248,7 @@
                     <Button x:Name="BTN_Suche_TMP_PFAD" Content="..." HorizontalAlignment="Left" Margin="286,86,0,0" VerticalAlignment="Top" Width="46" Click="btn_open_TMP_File_Click"/>
 
                     <Label Content="Design Auswahl:" HorizontalAlignment="Left" Margin="477,59,0,0" VerticalAlignment="Top" FontSize="12"/>
-                    <ComboBox x:Name="Designauswahl" Width="300" Height="30" Margin="476,85,216,393" 
+                    <ComboBox x:Name="Designauswahl" Height="30" Margin="476,83,356,374" 
                               SelectionChanged="Designauswahl_SelectionChanged" 
                               SelectedValuePath="Content">
                         <ComboBoxItem>Dark.Blue</ComboBoxItem>
@@ -314,12 +312,10 @@
 
 
         </TabControl>
-
-
-
-
-        <StatusBar VerticalAlignment="Bottom" Height="25" Margin="0,0,0,0">
-            <StatusBarItem Content="{Binding TELEMETRY_VERION}"/>
+        <StatusBar VerticalAlignment="Bottom" Height="30" Width="1200">
+            <StatusBarItem Content="{Binding TELEMETRY_VERSION}" FontSize="10"/>
+            <StatusBarItem Content="{Binding SPIEL_VERSION}" FontSize="10"/>
+            <StatusBarItem Content="{Binding DLL_VERSION}" FontSize="10"/>
         </StatusBar>
 
 
