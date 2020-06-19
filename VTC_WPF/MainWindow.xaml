@@ -14,17 +14,26 @@
         GlowBrush="Gold"
         BorderThickness="0"
         SaveWindowPosition="True"
-        Title="VTC-Manager V3" Height="600" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="VTCManager.png">
+        Title="VTC-Manager V3" Height="700" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="VTCManager.png">
 
     <mah:MetroWindow.Resources>
         <BooleanToVisibilityConverter x:Key="job_visibilityConverter" />
+        <BooleanToVisibilityConverter x:Key="sdk_activ_Converter" />
+        <BooleanToVisibilityConverter x:Key="is_game_runningConverter" />
         <BooleanToVisibilityConverter x:Key="elektrik_visibility" />
         <BooleanToVisibilityConverter x:Key="abblendlicht_visibility" />
         <BooleanToVisibilityConverter x:Key="normallicht_visibility" />
         <BooleanToVisibilityConverter x:Key="parkingbrake_visibility" />
         <BooleanToVisibilityConverter x:Key="carbrake_visibility" />
+        <BooleanToVisibilityConverter x:Key="blinker_left_visibility" />
+        <BooleanToVisibilityConverter x:Key="blinker_right_visibility" />
         <Image x:Key="Herst_Bild" />
+
+
     </mah:MetroWindow.Resources>
+    <Controls:MetroWindow.Background>
+        <ImageBrush ImageSource="road-1303617_640.jpg"/>
+    </Controls:MetroWindow.Background>
 
 
     <mah:MetroWindow.LeftWindowCommands>
@@ -36,7 +45,7 @@
     <mah:MetroWindow.RightWindowCommands>
 
         <mah:WindowCommands>
-            <Button Click="LaunchFaceBookSiteSite" ToolTip="Besuchen Sie uns auf unserer Facebook-Seite">
+            <Button Click="LaunchFaceBookSite" ToolTip="Besuchen Sie uns auf unserer Facebook-Seite">
                 <iconPacks:PackIconModern Width="22"
                                   Height="22"
                                   Kind="SocialFacebook" />
@@ -97,118 +106,141 @@
 
         <Grid Width="200" HorizontalAlignment="Left"/>
 
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="510" Margin="-2,58,-1,0" VerticalAlignment="Top" Width="1198" TabStripPlacement="Left">
-            <TabItem x:Name="TAB_FAHRT" Height="45" Width="200" FontSize="24" Opacity="0.7" BorderBrush="Gray" VerticalAlignment="Center" BorderThickness="1">
-                <Grid x:Name="GRID_FAHRT" Margin="0,0,0,66">
 
-                    <Rectangle x:Name="Anzeigen_Oben" RadiusX="50" Margin="39,0,43,239" RadiusY="50" StrokeThickness="5" OpacityMask="#FFFBC5C5">
+
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="489" Margin="-2,58,-1,0" VerticalAlignment="Top" Width="1198" TabStripPlacement="Left" Background="{x:Null}">
+            <TabItem x:Name="TAB_FAHRT" Height="45" Width="200" FontSize="24" Opacity="1"  VerticalAlignment="Center" Foreground="Black" Background="LightGray">
+                <Grid x:Name="GRID_FAHRT">
+
+                    <!-- HÄNGEBILDER ETS/ATS/TMP -->
+                    <Image x:Name="image" HorizontalAlignment="Left" Height="262" Margin="294,128,0,0" VerticalAlignment="Top" Width="126" Source="ATS_Logo.png" MouseDown="image_MouseDown" MouseEnter="image_MouseEnter_1" MouseLeave="image_MouseLeave"/>
+                    <Image x:Name="image2" HorizontalAlignment="Left" Height="262" Margin="400,228,0,0" VerticalAlignment="Top" Width="126" Source="TMP_Logo.png" MouseDown="image2_MouseDown" MouseEnter="image2_MouseEnter" MouseLeave="image2_MouseLeave"/>
+                    <Image x:Name="image3" HorizontalAlignment="Left" Height="262" Margin="501,131,0,0" VerticalAlignment="Top" Width="152" Source="ets2_logo.png" Stretch="Fill" MouseDown="image3_MouseDown" MouseEnter="image3_MouseEnter" MouseLeave="image3_MouseLeave"/>
+
+
+
+                    <Rectangle x:Name="Anzeigen_Oben" RadiusX="230" Margin="10,0,10,239" RadiusY="70" StrokeThickness="20" Opacity="100">
                         <Rectangle.Fill>
-                            <ImageBrush ImageSource="background-pattern-lines-01.png"/>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="White" Offset="0"/>
+                                <GradientStop Color="#FF057A85" Offset="1"/>
+                            </LinearGradientBrush>
                         </Rectangle.Fill>
                         <Rectangle.Stroke>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="Black" Offset="0"/>
-                                <GradientStop Color="White" Offset="1"/>
-                            </LinearGradientBrush>
+                            <ImageBrush ImageSource="340341_632_canny_pic.jpg"/>
                         </Rectangle.Stroke>
                     </Rectangle>
 
-                    <Image Source="{iconPacks:MaterialImage Kind=CarBrakeAlert}" Width="50" Height="50" Margin="327,126,613,262" Visibility="{Binding BRAKE_VISIBILITY, Converter={StaticResource carbrake_visibility}}"/>
-                    <Image Source="{iconPacks:MaterialImage Kind=CarBrakeParking}" Width="50" Height="50" Margin="385,126,555,262" Visibility="{Binding PARKING_BRAKE, Converter={StaticResource parkingbrake_visibility}}"/>
-                    <Image Source="{iconPacks:OcticonsImage Kind=Zap}" Width="50" Height="50" Margin="438,126,502,262" Visibility="{Binding ELEKTRIK_STATUS, Converter={StaticResource elektrik_visibility}}"/>
-                    <Image Source="{iconPacks:MaterialImage Kind=CarLightDimmed}" Width="50" Height="50" Margin="492,126,448,262" Visibility="{Binding ABBLENDLICHT, Converter={StaticResource abblendlicht_visibility}}"/>
-                    <Image Source="{iconPacks:MaterialImage Kind=CarLightHigh}" Width="50" Height="50" Margin="550,126,390,262" Visibility="{Binding NORMMALLICHT, Converter={StaticResource normallicht_visibility}}"/>
+                    <Image Source="{iconPacks:MaterialImage Kind=CarBrakeAlert}" Width="50" Height="50" Margin="327,168,613,265" Visibility="{Binding BRAKE_VISIBILITY, Converter={StaticResource carbrake_visibility}}"/>
+                    <Image Source="{iconPacks:MaterialImage Kind=CarBrakeParking}" Width="50" Height="50" Margin="385,166,555,267" Visibility="{Binding PARKING_BRAKE, Converter={StaticResource parkingbrake_visibility}}"/>
+                    <Image Source="{iconPacks:OcticonsImage Kind=Zap}" Width="50" Height="50" Margin="438,168,502,265" Visibility="{Binding ELEKTRIK_STATUS, Converter={StaticResource elektrik_visibility}}"/>
+                    <Image Source="{iconPacks:MaterialImage Kind=CarLightDimmed}" Width="50" Height="50" Margin="492,168,448,265" Visibility="{Binding ABBLENDLICHT, Converter={StaticResource abblendlicht_visibility}}"/>
+                    <Image Source="{iconPacks:MaterialImage Kind=CarLightHigh}" Width="50" Height="50" Margin="550,168,390,265" Visibility="{Binding NORMMALLICHT, Converter={StaticResource normallicht_visibility}}"/>
+
+
+                    <!-- BLINKER LINKS / RECHTS -->
+                    <Image Source="{iconPacks:EvaIconsImage Kind=ArrowLeft}" Width="50" Height="50" Margin="319,25,621,408" Visibility="{Binding BLINKER_LINKS, Converter={StaticResource blinker_left_visibility}}"/>
+                    <Image Source="{iconPacks:EvaIconsImage Kind=ArrowRight}" Width="50" Height="50" Margin="560,25,380,408" Visibility="{Binding BLINKER_RECHTS, Converter={StaticResource blinker_right_visibility}}"/>
 
 
 
-                    <StackPanel Orientation="Vertical" Margin="433,204,0,55">
+                    <TextBlock x:Name="TXT_BOX_FAHRT" Text="{Binding TXT_FAHRT}" FontSize="14" TextAlignment="Center" TextWrapping="Wrap" Margin="269,122,273,315" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}"/>
 
 
 
-                        <Separator/>
-
-                        <StackPanel x:Name="Job_Daten_Stack" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}" Orientation="Vertical" Width="557" HorizontalAlignment="Left">
-                            <TextBlock x:Name="TXT_BOX_FAHRT" Text="{Binding TXT_FAHRT}" Width="557" FontSize="18" TextAlignment="Center" TextWrapping="Wrap"/>
 
 
+
+                    <DockPanel Margin="722,20,0,259">
+                        <Border BorderBrush="Black" BorderThickness="1"/>
+                        <StackPanel Width="300" Margin="10,15,29,0" Orientation="Vertical" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}">
+
+
+                            <Label x:Name="LBL_FAHRT_SCHADEN_TITEL" FontSize="14" Content="Schadensanzeige:" Foreground="Black"/>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Foreground="Black" x:Name="TAB_FAHRT_LBL_MOTOR" FontSize="14" Padding="0" Content="Motor: " VerticalContentAlignment="Center" Width="150" Height="20" HorizontalContentAlignment="Right"/>
+                                <Label Foreground="Black" FontSize="14" Padding="0" Content="{Binding TRUCK_MOTOR_SCHADEN}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="30" Height="20"/>
+                                <Label Foreground="Black" FontSize="14" Padding="0" Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Foreground="Black" x:Name="TAB_FAHRT_LBL_GETRIEBE" FontSize="14" Padding="0 " Content="Getriebe: " VerticalContentAlignment="Center" Width="150" Height="20" HorizontalContentAlignment="Right"/>
+                                <Label Foreground="Black" FontSize="14" Padding="0" Content="{Binding TRUCK_GETRIEBE_SCHADEN}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="30" Height="20"/>
+                                <Label Foreground="Black" FontSize="14" Padding="0" Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Foreground="Black" x:Name="TAB_FAHRT_LBL_FAHRWERK" FontSize="14" Padding="0" Content="Fahrwerk: " VerticalContentAlignment="Center" Width="150" Height="20" HorizontalContentAlignment="Right"/>
+                                <Label Foreground="Black" FontSize="14" Padding="0" Content="{Binding TRUCK_FAHRWERK_SCHADEN}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="30" Height="20"/>
+                                <Label Foreground="Black" FontSize="14" Padding="0" Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Foreground="Black" x:Name="TAB_FAHRT_LBL_FAHRERHAUS" FontSize="14" Padding="0" Content="Fahrerhaus: " VerticalContentAlignment="Center" Width="150" Height="20" HorizontalContentAlignment="Right"/>
+                                <Label Foreground="Black" FontSize="14" Padding="0" Content="{Binding TRUCK_CHASSIS_SCHADEN}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="30" Height="20"/>
+                                <Label Foreground="Black" FontSize="14" Padding="0" Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Foreground="Black" x:Name="TAB_FAHRT_LBL_RAEDER" FontSize="14" Padding="0" Content="Räder: " Width="150" VerticalContentAlignment="Center" Height="20" HorizontalContentAlignment="Right"/>
+                                <Label Foreground="Black" FontSize="14" Padding="0" Content="{Binding TRUCK_RAEDER_SCHADEN}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="30" Height="20"/>
+                                <Label Foreground="Black" FontSize="14" Padding="0" Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Foreground="Black" x:Name="TAB_FAHRT_LBL_FRACHTSCHADEN" FontSize="14" Padding="0" Content="Frachtschaden: " VerticalContentAlignment="Center" Width="150" Height="20" HorizontalContentAlignment="Right"/>
+                                <Label Foreground="Black" FontSize="14" Padding="0" Content="{Binding TRAILER_FRACHT_SCHADEN}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="30" Height="20"/>
+                                <Label Foreground="Black" FontSize="14" Padding="0" Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                            </StackPanel>
                         </StackPanel>
 
-
-
-                    </StackPanel>
-
-
-
-
-
-
-                    <StackPanel Margin="78,204,612,0" Orientation="Vertical">
-                        <Label x:Name="LBL_FAHRT_SCHADEN_TITEL" Content="Schadensanzeige:" />
-
-                        <StackPanel Orientation="Horizontal">
-                            <Label x:Name="TAB_FAHRT_LBL_MOTOR" FontSize="14" Padding="0" Content="Motor: " VerticalContentAlignment="Center" Width="150" Height="20" HorizontalContentAlignment="Right"/>
-                            <Label FontSize="14" Padding="0" Content="{Binding TRUCK_MOTOR_SCHADEN}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="30" Height="20"/>
-                            <Label FontSize="14" Padding="0" Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Label x:Name="TAB_FAHRT_LBL_GETRIEBE" FontSize="14" Padding="0 " Content="Getriebe: " VerticalContentAlignment="Center" Width="150" Height="20" HorizontalContentAlignment="Right"/>
-                            <Label FontSize="14" Padding="0" Content="{Binding TRUCK_GETRIEBE_SCHADEN}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="30" Height="20"/>
-                            <Label FontSize="14" Padding="0" Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Label x:Name="TAB_FAHRT_LBL_FAHRWERK" FontSize="14" Padding="0" Content="Fahrwerk: " VerticalContentAlignment="Center" Width="150" Height="20" HorizontalContentAlignment="Right"/>
-                            <Label FontSize="14" Padding="0" Content="{Binding TRUCK_FAHRWERK_SCHADEN}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="30" Height="20"/>
-                            <Label FontSize="14" Padding="0" Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Label x:Name="TAB_FAHRT_LBL_FAHRERHAUS" FontSize="14" Padding="0" Content="Fahrerhaus: " VerticalContentAlignment="Center" Width="150" Height="20" HorizontalContentAlignment="Right"/>
-                            <Label FontSize="14" Padding="0" Content="{Binding TRUCK_CHASSIS_SCHADEN}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="30" Height="20"/>
-                            <Label FontSize="14" Padding="0" Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Label x:Name="TAB_FAHRT_LBL_RAEDER" FontSize="14" Padding="0" Content="Räder: " Width="150" VerticalContentAlignment="Center" Height="20" HorizontalContentAlignment="Right"/>
-                            <Label FontSize="14" Padding="0" Content="{Binding TRUCK_RAEDER_SCHADEN}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="30" Height="20"/>
-                            <Label FontSize="14" Padding="0" Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-
-                        <Separator/>
-                        <StackPanel Orientation="Horizontal">
-                            <Label x:Name="TAB_FAHRT_LBL_FRACHTSCHADEN" FontSize="14" Padding="0" Content="Frachtschaden: " VerticalContentAlignment="Center" Width="150" Height="20" HorizontalContentAlignment="Right"/>
-                            <Label FontSize="14" Padding="0" Content="{Binding TRAILER_FRACHT_SCHADEN}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="30" Height="20"/>
-                            <Label FontSize="14" Padding="0" Content="%" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </StackPanel>
+                    </DockPanel>
 
                     <!-- ANZEIGE STRECKE -->
                     <StackPanel Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Left" Orientation="Horizontal"/>
-                    <ProgressBar HorizontalAlignment="Left" Height="50" Margin="10,388,0,0" VerticalAlignment="Top" Width="798" RenderTransformOrigin="0.5,0.5" Maximum="{Binding GEPLANTE_DISTANZ}" Minimum="1" Value="{Binding REST_STRECKE}" BorderBrush="Red" BorderThickness="2" Background="White">
-                        <ProgressBar.Foreground>
-                            <LinearGradientBrush EndPoint="1,0" StartPoint="0,1">
-                                <GradientStop Color="#FF05FF49" Offset="0"/>
-                                <GradientStop Color="Red" Offset="1"/>
-                            </LinearGradientBrush>
-                        </ProgressBar.Foreground>
+                    <ProgressBar HorizontalAlignment="Left" Height="47" Margin="-191,426,0,0" VerticalAlignment="Top" Width="1171" RenderTransformOrigin="0.5,0.5" Maximum="{Binding GEPLANTE_DISTANZ}" Minimum="1" Value="{Binding REST_STRECKE}" BorderBrush="Black" BorderThickness="2" Background="{x:Null}" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}" Foreground="{x:Null}"/>
+
+                    <Image Source="{iconPacks:FontAwesomeImage Kind=GrimaceRegular}" Margin="944,434,16,19" Width="30" Height="30" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}"/>
+                    <Image Source="{iconPacks:UniconsImage Kind=Crosshair}" Margin="-189,428,1139,15" Width="40" Height="40" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}"/>
+                    <Label FontSize="18" Foreground="Black" Margin="39,158,751,295" Content="{Binding MODELL}" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Height="30" Width="200" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
+                    <Label Content="{Binding ANZEIGE_KM_MILES}" FontFamily="Verdana" Margin="414,84,476,364" FontWeight="Bold" Foreground="Gray" FontStyle="Italic" FontSize="20" Height="35" Width="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
+                    <Label Foreground="Black" Content="{Binding SPEED_KMH}" x:Name="LBL_SPEED" FontFamily="Verdana" Margin="369,20,432,400" FontWeight="Bold" FontStyle="Italic" FontSize="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
+                    <Image x:Name="BILD_ANZEIGE" Margin="87,44,804,309" Width="100" Height="100" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
+                    <ProgressBar x:Name="FUEL_ANZEGE" Width="20" Margin="244,25,726,295" Minimum="1" Maximum="{Binding FUEL_MAX}" Value="{Binding FUEL_BESTAND}" BorderThickness="1" Background="Transparent"  Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}" RenderTransformOrigin="0.5,0.5" Orientation="Vertical" ToolTip="{Binding TXT_TANKANZEIGE}" BorderBrush="Black">
+
                     </ProgressBar>
+                    <Image Height="30" Width="30" Margin="240,190,720,263" Source="icons8-tankstelle-64.png"  Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
 
-                    <Image Source="{iconPacks:FontAwesomeImage Kind=GrimaceRegular}" Margin="768,398,192,10" Width="30" Height="30"/>
-                    <Image Source="{iconPacks:UniconsImage Kind=Crosshair}" Margin="12,393,938,5" Width="40" Height="40" />
-                    <Label Padding="0" FontSize="20" Foreground="Black" Margin="71,117,719,291" Content="{Binding MODELL}" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Height="30" Width="200"/>
-                    <Label Content="{Binding ANZEIGE_KM_MILES}" FontFamily="Verdana" Margin="414,77,476,326" FontWeight="Bold" Foreground="Gray" FontStyle="Italic" FontSize="20" Height="35" Width="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Top"/>
-                    <Label Content="{Binding SPEED_KMH}" FontFamily="Verdana" Margin="369,22,432,366" FontWeight="Bold" Foreground="Black" FontStyle="Italic" FontSize="40" Height="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                    <Image Source="{Binding HERSTELLER_LOGO}" x:Name="BILD_ANZEIGE" Margin="129,28,777,329"/>
 
+                    <Border Margin="659,23,271,400"
+                            Background="#FF7AA0CD"
+                            BorderBrush="Black"
+                                BorderThickness="3"
+                            Height="60"
+                            CornerRadius="60"
+                            Width="60" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}">
+                        <Label x:Name="GANG_ANZEIGE" Content="{Binding GANG}" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="50" Height="50" FontSize="30"/>
+                    </Border>
+
+
+                    <Border Margin="659,156,269,267"
+                            Background="White"
+                            BorderBrush="red"
+                                BorderThickness="7"
+                            Height="60"
+                            CornerRadius="60"
+                            Width="60" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}">
+                        <Label Content="{Binding ANZEIGE_SPEED_LIMIT}" Foreground="Black" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Height="50" FontSize="28" FontWeight="Bold" Margin="-7,-2"/>
+                    </Border>
 
 
 
                 </Grid>
             </TabItem>
-            <TabItem x:Name="TAB_FREUNDE" Content="" Height="50" Width="200" FontSize="24" Opacity="0.7" BorderBrush="Gray" VerticalAlignment="Center" BorderThickness="1"/>
-            <TabItem x:Name="TAB_VERKEHR" Content="" FontSize="24" Height="50" Opacity="0.7" Width="200" BorderBrush="Gray" VerticalAlignment="Center" BorderThickness="1"/>
-            <TabItem x:Name="TAB_EINSTELLUNGEN" FontSize="24" Height="50" Width="200" Opacity="0.7" BorderBrush="Gray" VerticalAlignment="Center" BorderThickness="1">
+            <TabItem x:Name="TAB_FREUNDE" Content="" Height="50" Width="200" FontSize="24" Opacity="0.7" VerticalAlignment="Center" Background="LightGray"/>
+            <TabItem x:Name="TAB_VERKEHR" Content="" FontSize="24" Height="50" Opacity="0.7" Width="200" VerticalAlignment="Center" Background="LightGray"/>
+            <TabItem x:Name="TAB_EINSTELLUNGEN" FontSize="24" Height="50" Width="200" Opacity="0.7" VerticalAlignment="Center" Background="LightGray">
                 <Grid Margin="-1,0,-1,-4">
                     <Label x:Name="label1" Content="Einstellungen" HorizontalAlignment="Left" Margin="2,-1,0,0" VerticalAlignment="Top" FontSize="24"/>
                     <TextBox x:Name="TMP_Pfad_Textbox" HorizontalAlignment="Left" Height="30" Margin="15,86,0,0" VerticalAlignment="Top" Width="257" FontSize="14" BorderBrush="#893341CF" AcceptsReturn="False" MaxLines="1" TextWrapping="NoWrap" mah:TextBoxHelper.Watermark="Kein TruckersMP Pfad angegeben !"/>
@@ -216,7 +248,7 @@
                     <Button x:Name="BTN_Suche_TMP_PFAD" Content="..." HorizontalAlignment="Left" Margin="286,86,0,0" VerticalAlignment="Top" Width="46" Click="btn_open_TMP_File_Click"/>
 
                     <Label Content="Design Auswahl:" HorizontalAlignment="Left" Margin="477,59,0,0" VerticalAlignment="Top" FontSize="12"/>
-                    <ComboBox x:Name="Designauswahl" Width="300" Height="30" Margin="476,85,216,393" 
+                    <ComboBox x:Name="Designauswahl" Height="30" Margin="476,83,356,374" 
                               SelectionChanged="Designauswahl_SelectionChanged" 
                               SelectedValuePath="Content">
                         <ComboBoxItem>Dark.Blue</ComboBoxItem>
@@ -280,27 +312,11 @@
 
 
         </TabControl>
-
-        <Button Height="47" Margin="213,502,782,21" Style="{DynamicResource MahApps.Styles.Button.Dialogs.Accent}" Click="Launch_ETS">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="{iconPacks:BoxIconsImage Kind=SolidTruck}" Margin="0,0,10,0" Height="30" />
-                <TextBlock x:Name="BUTTON_ETS_STARTEN" VerticalAlignment="Center">ETS Start</TextBlock>
-            </StackPanel>
-        </Button>
-        <Button Height="46" Margin="805,502,190,22" Style="{DynamicResource MahApps.Styles.Button.Dialogs.Accent}" Click="Launch_ATS">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="{iconPacks:BoxIconsImage Kind=SolidTruck}" Margin="0,0,10,0" Height="30" />
-                <TextBlock x:Name="BUTTON_ATS_STARTEN" VerticalAlignment="Center">ATS Start</TextBlock>
-            </StackPanel>
-        </Button>
-
-        <Button Height="47" Margin="505,502,490,21" Style="{DynamicResource MahApps.Styles.Button.Dialogs.Accent}" Click="TMP_Starten_Click">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="{iconPacks:BoxIconsImage Kind=SolidTruck}" Margin="0,0,10,0" Height="30" />
-                <TextBlock x:Name="BUTTON_TMP_STARTEN" VerticalAlignment="Center">TMP Start</TextBlock>
-            </StackPanel>
-        </Button>
-
+        <StatusBar VerticalAlignment="Bottom" Height="30" Width="1200">
+            <StatusBarItem Content="{Binding TELEMETRY_VERSION}" FontSize="10"/>
+            <StatusBarItem Content="{Binding SPIEL_VERSION}" FontSize="10"/>
+            <StatusBarItem Content="{Binding DLL_VERSION}" FontSize="10"/>
+        </StatusBar>
 
 
     </Grid>

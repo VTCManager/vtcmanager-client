@@ -36,6 +36,10 @@ namespace VTCManager
         private object polyline1;
         private TelemetryHandler telemetryhandler;
         private Translation translation;
+        DispatcherTimer updateHersteller_Image = new DispatcherTimer();
+        public string int_game_version;
+        public int NAVIGATION_SPEED_LIMIT { get; private set; }
+        public string BILD_ANZEIGE2 { get; private set; }
 
         public MainWindow()
         {
@@ -46,6 +50,11 @@ namespace VTCManager
             TelemetryInstaller.check();
             jobHandler = new JobHandler();
             Truck_Daten = new Truck_Daten();
+            /*
+            updateHersteller_Image.Interval = TimeSpan.FromSeconds(5);
+            updateHersteller_Image.Tick += timer_Tick;
+            updateHersteller_Image.Start();
+            */
 
             InitializeComponent();
 
@@ -62,30 +71,41 @@ namespace VTCManager
             TMP_Pfad_Textbox.IsEnabled = string.IsNullOrEmpty(utils.Reg_Lesen("Config", "TMP_PFAD", true)) ? true : false;
 
 
-            switch(Truck_Daten.HERSTELLER_ID)
+            this.DataContext = Truck_Daten;
+        }
+
+        /*
+        void timer_Tick(object sender, EventArgs e)
+        {
+            switch (Truck_Daten.HERSTELLER_ID)
             {
                 case "mercedes":
-                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-mercedes-benz-256.png", UriKind.Relative));
+                    //BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-mercedes-benz-256.png", UriKind.Relative));
+                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("{iconPacks:SimpleIcons Kind=Mercedes}", UriKind.Relative));
                     break;
                 case "scania":
                     BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-scania-256.png", UriKind.Relative));
                     break;
+                case "volvo":
+                    //BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-volvo-256.png", UriKind.Relative));
+                    BILD_ANZEIGE2 = "{iconPacks:SimpleIcons Kind=Volvo}";
+                    break;
                 case "iveco":
                     BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-iveco-256.png", UriKind.Relative));
                     break;
-                case "daf":
-                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-iveco-256.png", UriKind.Relative));
+                case "renault":
+                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-renault-256.png", UriKind.Relative));
                     break;
-
+                case "daf":
+                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-daf-256.png", UriKind.Relative));
+                    break;
+                case "man":
+                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/man-256.png", UriKind.Relative));
+                    break;
             }
-
- 
-
-
-            this.DataContext = Truck_Daten;
+                
         }
-
-     
+        */
 
 
         private void Telemetry_Data_Handler(SCSTelemetry data, bool updated)
@@ -95,21 +115,35 @@ namespace VTCManager
                 if (!InvokeRequired)
                 {
                     // ALLGEMEINES
-                    Truck_Daten.TelemetryVersion = data.TelemetryVersion.Major.ToString() + "." + data.TelemetryVersion.Minor.ToString();
-                    Truck_Daten.SPIEL_PAUSE = data.Paused;
+                    Truck_Daten.TELEMETRY_VERSION = "Telemetry: " + data.TelemetryVersion.Major.ToString() + "." + data.TelemetryVersion.Minor.ToString();
+                    
+                    Truck_Daten.SPIEL_VERSION = "Game: " + data.GameVersion.Major.ToString() + "." + data.GameVersion.Minor.ToString();
+
+                    if (Truck_Daten.SPIEL_VERSION == "Game: 1.16") int_game_version = "1.37";
+                    else if (Truck_Daten.SPIEL_VERSION == "Game: 1.17") int_game_version = "1.38";
+                    else if (Truck_Daten.SPIEL_VERSION == "Game: 1.18") int_game_version = "1.39";
+                    else if (Truck_Daten.SPIEL_VERSION == "Game: 1.19") int_game_version = "1.40";
+                    else if (Truck_Daten.SPIEL_VERSION == "Game: 1.20") int_game_version = "1.41";
+                    else if (Truck_Daten.SPIEL_VERSION == "Game: 1.21") int_game_version = "1.42";
+
+                    Truck_Daten.SPIEL_VERSION += " (" + int_game_version + ")";
+
+                    Truck_Daten.DLL_VERSION = "DLL: " + data.DllVersion.ToString();
+                    Truck_Daten.SPIEL = data.Game.ToString();
+
+
+                    Truck_Daten.IS_GAME_RUNNING = data.Paused;
+                    Truck_Daten.SDK_ACTIVE = data.SdkActive;
                     Truck_Daten.SPIEL = data.Game.ToString();
 
                     Truck_Daten.ANZEIGE_KM_MILES = (Truck_Daten.SPIEL == "Ets2") ? " km " : " mi";
                     Truck_Daten.ANZEIGE_TO_LBS = (Truck_Daten.SPIEL == "Ets2") ? " t " : " lb ";
-
-                    var uriSource = new Uri(@"Resourcen/icon8-mercedes-benz-256.png", UriKind.Relative);
-                   
                     Truck_Daten.SPEED_KMH = (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph;
                     Truck_Daten.SPEED_TACHO_KMH = (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph-85;
                     Truck_Daten.SPEED_MPH = (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph;
                     Truck_Daten.SPEED_TACHO_MPH = (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph - 85;
-                    Truck_Daten.BLINKER_LINKS = (bool)data.TruckValues.CurrentValues.LightsValues.BlinkerLeftActive;
-                    Truck_Daten.BLINKER_RECHTS = (bool)data.TruckValues.CurrentValues.LightsValues.BlinkerRightActive;
+                    Truck_Daten.BLINKER_LINKS = (bool)data.TruckValues.CurrentValues.LightsValues.BlinkerLeftOn;
+                    Truck_Daten.BLINKER_RECHTS = (bool)data.TruckValues.CurrentValues.LightsValues.BlinkerRightOn;
                     Truck_Daten.TEMPOMAT_KMH =(int)data.TruckValues.CurrentValues.DashboardValues.CruiseControlSpeed.Kph;
                     Truck_Daten.TEMPOMAT_MPH = (int)data.TruckValues.CurrentValues.DashboardValues.CruiseControlSpeed.Mph;
                     Truck_Daten.VorwaertsGaenge = (int)data.TruckValues.ConstantsValues.MotorValues.ForwardGearCount;
@@ -117,7 +151,7 @@ namespace VTCManager
                     Truck_Daten.GANG = (int)data.TruckValues.CurrentValues.MotorValues.GearValues.Selected;
                     Truck_Daten.HERSTELLER = data.TruckValues.ConstantsValues.Brand;
                     Truck_Daten.HERSTELLER_ID = data.TruckValues.ConstantsValues.BrandId;
-                    Truck_Daten.MODELL = data.TruckValues.ConstantsValues.Name;
+                    Truck_Daten.MODELL = translation.TRUCK_MODELL + data.TruckValues.ConstantsValues.Name;
                     Truck_Daten.FUEL_MAX = (int)data.TruckValues.ConstantsValues.CapacityValues.Fuel;
                     Truck_Daten.FUEL_BESTAND = (int)data.TruckValues.CurrentValues.DashboardValues.FuelValue.Amount;
                     Truck_Daten.FUEL_REST = (int)data.TruckValues.CurrentValues.DashboardValues.FuelValue.Amount;
@@ -166,6 +200,8 @@ namespace VTCManager
                     Truck_Daten.NAVIGATION_SPEED_LIMIT_MPH = (int)data.NavigationValues.SpeedLimit.Mph;
                     Truck_Daten.NAVIGATION_ZEIT = (double)data.NavigationValues.NavigationTime;
 
+                    Truck_Daten.ANZEIGE_SPEED_LIMIT = Truck_Daten.SPIEL == "Ets2" ? Truck_Daten.NAVIGATION_SPEED_LIMIT_KMH.ToString() : Truck_Daten.NAVIGATION_SPEED_LIMIT_MPH.ToString();
+
                     // MAUTSTATIONEN
                      Truck_Daten.MAUT_BEZAHLT = (int)data.GamePlay.TollgateEvent.PayAmount;
 
@@ -194,25 +230,26 @@ namespace VTCManager
 
                     // TEXTANZEIGE IM MAINVIEW-STREETVIEW
                     // TODO TRANSLATION DE EN
-                    Truck_Daten.TXT_FAHRT = "Du fährst " + Truck_Daten.FRACHT_GEWICHT_TONNEN + Truck_Daten.ANZEIGE_TO_LBS + data.JobValues.CargoValues.Name + " von" + Environment.NewLine;
-                    Truck_Daten.TXT_FAHRT += "Firma " + data.JobValues.CompanySource + " in " + data.JobValues.CitySource + Environment.NewLine;
-                    Truck_Daten.TXT_FAHRT += "Zur Firma " + data.JobValues.CompanyDestination + " in " +data.JobValues.CityDestination + " fahren !" +Environment.NewLine;
+                    Truck_Daten.TXT_FAHRT = "Du fährst " + Truck_Daten.FRACHT_GEWICHT_TONNEN + Truck_Daten.ANZEIGE_TO_LBS + data.JobValues.CargoValues.Name + " von ";
+                    Truck_Daten.TXT_FAHRT += data.JobValues.CitySource + " nach ";
+                    Truck_Daten.TXT_FAHRT += data.JobValues.CityDestination;
                     Truck_Daten.TXT_FAHRT += Environment.NewLine;
-                    Truck_Daten.TXT_FAHRT += "Du musst noch " + Truck_Daten.REST_STRECKE + Truck_Daten.ANZEIGE_KM_MILES + " von " + Truck_Daten.REST_STRECKE + Truck_Daten.ANZEIGE_KM_MILES + " fahren !";
-                   
-                   // Image finalImage = new Image();
+                    Truck_Daten.TXT_FAHRT += "Du musst noch " +  Truck_Daten.REST_STRECKE + Truck_Daten.ANZEIGE_KM_MILES + " fahren !";
 
+                    if(Truck_Daten.HERSTELLER_ID == "mercedes")
+                        BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-mercedes-benz-256.png", UriKind.Relative));
 
+                    image.Visibility = data.Game.ToString() == "Ats" ? Visibility.Hidden : Visibility.Visible;
+                    image2.Visibility = data.Game.ToString() == "Ets" || data.Game.ToString() == "Ats" ? Visibility.Hidden : Visibility.Visible;
+                    image3.Visibility = data.Game.ToString() == "Ets2" ? Visibility.Hidden : Visibility.Visible;
 
+                    
                 }
-
-
             }
             catch
             { }
 
         }
-
 
         public void lade_Translations()
         {
@@ -228,10 +265,7 @@ namespace VTCManager
             TAB_FAHRT_LBL_FAHRWERK.Content = translation.TAB_FAHRT_LBL_FAHRWERK;
             TAB_FAHRT_LBL_FAHRERHAUS.Content = translation.TAB_FAHRT_LBL_FAHRERHAUS;
             TAB_FAHRT_LBL_FRACHTSCHADEN.Content = translation.TAB_FAHRT_LBL_FRACHTSCHADEN;
-            BUTTON_ATS_STARTEN.Text = translation.BUTTON_ATS_STARTEN;
-            BUTTON_ETS_STARTEN.Text = translation.BUTTON_ETS_STARTEN;
-            BUTTON_TMP_STARTEN.Text = translation.BUTTON_TMP_STARTEN;
-
+            FUEL_ANZEGE.ToolTip = translation.TXT_TANKANZEIGE;
 
 
         }
@@ -261,16 +295,6 @@ namespace VTCManager
         }
 
 
-        private void TMP_Starten_Click(object sender, RoutedEventArgs e)
-        {
-            FileHandler.StarteAnwendung(utils.Reg_Lesen("Config", "TMP_PFAD", true));
-        }
-
-        private void LaunchFaceBookSiteSite(object sender, RoutedEventArgs e)
-        {
-            FileHandler.StarteAnwendung("https://www.facebook.com/groups/vtcmanager");
-        }
-
         private void LaunchDiscord(object sender, RoutedEventArgs e)
         {
             FileHandler.StarteAnwendung("https://discord.gg/tye7APA");
@@ -292,31 +316,9 @@ namespace VTCManager
             {
                 Logging.WriteClientLog("Designer: Konnte das Design " + (string)(Designauswahl.SelectedValue) + " nicht laden." + ex.Message + ex.StackTrace);
             }
-                
-
         }
 
 
-
-
-
-        private void Launch_ATS(object sender, RoutedEventArgs e)
-        {
-            Translation trans = new Translation(utils.Reg_Lesen("Config", "Sprache", false));
-            if (string.IsNullOrEmpty(utils.Reg_Lesen("Config", "ATS_Pfad", false)))
-                Show_Message(trans.ETS2_PATH_NOT_FOUND);
-
-            FileHandler.StarteAnwendung(utils.Reg_Lesen("Config", "ATS_Pfad", false));
-        }
-
-        private void Launch_ETS(object sender, RoutedEventArgs e)
-        {
-            Translation trans = new Translation(utils.Reg_Lesen("Config", "Sprache", false));
-            if (string.IsNullOrEmpty(utils.Reg_Lesen("Config", "ETS2_Pfad", false)))
-                Show_Message(trans.ATS_PATH_NOT_FOUND);
-
-            FileHandler.StarteAnwendung(utils.Reg_Lesen("Config", "ETS2_Pfad", false));
-        }
 
 
 
@@ -359,6 +361,78 @@ namespace VTCManager
         private void Minimize_Window(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
+        }
+
+        private void image3_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            this.image3.Width = image3.Width + 15;
+            this.image3.Height = image3.Height + 15;
+        }
+
+        private void image3_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            this.image3.Width = image3.Width - 15;
+            this.image3.Height = image3.Height - 15;
+        }
+
+        private void image2_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            this.image2.Width = image2.Width + 5;
+            this.image2.Height = image2.Height + 5;
+        }
+
+        private void image2_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            this.image2.Width = image2.Width - 5;
+            this.image2.Height = image2.Height - 5;
+        }
+
+
+
+
+
+        private void image_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Translation trans = new Translation(utils.Reg_Lesen("Config", "Sprache", false));
+            if (string.IsNullOrEmpty(utils.Reg_Lesen("Config", "ATS_Pfad", false)))
+                Show_Message(trans.ETS2_PATH_NOT_FOUND);
+
+            FileHandler.StarteAnwendung(utils.Reg_Lesen("Config", "ATS_Pfad", false));
+        }
+
+        private void image2_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Translation trans = new Translation(utils.Reg_Lesen("Config", "Sprache", false));
+            if (string.IsNullOrEmpty(utils.Reg_Lesen("Config", "TMP_Pfad", false)))
+                Show_Message(trans.TMP_PATH_NOT_FOUND);
+
+            FileHandler.StarteAnwendung(utils.Reg_Lesen("Config", "TMP_Pfad", false));
+        }
+
+        private void image3_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Translation trans = new Translation(utils.Reg_Lesen("Config", "Sprache", false));
+            if (string.IsNullOrEmpty(utils.Reg_Lesen("Config", "ETS2_Pfad", false)))
+                Show_Message(trans.TMP_PATH_NOT_FOUND);
+
+            FileHandler.StarteAnwendung(utils.Reg_Lesen("Config", "ETS2_Pfad", false));
+        }
+
+        private void image_MouseEnter_1(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            this.image.Width = image.Width + 10;
+            this.image.Height = image.Height + 10;
+        }
+
+        private void image_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            this.image.Width = image.Width - 10;
+            this.image.Height = image.Height - 10;
+        }
+
+        private void LaunchFaceBookSite(object sender, RoutedEventArgs e)
+        {
+            FileHandler.StarteAnwendung("https://www.facebook.com/groups/vtcmanager");
         }
     }
 }
