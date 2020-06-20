@@ -106,6 +106,11 @@ namespace VTCManager
                 MessageBox.Show(iox.Message);
             }
 
+            ImageBrush myBrush = new ImageBrush();
+            myBrush.ImageSource = new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Images/" + RegistryHandler.read("Config","Background") + ".jpg"));
+            this.Background = myBrush;
+
+
         }
         /*
         void timer_Tick(object sender, EventArgs e)
@@ -479,6 +484,7 @@ namespace VTCManager
                 ImageBrush myBrush = new ImageBrush();
                 myBrush.ImageSource = new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Images/" + (string)CMB_BACKGROUND.SelectedValue + ".jpg"));
                 this.Background = myBrush;
+                RegistryHandler.write("Background", (string)CMB_BACKGROUND.SelectedValue, "Config");
 
             }
             catch (Exception ex)
