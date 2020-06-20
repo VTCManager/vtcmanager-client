@@ -28,7 +28,7 @@ namespace VTCManager
         public SCSSdkTelemetry Telemetry;
         private readonly bool InvokeRequired;
         private delegate void UpdateProgressDelegate(DependencyProperty dp, object value);
-        Utilities utils = new Utilities();
+        Klassen.Utilities utils = new Klassen.Utilities();
         public JobHandler jobHandler;
         private OpenFileDialog tmp_Trucker;
         public int Gesch2;
