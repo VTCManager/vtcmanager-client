@@ -6,9 +6,12 @@ namespace VTCManager
     public class Truck_Daten : INotifyPropertyChanged
     {
         // Algemeines
-        private string telemetryVersion;
+        private string telemetry_version;
+        private string dll_version;
         private string spiel;
-        private bool spiel_pause;
+        private string spiel_version;
+        private bool is_game_running;
+        private bool sdk_activ;
         private string anzeige_liter_gallonen;
         private string anzeige_km_miles;
         private string anzeige_to_lbs;
@@ -94,6 +97,7 @@ namespace VTCManager
         private double navigation_zeit;
         private int navigation_speed_limit_kmh;
         private int navigation_speed_limit_mph;
+        private string anzeige_speed_limit;
         private int rest_strecke;
 
 
@@ -116,6 +120,43 @@ namespace VTCManager
 
 
         // BEGIN INOTIFYPROPERTYCHANGED DONT CHANGE ANYTHING !
+
+        public string DLL_VERSION
+        {
+            get { return dll_version; }
+            set
+            {
+                if (dll_version != value)
+                {
+                    dll_version = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public string SPIEL_VERSION
+        {
+            get { return spiel_version; }
+            set
+            {
+                if (spiel_version != value)
+                {
+                    spiel_version = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public string ANZEIGE_SPEED_LIMIT
+        {
+            get { return anzeige_speed_limit; }
+            set
+            {
+                if (anzeige_speed_limit != value)
+                {
+                    anzeige_speed_limit = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
         public string HERSTELLER_ID
         {
             get { return hersteller_id; }
@@ -140,7 +181,18 @@ namespace VTCManager
                 }
             }
         }
-
+        public bool SDK_ACTIVE
+        {
+            get { return sdk_activ; }
+            set
+            {
+                if (sdk_activ != value)
+                {
+                    sdk_activ = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
         public string ANZEIGE_TO_LBS
         {
             get { return anzeige_to_lbs; }
@@ -645,14 +697,14 @@ namespace VTCManager
             }
 
         }
-        public bool SPIEL_PAUSE
+        public bool IS_GAME_RUNNING
         {
-            get { return spiel_pause; }
+            get { return is_game_running; }
             set
             {
-                if (spiel_pause != value)
+                if (is_game_running != value)
                 {
-                    spiel_pause = value;
+                    is_game_running = value;
                     NotifyPropertyChanged();
                 }
             }
@@ -1080,14 +1132,14 @@ namespace VTCManager
 
         }
 
-        public string TelemetryVersion
+        public string TELEMETRY_VERSION
         {
-            get { return telemetryVersion; }
+            get { return telemetry_version; }
             set
             {
-                if (telemetryVersion != value)
+                if (telemetry_version != value)
                 {
-                    telemetryVersion = value;
+                    telemetry_version = value;
                     NotifyPropertyChanged();
                 }
             }

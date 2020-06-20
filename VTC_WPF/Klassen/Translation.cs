@@ -30,11 +30,14 @@ namespace VTCManager.Klassen
             BUTTON_TMP_STARTEN,
             ATS_PATH_NOT_FOUND,
             ETS2_PATH_NOT_FOUND,
+            TMP_PATH_NOT_FOUND,
             DISCORD_IDLE,
             DISCORD_JOB_CARGO,
             DISCORD_DRIVING,
             DISCORD_JOB_REMAINING,
-            DISCORD_FREEROAM;
+            DISCORD_FREEROAM,
+            TXT_WARTE_AUF_SPIEL,
+            TXT_TANKANZEIGE;
         public Translation(String lang)
         {
             version = "Version: 3.0";
@@ -49,7 +52,7 @@ namespace VTCManager.Klassen
             TAB_EINSTELLUNGEN_TEXT = lang == "DE" ? "Einstellungen" : "Settings";
             waiting_for_ets_ats = lang == "DE" ? "Warte auf ETS2 / ATS" : "Waiting of ETS2 / ATS";
             TRUCK_NAME = lang == "DE" ? "Hersteller: " : "Manufacturer: ";
-            TRUCK_MODELL = lang == "DE" ? "Truck-Modell: " : "Truck-Model: ";
+            TRUCK_MODELL = lang == "DE" ? "Modell: " : "Model: ";
             SCHADENSANZEIGE_TITEL = lang == "DE" ? "Schadensanzeige:" : "Damage-Report:";
             TAB_FAHRT_LBL_MOTOR = lang == "DE" ? "Motor-Schaden:" : "Engine-Damage:";
             TAB_FAHRT_LBL_GETRIEBE = lang == "DE" ? "Getiebe-Schaden:" : "Gearbox-Damage:";
@@ -62,7 +65,12 @@ namespace VTCManager.Klassen
             BUTTON_TMP_STARTEN = lang == "DE" ? "Truckers-MP" : "Truckers-MP";
             ATS_PATH_NOT_FOUND = lang == "DE" ? "Du hast in den Einstellungen noch keinen Link für ATS angegeben ! Du kannst den Pfad jederzeit nachtragen!" : "You have not yet specified a link for ATS in the settings! You can add the path at any time!";
             ETS2_PATH_NOT_FOUND = lang == "DE" ? "Du hast in den Einstellungen noch keinen Link für ETS2 angegeben ! Du kannst den Pfad jederzeit nachtragen!" : "You have not yet specified a link for ETS2 in the settings! You can add the path at any time!";
-            if(lang == "DE")
+            ETS2_PATH_NOT_FOUND = lang == "DE" ? "Du hast in den Einstellungen noch keinen Link für TruckersMP angegeben ! Du kannst den Pfad jederzeit nachtragen!" : "You have not yet specified a link for TruckersMP in the settings! You can add the path at any time!";
+            TXT_WARTE_AUF_SPIEL = lang == "DE" ? "Warte auf ETS2 / ATS" : "Waiting for ETS2 / ATS";
+            TXT_TANKANZEIGE = lang == "DE" ? "Hier siehst du deine Tankanzeige" : "here you can see your fuel level";
+
+
+            if (lang == "DE")
             {
                 DISCORD_IDLE = "Kein Spiel aktiv.";
                 DISCORD_JOB_CARGO = "Fracht";
