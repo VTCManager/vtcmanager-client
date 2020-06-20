@@ -397,6 +397,9 @@
     <Content Include="Icons\Wallpaper1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\div_1.jpg" />
+    <Resource Include="Images\div_2.jpg" />
+    <Resource Include="Images\div_3.jpg" />
     <Content Include="Resources\icons8-mercedes-benz-256.png" />
     <Content Include="Resources\No_Truck.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

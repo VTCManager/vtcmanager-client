@@ -335,6 +335,9 @@
                         <ComboBoxItem>Woman_5</ComboBoxItem>
                         <ComboBoxItem>Woman_6</ComboBoxItem>
                         <ComboBoxItem>Woman_7</ComboBoxItem>
+                        <ComboBoxItem>Div_1</ComboBoxItem>
+                        <ComboBoxItem>Div_2</ComboBoxItem>
+                        <ComboBoxItem>Div_3</ComboBoxItem>
                     </ComboBox>
 
 
@@ -359,8 +362,8 @@
 
                 <TextBox x:Name="label" Margin="10,0,445,227" TextWrapping="Wrap" IsEnabled="False">
                     <TextBox.Text>
-                        fsdfs
-                        sfsdf
+                        Bilder von
+                        建鹏 邵, Pexels, Free-Photos
                         
                         
                         sdfsdff
