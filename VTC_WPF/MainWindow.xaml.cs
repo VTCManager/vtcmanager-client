@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 using System.Windows.Navigation;
 using System.Runtime.InteropServices;
 using System.IO;
+using VTCManager.Pages;
 
 namespace VTCManager
 {
@@ -57,93 +58,33 @@ namespace VTCManager
 
             InitializeComponent();
 
+            MainFrame.Content = new Fahrt_Page();
+
             Lade_Voreinstellungen();
-            Lade_Themes();
             lade_Translations();
             //must be after lade_Translations
             telemetryhandler = new TelemetryHandler(this, translation);
-            utils.Build_Registry();
+            if (string.IsNullOrEmpty(RegistryHandler.read("Config", "Sprache")))
+                RegistryHandler.write("Sprache", "", "Config");
 
 
 
             this.DataContext = Truck_Daten;
         }
-
+        public async void Show_Message(string text)
+        {
+            await this.ShowMessageAsync(text, "Das Team von VTC-Manager.");
+        }
 
         private void Lade_Voreinstellungen()
         {
             Sprachauswahl.SelectedValue = utils.Reg_Lesen("Config", "Sprache", false);
 
-            TMP_Pfad_Textbox.Text = utils.Reg_Lesen("Config", "TMP_PFAD", true);
-            Sprachauswahl.SelectedItem = utils.Reg_Lesen("Config", "Sprache", false);
-            TMP_Pfad_Textbox.IsEnabled = string.IsNullOrEmpty(utils.Reg_Lesen("Config", "TMP_PFAD", true)) ? true : false;
-            RUECKSPIEGEL_OBEN.Visibility = Visibility.Visible;
-            DASH_2_BORDER.BorderThickness = new Thickness(1, 0, 0, 0);
-            Canvas.SetTop(image, 220);
-            Canvas.SetTop(image2, 230);
-            Canvas.SetTop(image3, 250);
-            Canvas.SetLeft(image, 0);
-            Canvas.SetLeft(image2, 0);
-            Canvas.SetLeft(image3, 0);
-
-            BILD_ATS.Visibility = Visibility.Visible;
-            BILD_ETS.Visibility = Visibility.Visible;
-            BILD_TMP.Visibility = Visibility.Visible;
-
-            STRECKENANZEIGE.Visibility = Visibility.Visible;
-            STRECKE_IMG_L.Visibility = Visibility.Visible;
-            STRECKE_IMG_R.Visibility = Visibility.Visible;
-
-
-            string sourceFile =  AppDomain.CurrentDomain.BaseDirectory + @"Icons\Wallpaper1.png";
-            string destinationFile = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\VTCManager\Wallpaper1.png";
-            try
-            {
-                File.Copy(sourceFile.ToString(), destinationFile, true);
-            }
-            catch (IOException iox)
-            {
-                MessageBox.Show(iox.Message);
-            }
-
-            ImageBrush myBrush = new ImageBrush();
-            myBrush.ImageSource = new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Images/" + RegistryHandler.read("Config","Background") + ".jpg"));
-            this.Background = myBrush;
-
-
+            var accent = RegistryHandler.read("Config", "Design");
+            if (string.IsNullOrEmpty(accent)) accent = "Dark.Blue";
+            ThemeManager.Current.ChangeTheme(this, "Dark.Blue");
         }
-        /*
-        void timer_Tick(object sender, EventArgs e)
-        {
-            switch (Truck_Daten.HERSTELLER_ID)
-            {
-                case "mercedes":
-                    //BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-mercedes-benz-256.png", UriKind.Relative));
-                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("{iconPacks:SimpleIcons Kind=Mercedes}", UriKind.Relative));
-                    break;
-                case "scania":
-                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-scania-256.png", UriKind.Relative));
-                    break;
-                case "volvo":
-                    //BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-volvo-256.png", UriKind.Relative));
-                    BILD_ANZEIGE2 = "{iconPacks:SimpleIcons Kind=Volvo}";
-                    break;
-                case "iveco":
-                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-iveco-256.png", UriKind.Relative));
-                    break;
-                case "renault":
-                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-renault-256.png", UriKind.Relative));
-                    break;
-                case "daf":
-                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-daf-256.png", UriKind.Relative));
-                    break;
-                case "man":
-                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/man-256.png", UriKind.Relative));
-                    break;
-            }
-                
-        }
-        */
+
 
 
         private void Telemetry_Data_Handler(SCSTelemetry data, bool updated)
@@ -154,21 +95,9 @@ namespace VTCManager
                 {
                     // ALLGEMEINES
                     Truck_Daten.TELEMETRY_VERSION = "Telemetry: " + data.TelemetryVersion.Major.ToString() + "." + data.TelemetryVersion.Minor.ToString();
-                    
                     Truck_Daten.SPIEL_VERSION = "Game: " + data.GameVersion.Major.ToString() + "." + data.GameVersion.Minor.ToString();
-
-                    if (Truck_Daten.SPIEL_VERSION == "Game: 1.16") int_game_version = "1.37";
-                    else if (Truck_Daten.SPIEL_VERSION == "Game: 1.17") int_game_version = "1.38";
-                    else if (Truck_Daten.SPIEL_VERSION == "Game: 1.18") int_game_version = "1.39";
-                    else if (Truck_Daten.SPIEL_VERSION == "Game: 1.19") int_game_version = "1.40";
-                    else if (Truck_Daten.SPIEL_VERSION == "Game: 1.20") int_game_version = "1.41";
-                    else if (Truck_Daten.SPIEL_VERSION == "Game: 1.21") int_game_version = "1.42";
-
-                    Truck_Daten.SPIEL_VERSION += " (" + int_game_version + ")";
-
                     Truck_Daten.DLL_VERSION = "DLL: " + data.DllVersion.ToString();
                     Truck_Daten.SPIEL = data.Game.ToString();
-
 
                     Truck_Daten.IS_GAME_RUNNING = data.Paused;
                     Truck_Daten.SDK_ACTIVE = data.SdkActive;
@@ -274,14 +203,6 @@ namespace VTCManager
                     Truck_Daten.TXT_FAHRT += Environment.NewLine;
                     Truck_Daten.TXT_FAHRT += "Du musst noch " +  Truck_Daten.REST_STRECKE + Truck_Daten.ANZEIGE_KM_MILES + " fahren !";
 
-                    if(Truck_Daten.HERSTELLER_ID == "mercedes")
-                        BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-mercedes-benz-256.png", UriKind.Relative));
-
-                    image.Visibility = data.Game.ToString() == "Ats" ? Visibility.Hidden : Visibility.Visible;
-                    image2.Visibility = data.Game.ToString() == "Ets" || data.Game.ToString() == "Ats" ? Visibility.Hidden : Visibility.Visible;
-                    image3.Visibility = data.Game.ToString() == "Ets2" ? Visibility.Hidden : Visibility.Visible;
-
-                    
                 }
             }
             catch
@@ -292,46 +213,7 @@ namespace VTCManager
         public void lade_Translations()
         {
             translation = new Translation(utils.Reg_Lesen("Config", "Sprache", false));
-            TAB_FAHRT.Header = translation.TAB_Fahrt_Text;
-            TAB_FREUNDE.Header = translation.TAB_FREUNDE_TEXT;
-            TAB_VERKEHR.Header = translation.TAB_VERKEHR_TEXT;
-            TAB_EINSTELLUNGEN.Header = translation.TAB_EINSTELLUNGEN_TEXT;
-            LBL_FAHRT_SCHADEN_TITEL.Content = translation.SCHADENSANZEIGE_TITEL;
-            TAB_FAHRT_LBL_MOTOR.Content = translation.TAB_FAHRT_LBL_MOTOR;
-            TAB_FAHRT_LBL_GETRIEBE.Content = translation.TAB_FAHRT_LBL_GETRIEBE;
-            TAB_FAHRT_LBL_RAEDER.Content = translation.TAB_FAHRT_LBL_RAEDER;
-            TAB_FAHRT_LBL_FAHRWERK.Content = translation.TAB_FAHRT_LBL_FAHRWERK;
-            TAB_FAHRT_LBL_FAHRERHAUS.Content = translation.TAB_FAHRT_LBL_FAHRERHAUS;
-            TAB_FAHRT_LBL_FRACHTSCHADEN.Content = translation.TAB_FAHRT_LBL_FRACHTSCHADEN;
-            FUEL_ANZEGE.ToolTip = translation.TXT_TANKANZEIGE;
-
-
         }
-
-        private void btn_open_TMP_File_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == true)
-                TMP_Pfad_Textbox.Text = openFileDialog.FileName.ToString(); utils.Reg_Schreiben("TMP_PFAD", openFileDialog.FileName.ToString(), "Config");
-            TMP_Pfad_Textbox.IsEnabled = false;
-        }
-
-        private void btn_open_suche_ets_pfad(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog open_ETS2_Path = new OpenFileDialog();
-            if (open_ETS2_Path.ShowDialog() == true)
-                ETS2_Pfad_Textbox.Text = open_ETS2_Path.FileName.ToString(); utils.Reg_Schreiben("ETS2_PFAD", open_ETS2_Path.FileName.ToString(), "Config");
-            ETS2_Pfad_Textbox.IsEnabled = false;
-        }
-
-        private void btn_open_suche_ats_pfad(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog open_ATS_Path = new OpenFileDialog();
-            if (open_ATS_Path.ShowDialog() == true)
-                ATS_Pfad_Textbox.Text = open_ATS_Path.FileName.ToString(); utils.Reg_Schreiben("ATS_PFAD", open_ATS_Path.FileName.ToString(), "Config");
-            ATS_Pfad_Textbox.IsEnabled = false;
-        }
-
 
         private void LaunchDiscord(object sender, RoutedEventArgs e)
         {
@@ -344,131 +226,22 @@ namespace VTCManager
             FileHandler.StarteAnwendung("https://vtc.northwestvideo.de/");
         }
 
-        private void Designauswahl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            utils.Reg_Schreiben("Design", (string)(Designauswahl.SelectedValue), "Config");
-            try
-            {
-                ThemeManager.Current.ChangeTheme(this, (string)(Designauswahl.SelectedValue));
-            } catch (Exception ex)
-            {
-                Logging.WriteClientLog("Designer: Konnte das Design " + (string)(Designauswahl.SelectedValue) + " nicht laden." + ex.Message + ex.StackTrace);
-            }
-        }
-
-
-
-
-
-
-        public async void Show_Message(string text)
-        {
-            await this.ShowMessageAsync(text, "Das Team von VTC-Manager.");
-        }
-
-        private void Lade_Themes()
-        {
-            if (string.IsNullOrEmpty(utils.Reg_Lesen("Config", "Design", false)))
-            {
-                utils.Reg_Schreiben("Design", "Dark.Blue", "Config");
-                ThemeManager.Current.ChangeTheme(this, "Dark.Blue");
-            }
-            else
-            {
-                Designauswahl.SelectedValue = utils.Reg_Lesen("Config", "Design", false);
-                ThemeManager.Current.ChangeTheme(this, utils.Reg_Lesen("Config", "Design", false));
-            }
-        }
-
         private void Sprachauswahl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string sprache = (string)Sprachauswahl.SelectedValue;
 
             if (utils.Reg_Lesen("Config", "Sprache", false) != (string)Sprachauswahl.SelectedValue)
             {
-                Show_Message("Die Sprache wird beim nächsten Systemstart geändert !");
+                Show_Message(translation.CHANGE_LANGUAGE);
             }
 
             utils.Reg_Schreiben("Sprache", sprache, "Config");
             Translation Translation = new Translation(utils.Reg_Lesen("Config", "Design", false));
-
-
-
         }
-
-
-
 
         private void Minimize_Window(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
-        }
-
-        private void image3_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            this.image3.Width = image3.Width + 15;
-            this.image3.Height = image3.Height + 15;
-        }
-
-        private void image3_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            this.image3.Width = image3.Width - 15;
-            this.image3.Height = image3.Height - 15;
-        }
-
-        private void image2_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            this.image2.Width = image2.Width + 5;
-            this.image2.Height = image2.Height + 5;
-        }
-
-        private void image2_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            this.image2.Width = image2.Width - 5;
-            this.image2.Height = image2.Height - 5;
-        }
-
-
-
-
-
-        private void image_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            Translation trans = new Translation(utils.Reg_Lesen("Config", "Sprache", false));
-            if (string.IsNullOrEmpty(utils.Reg_Lesen("Config", "ATS_Pfad", false)))
-                Show_Message(trans.ETS2_PATH_NOT_FOUND);
-
-            FileHandler.StarteAnwendung(utils.Reg_Lesen("Config", "ATS_Pfad", false));
-        }
-
-        private void image2_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            Translation trans = new Translation(utils.Reg_Lesen("Config", "Sprache", false));
-            if (string.IsNullOrEmpty(utils.Reg_Lesen("Config", "TMP_Pfad", false)))
-                Show_Message(trans.TMP_PATH_NOT_FOUND);
-
-            FileHandler.StarteAnwendung(utils.Reg_Lesen("Config", "TMP_Pfad", false));
-        }
-
-        private void image3_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            Translation trans = new Translation(utils.Reg_Lesen("Config", "Sprache", false));
-            if (string.IsNullOrEmpty(utils.Reg_Lesen("Config", "ETS2_Pfad", false)))
-                Show_Message(trans.TMP_PATH_NOT_FOUND);
-
-            FileHandler.StarteAnwendung(utils.Reg_Lesen("Config", "ETS2_Pfad", false));
-        }
-
-        private void image_MouseEnter_1(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            this.image.Width = image.Width + 10;
-            this.image.Height = image.Height + 10;
-        }
-
-        private void image_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            this.image.Width = image.Width - 10;
-            this.image.Height = image.Height - 10;
         }
 
         private void LaunchFaceBookSite(object sender, RoutedEventArgs e)
@@ -476,71 +249,11 @@ namespace VTCManager
             FileHandler.StarteAnwendung("https://www.facebook.com/groups/vtcmanager");
         }
 
-        private void Background_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void LaunchGitHubSite(object sender, RoutedEventArgs e)
         {
-            utils.Reg_Schreiben("Background", (string)(CMB_BACKGROUND.SelectedValue), "Config");
-            try
-            {
-                ImageBrush myBrush = new ImageBrush();
-                myBrush.ImageSource = new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Images/" + (string)CMB_BACKGROUND.SelectedValue + ".jpg"));
-                this.Background = myBrush;
-                RegistryHandler.write("Background", (string)CMB_BACKGROUND.SelectedValue, "Config");
-
-            }
-            catch (Exception ex)
-            {
-                Logging.WriteClientLog("Designer: Konnte den Background " + (string)(CMB_BACKGROUND.SelectedValue) + " nicht laden." + ex.Message + ex.StackTrace);
-            }
+            FileHandler.StarteAnwendung("https://github.com/VTCManager");
         }
 
-        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
-        {
-            RUECKSPIEGEL_OBEN.Visibility = RUECKSPIEGEL_OBEN.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-            DASH_2_BORDER.BorderThickness = new Thickness(0,0,0,0);
-            if (Canvas.GetTop(image) == 220)
-            {
-                // image 1 ATS
-                Canvas.SetTop(image, -75);
-                Canvas.SetLeft(image, -70);
-
-                // IMAGE 2 TMP
-                Canvas.SetTop(image2, 0);
-                Canvas.SetLeft(image2, 35);
-
-                // IMAGE 3 ETS
-                Canvas.SetTop(image3, -5);
-                Canvas.SetLeft(image3, -50);
-            }
-            else
-            {
-                // IMAGE 1 ATS
-                Canvas.SetTop(image, 220);
-                Canvas.SetLeft(image, 0);
-
-                // IMAGE 2 TMP
-                Canvas.SetTop(image2, 230);
-                Canvas.SetLeft(image2, 0);
-
-                // IMAGE 3 ETS
-                Canvas.SetTop(image3, 260);
-                Canvas.SetLeft(image3, 0);
-            }
-        }
-
-        private void ANHAENGER_Toggled(object sender, RoutedEventArgs e)
-        {
-            BILD_ATS.Visibility = BILD_ATS.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
-            BILD_ETS.Visibility = BILD_ETS.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
-            BILD_TMP.Visibility = BILD_TMP.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
-
-        }
-
-        private void STRECKENANZEIGE_Toggled(object sender, RoutedEventArgs e)
-        {
-            STRECKENANZEIGE.Visibility = STRECKENANZEIGE.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
-            STRECKE_IMG_L.Visibility = STRECKE_IMG_L.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
-            STRECKE_IMG_R.Visibility = STRECKE_IMG_R.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
-        }
 
         internal sealed class win32
         {
@@ -564,5 +277,20 @@ namespace VTCManager
             string sFile_Full_Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\VTCManager\Wallpaper1.png";
             set_Desktop_Background(sFile_Full_Path);
         }
+
+        private void Farbschema_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RegistryHandler.write("Design", (string)(Farbschema.SelectedValue), "Config");
+            try
+            {
+                ThemeManager.Current.ChangeTheme(this, (string)(Farbschema.SelectedValue));
+            }
+            catch (Exception ex)
+            {
+                Logging.WriteClientLog("Designer: Konnte das Design " + (string)(Farbschema.SelectedValue) + " nicht laden: " + Environment.NewLine + ex.Message + ex.StackTrace);
+            }
+        }
+
+
     }
 }

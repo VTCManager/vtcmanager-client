@@ -12,18 +12,35 @@ namespace VTCManager.Klassen
     class FileHandler
     {
         public FileStream JobCacheFileStream;
-        public bool create(string FilePath)
+
+
+
+        public static void kopiere_dateien()
         {
+            string sourceFile = AppDomain.CurrentDomain.BaseDirectory + @"Icons\Wallpaper1.png";
+            string destinationFile = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\VTCManager\Wallpaper1.png";
             try
             {
-                JobCacheFileStream = File.Create(FilePath);
-                return true;
+                File.Copy(sourceFile.ToString(), destinationFile, true);
             }
-            catch (UnauthorizedAccessException ex)
+            catch (IOException iox)
             {
-                MessageBox.Show("No permissions to create " + FilePath + ex.Message,"ERROR",MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
+                MessageBox.Show(iox.Message);
             }
+        }
+
+        public bool create(string FilePath)
+                {
+                    try
+                    {
+                        JobCacheFileStream = File.Create(FilePath);
+                        return true;
+                    }
+                    catch (UnauthorizedAccessException ex)
+                    {
+                        MessageBox.Show("No permissions to create " + FilePath + ex.Message,"ERROR",MessageBoxButton.OK, MessageBoxImage.Error);
+                        return false;
+                    }
         }
 
 
@@ -40,5 +57,6 @@ namespace VTCManager.Klassen
                 Logging.WriteClientLog("<ERROR> Konnte Anwendung in Pfad: " + path + " nicht starten. " + ex.Message + ex.StackTrace);
             }
         }
+
     }
 }

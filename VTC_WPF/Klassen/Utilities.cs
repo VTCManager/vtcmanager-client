@@ -193,10 +193,6 @@ namespace VTCManager.Klassen
         }
 
 
-        public void Build_Registry()
-        {
-            if (string.IsNullOrEmpty(this.Reg_Lesen("Config", "Sprache", false))) this.Reg_Schreiben("Sprache", "", "Config");
-        }
 
 
     }

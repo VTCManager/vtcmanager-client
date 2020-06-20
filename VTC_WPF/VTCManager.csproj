@@ -121,6 +121,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Einstellungen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Fahrt_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RegisterClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -153,6 +161,12 @@
     <Compile Include="Klassen\Telemetry.cs" />
     <Compile Include="Klassen\TelemetryHandler.cs" />
     <Compile Include="Klassen\TelemetryInstaller.cs" />
+    <Compile Include="Pages\Einstellungen.xaml.cs">
+      <DependentUpon>Einstellungen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Fahrt_Page.xaml.cs">
+      <DependentUpon>Fahrt_Page.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Truck_Daten.cs" />
     <Compile Include="Klassen\Translation.cs" />
     <Compile Include="Klassen\Utilities.cs" />
