@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VTCManager"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Title="VTCManager" Height="450" Width="800">
     <Grid>
@@ -23,6 +24,7 @@
         <Label x:Name="SpeedLabel" Content="40" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="741,298,0,0" Foreground="#DDFFFFFF" Width="30" FontFamily="Segoe UI Semibold" FontSize="18"/>
         <Label Content="km/h" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="742,319,0,0" Foreground="#DDC7C7C7" Width="30" FontFamily="Segoe UI Semibold" Height="20" FontSize="7"/>
         <Label x:Name="MaxSpeed" Content="50" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="5.38,4.836" Margin="743,263,0,0" Foreground="#DD000000" Width="31" FontFamily="Segoe UI Semibold" FontSize="18" Panel.ZIndex="55"/>
+        <Rectangle Fill="#121212" HorizontalAlignment="Left" Height="359" Stroke="Black" VerticalAlignment="Top" Width="45" RenderTransformOrigin="0.5,0.5"/>
 
     </Grid>
 </Window>

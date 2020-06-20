@@ -60,7 +60,7 @@ namespace VTCManager
                     }
                 }
                 //open MainInterface
-                MainWindow mainwin = new MainWindow();
+                Joschis_Design mainwin = new Joschis_Design();
                 mainwin.Show();
                this.Close();
             }

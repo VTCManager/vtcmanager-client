@@ -279,6 +279,9 @@
     <PackageReference Include="DiscordRichPresence">
       <Version>1.0.150</Version>
     </PackageReference>
+    <PackageReference Include="FontAwesome.WPF">
+      <Version>4.7.0.9</Version>
+    </PackageReference>
     <PackageReference Include="MahApps.Extra">
       <Version>1.6.5</Version>
     </PackageReference>
