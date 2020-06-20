@@ -18,6 +18,9 @@ using MahApps.Metro.Controls;
 using ControlzEx.Theming;
 using MahApps.Metro.Controls.Dialogs;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
+using System.Runtime.InteropServices;
+using System.IO;
 
 namespace VTCManager
 {
@@ -50,30 +53,60 @@ namespace VTCManager
             TelemetryInstaller.check();
             jobHandler = new JobHandler();
             Truck_Daten = new Truck_Daten();
-            /*
-            updateHersteller_Image.Interval = TimeSpan.FromSeconds(5);
-            updateHersteller_Image.Tick += timer_Tick;
-            updateHersteller_Image.Start();
-            */
+            
 
             InitializeComponent();
 
+            Lade_Voreinstellungen();
             Lade_Themes();
             lade_Translations();
             //must be after lade_Translations
             telemetryhandler = new TelemetryHandler(this, translation);
             utils.Build_Registry();
 
-            Sprachauswahl.SelectedValue = utils.Reg_Lesen("Config", "Sprache", false);
-
-            TMP_Pfad_Textbox.Text = utils.Reg_Lesen("Config", "TMP_PFAD", true);
-            Sprachauswahl.SelectedItem = utils.Reg_Lesen("Config", "Sprache", false);
-            TMP_Pfad_Textbox.IsEnabled = string.IsNullOrEmpty(utils.Reg_Lesen("Config", "TMP_PFAD", true)) ? true : false;
 
 
             this.DataContext = Truck_Daten;
         }
 
+
+        private void Lade_Voreinstellungen()
+        {
+            Sprachauswahl.SelectedValue = utils.Reg_Lesen("Config", "Sprache", false);
+
+            TMP_Pfad_Textbox.Text = utils.Reg_Lesen("Config", "TMP_PFAD", true);
+            Sprachauswahl.SelectedItem = utils.Reg_Lesen("Config", "Sprache", false);
+            TMP_Pfad_Textbox.IsEnabled = string.IsNullOrEmpty(utils.Reg_Lesen("Config", "TMP_PFAD", true)) ? true : false;
+            RUECKSPIEGEL_OBEN.Visibility = Visibility.Visible;
+            DASH_2_BORDER.BorderThickness = new Thickness(1, 0, 0, 0);
+            Canvas.SetTop(image, 220);
+            Canvas.SetTop(image2, 230);
+            Canvas.SetTop(image3, 250);
+            Canvas.SetLeft(image, 0);
+            Canvas.SetLeft(image2, 0);
+            Canvas.SetLeft(image3, 0);
+
+            BILD_ATS.Visibility = Visibility.Visible;
+            BILD_ETS.Visibility = Visibility.Visible;
+            BILD_TMP.Visibility = Visibility.Visible;
+
+            STRECKENANZEIGE.Visibility = Visibility.Visible;
+            STRECKE_IMG_L.Visibility = Visibility.Visible;
+            STRECKE_IMG_R.Visibility = Visibility.Visible;
+
+
+            string sourceFile =  AppDomain.CurrentDomain.BaseDirectory + @"Icons\Wallpaper1.png";
+            string destinationFile = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\VTCManager\Wallpaper1.png";
+            try
+            {
+                File.Copy(sourceFile.ToString(), destinationFile, true);
+            }
+            catch (IOException iox)
+            {
+                MessageBox.Show(iox.Message);
+            }
+
+        }
         /*
         void timer_Tick(object sender, EventArgs e)
         {
@@ -358,6 +391,9 @@ namespace VTCManager
 
         }
 
+
+
+
         private void Minimize_Window(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
@@ -433,6 +469,94 @@ namespace VTCManager
         private void LaunchFaceBookSite(object sender, RoutedEventArgs e)
         {
             FileHandler.StarteAnwendung("https://www.facebook.com/groups/vtcmanager");
+        }
+
+        private void Background_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            utils.Reg_Schreiben("Background", (string)(CMB_BACKGROUND.SelectedValue), "Config");
+            try
+            {
+                ImageBrush myBrush = new ImageBrush();
+                myBrush.ImageSource = new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Images/" + (string)CMB_BACKGROUND.SelectedValue + ".jpg"));
+                this.Background = myBrush;
+
+            }
+            catch (Exception ex)
+            {
+                Logging.WriteClientLog("Designer: Konnte den Background " + (string)(CMB_BACKGROUND.SelectedValue) + " nicht laden." + ex.Message + ex.StackTrace);
+            }
+        }
+
+        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            RUECKSPIEGEL_OBEN.Visibility = RUECKSPIEGEL_OBEN.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+            DASH_2_BORDER.BorderThickness = new Thickness(0,0,0,0);
+            if (Canvas.GetTop(image) == 220)
+            {
+                // image 1 ATS
+                Canvas.SetTop(image, -75);
+                Canvas.SetLeft(image, -70);
+
+                // IMAGE 2 TMP
+                Canvas.SetTop(image2, 0);
+                Canvas.SetLeft(image2, 35);
+
+                // IMAGE 3 ETS
+                Canvas.SetTop(image3, -5);
+                Canvas.SetLeft(image3, -50);
+            }
+            else
+            {
+                // IMAGE 1 ATS
+                Canvas.SetTop(image, 220);
+                Canvas.SetLeft(image, 0);
+
+                // IMAGE 2 TMP
+                Canvas.SetTop(image2, 230);
+                Canvas.SetLeft(image2, 0);
+
+                // IMAGE 3 ETS
+                Canvas.SetTop(image3, 260);
+                Canvas.SetLeft(image3, 0);
+            }
+        }
+
+        private void ANHAENGER_Toggled(object sender, RoutedEventArgs e)
+        {
+            BILD_ATS.Visibility = BILD_ATS.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
+            BILD_ETS.Visibility = BILD_ETS.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
+            BILD_TMP.Visibility = BILD_TMP.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
+
+        }
+
+        private void STRECKENANZEIGE_Toggled(object sender, RoutedEventArgs e)
+        {
+            STRECKENANZEIGE.Visibility = STRECKENANZEIGE.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
+            STRECKE_IMG_L.Visibility = STRECKE_IMG_L.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
+            STRECKE_IMG_R.Visibility = STRECKE_IMG_R.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
+        }
+
+        internal sealed class win32
+        {
+            [DllImport("user32.dll", CharSet = CharSet.Auto)]
+            internal static extern int SystemParametersInfo(
+                int uAction,
+                int uParam, String lpvParam,
+                int fuWinIni);
+        }
+
+        private void set_Desktop_Background(string sFile_Full_Path)
+        {
+            const int SET_DESKTOP_BACKGROUND = 20;
+            const int UPDATE_INI_FILE = 1;
+            const int SEND_WINDOWS_INI_CHANGE = 2;
+            win32.SystemParametersInfo(SET_DESKTOP_BACKGROUND, 0, sFile_Full_Path, UPDATE_INI_FILE | SEND_WINDOWS_INI_CHANGE);
+        }
+
+        private void wp_1_set_Click(object sender, RoutedEventArgs e)
+        {
+            string sFile_Full_Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\VTCManager\Wallpaper1.png";
+            set_Desktop_Background(sFile_Full_Path);
         }
     }
 }

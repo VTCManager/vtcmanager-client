@@ -14,7 +14,8 @@
         GlowBrush="Gold"
         BorderThickness="0"
         SaveWindowPosition="True"
-        Title="VTC-Manager V3" Height="700" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="VTCManager.png">
+        Name="Hauptfenster"
+        Title="VTC-Manager V3" Height="800" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="VTCManager.png" MinHeight="800">
 
     <mah:MetroWindow.Resources>
         <BooleanToVisibilityConverter x:Key="job_visibilityConverter" />
@@ -113,13 +114,20 @@
                 <Grid x:Name="GRID_FAHRT">
 
                     <!-- HÄNGEBILDER ETS/ATS/TMP -->
-                    <Image x:Name="image" HorizontalAlignment="Left" Height="262" Margin="294,128,0,0" VerticalAlignment="Top" Width="126" Source="ATS_Logo.png" MouseDown="image_MouseDown" MouseEnter="image_MouseEnter_1" MouseLeave="image_MouseLeave"/>
-                    <Image x:Name="image2" HorizontalAlignment="Left" Height="262" Margin="400,228,0,0" VerticalAlignment="Top" Width="126" Source="TMP_Logo.png" MouseDown="image2_MouseDown" MouseEnter="image2_MouseEnter" MouseLeave="image2_MouseLeave"/>
-                    <Image x:Name="image3" HorizontalAlignment="Left" Height="262" Margin="501,131,0,0" VerticalAlignment="Top" Width="152" Source="ets2_logo.png" Stretch="Fill" MouseDown="image3_MouseDown" MouseEnter="image3_MouseEnter" MouseLeave="image3_MouseLeave"/>
+                    <Canvas x:Name="BILD_ATS" Width="126" Margin="196,-60,668,65">
+                        <Image x:Name="image" Canvas.Top="220" HorizontalAlignment="Left" Height="262" VerticalAlignment="Top" Width="126" Source="ATS_Logo.png" MouseDown="image_MouseDown" MouseEnter="image_MouseEnter_1" MouseLeave="image_MouseLeave"/>
+                    </Canvas>
+
+                    <Canvas x:Name="BILD_TMP" Width="126" Margin="402,-60,462,65">
+                        <Image Canvas.Left="0" Canvas.Top="230" x:Name="image2" HorizontalAlignment="Left" Height="262" VerticalAlignment="Top" Width="126" Source="TMP_Logo.png" MouseDown="image2_MouseDown" MouseEnter="image2_MouseEnter" MouseLeave="image2_MouseLeave"/>
+                    </Canvas>
+
+                    <Canvas x:Name="BILD_ETS" Width="126" Margin="650,-88,214,65">
+                        <Image Canvas.Top="260" x:Name="image3" HorizontalAlignment="Left" Height="220" VerticalAlignment="Top" Width="126" Source="ets2_logo.png" Stretch="Fill" MouseDown="image3_MouseDown" MouseEnter="image3_MouseEnter" MouseLeave="image3_MouseLeave"/>
+                    </Canvas>
 
 
-
-                    <Rectangle x:Name="Anzeigen_Oben" RadiusX="230" Margin="10,0,10,239" RadiusY="70" StrokeThickness="20" Opacity="100">
+                    <Rectangle x:Name="RUECKSPIEGEL_OBEN" RadiusX="230" Margin="10,0,10,239" RadiusY="70" StrokeThickness="20" Opacity="100" Visibility="Visible">
                         <Rectangle.Fill>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                 <GradientStop Color="White" Offset="0"/>
@@ -152,7 +160,7 @@
 
 
                     <DockPanel Margin="722,20,0,259">
-                        <Border BorderBrush="Black" BorderThickness="1"/>
+                        <Border BorderBrush="Black" BorderThickness="1" x:Name="DASH_2_BORDER"/>
                         <StackPanel Width="300" Margin="10,15,29,0" Orientation="Vertical" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}">
 
 
@@ -199,10 +207,10 @@
 
                     <!-- ANZEIGE STRECKE -->
                     <StackPanel Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Left" Orientation="Horizontal"/>
-                    <ProgressBar HorizontalAlignment="Left" Height="47" Margin="-191,426,0,0" VerticalAlignment="Top" Width="1171" RenderTransformOrigin="0.5,0.5" Maximum="{Binding GEPLANTE_DISTANZ}" Minimum="1" Value="{Binding REST_STRECKE}" BorderBrush="Black" BorderThickness="2" Background="{x:Null}" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}" Foreground="{x:Null}"/>
+                    <ProgressBar x:Name="STRECKENANZEIGE" HorizontalAlignment="Left" Height="47" Margin="-189,627,0,-191" VerticalAlignment="Top" Width="1171" RenderTransformOrigin="0.5,0.5" Maximum="{Binding GEPLANTE_DISTANZ}" Minimum="1" Value="{Binding REST_STRECKE}" BorderBrush="Black" BorderThickness="2" Background="{x:Null}" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}" Foreground="{x:Null}"/>
 
-                    <Image Source="{iconPacks:FontAwesomeImage Kind=GrimaceRegular}" Margin="944,434,16,19" Width="30" Height="30" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}"/>
-                    <Image Source="{iconPacks:UniconsImage Kind=Crosshair}" Margin="-189,428,1139,15" Width="40" Height="40" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}"/>
+                    <Image x:Name="STRECKE_IMG_R" Source="{iconPacks:FontAwesomeImage Kind=GrimaceRegular}" Margin="944,631,13,-188" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}"/>
+                    <Image x:Name="STRECKE_IMG_L" Source="{iconPacks:UniconsImage Kind=Crosshair}" Margin="-187,631,1137,-188" Width="40" Height="40" Visibility="{Binding IS_JOB_DATA_VISIBLE, Converter={StaticResource job_visibilityConverter}}"/>
                     <Label FontSize="18" Foreground="Black" Margin="39,158,751,295" Content="{Binding MODELL}" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Height="30" Width="200" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
                     <Label Content="{Binding ANZEIGE_KM_MILES}" FontFamily="Verdana" Margin="414,84,476,364" FontWeight="Bold" Foreground="Gray" FontStyle="Italic" FontSize="20" Height="35" Width="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
                     <Label Foreground="Black" Content="{Binding SPEED_KMH}" x:Name="LBL_SPEED" FontFamily="Verdana" Margin="369,20,432,400" FontWeight="Bold" FontStyle="Italic" FontSize="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding IS_GAME_RUNNING, Converter={StaticResource is_game_runningConverter}}"/>
@@ -241,14 +249,14 @@
             <TabItem x:Name="TAB_FREUNDE" Content="" Height="50" Width="200" FontSize="24" Opacity="0.7" VerticalAlignment="Center" Background="LightGray"/>
             <TabItem x:Name="TAB_VERKEHR" Content="" FontSize="24" Height="50" Opacity="0.7" Width="200" VerticalAlignment="Center" Background="LightGray"/>
             <TabItem x:Name="TAB_EINSTELLUNGEN" FontSize="24" Height="50" Width="200" Opacity="0.7" VerticalAlignment="Center" Background="LightGray">
-                <Grid Margin="-1,0,-1,-4">
+                <Grid Margin="-1,0,-1,-150">
                     <Label x:Name="label1" Content="Einstellungen" HorizontalAlignment="Left" Margin="2,-1,0,0" VerticalAlignment="Top" FontSize="24"/>
                     <TextBox x:Name="TMP_Pfad_Textbox" HorizontalAlignment="Left" Height="30" Margin="15,86,0,0" VerticalAlignment="Top" Width="257" FontSize="14" BorderBrush="#893341CF" AcceptsReturn="False" MaxLines="1" TextWrapping="NoWrap" mah:TextBoxHelper.Watermark="Kein TruckersMP Pfad angegeben !"/>
                     <Label x:Name="TMP_Pfad_Label" Content="Pfad zu Truckers-MP:" HorizontalAlignment="Left" Margin="15,59,0,0" VerticalAlignment="Top" FontSize="12"/>
                     <Button x:Name="BTN_Suche_TMP_PFAD" Content="..." HorizontalAlignment="Left" Margin="286,86,0,0" VerticalAlignment="Top" Width="46" Click="btn_open_TMP_File_Click"/>
 
                     <Label Content="Design Auswahl:" HorizontalAlignment="Left" Margin="477,59,0,0" VerticalAlignment="Top" FontSize="12"/>
-                    <ComboBox x:Name="Designauswahl" Height="30" Margin="476,83,356,374" 
+                    <ComboBox x:Name="Designauswahl" Height="30" Margin="477,86,355,517" 
                               SelectionChanged="Designauswahl_SelectionChanged" 
                               SelectedValuePath="Content">
                         <ComboBoxItem>Dark.Blue</ComboBoxItem>
@@ -303,10 +311,69 @@
 
                     <TextBox x:Name="ATS_Pfad_Textbox" HorizontalAlignment="Left" Height="30" Margin="15,180,0,0" VerticalAlignment="Top" Width="257" FontSize="14" BorderBrush="#893341CF" AcceptsReturn="False" MaxLines="1" TextWrapping="NoWrap" mah:TextBoxHelper.Watermark="Kein ATS Pfad angegeben !" mah:TextBoxHelper.WatermarkAlignment="Right" mah:TextBoxHelper.IsWaitingForData="True"/>
                     <Button x:Name="BTN_SUCHE_ATS" Content="..." HorizontalAlignment="Left" Margin="286,180,0,0" VerticalAlignment="Top" Width="46" Click="btn_open_suche_ats_pfad"/>
+                    <ComboBox x:Name="CMB_BACKGROUND" 
+                              HorizontalAlignment="Left" 
+                              Margin="477,136,0,0" 
+                              VerticalAlignment="Top" 
+                              Width="260"
+                              SelectionChanged="Background_SelectionChanged" 
+                              SelectedValuePath="Content">
+                        <ComboBoxItem>LKW_1</ComboBoxItem>
+                        <ComboBoxItem>LKW_2</ComboBoxItem>
+                        <ComboBoxItem>LKW_3</ComboBoxItem>
+                        <ComboBoxItem>LKW_4</ComboBoxItem>
+                        <ComboBoxItem>LKW_5</ComboBoxItem>
+                        <ComboBoxItem>LKW_6</ComboBoxItem>
+                        <ComboBoxItem>LKW_7</ComboBoxItem>
+                        <ComboBoxItem>LKW_8</ComboBoxItem>
+                        <ComboBoxItem>LKW_9</ComboBoxItem>
+                        <ComboBoxItem>LKW_10</ComboBoxItem>
+                        <ComboBoxItem>Woman_1</ComboBoxItem>
+                        <ComboBoxItem>Woman_2</ComboBoxItem>
+                        <ComboBoxItem>Woman_3</ComboBoxItem>
+                        <ComboBoxItem>Woman_4</ComboBoxItem>
+                        <ComboBoxItem>Woman_5</ComboBoxItem>
+                        <ComboBoxItem>Woman_6</ComboBoxItem>
+                        <ComboBoxItem>Woman_7</ComboBoxItem>
+                        <ComboBoxItem>Div_1</ComboBoxItem>
+                        <ComboBoxItem>Div_2</ComboBoxItem>
+                        <ComboBoxItem>Div_3</ComboBoxItem>
+                    </ComboBox>
+
+
+                    <Grid Background="Black" Opacity="0.7" Margin="10,565,10,10">
+                        <Controls:ToggleSwitch OffContent="Aus" OnContent="An" Toggled="ToggleSwitch_Toggled" Margin="10,3,0,3" Header="DashBoard" HorizontalAlignment="Left" Cursor="SizeWE" Controls:HeaderedControlHelper.HeaderFontFamily="Arial Black" Controls:HeaderedControlHelper.HeaderForeground="Black" Controls:HeaderedControlHelper.HeaderHorizontalContentAlignment="Center" Controls:HeaderedControlHelper.HeaderVerticalContentAlignment="Center" IsOn="True" Foreground="White" Width="131"/>
+                        <Controls:ToggleSwitch OffContent="Aus" OnContent="An" Toggled="ANHAENGER_Toggled" Margin="120,3,0,3" Header="Anhänger" HorizontalAlignment="Left" Cursor="SizeWE" Controls:HeaderedControlHelper.HeaderFontFamily="Arial Black" Controls:HeaderedControlHelper.HeaderForeground="Black" Controls:HeaderedControlHelper.HeaderHorizontalContentAlignment="Center" Controls:HeaderedControlHelper.HeaderVerticalContentAlignment="Center" IsOn="True" Foreground="White" Width="131"/>
+                        <Controls:ToggleSwitch OffContent="Aus" OnContent="An" Toggled="STRECKENANZEIGE_Toggled" Margin="230,3,0,3" Header="Strecke" HorizontalAlignment="Left" Cursor="SizeWE" Controls:HeaderedControlHelper.HeaderFontFamily="Arial Black" Controls:HeaderedControlHelper.HeaderForeground="Black" Controls:HeaderedControlHelper.HeaderHorizontalContentAlignment="Center" Controls:HeaderedControlHelper.HeaderVerticalContentAlignment="Center" IsOn="True" Foreground="White" Width="131"/>
+
+                    </Grid>
+                    <Label Content="Hintergrund Auswahl:" HorizontalAlignment="Left" Margin="477,115,0,0" VerticalAlignment="Top" FontSize="12"/>
+                    <Button x:Name="wp_1_set" Click="wp_1_set_Click" Content="Setze VTC Desktop Wallpaper 1" HorizontalAlignment="Left" Margin="477,196,0,0" VerticalAlignment="Top" Width="260"/>
+
+
+
+
                 </Grid>
 
 
             </TabItem>
+            <TabItem x:Name="TAB_RECHTLICHES" Height="50" Width="200" FontSize="24" VerticalAlignment="Center" Background="LightGray">
+
+
+                <TextBox x:Name="label" Margin="10,0,445,227" TextWrapping="Wrap" IsEnabled="False">
+                    <TextBox.Text>
+                        Bilder von
+                        建鹏 邵, Pexels, Free-Photos
+                        
+                        
+                        sdfsdff
+                    </TextBox.Text>
+                </TextBox>
+
+            </TabItem>
+
+
+
 
 
 
