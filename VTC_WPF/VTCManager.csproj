@@ -129,6 +129,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Keine_TELE.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RegisterClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -166,6 +170,9 @@
     </Compile>
     <Compile Include="Pages\Fahrt_Page.xaml.cs">
       <DependentUpon>Fahrt_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Keine_TELE.xaml.cs">
+      <DependentUpon>Keine_TELE.xaml</DependentUpon>
     </Compile>
     <Compile Include="Truck_Daten.cs" />
     <Compile Include="Klassen\Translation.cs" />
@@ -312,6 +319,8 @@
     <Resource Include="Images\div_1.jpg" />
     <Resource Include="Images\div_2.jpg" />
     <Resource Include="Images\div_3.jpg" />
+    <Resource Include="Pages\37.gif" />
+    <Resource Include="Pages\ajax-loader.gif" />
     <Content Include="Resources\icons8-mercedes-benz-256.png" />
     <Content Include="Resources\No_Truck.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -368,9 +377,6 @@
     </PackageReference>
     <PackageReference Include="MahApps.Metro.Resources">
       <Version>0.6.1</Version>
-    </PackageReference>
-    <PackageReference Include="MaterialDesignColors">
-      <Version>1.2.6</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>

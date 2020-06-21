@@ -33,18 +33,9 @@ namespace VTCManager
         public Truck_Daten Truck_Daten;
         Klassen.Utilities utils = new Klassen.Utilities();
         public JobHandler jobHandler;
-        private OpenFileDialog tmp_Trucker;
         public int Gesch2;
-        int minutes;
-        int Tankinhalt;
-        private object polyline1;
         private TelemetryHandler telemetryhandler;
         private Translation translation;
-        DispatcherTimer updateHersteller_Image = new DispatcherTimer();
-        public string int_game_version;
-        public int NAVIGATION_SPEED_LIMIT { get; private set; }
-        public string BILD_ANZEIGE2 { get; private set; }
-
         public MainWindow()
         {
             Logging.Make_Log_File(); 
@@ -55,10 +46,7 @@ namespace VTCManager
             jobHandler = new JobHandler();
             Truck_Daten = new Truck_Daten();
             
-
             InitializeComponent();
-
-            MainFrame.Content = new Fahrt_Page();
 
             Lade_Voreinstellungen();
             lade_Translations();
@@ -66,9 +54,6 @@ namespace VTCManager
             telemetryhandler = new TelemetryHandler(this, translation);
             if (string.IsNullOrEmpty(RegistryHandler.read("Config", "Sprache")))
                 RegistryHandler.write("Sprache", "", "Config");
-
-
-
             this.DataContext = Truck_Daten;
         }
         public async void Show_Message(string text)
@@ -82,7 +67,8 @@ namespace VTCManager
 
             var accent = RegistryHandler.read("Config", "Design");
             if (string.IsNullOrEmpty(accent)) accent = "Dark.Blue";
-            ThemeManager.Current.ChangeTheme(this, "Dark.Blue");
+            ThemeManager.Current.ChangeTheme(this, accent);
+            _mainFrame.Navigate(new Keine_TELE());
         }
 
 
@@ -102,6 +88,10 @@ namespace VTCManager
                     Truck_Daten.IS_GAME_RUNNING = data.Paused;
                     Truck_Daten.SDK_ACTIVE = data.SdkActive;
                     Truck_Daten.SPIEL = data.Game.ToString();
+
+
+
+
 
                     Truck_Daten.ANZEIGE_KM_MILES = (Truck_Daten.SPIEL == "Ets2") ? " km " : " mi";
                     Truck_Daten.ANZEIGE_TO_LBS = (Truck_Daten.SPIEL == "Ets2") ? " t " : " lb ";

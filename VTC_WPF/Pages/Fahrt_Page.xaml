@@ -9,7 +9,7 @@
       Title="Fahrt_Page">
 
     <Grid>
-        <Label x:Name="label" Content="TestLabel" VerticalAlignment="Top" FontSize="48" FontFamily="Verdana" FontStyle="Italic" FontWeight="DemiBold" HorizontalAlignment="Center" />
+        <Label x:Name="label" Content="TestLabel" VerticalAlignment="Center" FontSize="48" FontFamily="Verdana" FontStyle="Italic" FontWeight="DemiBold" HorizontalAlignment="Center" />
 
     </Grid>
 </Page>
