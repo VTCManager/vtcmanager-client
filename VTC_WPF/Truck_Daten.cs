@@ -13,7 +13,8 @@ namespace VTCManager
         private bool is_game_running;
         private bool sdk_activ;
         private string anzeige_liter_gallonen;
-        private string anzeige_km_miles;
+        private string anzeige_kmh_miles;
+        private string anzeige_km_mi;
         private string anzeige_to_lbs;
         private string txt_fahrt;
 
@@ -233,15 +234,26 @@ namespace VTCManager
                 }
             }
         }
-
-        public string ANZEIGE_KM_MILES
+        public string ANZEIGE_KM_MI
         {
-            get { return anzeige_km_miles; }
+            get { return anzeige_km_mi; }
             set
             {
-                if (anzeige_km_miles != value)
+                if (anzeige_km_mi != value)
                 {
-                    anzeige_km_miles = value;
+                    anzeige_km_mi = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public string ANZEIGE_KMH_MILES
+        {
+            get { return anzeige_kmh_miles; }
+            set
+            {
+                if (anzeige_kmh_miles != value)
+                {
+                    anzeige_kmh_miles = value;
                     NotifyPropertyChanged();
                 }
             }

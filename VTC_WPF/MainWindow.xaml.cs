@@ -43,7 +43,9 @@ namespace VTCManager
         public string int_game_version;
         public int NAVIGATION_SPEED_LIMIT { get; private set; }
         public string BILD_ANZEIGE2 { get; private set; }
-
+        public int SPEED_ANZEIGE;
+        public string TRUCK_IMAGE;
+        public string STRECKENINFO_KM;
         public MainWindow()
         {
             Logging.Make_Log_File(); 
@@ -65,7 +67,6 @@ namespace VTCManager
             utils.Build_Registry();
 
 
-
             this.DataContext = Truck_Daten;
         }
 
@@ -78,21 +79,6 @@ namespace VTCManager
             Sprachauswahl.SelectedItem = utils.Reg_Lesen("Config", "Sprache", false);
             TMP_Pfad_Textbox.IsEnabled = string.IsNullOrEmpty(utils.Reg_Lesen("Config", "TMP_PFAD", true)) ? true : false;
             RUECKSPIEGEL_OBEN.Visibility = Visibility.Visible;
-            DASH_2_BORDER.BorderThickness = new Thickness(1, 0, 0, 0);
-            Canvas.SetTop(image, 220);
-            Canvas.SetTop(image2, 230);
-            Canvas.SetTop(image3, 250);
-            Canvas.SetLeft(image, 0);
-            Canvas.SetLeft(image2, 0);
-            Canvas.SetLeft(image3, 0);
-
-            BILD_ATS.Visibility = Visibility.Visible;
-            BILD_ETS.Visibility = Visibility.Visible;
-            BILD_TMP.Visibility = Visibility.Visible;
-
-            STRECKENANZEIGE.Visibility = Visibility.Visible;
-            STRECKE_IMG_L.Visibility = Visibility.Visible;
-            STRECKE_IMG_R.Visibility = Visibility.Visible;
 
 
             string sourceFile =  AppDomain.CurrentDomain.BaseDirectory + @"Icons\Wallpaper1.png";
@@ -169,12 +155,15 @@ namespace VTCManager
                     Truck_Daten.SDK_ACTIVE = data.SdkActive;
                     Truck_Daten.SPIEL = data.Game.ToString();
 
-                    Truck_Daten.ANZEIGE_KM_MILES = (Truck_Daten.SPIEL == "Ets2") ? " km " : " mi";
+                    Truck_Daten.ANZEIGE_KMH_MILES = (Truck_Daten.SPIEL == "Ets2") ? "KM/H" : "MI/H";
+                    Truck_Daten.ANZEIGE_KM_MI = (Truck_Daten.SPIEL == "Ets2") ? " KM " : " MI ";
+
                     Truck_Daten.ANZEIGE_TO_LBS = (Truck_Daten.SPIEL == "Ets2") ? " t " : " lb ";
-                    Truck_Daten.SPEED_KMH = (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph;
-                    Truck_Daten.SPEED_TACHO_KMH = (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph-85;
-                    Truck_Daten.SPEED_MPH = (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph;
-                    Truck_Daten.SPEED_TACHO_MPH = (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph - 85;
+
+
+                    Truck_Daten.SPEED_KMH = (Truck_Daten.SPIEL == "Ets2") ? (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph : (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Mph;
+
+
                     Truck_Daten.BLINKER_LINKS = (bool)data.TruckValues.CurrentValues.LightsValues.BlinkerLeftOn;
                     Truck_Daten.BLINKER_RECHTS = (bool)data.TruckValues.CurrentValues.LightsValues.BlinkerRightOn;
                     Truck_Daten.TEMPOMAT_KMH =(int)data.TruckValues.CurrentValues.DashboardValues.CruiseControlSpeed.Kph;
@@ -183,6 +172,24 @@ namespace VTCManager
                     Truck_Daten.RUECKWAERTS_GAENGE = (int)data.TruckValues.ConstantsValues.MotorValues.ReverseGearCount;
                     Truck_Daten.GANG = (int)data.TruckValues.CurrentValues.MotorValues.GearValues.Selected;
                     Truck_Daten.HERSTELLER = data.TruckValues.ConstantsValues.Brand;
+
+                    try
+                    {
+                        if (Truck_Daten.HERSTELLER_ID == "mercedes") HST_IMG.Source = GetImage("{iconPacks:SimpleIcons Kind=Mercedes}");
+                        if (Truck_Daten.HERSTELLER_ID == "volvo");
+                        if (Truck_Daten.HERSTELLER_ID == "iveco") HST_IMG.Source = GetImage("{iconPacks:SimpleIcons Kind=Iveco}");
+                        if (Truck_Daten.HERSTELLER_ID == "man") HST_IMG.Source = GetImage("{iconPacks:SimpleIcons Kind=Man}");
+                        if (Truck_Daten.HERSTELLER_ID == "scania") HST_IMG.Source = GetImage("{iconPacks:SimpleIcons Kind=Scania}");
+                        if (Truck_Daten.HERSTELLER_ID == "renault") HST_IMG.Source = GetImage("{iconPacks:SimpleIcons Kind=Renault}");
+                        if (Truck_Daten.HERSTELLER_ID == "") HST_IMG.Source = GetImage("Icons/No_Truck.png");
+                    } catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+
+
+
                     Truck_Daten.HERSTELLER_ID = data.TruckValues.ConstantsValues.BrandId;
                     Truck_Daten.MODELL = translation.TRUCK_MODELL + data.TruckValues.ConstantsValues.Name;
                     Truck_Daten.FUEL_MAX = (int)data.TruckValues.ConstantsValues.CapacityValues.Fuel;
@@ -193,6 +200,8 @@ namespace VTCManager
                     Truck_Daten.ADBLUE_BESTAND = Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.AdBlue).ToString();
                     Truck_Daten.RPM = (int)data.TruckValues.CurrentValues.DashboardValues.RPM;
                     Truck_Daten.RPM_MAX = (int)data.TruckValues.ConstantsValues.MotorValues.EngineRpmMax;
+
+
                     // STATUS ANZEIGEN
                     Truck_Daten.ELEKTRIK_STATUS = data.TruckValues.CurrentValues.ElectricEnabled;
                     Truck_Daten.ABBLENDLICHT = (bool)data.TruckValues.CurrentValues.LightsValues.Parking;
@@ -263,25 +272,32 @@ namespace VTCManager
 
                     // TEXTANZEIGE IM MAINVIEW-STREETVIEW
                     // TODO TRANSLATION DE EN
-                    Truck_Daten.TXT_FAHRT = "Du fährst " + Truck_Daten.FRACHT_GEWICHT_TONNEN + Truck_Daten.ANZEIGE_TO_LBS + data.JobValues.CargoValues.Name + " von ";
-                    Truck_Daten.TXT_FAHRT += data.JobValues.CitySource + " nach ";
-                    Truck_Daten.TXT_FAHRT += data.JobValues.CityDestination;
+                    Truck_Daten.TXT_FAHRT = "Du fährst " + Truck_Daten.FRACHT_GEWICHT_TONNEN + Truck_Daten.ANZEIGE_TO_LBS + data.JobValues.CargoValues.Name + " von " + data.JobValues.CitySource + " nach " +data.JobValues.CityDestination;
                     Truck_Daten.TXT_FAHRT += Environment.NewLine;
-                    Truck_Daten.TXT_FAHRT += "Du musst noch " +  Truck_Daten.REST_STRECKE + Truck_Daten.ANZEIGE_KM_MILES + " fahren !";
+                    Truck_Daten.TXT_FAHRT += "Du musst noch " +  Truck_Daten.REST_STRECKE + Truck_Daten.ANZEIGE_KM_MI + " fahren !";
 
-                    if(Truck_Daten.HERSTELLER_ID == "mercedes")
-                        BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-mercedes-benz-256.png", UriKind.Relative));
 
-                    image.Visibility = data.Game.ToString() == "Ats" ? Visibility.Hidden : Visibility.Visible;
-                    image2.Visibility = data.Game.ToString() == "Ets" || data.Game.ToString() == "Ats" ? Visibility.Hidden : Visibility.Visible;
-                    image3.Visibility = data.Game.ToString() == "Ets2" ? Visibility.Hidden : Visibility.Visible;
+                    SPEED_LBL.Content = (Truck_Daten.SDK_ACTIVE) ? "{Binding Truck_Daten.SPEED_KMH}" : "{Binding Truck_Daten.SPEED_KMH}";
 
-                    
+
+
+
+
                 }
             }
             catch
             { }
 
+        }
+
+
+        private static BitmapImage GetImage(string imageUri)
+        {
+            var bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.UriSource = new Uri("pack://siteoforigin:,,,/" + imageUri, UriKind.RelativeOrAbsolute);
+            bitmapImage.EndInit();
+            return bitmapImage;
         }
 
         public void lade_Translations()
@@ -291,15 +307,6 @@ namespace VTCManager
             TAB_FREUNDE.Header = translation.TAB_FREUNDE_TEXT;
             TAB_VERKEHR.Header = translation.TAB_VERKEHR_TEXT;
             TAB_EINSTELLUNGEN.Header = translation.TAB_EINSTELLUNGEN_TEXT;
-            LBL_FAHRT_SCHADEN_TITEL.Content = translation.SCHADENSANZEIGE_TITEL;
-            TAB_FAHRT_LBL_MOTOR.Content = translation.TAB_FAHRT_LBL_MOTOR;
-            TAB_FAHRT_LBL_GETRIEBE.Content = translation.TAB_FAHRT_LBL_GETRIEBE;
-            TAB_FAHRT_LBL_RAEDER.Content = translation.TAB_FAHRT_LBL_RAEDER;
-            TAB_FAHRT_LBL_FAHRWERK.Content = translation.TAB_FAHRT_LBL_FAHRWERK;
-            TAB_FAHRT_LBL_FAHRERHAUS.Content = translation.TAB_FAHRT_LBL_FAHRERHAUS;
-            TAB_FAHRT_LBL_FRACHTSCHADEN.Content = translation.TAB_FAHRT_LBL_FRACHTSCHADEN;
-            FUEL_ANZEGE.ToolTip = translation.TXT_TANKANZEIGE;
-
 
         }
 
@@ -399,30 +406,6 @@ namespace VTCManager
             this.WindowState = WindowState.Minimized;
         }
 
-        private void image3_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            this.image3.Width = image3.Width + 15;
-            this.image3.Height = image3.Height + 15;
-        }
-
-        private void image3_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            this.image3.Width = image3.Width - 15;
-            this.image3.Height = image3.Height - 15;
-        }
-
-        private void image2_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            this.image2.Width = image2.Width + 5;
-            this.image2.Height = image2.Height + 5;
-        }
-
-        private void image2_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            this.image2.Width = image2.Width - 5;
-            this.image2.Height = image2.Height - 5;
-        }
-
 
 
 
@@ -454,17 +437,6 @@ namespace VTCManager
             FileHandler.StarteAnwendung(utils.Reg_Lesen("Config", "ETS2_Pfad", false));
         }
 
-        private void image_MouseEnter_1(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            this.image.Width = image.Width + 10;
-            this.image.Height = image.Height + 10;
-        }
-
-        private void image_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            this.image.Width = image.Width - 10;
-            this.image.Height = image.Height - 10;
-        }
 
         private void LaunchFaceBookSite(object sender, RoutedEventArgs e)
         {
@@ -490,51 +462,8 @@ namespace VTCManager
         private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
             RUECKSPIEGEL_OBEN.Visibility = RUECKSPIEGEL_OBEN.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-            DASH_2_BORDER.BorderThickness = new Thickness(0,0,0,0);
-            if (Canvas.GetTop(image) == 220)
-            {
-                // image 1 ATS
-                Canvas.SetTop(image, -75);
-                Canvas.SetLeft(image, -70);
-
-                // IMAGE 2 TMP
-                Canvas.SetTop(image2, 0);
-                Canvas.SetLeft(image2, 35);
-
-                // IMAGE 3 ETS
-                Canvas.SetTop(image3, -5);
-                Canvas.SetLeft(image3, -50);
-            }
-            else
-            {
-                // IMAGE 1 ATS
-                Canvas.SetTop(image, 220);
-                Canvas.SetLeft(image, 0);
-
-                // IMAGE 2 TMP
-                Canvas.SetTop(image2, 230);
-                Canvas.SetLeft(image2, 0);
-
-                // IMAGE 3 ETS
-                Canvas.SetTop(image3, 260);
-                Canvas.SetLeft(image3, 0);
-            }
         }
 
-        private void ANHAENGER_Toggled(object sender, RoutedEventArgs e)
-        {
-            BILD_ATS.Visibility = BILD_ATS.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
-            BILD_ETS.Visibility = BILD_ETS.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
-            BILD_TMP.Visibility = BILD_TMP.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
-
-        }
-
-        private void STRECKENANZEIGE_Toggled(object sender, RoutedEventArgs e)
-        {
-            STRECKENANZEIGE.Visibility = STRECKENANZEIGE.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
-            STRECKE_IMG_L.Visibility = STRECKE_IMG_L.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
-            STRECKE_IMG_R.Visibility = STRECKE_IMG_R.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
-        }
 
         internal sealed class win32
         {
