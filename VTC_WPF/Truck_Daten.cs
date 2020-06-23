@@ -39,15 +39,15 @@ namespace VTCManager
         private bool normmallicht;
         private bool parking_brake;
         private bool brake_visibility;
+        private bool motor_brake;
         private string adblue_max;
         private string adblue_bestand;
         private double tempomat_kmh;
         private double tempomat_mph;
         private bool blinker_links;
         private bool blinker_rechts;
-        private int speed_kmh;
+        private int speed;
         private double speed_tacho_kmh;
-        private int speed_mph;
         private double speed_tacho_mph;
 
 
@@ -58,10 +58,15 @@ namespace VTCManager
         private double truck_chassis_schaden;
         private double truck_raeder_schaden;
 
-
+        // WARNINGS
+        private bool luftdruck_warning;
+        private bool fuel_warning;
+        private bool oil_warning;
+        private bool water_warning;
+        private bool battery_warning;
 
     // TRAILER VALUES
-    private string angehangen;
+        private string angehangen;
 
     // Trailer Schaden
         private double trailer_fracht_schaden;
@@ -117,10 +122,91 @@ namespace VTCManager
         private string faehre_ankunft_in;
 
 
-
+        // EINSTELLUNGEN
+        private double dashboard_opacity;
+        public double DASHBOARD_OPACITY
+        {
+            get { return dashboard_opacity; }
+            set
+            {
+                if (dashboard_opacity != value)
+                {
+                    dashboard_opacity = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
 
 
         // BEGIN INOTIFYPROPERTYCHANGED DONT CHANGE ANYTHING !
+
+        public bool BATTERY_WARNING
+        {
+            get { return battery_warning; }
+            set
+            {
+                if (battery_warning != value)
+                {
+                    battery_warning = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+
+        public bool WATER_WARNING
+        {
+            get { return water_warning; }
+            set
+            {
+                if (water_warning != value)
+                {
+                    water_warning = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+
+        public bool OIL_WARNING
+        {
+            get { return oil_warning; }
+            set
+            {
+                if (oil_warning != value)
+                {
+                    oil_warning = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+
+        public bool FUEL_WARNING
+        {
+            get { return fuel_warning; }
+            set
+            {
+                if (fuel_warning != value)
+                {
+                    fuel_warning = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public bool LUFTDRUCK_WARNING
+        {
+            get { return luftdruck_warning; }
+            set
+            {
+                if (luftdruck_warning != value)
+                {
+                    luftdruck_warning = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
 
         public string DLL_VERSION
         {
@@ -182,6 +268,20 @@ namespace VTCManager
                 }
             }
         }
+
+        public bool MOTOR_BRAKE
+        {
+            get { return motor_brake; }
+            set
+            {
+                if (motor_brake != value)
+                {
+                    motor_brake = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
         public bool SDK_ACTIVE
         {
             get { return sdk_activ; }
@@ -629,14 +729,14 @@ namespace VTCManager
             }
 
         }
-        public int SPEED_KMH
+        public int SPEED
         {
-            get { return speed_kmh; }
+            get { return speed; }
             set
             {
-                if (speed_kmh != value)
+                if (speed != value)
                 {
-                    speed_kmh = value;
+                    speed = value;
                     NotifyPropertyChanged();
                 }
             }
@@ -656,19 +756,7 @@ namespace VTCManager
             }
 
         }
-        public int SPEED_MPH
-        {
-            get { return speed_mph; }
-            set
-            {
-                if (speed_mph != value)
-                {
-                    speed_mph = value;
-                    NotifyPropertyChanged();
-                }
-            }
 
-        }
 
         public double SPEED_TACHO_MPH
         {

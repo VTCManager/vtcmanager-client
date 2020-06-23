@@ -28,7 +28,12 @@
         <BooleanToVisibilityConverter x:Key="carbrake_visibility" />
         <BooleanToVisibilityConverter x:Key="blinker_left_visibility" />
         <BooleanToVisibilityConverter x:Key="blinker_right_visibility" />
-        <Image x:Key="Herst_Bild" />
+        <BooleanToVisibilityConverter x:Key="luftdruck_warning_visibility" />
+        <BooleanToVisibilityConverter x:Key="fuel_warning_visibility" />
+        <BooleanToVisibilityConverter x:Key="oil_warning_visibility" />
+        <BooleanToVisibilityConverter x:Key="water_warning_visibility" />
+        <BooleanToVisibilityConverter x:Key="battery_warning_visibility" />
+
         <Style x:Key="MetroProgressBarStyle1" TargetType="{x:Type Controls:MetroProgressBar}">
             <Setter Property="Background" Value="#1FFFFFFF"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
@@ -321,7 +326,7 @@
 
 
         <TabControl x:Name="tabControl" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="1198" TabStripPlacement="Top" Background="{x:Null}" Height="720">
-            <TabItem x:Name="TAB_FAHRT" FontSize="24" Opacity="1"  VerticalAlignment="Center" Foreground="Black" Padding="0">
+            <TabItem x:Name="TAB_FAHRT" FontSize="24" Opacity="1"  VerticalAlignment="Center" Foreground="Black" Padding="20">
 
                 <Grid x:Name="GRID_FAHRT" Margin="0">
                     <Grid.RowDefinitions>
@@ -344,20 +349,23 @@
                         <ColumnDefinition Width="50"/>
                         <ColumnDefinition Width="50"/>
                         <ColumnDefinition Width="50"/>
-                        <ColumnDefinition Width="140"/>
-                        <ColumnDefinition Width="70"/>
-                        <ColumnDefinition Width="30"/>
-                        <ColumnDefinition Width="123*"/>
-                        <ColumnDefinition Width="13*"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="213"/>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
 
-                    <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="15" x:Name="RUECKSPIEGEL_OBEN" VerticalAlignment="Top" Height="300" RadiusX="50" RadiusY="50" StrokeThickness="10" Opacity="100" Visibility="Visible" Grid.RowSpan="7">
+                    <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="18" x:Name="RUECKSPIEGEL_OBEN" VerticalAlignment="Top" Height="300" RadiusX="50" RadiusY="50" StrokeThickness="10" Opacity="0.6" Visibility="Visible" Grid.RowSpan="7">
                         <Rectangle.Fill>
-                            <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,0">
+                            <RadialGradientBrush>
                                 <GradientStop Color="White" Offset="0"/>
-                                <GradientStop Color="#FF057A85" Offset="1"/>
-                            </LinearGradientBrush>
+                                <GradientStop Color="#FF646464" Offset="1"/>
+                            </RadialGradientBrush>
                         </Rectangle.Fill>
                         <Rectangle.Stroke>
                             <ImageBrush ImageSource="340341_632_canny_pic.jpg"/>
@@ -365,8 +373,8 @@
                     </Rectangle>
 
                     <!-- BLINKER LIGHTS -->
-                    <Image Grid.Row="1" Grid.Column="3" Margin="5" Source="{iconPacks:MaterialImage Kind=CarBrakeAlert}" Visibility="{Binding BRAKE_VISIBILITY, Converter={StaticResource carbrake_visibility}}"/>
-                    <Image Grid.Row="1" Grid.Column="11" Margin="5" Source="{iconPacks:MaterialImage Kind=CarBrakeAlert}" Visibility="{Binding BRAKE_VISIBILITY, Converter={StaticResource carbrake_visibility}}"/>
+                    <Image Grid.Row="1" Grid.Column="4" Margin="5" Source="{iconPacks:MaterialImage Kind=ArrowLeftBoldBox}" Visibility="{Binding BLINKER_LINKS, Converter={StaticResource blinker_left_visibility}}"/>
+                    <Image Grid.Row="1" Grid.Column="13" Margin="5" Source="{iconPacks:MaterialImage Kind=ArrowRightBoldBox}" Visibility="{Binding BLINKER_RECHTS, Converter={StaticResource blinker_right_visibility}}"/>
 
 
 
@@ -376,13 +384,17 @@
                     <Image Grid.Row="4" Grid.Column="6" Margin="5" Source="{iconPacks:OcticonsImage Kind=Zap}" Visibility="{Binding ELEKTRIK_STATUS, Converter={StaticResource elektrik_visibility}}"/>
                     <Image Grid.Row="4" Grid.Column="7" Margin="5" Source="{iconPacks:MaterialImage Kind=CarLightDimmed}" Visibility="{Binding ABBLENDLICHT, Converter={StaticResource abblendlicht_visibility}}"/>
                     <Image Grid.Row="4" Grid.Column="8" Margin="5" Source="{iconPacks:MaterialImage Kind=CarLightHigh}" Visibility="{Binding NORMMALLICHT, Converter={StaticResource normallicht_visibility}}"/>
+                    <Image Grid.Row="4" Grid.Column="9" Margin="5" Source="{iconPacks:FontAwesomeImage Kind=WindSolid}" Visibility="{Binding LUFTDRUCK_WARNING, Converter={StaticResource luftdruck_warning_visibility}}"/>
+                    <Image Grid.Row="4" Grid.Column="10" Margin="5" Source="{iconPacks:FontAwesomeImage Kind=GasPumpSolid}" Visibility="{Binding FUEL_WARNING, Converter={StaticResource fuel_warning_visibility}}"/>
+                    <Image Grid.Row="4" Grid.Column="11" Margin="5" Source="{iconPacks:MaterialImage Kind=Oil}" Visibility="{Binding OIL_WARNING, Converter={StaticResource oil_warning_visibility}}"/>
+                    <Image Grid.Row="4" Grid.Column="12" Margin="5" Source="{iconPacks:UniconsImage Kind=Water}" Visibility="{Binding WATER_WARNING, Converter={StaticResource water_warning_visibility}}"/>
+                    <Image Grid.Row="4" Grid.Column="13" Margin="5" Source="{iconPacks:MaterialImage Kind=BatteryCharging10}" Visibility="{Binding BATTERY_WARNING, Converter={StaticResource battery_warning_visibility}}"/>
 
 
+                    <Label Grid.Row="1" Grid.Column="7" Content="{Binding SPEED}" Grid.ColumnSpan="4" FontSize="60" FontFamily="{StaticResource Notable}" FontWeight="DemiBold" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" x:Name="SPEED_LBL"/>
+                    <Label Grid.Row="2" Grid.Column="7" Grid.ColumnSpan="4" FontSize="18" Content="{Binding ANZEIGE_KMH_MILES}" VerticalContentAlignment="Top" HorizontalContentAlignment="Center"/>
 
-                    <Label Grid.Row="1" Grid.Column="6" Grid.ColumnSpan="4" FontSize="40" FontWeight="DemiBold" FontStyle="Italic" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" x:Name="SPEED_LBL"/>
-                    <Label Grid.Row="2" Grid.Column="7" Grid.ColumnSpan="2" FontSize="18" Content="{Binding ANZEIGE_KMH_MILES}" VerticalContentAlignment="Top" HorizontalContentAlignment="Center"/>
-
-                    <StackPanel Grid.Row="1" Grid.Column="13" Grid.RowSpan="3" Orientation="Vertical" Grid.ColumnSpan="2">
+                    <StackPanel Grid.Row="1" Grid.Column="16" Grid.RowSpan="3" Orientation="Vertical" HorizontalAlignment="Right" Grid.ColumnSpan="2">
                         <StackPanel Orientation="Horizontal">
                             <Label Width="100" Content="Motorschaden:" HorizontalContentAlignment="Right" FontSize="12"/>
                             <Label Content="{Binding TRUCK_MOTOR_SCHADEN}" HorizontalContentAlignment="Right" FontSize="12"/>
@@ -419,9 +431,12 @@
 
                     <TextBlock TextWrapping="Wrap" Text="{Binding TXT_FAHRT}" Grid.Row="3" Grid.Column="8" FontSize="14" HorizontalAlignment="Center" Margin="45,0,5,0" Width="0"/>
 
-                    <Image x:Name="HST_IMG" Grid.Row="1" Grid.ColumnSpan="4" Grid.Column="1"/>
-                    <Label Content="{Binding MODELL}" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="3" VerticalContentAlignment="Top" HorizontalContentAlignment="Left"/>
-                    <Controls:MetroProgressBar Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="13" Minimum="1" Maximum="100" Value="100" RenderTransformOrigin="0,1" SnapsToDevicePixels="True" IsIndeterminate="False" Background="{x:Null}" MinHeight="25" BorderThickness="1" Style="{DynamicResource MetroProgressBarStyle1}">
+                    <Label Margin="0" Content="{Binding HERSTELLER}" FontFamily="{StaticResource Notable}" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="3" Grid.Column="1" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" FontSize="28"/>
+                    <Label Content="{Binding MODELL}" Grid.Row="2" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="3" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Margin="0,0,0,10"/>
+                    <Controls:MetroProgressBar Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="16" Minimum="1" Maximum="100" Value="100" RenderTransformOrigin="0,1" SnapsToDevicePixels="True" IsIndeterminate="False" Background="{x:Null}" MinHeight="25" BorderThickness="1" Style="{DynamicResource MetroProgressBarStyle1}" Visibility="{Binding FRACHT_GELADEN, Converter={StaticResource job_visibilityConverter}}" Opacity="0.4">
+                        <Controls:MetroProgressBar.Effect>
+                            <BlurEffect/>
+                        </Controls:MetroProgressBar.Effect>
                         <Controls:MetroProgressBar.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -442,34 +457,43 @@
 
             </TabItem>
 
-            <TabItem x:Name="TAB_FREUNDE" FontSize="24" VerticalAlignment="Center"/>
-            <TabItem x:Name="TAB_VERKEHR" FontSize="24" VerticalAlignment="Center"/>
-            <TabItem x:Name="TAB_EINSTELLUNGEN" FontSize="24" VerticalAlignment="Center">
+            <TabItem x:Name="TAB_FREUNDE" FontSize="24" VerticalAlignment="Center" Padding="20"/>
+            <TabItem x:Name="TAB_VERKEHR" FontSize="24" VerticalAlignment="Center" Padding="20"/>
+            <TabItem x:Name="TAB_EINSTELLUNGEN" FontSize="24" VerticalAlignment="Center" Padding="20">
                 <Grid Margin="0,0,0,0">
-                    <Label x:Name="label1" Content="Einstellungen" HorizontalAlignment="Left" Margin="2,-1,0,0" VerticalAlignment="Top" FontSize="24"/>
-                    <TextBox x:Name="TMP_Pfad_Textbox" HorizontalAlignment="Left" Height="30" Margin="15,86,0,0" VerticalAlignment="Top" Width="257" FontSize="14" BorderBrush="#893341CF" AcceptsReturn="False" MaxLines="1" TextWrapping="NoWrap" mah:TextBoxHelper.Watermark="Kein TruckersMP Pfad angegeben !"/>
-                    <Label x:Name="TMP_Pfad_Label" Content="Pfad zu Truckers-MP:" HorizontalAlignment="Left" Margin="15,59,0,0" VerticalAlignment="Top" FontSize="12"/>
-                    <Button x:Name="BTN_Suche_TMP_PFAD" Content="..." HorizontalAlignment="Left" Margin="286,86,0,0" VerticalAlignment="Top" Width="46" Click="btn_open_TMP_File_Click"/>
+                    <TextBox x:Name="TMP_Pfad_Textbox" HorizontalAlignment="Left" Height="30" Margin="11,42,0,0" VerticalAlignment="Top" Width="257" FontSize="14" BorderBrush="#893341CF" AcceptsReturn="False" MaxLines="1" TextWrapping="NoWrap" mah:TextBoxHelper.Watermark="Kein TruckersMP Pfad angegeben !"/>
+                    <Label x:Name="TMP_Pfad_Label" Content="Pfad zu Truckers-MP:" HorizontalAlignment="Left" Margin="11,15,0,0" VerticalAlignment="Top" FontSize="12"/>
+                    <Button x:Name="BTN_Suche_TMP_PFAD" Content="..." HorizontalAlignment="Left" Margin="282,42,0,0" VerticalAlignment="Top" Width="46" Click="btn_open_TMP_File_Click"/>
 
-                    <Label Content="Design Auswahl:" HorizontalAlignment="Left" Margin="477,59,0,0" VerticalAlignment="Top" FontSize="12"/>
+                    <TextBox x:Name="ETS2_Pfad_Textbox" HorizontalAlignment="Left" Height="30" Margin="11,88,0,0" VerticalAlignment="Top" Width="257" FontSize="14" BorderBrush="#893341CF" AcceptsReturn="False" MaxLines="1" TextWrapping="NoWrap" mah:TextBoxHelper.Watermark="Kein ETS2 Pfad angegeben !" mah:TextBoxHelper.WatermarkAlignment="Right" mah:TextBoxHelper.IsWaitingForData="True"/>
+                    <Button x:Name="BTN_SUCHE_ETS" Content="..." HorizontalAlignment="Left" Margin="282,88,0,0" VerticalAlignment="Top" Width="46" Click="btn_open_suche_ets_pfad"/>
 
-                    <TextBox x:Name="ETS2_Pfad_Textbox" HorizontalAlignment="Left" Height="30" Margin="15,132,0,0" VerticalAlignment="Top" Width="257" FontSize="14" BorderBrush="#893341CF" AcceptsReturn="False" MaxLines="1" TextWrapping="NoWrap" mah:TextBoxHelper.Watermark="Kein ETS2 Pfad angegeben !" mah:TextBoxHelper.WatermarkAlignment="Right" mah:TextBoxHelper.IsWaitingForData="True"/>
-                    <Button x:Name="BTN_SUCHE_ETS" Content="..." HorizontalAlignment="Left" Margin="286,132,0,0" VerticalAlignment="Top" Width="46" Click="btn_open_suche_ets_pfad"/>
-
-                    <TextBox x:Name="ATS_Pfad_Textbox" HorizontalAlignment="Left" Height="30" Margin="15,180,0,0" VerticalAlignment="Top" Width="257" FontSize="14" BorderBrush="#893341CF" AcceptsReturn="False" MaxLines="1" TextWrapping="NoWrap" mah:TextBoxHelper.Watermark="Kein ATS Pfad angegeben !" mah:TextBoxHelper.WatermarkAlignment="Right" mah:TextBoxHelper.IsWaitingForData="True"/>
-                    <Button x:Name="BTN_SUCHE_ATS" Content="..." HorizontalAlignment="Left" Margin="286,180,0,0" VerticalAlignment="Top" Width="46" Click="btn_open_suche_ats_pfad"/>
+                    <TextBox x:Name="ATS_Pfad_Textbox" HorizontalAlignment="Left" Height="30" Margin="11,136,0,0" VerticalAlignment="Top" Width="257" FontSize="14" BorderBrush="#893341CF" AcceptsReturn="False" MaxLines="1" TextWrapping="NoWrap" mah:TextBoxHelper.Watermark="Kein ATS Pfad angegeben !" mah:TextBoxHelper.WatermarkAlignment="Right" mah:TextBoxHelper.IsWaitingForData="True"/>
+                    <Button x:Name="BTN_SUCHE_ATS" Content="..." HorizontalAlignment="Left" Margin="282,136,0,0" VerticalAlignment="Top" Width="46" Click="btn_open_suche_ats_pfad"/>
 
 
 
-                    <Grid Background="Black" Opacity="0.7" Margin="0,565,0,0">
-                        <Controls:ToggleSwitch OffContent="Aus" OnContent="An" Toggled="ToggleSwitch_Toggled" Margin="10,3,0,3" Header="DashBoard" HorizontalAlignment="Left" Cursor="SizeWE" Controls:HeaderedControlHelper.HeaderFontFamily="Arial Black" Controls:HeaderedControlHelper.HeaderForeground="Black" Controls:HeaderedControlHelper.HeaderHorizontalContentAlignment="Center" Controls:HeaderedControlHelper.HeaderVerticalContentAlignment="Center" IsOn="True" Foreground="White" Width="131"/>
-                        <Controls:ToggleSwitch OffContent="Aus" OnContent="An" Margin="120,3,0,3" Header="Anhänger" HorizontalAlignment="Left" Cursor="SizeWE" Controls:HeaderedControlHelper.HeaderFontFamily="Arial Black" Controls:HeaderedControlHelper.HeaderForeground="Black" Controls:HeaderedControlHelper.HeaderHorizontalContentAlignment="Center" Controls:HeaderedControlHelper.HeaderVerticalContentAlignment="Center" IsOn="True" Foreground="White" Width="131"/>
-                        <Controls:ToggleSwitch OffContent="Aus" OnContent="An" Margin="230,3,0,3" Header="Strecke" HorizontalAlignment="Left" Cursor="SizeWE" Controls:HeaderedControlHelper.HeaderFontFamily="Arial Black" Controls:HeaderedControlHelper.HeaderForeground="Black" Controls:HeaderedControlHelper.HeaderHorizontalContentAlignment="Center" Controls:HeaderedControlHelper.HeaderVerticalContentAlignment="Center" IsOn="True" Foreground="White" Width="131"/>
+                    <Grid Background="Black" Opacity="0.5" Margin="0,500,0,5" Height="70">
+                        <Controls:ToggleSwitch OffContent="Aus" OnContent="An" Toggled="ToggleSwitch_Toggled" Margin="10,3,0,3" Header="DashBoard" HorizontalAlignment="Left" Controls:HeaderedControlHelper.HeaderFontFamily="Arial Black" Controls:HeaderedControlHelper.HeaderForeground="White" Controls:HeaderedControlHelper.HeaderHorizontalContentAlignment="Left" Controls:HeaderedControlHelper.HeaderVerticalContentAlignment="Center" IsOn="True" Foreground="White" Width="131"/>
+                        <Controls:ToggleSwitch OffContent="Aus" OnContent="An" Margin="286,9,0,9" Header="Strecke" HorizontalAlignment="Left" Cursor="SizeWE" Controls:HeaderedControlHelper.HeaderFontFamily="Arial Black" Controls:HeaderedControlHelper.HeaderForeground="Black" Controls:HeaderedControlHelper.HeaderHorizontalContentAlignment="Left" Controls:HeaderedControlHelper.HeaderVerticalContentAlignment="Center" IsOn="True" Foreground="White" Width="131"/>
+                        <Controls:ToggleSwitch Visibility="Hidden" OffContent="Aus" OnContent="An" Margin="148,9,0,9" Header="Anhänger" HorizontalAlignment="Left" Controls:HeaderedControlHelper.HeaderFontFamily="Arial Black" Controls:HeaderedControlHelper.HeaderForeground="Black" Controls:HeaderedControlHelper.HeaderHorizontalContentAlignment="Left" Controls:HeaderedControlHelper.HeaderVerticalContentAlignment="Bottom" IsOn="True" Foreground="White" Width="131"/>
 
                     </Grid>
-                    <Label Content="Hintergrund Auswahl:" HorizontalAlignment="Left" Margin="477,115,0,0" VerticalAlignment="Top" FontSize="12"/>
-                    <Button x:Name="wp_1_set" Click="wp_1_set_Click" Content="Setze VTC Desktop Wallpaper 1" HorizontalAlignment="Left" Margin="477,196,0,0" VerticalAlignment="Top" Width="260"/>
-
+                    <Button x:Name="wp_1_set" Click="wp_1_set_Click" Content="Setze VTC Desktop Wallpaper 1" HorizontalAlignment="Left" Margin="470,42,0,0" VerticalAlignment="Top" Width="260"/>
+                    <Slider Name="SLIDER_OPA" Maximum="1" Width="500" Background="Black" Opacity="0.8" TickPlacement="BottomRight" TickFrequency="0.1" IsSnapToTickEnabled="True" Margin="476,221,216,382" ValueChanged="SLIDER_OPA_ValueChanged" RenderTransformOrigin="0.5,0.5" >
+                        <Slider.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleX="0"/>
+                                <RotateTransform/>
+                                <TranslateTransform X="0"/>
+                            </TransformGroup>
+                        </Slider.RenderTransform>
+                    </Slider>
+                    <Label x:Name="label2" Foreground="White" FontSize="12" Content="Durchsichtigkeit Dashboard (100% - 0%):" HorizontalAlignment="Left" Margin="603,193,0,0" VerticalAlignment="Top"/>
+                    <Rectangle Fill="Gray" Opacity="{Binding ElementName=SLIDER_OPA, Path=Value}" HorizontalAlignment="Left" Height="100" Margin="477,86,0,0" Stroke="Black" VerticalAlignment="Top" Width="500">
+                    </Rectangle>
+                    <Label Content="TESTFELD" Foreground="White" FontSize="24" Margin="473,78,222,481" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
 
 
@@ -513,27 +537,27 @@
                               Width="260"
                                 Height="30"
                               SelectionChanged="Background_SelectionChanged" 
-                              SelectedValuePath="Content">
-                    <ComboBoxItem>LKW_1</ComboBoxItem>
-                    <ComboBoxItem>LKW_2</ComboBoxItem>
-                    <ComboBoxItem>LKW_3</ComboBoxItem>
-                    <ComboBoxItem>LKW_4</ComboBoxItem>
-                    <ComboBoxItem>LKW_5</ComboBoxItem>
-                    <ComboBoxItem>LKW_6</ComboBoxItem>
-                    <ComboBoxItem>LKW_7</ComboBoxItem>
-                    <ComboBoxItem>LKW_8</ComboBoxItem>
-                    <ComboBoxItem>LKW_9</ComboBoxItem>
-                    <ComboBoxItem>LKW_10</ComboBoxItem>
-                    <ComboBoxItem>Woman_1</ComboBoxItem>
-                    <ComboBoxItem>Woman_2</ComboBoxItem>
-                    <ComboBoxItem>Woman_3</ComboBoxItem>
-                    <ComboBoxItem>Woman_4</ComboBoxItem>
-                    <ComboBoxItem>Woman_5</ComboBoxItem>
-                    <ComboBoxItem>Woman_6</ComboBoxItem>
-                    <ComboBoxItem>Woman_7</ComboBoxItem>
-                    <ComboBoxItem>Div_1</ComboBoxItem>
-                    <ComboBoxItem>Div_2</ComboBoxItem>
-                    <ComboBoxItem>Div_3</ComboBoxItem>
+                              SelectedValuePath="Tag">
+                    <ComboBoxItem Tag="LKW_1">Truck N°1</ComboBoxItem>
+                    <ComboBoxItem Tag="LKW_2">Truck N°2</ComboBoxItem>
+                    <ComboBoxItem Tag="LKW_3">Truck N°3</ComboBoxItem>
+                    <ComboBoxItem Tag="LKW_4">Truck N°4</ComboBoxItem>
+                    <ComboBoxItem Tag="LKW_5">Truck N°5</ComboBoxItem>
+                    <ComboBoxItem Tag="LKW_6">Truck N°6</ComboBoxItem>
+                    <ComboBoxItem Tag="LKW_7">Truck N°7</ComboBoxItem>
+                    <ComboBoxItem Tag="LKW_8">Truck N°8</ComboBoxItem>
+                    <ComboBoxItem Tag="LKW_9">Truck N°9</ComboBoxItem>
+                    <ComboBoxItem Tag="LKW_10">Truck N°10</ComboBoxItem>
+                    <ComboBoxItem Tag="Woman_1">Frau N°1</ComboBoxItem>
+                    <ComboBoxItem Tag="Woman_2">Frau N°2</ComboBoxItem>
+                    <ComboBoxItem Tag="Woman_3">Frau N°3</ComboBoxItem>
+                    <ComboBoxItem Tag="Woman_4">Frau N°4</ComboBoxItem>
+                    <ComboBoxItem Tag="Woman_5">Frau N°5</ComboBoxItem>
+                    <ComboBoxItem Tag="Woman_6">Frau N°6</ComboBoxItem>
+                    <ComboBoxItem Tag="Woman_7">Frau N°7</ComboBoxItem>
+                    <ComboBoxItem Tag="Div_1">Mann N°1</ComboBoxItem>
+                    <ComboBoxItem Tag="Div_2">Mann N°2</ComboBoxItem>
+                    <ComboBoxItem Tag="Div_3">Mann N°3</ComboBoxItem>
                 </ComboBox>
             </StatusBarItem>
 

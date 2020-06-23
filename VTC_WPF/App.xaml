@@ -5,9 +5,12 @@
              StartupUri="RegisterClient.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <FontFamily x:Key="Aladin">pack://application:,,,/fonts/#Aladin</FontFamily>
+            <FontFamily x:Key="Notable">pack://application:,,,/fonts/#Notable</FontFamily>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+
 
                 <!-- MahApps.Metro DESIGNS 
                 Grunddesigns: Dark + Light

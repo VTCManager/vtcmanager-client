@@ -65,8 +65,6 @@ namespace VTCManager
             //must be after lade_Translations
             telemetryhandler = new TelemetryHandler(this, translation);
             utils.Build_Registry();
-
-
             this.DataContext = Truck_Daten;
         }
 
@@ -80,6 +78,7 @@ namespace VTCManager
             TMP_Pfad_Textbox.IsEnabled = string.IsNullOrEmpty(utils.Reg_Lesen("Config", "TMP_PFAD", true)) ? true : false;
             RUECKSPIEGEL_OBEN.Visibility = Visibility.Visible;
 
+            CMB_BACKGROUND.SelectedItem = RegistryHandler.read("Config", "Background");
 
             string sourceFile =  AppDomain.CurrentDomain.BaseDirectory + @"Icons\Wallpaper1.png";
             string destinationFile = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\VTCManager\Wallpaper1.png";
@@ -92,39 +91,10 @@ namespace VTCManager
                 MessageBox.Show(iox.Message);
             }
 
+            SLIDER_OPA.Value = Convert.ToDouble(RegistryHandler.read("Config", "Dashboard_Opacity"));
+            RUECKSPIEGEL_OBEN.Opacity = Convert.ToDouble(RegistryHandler.read("Config", "Dashboard_Opacity"));
         }
-        /*
-        void timer_Tick(object sender, EventArgs e)
-        {
-            switch (Truck_Daten.HERSTELLER_ID)
-            {
-                case "mercedes":
-                    //BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-mercedes-benz-256.png", UriKind.Relative));
-                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("{iconPacks:SimpleIcons Kind=Mercedes}", UriKind.Relative));
-                    break;
-                case "scania":
-                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-scania-256.png", UriKind.Relative));
-                    break;
-                case "volvo":
-                    //BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-volvo-256.png", UriKind.Relative));
-                    BILD_ANZEIGE2 = "{iconPacks:SimpleIcons Kind=Volvo}";
-                    break;
-                case "iveco":
-                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-iveco-256.png", UriKind.Relative));
-                    break;
-                case "renault":
-                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-renault-256.png", UriKind.Relative));
-                    break;
-                case "daf":
-                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/icons8-daf-256.png", UriKind.Relative));
-                    break;
-                case "man":
-                    BILD_ANZEIGE.Source = new BitmapImage(new Uri("Icons/man-256.png", UriKind.Relative));
-                    break;
-            }
-                
-        }
-        */
+
 
 
         private void Telemetry_Data_Handler(SCSTelemetry data, bool updated)
@@ -146,10 +116,8 @@ namespace VTCManager
                     else if (Truck_Daten.SPIEL_VERSION == "Game: 1.21") int_game_version = "1.42";
 
                     Truck_Daten.SPIEL_VERSION += " (" + int_game_version + ")";
-
                     Truck_Daten.DLL_VERSION = "DLL: " + data.DllVersion.ToString();
                     Truck_Daten.SPIEL = data.Game.ToString();
-
 
                     Truck_Daten.IS_GAME_RUNNING = data.Paused;
                     Truck_Daten.SDK_ACTIVE = data.SdkActive;
@@ -160,8 +128,7 @@ namespace VTCManager
 
                     Truck_Daten.ANZEIGE_TO_LBS = (Truck_Daten.SPIEL == "Ets2") ? " t " : " lb ";
 
-
-                    Truck_Daten.SPEED_KMH = (Truck_Daten.SPIEL == "Ets2") ? (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph : (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Mph;
+                    Truck_Daten.SPEED = (Truck_Daten.SPIEL == "Ets2") ? (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Kph : (int)data.TruckValues.CurrentValues.DashboardValues.Speed.Mph;
 
 
                     Truck_Daten.BLINKER_LINKS = (bool)data.TruckValues.CurrentValues.LightsValues.BlinkerLeftOn;
@@ -172,22 +139,6 @@ namespace VTCManager
                     Truck_Daten.RUECKWAERTS_GAENGE = (int)data.TruckValues.ConstantsValues.MotorValues.ReverseGearCount;
                     Truck_Daten.GANG = (int)data.TruckValues.CurrentValues.MotorValues.GearValues.Selected;
                     Truck_Daten.HERSTELLER = data.TruckValues.ConstantsValues.Brand;
-
-                    try
-                    {
-                        if (Truck_Daten.HERSTELLER_ID == "mercedes") HST_IMG.Source = GetImage("{iconPacks:SimpleIcons Kind=Mercedes}");
-                        if (Truck_Daten.HERSTELLER_ID == "volvo");
-                        if (Truck_Daten.HERSTELLER_ID == "iveco") HST_IMG.Source = GetImage("{iconPacks:SimpleIcons Kind=Iveco}");
-                        if (Truck_Daten.HERSTELLER_ID == "man") HST_IMG.Source = GetImage("{iconPacks:SimpleIcons Kind=Man}");
-                        if (Truck_Daten.HERSTELLER_ID == "scania") HST_IMG.Source = GetImage("{iconPacks:SimpleIcons Kind=Scania}");
-                        if (Truck_Daten.HERSTELLER_ID == "renault") HST_IMG.Source = GetImage("{iconPacks:SimpleIcons Kind=Renault}");
-                        if (Truck_Daten.HERSTELLER_ID == "") HST_IMG.Source = GetImage("Icons/No_Truck.png");
-                    } catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-
-
 
 
                     Truck_Daten.HERSTELLER_ID = data.TruckValues.ConstantsValues.BrandId;
@@ -200,6 +151,14 @@ namespace VTCManager
                     Truck_Daten.ADBLUE_BESTAND = Convert.ToInt32(data.TruckValues.CurrentValues.DashboardValues.AdBlue).ToString();
                     Truck_Daten.RPM = (int)data.TruckValues.CurrentValues.DashboardValues.RPM;
                     Truck_Daten.RPM_MAX = (int)data.TruckValues.ConstantsValues.MotorValues.EngineRpmMax;
+
+
+                    // WARNINGS
+                    Truck_Daten.LUFTDRUCK_WARNING = (bool)data.TruckValues.CurrentValues.DashboardValues.WarningValues.AirPressure;
+                    Truck_Daten.FUEL_WARNING = (bool)data.TruckValues.CurrentValues.DashboardValues.WarningValues.FuelW;
+                    Truck_Daten.OIL_WARNING = (bool)data.TruckValues.CurrentValues.DashboardValues.WarningValues.OilPressure;
+                    Truck_Daten.WATER_WARNING = (bool)data.TruckValues.CurrentValues.DashboardValues.WarningValues.WaterTemperature;
+                    Truck_Daten.BATTERY_WARNING = (bool)data.TruckValues.CurrentValues.DashboardValues.WarningValues.BatteryVoltage;
 
 
                     // STATUS ANZEIGEN
@@ -486,6 +445,12 @@ namespace VTCManager
         {
             string sFile_Full_Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\VTCManager\Wallpaper1.png";
             set_Desktop_Background(sFile_Full_Path);
+        }
+
+        private void SLIDER_OPA_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            RegistryHandler.write("Dashboard_Opacity", SLIDER_OPA.Value.ToString(), "Config");
+            RUECKSPIEGEL_OBEN.Opacity = Convert.ToDouble(RegistryHandler.read("Config", "Dashboard_Opacity"));
         }
     }
 }

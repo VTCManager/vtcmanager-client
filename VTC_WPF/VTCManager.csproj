@@ -183,6 +183,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="fonts\Notable-Regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -204,21 +207,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="fonts\Aladin-Regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\Wallpaper1.png" />
     <Resource Include="TMP_Logo.png" />
     <Resource Include="road-1303617_640.jpg" />
-    <Resource Include="Icons\icons8-einstellungen-30.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Icons\TMP_BTN.png" />
-    <Resource Include="Icons\icons8-daf-256.png" />
-    <Resource Include="Icons\icons8-iveco-256.png" />
-    <Resource Include="Icons\blinker_links.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Icons\blinker_rechts.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="VTCManager.png" />
     <Resource Include="favicon.ico" />
     <Resource Include="background-pattern-lines-01.png" />
@@ -226,20 +220,12 @@
     <Resource Include="icons8-tankstelle-64.png" />
     <Resource Include="ATS_Logo.png" />
     <Resource Include="ets2_logo.png" />
-    <Content Include="Icons\icons8-mercedes-benz-256.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Resource Include="Icons\icons8-renault-256.png" />
-    <Resource Include="Icons\icons8-scania-256.png" />
-    <Resource Include="Icons\icons8-volvo-256.png" />
-    <Resource Include="Icons\No_Truck.png" />
     <Resource Include="Resources\login_background.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\vtcm_logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Icons\man-256.png" />
     <Resource Include="PearlessenceSmoke_Lattice-768x766.jpg" />
     <Resource Include="Images\woman_1.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
