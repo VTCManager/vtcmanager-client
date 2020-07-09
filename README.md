@@ -3,7 +3,7 @@ VTCManager is a powerful Euro Truck Simulator 2 tool. We are building something 
 IMPORTANT: This client is unfinished and the development was canceled!
 
 ## Community
-Join our official Discord server and chat with other truckers and devs. https://discord.gg/TRH9Ut2
+Join our official Discord server and chat with other devs. https://discord.gg/AJrapkG
 ## Development
 Here is a good tutorial on how to contribute to projects (and also in our project): https://github.com/firstcontributions/first-contributions
 ## License
