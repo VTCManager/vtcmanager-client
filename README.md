@@ -1,4 +1,8 @@
 # vtcmanager-web
+
+# IMPORTANT: NEW VERSION AVAILABLE
+The project is continued at the VCC https://github.com/VisualCableCollective .<br><br>
+
 VTCManager is a powerful Euro Truck Simulator 2 tool. We are building something more than only a simple job logger. Together we can build something awesome! <br>
 IMPORTANT: This client is unfinished and the development was canceled!
 
